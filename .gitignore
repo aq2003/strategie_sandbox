@@ -2,3 +2,5 @@
 *.aql
 *.aqp
 *script.csv
+*-QMIndicator.csv
+*-QMEquityIndicator.csv
