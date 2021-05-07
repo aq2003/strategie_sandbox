@@ -1,5 +1,5 @@
 Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLow;posRange;posEntry;posExit;posEffic;posType
-06.05.2021;18:41:16.393;QM;SBER; 15 ìèíóò
+07.05.2021;14:53:37.691;QM;SBER; 15 ìèíóò
 14.12.2020;16:15:00.000;0;QM_Init: AQL Script has been loaded successfully;C:\Users\Admin\OneDrive\Documents\My Stocks\Stock\HP-HP\Libs Sandbox\trade_lib.aql
 14.12.2020;16:15:00.000;0;#step_=;0n;account_=;0l;lbreak_=;0,00p;lbounce_=;0,00p;sbreak_=;0,00p;sbounce_=;0,00p
 14.12.2020;16:30:00.000;1;#step_=;1n;account_=;0l;lbreak_=;0,00p;lbounce_=;0,00p;sbreak_=;0,00p;sbounce_=;0,00p
@@ -34,10 +34,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 14.12.2020;23:45:00.000;30;#step_=;30n;account_=;0l;lbreak_=;0,00p;lbounce_=;0,00p;sbreak_=;0,00p;sbounce_=;0,00p
 15.12.2020;09:45:00.000;31;#step_=;31n;account_=;0l;lbreak_=;285,97p;lbounce_=;277,80p;sbreak_=;276,04p;sbounce_=;284,32p
 15.12.2020;10:00:00.000;32;#step_=;32n;account_=;0l;lbreak_=;285,96p;lbounce_=;277,79p;sbreak_=;276,03p;sbounce_=;284,31p
-15.12.2020;10:00:00.000;32;imitator: Open short;279,4;300;83820;817;-46,9392
-15.12.2020;10:00:00.000;32;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1614;status_=;matched;
+15.12.2020;10:00:00.000;32;imitator: Open short;279,4;300;83820;847;-46,9392
+15.12.2020;10:00:00.000;32;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1674;status_=;matched;
 15.12.2020;10:00:00.000;32;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-15.12.2020;10:00:00.000;32;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1614;tradeno_=;1614;quantity_=;30;price_=;279,4;
+15.12.2020;10:00:00.000;32;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1674;tradeno_=;1674;quantity_=;30;price_=;279,4;
 15.12.2020;10:00:00.000;32;dealer_onTrade;SELL;quantity;30;price;279,4;money;83820
 15.12.2020;10:00:00.000;32;#short_lr_bounce_open_following;pos.price_=;279,40p;account_=;-30l;LR_=;0,00p
 15.12.2020;10:15:00.000;33;#step_=;33n;account_=;-30l;lbreak_=;285,96p;lbounce_=;277,78p;sbreak_=;276,03p;sbounce_=;284,31p
@@ -159,17 +159,17 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 17.12.2020;10:15:00.000;147;#step_=;147n;account_=;-30l;lbreak_=;282,43p;lbounce_=;274,26p;sbreak_=;271,46p;sbounce_=;279,74p
 17.12.2020;10:30:00.000;148;#step_=;148n;account_=;-30l;lbreak_=;282,41p;lbounce_=;274,23p;sbreak_=;271,43p;sbounce_=;279,71p
 17.12.2020;10:45:00.000;149;#step_=;149n;account_=;-30l;lbreak_=;282,38p;lbounce_=;274,20p;sbreak_=;271,40p;sbounce_=;279,68p
-17.12.2020;10:45:00.000;149;imitator: Close short;284,78;300;-85434;817;-47,84304;117;285,16;276,07;3,29264317021047;36,6336633663363;4,18041804180474;-59,1859185918589;No
-17.12.2020;10:45:00.000;149;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1615;status_=;matched;
+17.12.2020;10:45:00.000;149;imitator: Close short;284,78;300;-85434;847;-47,84304;117;285,16;276,07;3,29264317021047;36,6336633663363;4,18041804180474;-59,1859185918589;No
+17.12.2020;10:45:00.000;149;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1675;status_=;matched;
 17.12.2020;10:45:00.000;149;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;279,4;pos.Bought_=;0;pos.Sold_=;83820;
-17.12.2020;10:45:00.000;149;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1615;tradeno_=;1615;quantity_=;30;price_=;284,78;
+17.12.2020;10:45:00.000;149;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1675;tradeno_=;1675;quantity_=;30;price_=;284,78;
 17.12.2020;10:45:00.000;149;dealer_onTrade;BUY;quantity;30;price;284,78;money;85434
 17.12.2020;10:45:00.000;149;dealer_onOrder: trade complete;SHORT;posMargin_=;-1614;pos.Bought_=;-85434;pos.Sold_=;83820;
 17.12.2020;10:45:00.000;149;#short_lr_SL_following;pos.abs_profit_=;-1 614,00p;pos.age_=;0c;LRSL_=;282,41p
-17.12.2020;10:45:00.000;149;imitator: Open long;284,78;300;-85434;818;-47,84304
-17.12.2020;10:45:00.000;149;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1616;status_=;matched;
+17.12.2020;10:45:00.000;149;imitator: Open long;284,78;300;-85434;848;-47,84304
+17.12.2020;10:45:00.000;149;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1676;status_=;matched;
 17.12.2020;10:45:00.000;149;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-17.12.2020;10:45:00.000;149;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1616;tradeno_=;1616;quantity_=;30;price_=;284,78;
+17.12.2020;10:45:00.000;149;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1676;tradeno_=;1676;quantity_=;30;price_=;284,78;
 17.12.2020;10:45:00.000;149;dealer_onTrade;BUY;quantity;30;price;284,78;money;85434
 17.12.2020;10:45:00.000;149;#long_lr_break_open_following;pos.price_=;284,78p;account_=;30l;LR_=;282,43p
 17.12.2020;10:45:00.000;149;#account_>_0l_already
@@ -180,10 +180,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 17.12.2020;11:30:00.000;152;#step_=;152n;account_=;30l;lbreak_=;282,29p;lbounce_=;274,11p;sbreak_=;271,30p;sbounce_=;279,59p
 17.12.2020;11:45:00.000;153;#step_=;153n;account_=;30l;lbreak_=;282,26p;lbounce_=;274,08p;sbreak_=;271,27p;sbounce_=;279,56p
 17.12.2020;12:00:00.000;154;#step_=;154n;account_=;30l;lbreak_=;282,23p;lbounce_=;274,05p;sbreak_=;271,24p;sbounce_=;279,54p
-17.12.2020;12:00:00.000;154;imitator: Close long;283,81;300;85143;818;-47,68008;5;285,16;282,31;1,00952853246432;86,6666666666649;47,368421052632;34,0350877192969;No
-17.12.2020;12:00:00.000;154;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1617;status_=;matched;
+17.12.2020;12:00:00.000;154;imitator: Close long;283,81;300;85143;848;-47,68008;5;285,16;282,31;1,00952853246432;86,6666666666649;47,368421052632;34,0350877192969;No
+17.12.2020;12:00:00.000;154;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1677;status_=;matched;
 17.12.2020;12:00:00.000;154;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;284,78;pos.Bought_=;-85434;pos.Sold_=;0;
-17.12.2020;12:00:00.000;154;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1617;tradeno_=;1617;quantity_=;30;price_=;283,81;
+17.12.2020;12:00:00.000;154;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1677;tradeno_=;1677;quantity_=;30;price_=;283,81;
 17.12.2020;12:00:00.000;154;dealer_onTrade;SELL;quantity;30;price;283,81;money;85143
 17.12.2020;12:00:00.000;154;dealer_onOrder: trade complete;LONG;posMargin_=;-291;pos.Bought_=;-85434;pos.Sold_=;85143;
 17.12.2020;12:00:00.000;154;#long_lr_TP_following;pos.abs_profit_=;-291,00p;pos.age_=;0c;LRTP_=;283,75p
@@ -207,10 +207,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 17.12.2020;16:30:00.000;172;#step_=;172n;account_=;0l;lbreak_=;281,70p;lbounce_=;273,51p;sbreak_=;270,70p;sbounce_=;279,01p
 17.12.2020;16:45:00.000;173;#step_=;173n;account_=;0l;lbreak_=;281,68p;lbounce_=;273,48p;sbreak_=;270,67p;sbounce_=;278,98p
 17.12.2020;17:00:00.000;174;#step_=;174n;account_=;0l;lbreak_=;281,65p;lbounce_=;273,45p;sbreak_=;270,64p;sbounce_=;278,95p
-17.12.2020;17:00:00.000;174;imitator: Open short;279,19;300;83757;819;-46,90392
-17.12.2020;17:00:00.000;174;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1618;status_=;matched;
+17.12.2020;17:00:00.000;174;imitator: Open short;279,19;300;83757;849;-46,90392
+17.12.2020;17:00:00.000;174;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1678;status_=;matched;
 17.12.2020;17:00:00.000;174;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-17.12.2020;17:00:00.000;174;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1618;tradeno_=;1618;quantity_=;30;price_=;279,19;
+17.12.2020;17:00:00.000;174;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1678;tradeno_=;1678;quantity_=;30;price_=;279,19;
 17.12.2020;17:00:00.000;174;dealer_onTrade;SELL;quantity;30;price;279,19;money;83757
 17.12.2020;17:00:00.000;174;#short_lr_bounce_open_following;pos.price_=;279,19p;account_=;-30l;LR_=;279,01p
 17.12.2020;17:15:00.000;175;#step_=;175n;account_=;-30l;lbreak_=;281,62p;lbounce_=;273,42p;sbreak_=;270,61p;sbounce_=;278,92p
@@ -269,10 +269,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 18.12.2020;15:45:00.000;226;#step_=;226n;account_=;-30l;lbreak_=;284,74p;lbounce_=;272,72p;sbreak_=;269,48p;sbounce_=;281,55p
 18.12.2020;16:00:00.000;227;#step_=;227n;account_=;-30l;lbreak_=;284,71p;lbounce_=;272,69p;sbreak_=;269,45p;sbounce_=;281,52p
 18.12.2020;16:15:00.000;228;#step_=;228n;account_=;-30l;lbreak_=;284,69p;lbounce_=;272,67p;sbreak_=;269,43p;sbounce_=;281,50p
-18.12.2020;16:15:00.000;228;imitator: Close short;271,59;300;-81477;819;-45,62712;54;279,74;270,68;3,34712575735186;93,9293598233994;89,9558498896251;83,8852097130245;No
-18.12.2020;16:15:00.000;228;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1619;status_=;matched;
+18.12.2020;16:15:00.000;228;imitator: Close short;271,59;300;-81477;849;-45,62712;54;279,74;270,68;3,34712575735186;93,9293598233994;89,9558498896251;83,8852097130245;No
+18.12.2020;16:15:00.000;228;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1679;status_=;matched;
 18.12.2020;16:15:00.000;228;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;279,19;pos.Bought_=;0;pos.Sold_=;83757;
-18.12.2020;16:15:00.000;228;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1619;tradeno_=;1619;quantity_=;30;price_=;271,59;
+18.12.2020;16:15:00.000;228;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1679;tradeno_=;1679;quantity_=;30;price_=;271,59;
 18.12.2020;16:15:00.000;228;dealer_onTrade;BUY;quantity;30;price;271,59;money;81477
 18.12.2020;16:15:00.000;228;dealer_onOrder: trade complete;SHORT;posMargin_=;2280,00000000001;pos.Bought_=;-81477;pos.Sold_=;83757;
 18.12.2020;16:15:00.000;228;#short_lr_TP_following;pos.abs_profit_=;2 280,00p;pos.age_=;0c;LRTP_=;272,67p
@@ -310,10 +310,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 21.12.2020;10:00:00.000;260;#step_=;260n;account_=;0l;lbreak_=;282,71p;lbounce_=;268,94p;sbreak_=;265,05p;sbounce_=;278,90p
 21.12.2020;10:15:00.000;261;#step_=;261n;account_=;0l;lbreak_=;282,67p;lbounce_=;268,90p;sbreak_=;265,01p;sbounce_=;278,86p
 21.12.2020;10:30:00.000;262;#step_=;262n;account_=;0l;lbreak_=;282,63p;lbounce_=;268,86p;sbreak_=;264,97p;sbounce_=;278,82p
-21.12.2020;10:30:00.000;262;imitator: Open short;265,1;300;79530;820;-44,5368
-21.12.2020;10:30:00.000;262;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1620;status_=;matched;
+21.12.2020;10:30:00.000;262;imitator: Open short;265,1;300;79530;850;-44,5368
+21.12.2020;10:30:00.000;262;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1680;status_=;matched;
 21.12.2020;10:30:00.000;262;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-21.12.2020;10:30:00.000;262;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1620;tradeno_=;1620;quantity_=;30;price_=;265,1;
+21.12.2020;10:30:00.000;262;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1680;tradeno_=;1680;quantity_=;30;price_=;265,1;
 21.12.2020;10:30:00.000;262;dealer_onTrade;SELL;quantity;30;price;265,1;money;79530
 21.12.2020;10:30:00.000;262;#short_lr_break_open_following;pos.price_=;265,10p;account_=;-30l;LR_=;265,05p
 21.12.2020;10:45:00.000;263;#step_=;263n;account_=;-30l;lbreak_=;282,59p;lbounce_=;268,82p;sbreak_=;264,93p;sbounce_=;278,78p
@@ -468,17 +468,17 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 23.12.2020;19:00:00.000;410;#step_=;410n;account_=;-30l;lbreak_=;269,89p;lbounce_=;253,38p;sbreak_=;247,81p;sbounce_=;264,41p
 23.12.2020;19:15:00.000;411;#step_=;411n;account_=;-30l;lbreak_=;269,82p;lbounce_=;253,31p;sbreak_=;247,74p;sbounce_=;264,35p
 23.12.2020;19:30:00.000;412;#step_=;412n;account_=;-30l;lbreak_=;269,76p;lbounce_=;253,24p;sbreak_=;247,67p;sbounce_=;264,28p
-23.12.2020;19:30:00.000;412;imitator: Close short;269,74;300;-80922;820;-45,31632;150;270,11;257,05;5,08072359463139;61,6385911179174;2,83307810107201;-35,5283307810106;No
-23.12.2020;19:30:00.000;412;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1621;status_=;matched;
+23.12.2020;19:30:00.000;412;imitator: Close short;269,74;300;-80922;850;-45,31632;150;270,11;257,05;5,08072359463139;61,6385911179174;2,83307810107201;-35,5283307810106;No
+23.12.2020;19:30:00.000;412;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1681;status_=;matched;
 23.12.2020;19:30:00.000;412;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;265,1;pos.Bought_=;0;pos.Sold_=;79530;
-23.12.2020;19:30:00.000;412;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1621;tradeno_=;1621;quantity_=;30;price_=;269,74;
+23.12.2020;19:30:00.000;412;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1681;tradeno_=;1681;quantity_=;30;price_=;269,74;
 23.12.2020;19:30:00.000;412;dealer_onTrade;BUY;quantity;30;price;269,74;money;80922
 23.12.2020;19:30:00.000;412;dealer_onOrder: trade complete;SHORT;posMargin_=;-1391,99999999999;pos.Bought_=;-80922;pos.Sold_=;79530;
 23.12.2020;19:30:00.000;412;#short_lr_SL_following;pos.abs_profit_=;-1 392,00p;pos.age_=;0c;LRSL_=;269,82p
-23.12.2020;19:30:00.000;412;imitator: Open long;269,74;300;-80922;821;-45,31632
-23.12.2020;19:30:00.000;412;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1622;status_=;matched;
+23.12.2020;19:30:00.000;412;imitator: Open long;269,74;300;-80922;851;-45,31632
+23.12.2020;19:30:00.000;412;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1682;status_=;matched;
 23.12.2020;19:30:00.000;412;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-23.12.2020;19:30:00.000;412;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1622;tradeno_=;1622;quantity_=;30;price_=;269,74;
+23.12.2020;19:30:00.000;412;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1682;tradeno_=;1682;quantity_=;30;price_=;269,74;
 23.12.2020;19:30:00.000;412;dealer_onTrade;BUY;quantity;30;price;269,74;money;80922
 23.12.2020;19:30:00.000;412;#long_lr_break_open_following;pos.price_=;269,74p;account_=;30l;LR_=;269,89p
 23.12.2020;19:30:00.000;412;#account_>_0l_already
@@ -699,10 +699,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 29.12.2020;15:45:00.000;625;#step_=;625n;account_=;30l;lbreak_=;281,77p;lbounce_=;271,09p;sbreak_=;268,45p;sbounce_=;278,99p
 29.12.2020;16:00:00.000;626;#step_=;626n;account_=;30l;lbreak_=;281,81p;lbounce_=;271,14p;sbreak_=;268,49p;sbounce_=;279,03p
 29.12.2020;16:15:00.000;627;#step_=;627n;account_=;30l;lbreak_=;281,85p;lbounce_=;271,18p;sbreak_=;268,54p;sbounce_=;279,07p
-29.12.2020;16:15:00.000;627;imitator: Close long;273,64;300;82092;821;-45,97152;215;276,43;267,13;3,48145097892412;28,0645161290324;30,0000000000002;-41,9354838709674;No
-29.12.2020;16:15:00.000;627;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1623;status_=;matched;
+29.12.2020;16:15:00.000;627;imitator: Close long;273,64;300;82092;851;-45,97152;215;276,43;267,13;3,48145097892412;28,0645161290324;30,0000000000002;-41,9354838709674;No
+29.12.2020;16:15:00.000;627;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1683;status_=;matched;
 29.12.2020;16:15:00.000;627;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;269,74;pos.Bought_=;-80922;pos.Sold_=;0;
-29.12.2020;16:15:00.000;627;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1623;tradeno_=;1623;quantity_=;30;price_=;273,64;
+29.12.2020;16:15:00.000;627;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1683;tradeno_=;1683;quantity_=;30;price_=;273,64;
 29.12.2020;16:15:00.000;627;dealer_onTrade;SELL;quantity;30;price;273,64;money;82092
 29.12.2020;16:15:00.000;627;dealer_onOrder: trade complete;LONG;posMargin_=;1169,99999999999;pos.Bought_=;-80922;pos.Sold_=;82092;
 29.12.2020;16:15:00.000;627;#long_lr_TP_following;pos.abs_profit_=;1 170,00p;pos.age_=;0c;LRTP_=;273,47p
@@ -728,10 +728,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 29.12.2020;21:15:00.000;647;#step_=;647n;account_=;0l;lbreak_=;282,63p;lbounce_=;272,00p;sbreak_=;269,36p;sbounce_=;279,85p
 29.12.2020;21:30:00.000;648;#step_=;648n;account_=;0l;lbreak_=;282,66p;lbounce_=;272,04p;sbreak_=;269,40p;sbounce_=;279,89p
 29.12.2020;21:45:00.000;649;#step_=;649n;account_=;0l;lbreak_=;282,70p;lbounce_=;272,09p;sbreak_=;269,44p;sbounce_=;279,93p
-29.12.2020;21:45:00.000;649;imitator: Open long;272,19;300;-81657;822;-45,72792
-29.12.2020;21:45:00.000;649;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1624;status_=;matched;
+29.12.2020;21:45:00.000;649;imitator: Open long;272,19;300;-81657;852;-45,72792
+29.12.2020;21:45:00.000;649;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1684;status_=;matched;
 29.12.2020;21:45:00.000;649;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-29.12.2020;21:45:00.000;649;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1624;tradeno_=;1624;quantity_=;30;price_=;272,19;
+29.12.2020;21:45:00.000;649;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1684;tradeno_=;1684;quantity_=;30;price_=;272,19;
 29.12.2020;21:45:00.000;649;dealer_onTrade;BUY;quantity;30;price;272,19;money;81657
 29.12.2020;21:45:00.000;649;#long_lr_bounce_open_following;pos.price_=;272,19p;account_=;30l;LR_=;272,00p
 29.12.2020;22:00:00.000;650;#step_=;650n;account_=;30l;lbreak_=;282,74p;lbounce_=;272,13p;sbreak_=;269,49p;sbounce_=;279,97p
@@ -974,10 +974,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 06.01.2021;23:45:00.000;885;#step_=;885n;account_=;30l;lbreak_=;280,53p;lbounce_=;272,57p;sbreak_=;269,93p;sbounce_=;277,78p
 08.01.2021;09:45:00.000;886;#step_=;886n;account_=;30l;lbreak_=;278,49p;lbounce_=;271,82p;sbreak_=;269,36p;sbounce_=;276,03p
 08.01.2021;10:00:00.000;887;#step_=;887n;account_=;30l;lbreak_=;278,49p;lbounce_=;271,83p;sbreak_=;269,36p;sbounce_=;276,03p
-08.01.2021;10:00:00.000;887;imitator: Close long;275,91;300;82773;822;-46,35288;238;277,42;270,12;2,70250259144085;28,3561643835615;20,6849315068492;-50,9589041095893;No
-08.01.2021;10:00:00.000;887;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1625;status_=;matched;
+08.01.2021;10:00:00.000;887;imitator: Close long;275,91;300;82773;852;-46,35288;238;277,42;270,12;2,70250259144085;28,3561643835615;20,6849315068492;-50,9589041095893;No
+08.01.2021;10:00:00.000;887;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1685;status_=;matched;
 08.01.2021;10:00:00.000;887;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;272,19;pos.Bought_=;-81657;pos.Sold_=;0;
-08.01.2021;10:00:00.000;887;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1625;tradeno_=;1625;quantity_=;30;price_=;275,91;
+08.01.2021;10:00:00.000;887;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1685;tradeno_=;1685;quantity_=;30;price_=;275,91;
 08.01.2021;10:00:00.000;887;dealer_onTrade;SELL;quantity;30;price;275,91;money;82773
 08.01.2021;10:00:00.000;887;dealer_onOrder: trade complete;LONG;posMargin_=;1116,00000000001;pos.Bought_=;-81657;pos.Sold_=;82773;
 08.01.2021;10:00:00.000;887;#long_lr_TP_following;pos.abs_profit_=;1 116,00p;pos.age_=;0c;LRTP_=;276,03p
@@ -986,20 +986,20 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 08.01.2021;10:45:00.000;890;#step_=;890n;account_=;0l;lbreak_=;278,50p;lbounce_=;271,83p;sbreak_=;269,37p;sbounce_=;276,04p
 08.01.2021;11:00:00.000;891;#step_=;891n;account_=;0l;lbreak_=;278,50p;lbounce_=;271,84p;sbreak_=;269,38p;sbounce_=;276,04p
 08.01.2021;11:15:00.000;892;#step_=;892n;account_=;0l;lbreak_=;278,50p;lbounce_=;271,84p;sbreak_=;269,38p;sbounce_=;276,04p
-08.01.2021;11:15:00.000;892;imitator: Open long;280,08;300;-84024;823;-47,05344
-08.01.2021;11:15:00.000;892;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1626;status_=;matched;
+08.01.2021;11:15:00.000;892;imitator: Open long;280,08;300;-84024;853;-47,05344
+08.01.2021;11:15:00.000;892;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1686;status_=;matched;
 08.01.2021;11:15:00.000;892;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-08.01.2021;11:15:00.000;892;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1626;tradeno_=;1626;quantity_=;30;price_=;280,08;
+08.01.2021;11:15:00.000;892;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1686;tradeno_=;1686;quantity_=;30;price_=;280,08;
 08.01.2021;11:15:00.000;892;dealer_onTrade;BUY;quantity;30;price;280,08;money;84024
 08.01.2021;11:15:00.000;892;#long_lr_break_open_following;pos.price_=;280,08p;account_=;30l;LR_=;278,50p
 08.01.2021;11:30:00.000;893;#step_=;893n;account_=;30l;lbreak_=;278,51p;lbounce_=;271,84p;sbreak_=;269,38p;sbounce_=;276,05p
 08.01.2021;11:45:00.000;894;#step_=;894n;account_=;30l;lbreak_=;278,51p;lbounce_=;271,85p;sbreak_=;269,38p;sbounce_=;276,05p
 08.01.2021;11:45:00.000;894;#long_lr_stop_following_looking_for_SL_conditions
 08.01.2021;11:45:00.000;894;#long_lr_stop_following_looking_for_TP_conditions
-08.01.2021;11:45:00.000;894;imitator: Close long;280,25;300;84075;823;-47,082;2;281,16;278,69;0,886289425526581;56,2753036437235;36,8421052631585;-6,88259109311798;No
-08.01.2021;11:45:00.000;894;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1627;status_=;matched;
+08.01.2021;11:45:00.000;894;imitator: Close long;280,25;300;84075;853;-47,082;2;281,16;278,69;0,886289425526581;56,2753036437235;36,8421052631585;-6,88259109311798;No
+08.01.2021;11:45:00.000;894;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1687;status_=;matched;
 08.01.2021;11:45:00.000;894;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;280,08;pos.Bought_=;-84024;pos.Sold_=;0;
-08.01.2021;11:45:00.000;894;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1627;tradeno_=;1627;quantity_=;30;price_=;280,25;
+08.01.2021;11:45:00.000;894;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1687;tradeno_=;1687;quantity_=;30;price_=;280,25;
 08.01.2021;11:45:00.000;894;dealer_onTrade;SELL;quantity;30;price;280,25;money;84075
 08.01.2021;11:45:00.000;894;dealer_onOrder: trade complete;LONG;posMargin_=;51;pos.Bought_=;-84024;pos.Sold_=;84075;
 08.01.2021;11:45:00.000;894;#long_lr_TP_following;pos.abs_profit_=;51,00p;pos.age_=;0c;LRTP_=;271,17p
@@ -1058,10 +1058,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 11.01.2021;10:45:00.000;947;#step_=;947n;account_=;0l;lbreak_=;286,99p;lbounce_=;276,03p;sbreak_=;271,63p;sbounce_=;282,51p
 11.01.2021;11:00:00.000;948;#step_=;948n;account_=;0l;lbreak_=;287,01p;lbounce_=;276,05p;sbreak_=;271,66p;sbounce_=;282,54p
 11.01.2021;11:15:00.000;949;#step_=;949n;account_=;0l;lbreak_=;287,04p;lbounce_=;276,08p;sbreak_=;271,68p;sbounce_=;282,56p
-11.01.2021;11:15:00.000;949;imitator: Open long;287,9;300;-86370;824;-48,3672
-11.01.2021;11:15:00.000;949;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1628;status_=;matched;
+11.01.2021;11:15:00.000;949;imitator: Open long;287,9;300;-86370;854;-48,3672
+11.01.2021;11:15:00.000;949;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1688;status_=;matched;
 11.01.2021;11:15:00.000;949;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-11.01.2021;11:15:00.000;949;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1628;tradeno_=;1628;quantity_=;30;price_=;287,9;
+11.01.2021;11:15:00.000;949;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1688;tradeno_=;1688;quantity_=;30;price_=;287,9;
 11.01.2021;11:15:00.000;949;dealer_onTrade;BUY;quantity;30;price;287,9;money;86370
 11.01.2021;11:15:00.000;949;#long_lr_break_open_following;pos.price_=;287,90p;account_=;30l;LR_=;286,99p
 11.01.2021;11:30:00.000;950;#step_=;950n;account_=;30l;lbreak_=;287,06p;lbounce_=;276,10p;sbreak_=;271,71p;sbounce_=;282,59p
@@ -1143,10 +1143,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 12.01.2021;15:45:00.000;1024;#step_=;1024n;account_=;30l;lbreak_=;299,06p;lbounce_=;283,37p;sbreak_=;277,76p;sbounce_=;293,38p
 12.01.2021;16:00:00.000;1025;#step_=;1025n;account_=;30l;lbreak_=;299,12p;lbounce_=;283,42p;sbreak_=;277,82p;sbounce_=;293,44p
 12.01.2021;16:15:00.000;1026;#step_=;1026n;account_=;30l;lbreak_=;299,17p;lbounce_=;283,48p;sbreak_=;277,87p;sbounce_=;293,50p
-12.01.2021;16:15:00.000;1026;imitator: Close long;291,38;300;87414;824;-48,95184;77;296,07;285,96;3,53545950482585;19,188921859545;46,3897131552917;-34,4213649851633;No
-12.01.2021;16:15:00.000;1026;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1629;status_=;matched;
+12.01.2021;16:15:00.000;1026;imitator: Close long;291,38;300;87414;854;-48,95184;77;296,07;285,96;3,53545950482585;19,188921859545;46,3897131552917;-34,4213649851633;No
+12.01.2021;16:15:00.000;1026;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1689;status_=;matched;
 12.01.2021;16:15:00.000;1026;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;287,9;pos.Bought_=;-86370;pos.Sold_=;0;
-12.01.2021;16:15:00.000;1026;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1629;tradeno_=;1629;quantity_=;30;price_=;291,38;
+12.01.2021;16:15:00.000;1026;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1689;tradeno_=;1689;quantity_=;30;price_=;291,38;
 12.01.2021;16:15:00.000;1026;dealer_onTrade;SELL;quantity;30;price;291,38;money;87414
 12.01.2021;16:15:00.000;1026;dealer_onOrder: trade complete;LONG;posMargin_=;1044;pos.Bought_=;-86370;pos.Sold_=;87414;
 12.01.2021;16:15:00.000;1026;#long_lr_TP_following;pos.abs_profit_=;1 044,00p;pos.age_=;0c;LRTP_=;287,21p
@@ -1211,10 +1211,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 13.01.2021;16:45:00.000;1085;#step_=;1085n;account_=;0l;lbreak_=;304,54p;lbounce_=;289,31p;sbreak_=;284,08p;sbounce_=;299,07p
 13.01.2021;17:00:00.000;1086;#step_=;1086n;account_=;0l;lbreak_=;304,61p;lbounce_=;289,37p;sbreak_=;284,15p;sbounce_=;299,14p
 13.01.2021;17:15:00.000;1087;#step_=;1087n;account_=;0l;lbreak_=;304,68p;lbounce_=;289,44p;sbreak_=;284,22p;sbounce_=;299,21p
-13.01.2021;17:15:00.000;1087;imitator: Open short;283,72;300;85116;825;-47,66496
-13.01.2021;17:15:00.000;1087;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1630;status_=;matched;
+13.01.2021;17:15:00.000;1087;imitator: Open short;283,72;300;85116;855;-47,66496
+13.01.2021;17:15:00.000;1087;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1690;status_=;matched;
 13.01.2021;17:15:00.000;1087;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-13.01.2021;17:15:00.000;1087;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1630;tradeno_=;1630;quantity_=;30;price_=;283,72;
+13.01.2021;17:15:00.000;1087;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1690;tradeno_=;1690;quantity_=;30;price_=;283,72;
 13.01.2021;17:15:00.000;1087;dealer_onTrade;SELL;quantity;30;price;283,72;money;85116
 13.01.2021;17:15:00.000;1087;#short_lr_break_open_following;pos.price_=;283,72p;account_=;-30l;LR_=;284,08p
 13.01.2021;17:30:00.000;1088;#step_=;1088n;account_=;-30l;lbreak_=;304,75p;lbounce_=;289,51p;sbreak_=;284,29p;sbounce_=;299,28p
@@ -1539,10 +1539,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 21.01.2021;11:15:00.000;1405;#step_=;1405n;account_=;-30l;lbreak_=;283,46p;lbounce_=;271,04p;sbreak_=;267,60p;sbounce_=;280,04p
 21.01.2021;11:30:00.000;1406;#step_=;1406n;account_=;-30l;lbreak_=;283,44p;lbounce_=;271,02p;sbreak_=;267,58p;sbounce_=;280,02p
 21.01.2021;11:45:00.000;1407;#step_=;1407n;account_=;-30l;lbreak_=;283,42p;lbounce_=;271,00p;sbreak_=;267,56p;sbounce_=;280,00p
-21.01.2021;11:45:00.000;1407;imitator: Close short;274,52;300;-82356;825;-46,11936;320;286,9;272,95;5,11082615863711;77,2043010752692;88,7455197132617;65,9498207885308;No
-21.01.2021;11:45:00.000;1407;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1631;status_=;matched;
+21.01.2021;11:45:00.000;1407;imitator: Close short;274,52;300;-82356;855;-46,11936;320;286,9;272,95;5,11082615863711;77,2043010752692;88,7455197132617;65,9498207885308;No
+21.01.2021;11:45:00.000;1407;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1691;status_=;matched;
 21.01.2021;11:45:00.000;1407;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;283,72;pos.Bought_=;0;pos.Sold_=;85116;
-21.01.2021;11:45:00.000;1407;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1631;tradeno_=;1631;quantity_=;30;price_=;274,52;
+21.01.2021;11:45:00.000;1407;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1691;tradeno_=;1691;quantity_=;30;price_=;274,52;
 21.01.2021;11:45:00.000;1407;dealer_onTrade;BUY;quantity;30;price;274,52;money;82356
 21.01.2021;11:45:00.000;1407;dealer_onOrder: trade complete;SHORT;posMargin_=;2760,00000000001;pos.Bought_=;-82356;pos.Sold_=;85116;
 21.01.2021;11:45:00.000;1407;#short_lr_TP_following;pos.abs_profit_=;2 760,00p;pos.age_=;0c;LRTP_=;274,47p
@@ -1773,10 +1773,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 27.01.2021;11:00:00.000;1632;#step_=;1632n;account_=;0l;lbreak_=;271,91p;lbounce_=;259,58p;sbreak_=;255,33p;sbounce_=;267,71p
 27.01.2021;11:15:00.000;1633;#step_=;1633n;account_=;0l;lbreak_=;271,86p;lbounce_=;259,53p;sbreak_=;255,28p;sbounce_=;267,66p
 27.01.2021;11:30:00.000;1634;#step_=;1634n;account_=;0l;lbreak_=;271,81p;lbounce_=;259,48p;sbreak_=;255,23p;sbounce_=;267,60p
-27.01.2021;11:30:00.000;1634;imitator: Open long;272,69;300;-81807;826;-45,81192
-27.01.2021;11:30:00.000;1634;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1632;status_=;matched;
+27.01.2021;11:30:00.000;1634;imitator: Open long;272,69;300;-81807;856;-45,81192
+27.01.2021;11:30:00.000;1634;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1692;status_=;matched;
 27.01.2021;11:30:00.000;1634;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-27.01.2021;11:30:00.000;1634;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1632;tradeno_=;1632;quantity_=;30;price_=;272,69;
+27.01.2021;11:30:00.000;1634;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1692;tradeno_=;1692;quantity_=;30;price_=;272,69;
 27.01.2021;11:30:00.000;1634;dealer_onTrade;BUY;quantity;30;price;272,69;money;81807
 27.01.2021;11:30:00.000;1634;#long_lr_break_open_following;pos.price_=;272,69p;account_=;30l;LR_=;271,91p
 27.01.2021;11:45:00.000;1635;#step_=;1635n;account_=;30l;lbreak_=;271,76p;lbounce_=;259,43p;sbreak_=;255,18p;sbounce_=;267,55p
@@ -2256,10 +2256,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 08.02.2021;15:45:00.000;2107;#step_=;2107n;account_=;30l;lbreak_=;277,54p;lbounce_=;267,99p;sbreak_=;265,16p;sbounce_=;274,69p
 08.02.2021;16:00:00.000;2108;#step_=;2108n;account_=;30l;lbreak_=;277,57p;lbounce_=;268,03p;sbreak_=;265,20p;sbounce_=;274,72p
 08.02.2021;16:15:00.000;2109;#step_=;2109n;account_=;30l;lbreak_=;277,61p;lbounce_=;268,06p;sbreak_=;265,23p;sbounce_=;274,76p
-08.02.2021;16:15:00.000;2109;imitator: Close long;273,88;300;82164;826;-46,01184;475;275,35;257,36;6,99020826857321;85,214007782101;8,17120622568108;-6,61478599221788;No
-08.02.2021;16:15:00.000;2109;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1633;status_=;matched;
+08.02.2021;16:15:00.000;2109;imitator: Close long;273,88;300;82164;856;-46,01184;475;275,35;257,36;6,99020826857321;85,214007782101;8,17120622568108;-6,61478599221788;No
+08.02.2021;16:15:00.000;2109;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1693;status_=;matched;
 08.02.2021;16:15:00.000;2109;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;272,69;pos.Bought_=;-81807;pos.Sold_=;0;
-08.02.2021;16:15:00.000;2109;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1633;tradeno_=;1633;quantity_=;30;price_=;273,88;
+08.02.2021;16:15:00.000;2109;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1693;tradeno_=;1693;quantity_=;30;price_=;273,88;
 08.02.2021;16:15:00.000;2109;dealer_onTrade;SELL;quantity;30;price;273,88;money;82164
 08.02.2021;16:15:00.000;2109;dealer_onOrder: trade complete;LONG;posMargin_=;357;pos.Bought_=;-81807;pos.Sold_=;82164;
 08.02.2021;16:15:00.000;2109;#long_lr_TP_following;pos.abs_profit_=;357,00p;pos.age_=;0c;LRTP_=;272,44p
@@ -2309,10 +2309,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 09.02.2021;13:00:00.000;2153;#step_=;2153n;account_=;0l;lbreak_=;280,22p;lbounce_=;270,47p;sbreak_=;267,69p;sbounce_=;277,43p
 09.02.2021;13:15:00.000;2154;#step_=;2154n;account_=;0l;lbreak_=;280,26p;lbounce_=;270,51p;sbreak_=;267,73p;sbounce_=;277,47p
 09.02.2021;13:30:00.000;2155;#step_=;2155n;account_=;0l;lbreak_=;280,30p;lbounce_=;270,55p;sbreak_=;267,77p;sbounce_=;277,51p
-09.02.2021;13:30:00.000;2155;imitator: Open long;270,55;300;-81165;827;-45,4524
-09.02.2021;13:30:00.000;2155;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1634;status_=;matched;
+09.02.2021;13:30:00.000;2155;imitator: Open long;270,55;300;-81165;857;-45,4524
+09.02.2021;13:30:00.000;2155;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1694;status_=;matched;
 09.02.2021;13:30:00.000;2155;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-09.02.2021;13:30:00.000;2155;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1634;tradeno_=;1634;quantity_=;30;price_=;270,55;
+09.02.2021;13:30:00.000;2155;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1694;tradeno_=;1694;quantity_=;30;price_=;270,55;
 09.02.2021;13:30:00.000;2155;dealer_onTrade;BUY;quantity;30;price;270,55;money;81165
 09.02.2021;13:30:00.000;2155;#long_lr_bounce_open_following;pos.price_=;270,55p;account_=;30l;LR_=;270,47p
 09.02.2021;13:45:00.000;2156;#step_=;2156n;account_=;30l;lbreak_=;280,34p;lbounce_=;270,59p;sbreak_=;267,81p;sbounce_=;277,55p
@@ -2336,17 +2336,17 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 09.02.2021;17:45:00.000;2172;#step_=;2172n;account_=;30l;lbreak_=;280,97p;lbounce_=;271,23p;sbreak_=;268,44p;sbounce_=;278,18p
 09.02.2021;18:00:00.000;2173;#step_=;2173n;account_=;30l;lbreak_=;281,01p;lbounce_=;271,27p;sbreak_=;268,48p;sbounce_=;278,22p
 09.02.2021;18:15:00.000;2174;#step_=;2174n;account_=;30l;lbreak_=;281,05p;lbounce_=;271,31p;sbreak_=;268,52p;sbounce_=;278,26p
-09.02.2021;18:15:00.000;2174;imitator: Close long;267,98;300;80394;827;-45,02064;19;271,66;267,86;1,41865153438364;70,7894736842103;96,8421052631578;67,631578947368;No
-09.02.2021;18:15:00.000;2174;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1635;status_=;matched;
+09.02.2021;18:15:00.000;2174;imitator: Close long;267,98;300;80394;857;-45,02064;19;271,66;267,86;1,41865153438364;70,7894736842103;96,8421052631578;67,631578947368;No
+09.02.2021;18:15:00.000;2174;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1695;status_=;matched;
 09.02.2021;18:15:00.000;2174;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;270,55;pos.Bought_=;-81165;pos.Sold_=;0;
-09.02.2021;18:15:00.000;2174;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1635;tradeno_=;1635;quantity_=;30;price_=;267,98;
+09.02.2021;18:15:00.000;2174;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1695;tradeno_=;1695;quantity_=;30;price_=;267,98;
 09.02.2021;18:15:00.000;2174;dealer_onTrade;SELL;quantity;30;price;267,98;money;80394
 09.02.2021;18:15:00.000;2174;dealer_onOrder: trade complete;LONG;posMargin_=;-771;pos.Bought_=;-81165;pos.Sold_=;80394;
 09.02.2021;18:15:00.000;2174;#long_lr_SL_following;pos.abs_profit_=;-771,00p;pos.age_=;0c;LRSL_=;268,48p
-09.02.2021;18:15:00.000;2174;imitator: Open short;267,98;300;80394;828;-45,02064
-09.02.2021;18:15:00.000;2174;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1636;status_=;matched;
+09.02.2021;18:15:00.000;2174;imitator: Open short;267,98;300;80394;858;-45,02064
+09.02.2021;18:15:00.000;2174;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1696;status_=;matched;
 09.02.2021;18:15:00.000;2174;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-09.02.2021;18:15:00.000;2174;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1636;tradeno_=;1636;quantity_=;30;price_=;267,98;
+09.02.2021;18:15:00.000;2174;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1696;tradeno_=;1696;quantity_=;30;price_=;267,98;
 09.02.2021;18:15:00.000;2174;dealer_onTrade;SELL;quantity;30;price;267,98;money;80394
 09.02.2021;18:15:00.000;2174;#short_lr_break_open_following;pos.price_=;267,98p;account_=;-30l;LR_=;268,44p
 09.02.2021;18:15:00.000;2174;#account_<_0l_already
@@ -2569,17 +2569,17 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 15.02.2021;15:00:00.000;2389;#step_=;2389n;account_=;-30l;lbreak_=;268,76p;lbounce_=;257,60p;sbreak_=;254,32p;sbounce_=;265,50p
 15.02.2021;15:15:00.000;2390;#step_=;2390n;account_=;-30l;lbreak_=;268,72p;lbounce_=;257,56p;sbreak_=;254,28p;sbounce_=;265,47p
 15.02.2021;15:30:00.000;2391;#step_=;2391n;account_=;-30l;lbreak_=;268,68p;lbounce_=;257,52p;sbreak_=;254,24p;sbounce_=;265,43p
-15.02.2021;15:30:00.000;2391;imitator: Close short;268,48;300;-80544;828;-45,10464;217;270,99;258,55;4,81144846257977;75,8038585209004;20,176848874598;-4,01929260450161;No
-15.02.2021;15:30:00.000;2391;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1637;status_=;matched;
+15.02.2021;15:30:00.000;2391;imitator: Close short;268,48;300;-80544;858;-45,10464;217;270,99;258,55;4,81144846257977;75,8038585209004;20,176848874598;-4,01929260450161;No
+15.02.2021;15:30:00.000;2391;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1697;status_=;matched;
 15.02.2021;15:30:00.000;2391;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;267,98;pos.Bought_=;0;pos.Sold_=;80394;
-15.02.2021;15:30:00.000;2391;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1637;tradeno_=;1637;quantity_=;30;price_=;268,48;
+15.02.2021;15:30:00.000;2391;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1697;tradeno_=;1697;quantity_=;30;price_=;268,48;
 15.02.2021;15:30:00.000;2391;dealer_onTrade;BUY;quantity;30;price;268,48;money;80544
 15.02.2021;15:30:00.000;2391;dealer_onOrder: trade complete;SHORT;posMargin_=;-150;pos.Bought_=;-80544;pos.Sold_=;80394;
 15.02.2021;15:30:00.000;2391;#short_lr_SL_following;pos.abs_profit_=;-150,00p;pos.age_=;0c;LRSL_=;268,72p
-15.02.2021;15:30:00.000;2391;imitator: Open long;268,48;300;-80544;829;-45,10464
-15.02.2021;15:30:00.000;2391;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1638;status_=;matched;
+15.02.2021;15:30:00.000;2391;imitator: Open long;268,48;300;-80544;859;-45,10464
+15.02.2021;15:30:00.000;2391;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1698;status_=;matched;
 15.02.2021;15:30:00.000;2391;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-15.02.2021;15:30:00.000;2391;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1638;tradeno_=;1638;quantity_=;30;price_=;268,48;
+15.02.2021;15:30:00.000;2391;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1698;tradeno_=;1698;quantity_=;30;price_=;268,48;
 15.02.2021;15:30:00.000;2391;dealer_onTrade;BUY;quantity;30;price;268,48;money;80544
 15.02.2021;15:30:00.000;2391;#long_lr_break_open_following;pos.price_=;268,48p;account_=;30l;LR_=;268,76p
 15.02.2021;15:30:00.000;2391;#account_>_0l_already
@@ -2589,10 +2589,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 15.02.2021;16:00:00.000;2393;#long_lr_stop_following_looking_for_TP_conditions
 15.02.2021;16:15:00.000;2394;#step_=;2394n;account_=;30l;lbreak_=;268,57p;lbounce_=;257,41p;sbreak_=;254,13p;sbounce_=;265,32p
 15.02.2021;16:30:00.000;2395;#step_=;2395n;account_=;30l;lbreak_=;268,54p;lbounce_=;257,38p;sbreak_=;254,10p;sbounce_=;265,28p
-15.02.2021;16:30:00.000;2395;imitator: Close long;268,98;300;80694;829;-45,18864;4;269,2;268,18;0,380341561637699;29,411764705884;21,5686274509779;-49,0196078431381;No
-15.02.2021;16:30:00.000;2395;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1639;status_=;matched;
+15.02.2021;16:30:00.000;2395;imitator: Close long;268,98;300;80694;859;-45,18864;4;269,2;268,18;0,380341561637699;29,411764705884;21,5686274509779;-49,0196078431381;No
+15.02.2021;16:30:00.000;2395;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1699;status_=;matched;
 15.02.2021;16:30:00.000;2395;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;268,48;pos.Bought_=;-80544;pos.Sold_=;0;
-15.02.2021;16:30:00.000;2395;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1639;tradeno_=;1639;quantity_=;30;price_=;268,98;
+15.02.2021;16:30:00.000;2395;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1699;tradeno_=;1699;quantity_=;30;price_=;268,98;
 15.02.2021;16:30:00.000;2395;dealer_onTrade;SELL;quantity;30;price;268,98;money;80694
 15.02.2021;16:30:00.000;2395;dealer_onOrder: trade complete;LONG;posMargin_=;150;pos.Bought_=;-80544;pos.Sold_=;80694;
 15.02.2021;16:30:00.000;2395;#long_lr_TP_following;pos.abs_profit_=;150,00p;pos.age_=;0c;LRTP_=;269,18p
@@ -2630,10 +2630,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 16.02.2021;10:15:00.000;2427;#step_=;2427n;account_=;0l;lbreak_=;274,46p;lbounce_=;258,86p;sbreak_=;253,52p;sbounce_=;269,15p
 16.02.2021;10:30:00.000;2428;#step_=;2428n;account_=;0l;lbreak_=;274,44p;lbounce_=;258,84p;sbreak_=;253,50p;sbounce_=;269,12p
 16.02.2021;10:45:00.000;2429;#step_=;2429n;account_=;0l;lbreak_=;274,42p;lbounce_=;258,82p;sbreak_=;253,48p;sbounce_=;269,10p
-16.02.2021;10:45:00.000;2429;imitator: Open short;269,48;300;80844;830;-45,27264
-16.02.2021;10:45:00.000;2429;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1640;status_=;matched;
+16.02.2021;10:45:00.000;2429;imitator: Open short;269,48;300;80844;860;-45,27264
+16.02.2021;10:45:00.000;2429;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1700;status_=;matched;
 16.02.2021;10:45:00.000;2429;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-16.02.2021;10:45:00.000;2429;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1640;tradeno_=;1640;quantity_=;30;price_=;269,48;
+16.02.2021;10:45:00.000;2429;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1700;tradeno_=;1700;quantity_=;30;price_=;269,48;
 16.02.2021;10:45:00.000;2429;dealer_onTrade;SELL;quantity;30;price;269,48;money;80844
 16.02.2021;10:45:00.000;2429;#short_lr_bounce_open_following;pos.price_=;269,48p;account_=;-30l;LR_=;269,15p
 16.02.2021;11:00:00.000;2430;#step_=;2430n;account_=;-30l;lbreak_=;274,40p;lbounce_=;258,80p;sbreak_=;253,46p;sbounce_=;269,08p
@@ -2782,19 +2782,19 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 18.02.2021;17:45:00.000;2571;#step_=;2571n;account_=;-30l;lbreak_=;280,08p;lbounce_=;266,53p;sbreak_=;262,55p;sbounce_=;276,07p
 18.02.2021;18:00:00.000;2572;#step_=;2572n;account_=;-30l;lbreak_=;280,10p;lbounce_=;266,55p;sbreak_=;262,57p;sbounce_=;276,09p
 18.02.2021;18:15:00.000;2573;#step_=;2573n;account_=;-30l;lbreak_=;280,13p;lbounce_=;266,57p;sbreak_=;262,60p;sbounce_=;276,12p
-18.02.2021;18:15:00.000;2573;imitator: Close short;266,55;300;-79965;830;-44,7804;144;275,07;266,21;3,32819954171519;36,9074492099327;96,1625282167039;33,0699774266366;No
-18.02.2021;18:15:00.000;2573;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1641;status_=;matched;
+18.02.2021;18:15:00.000;2573;imitator: Close short;266,55;300;-79965;860;-44,7804;144;275,07;266,21;3,32819954171519;36,9074492099327;96,1625282167039;33,0699774266366;No
+18.02.2021;18:15:00.000;2573;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1701;status_=;matched;
 18.02.2021;18:15:00.000;2573;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;269,48;pos.Bought_=;0;pos.Sold_=;80844;
-18.02.2021;18:15:00.000;2573;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1641;tradeno_=;1641;quantity_=;30;price_=;266,55;
+18.02.2021;18:15:00.000;2573;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1701;tradeno_=;1701;quantity_=;30;price_=;266,55;
 18.02.2021;18:15:00.000;2573;dealer_onTrade;BUY;quantity;30;price;266,55;money;79965
 18.02.2021;18:15:00.000;2573;dealer_onOrder: trade complete;SHORT;posMargin_=;879;pos.Bought_=;-79965;pos.Sold_=;80844;
 18.02.2021;18:15:00.000;2573;#short_lr_TP_following;pos.abs_profit_=;879,00p;pos.age_=;0c;LRTP_=;266,57p
 18.02.2021;18:30:00.000;2574;#step_=;2574n;account_=;0l;lbreak_=;280,15p;lbounce_=;266,60p;sbreak_=;262,62p;sbounce_=;276,14p
 18.02.2021;18:45:00.000;2575;#step_=;2575n;account_=;0l;lbreak_=;280,18p;lbounce_=;266,62p;sbreak_=;262,64p;sbounce_=;276,17p
-18.02.2021;18:45:00.000;2575;imitator: Open long;267,89;300;-80367;831;-45,00552
-18.02.2021;18:45:00.000;2575;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1642;status_=;matched;
+18.02.2021;18:45:00.000;2575;imitator: Open long;267,89;300;-80367;861;-45,00552
+18.02.2021;18:45:00.000;2575;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1702;status_=;matched;
 18.02.2021;18:45:00.000;2575;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-18.02.2021;18:45:00.000;2575;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1642;tradeno_=;1642;quantity_=;30;price_=;267,89;
+18.02.2021;18:45:00.000;2575;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1702;tradeno_=;1702;quantity_=;30;price_=;267,89;
 18.02.2021;18:45:00.000;2575;dealer_onTrade;BUY;quantity;30;price;267,89;money;80367
 18.02.2021;18:45:00.000;2575;#long_lr_bounce_open_following;pos.price_=;267,89p;account_=;30l;LR_=;266,57p
 18.02.2021;19:00:00.000;2576;#step_=;2576n;account_=;30l;lbreak_=;280,20p;lbounce_=;266,65p;sbreak_=;262,67p;sbounce_=;276,19p
@@ -2965,10 +2965,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 22.02.2021;17:00:00.000;2739;#step_=;2739n;account_=;30l;lbreak_=;275,49p;lbounce_=;265,17p;sbreak_=;262,47p;sbounce_=;273,00p
 22.02.2021;17:15:00.000;2740;#step_=;2740n;account_=;30l;lbreak_=;275,49p;lbounce_=;265,16p;sbreak_=;262,47p;sbounce_=;272,99p
 22.02.2021;17:30:00.000;2741;#step_=;2741n;account_=;30l;lbreak_=;275,49p;lbounce_=;265,16p;sbreak_=;262,47p;sbounce_=;272,99p
-22.02.2021;17:30:00.000;2741;imitator: Close long;272,98;300;81894;831;-45,86064;166;273,13;264,19;3,38392823346834;41,387024608501;1,67785234899303;-56,935123042506;No
-22.02.2021;17:30:00.000;2741;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1643;status_=;matched;
+22.02.2021;17:30:00.000;2741;imitator: Close long;272,98;300;81894;861;-45,86064;166;273,13;264,19;3,38392823346834;41,387024608501;1,67785234899303;-56,935123042506;No
+22.02.2021;17:30:00.000;2741;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1703;status_=;matched;
 22.02.2021;17:30:00.000;2741;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;267,89;pos.Bought_=;-80367;pos.Sold_=;0;
-22.02.2021;17:30:00.000;2741;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1643;tradeno_=;1643;quantity_=;30;price_=;272,98;
+22.02.2021;17:30:00.000;2741;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1703;tradeno_=;1703;quantity_=;30;price_=;272,98;
 22.02.2021;17:30:00.000;2741;dealer_onTrade;SELL;quantity;30;price;272,98;money;81894
 22.02.2021;17:30:00.000;2741;dealer_onOrder: trade complete;LONG;posMargin_=;1527;pos.Bought_=;-80367;pos.Sold_=;81894;
 22.02.2021;17:30:00.000;2741;#long_lr_TP_following;pos.abs_profit_=;1 527,00p;pos.age_=;0c;LRTP_=;272,99p
@@ -2976,10 +2976,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 22.02.2021;18:00:00.000;2743;#step_=;2743n;account_=;0l;lbreak_=;275,48p;lbounce_=;265,16p;sbreak_=;262,46p;sbounce_=;272,98p
 22.02.2021;18:15:00.000;2744;#step_=;2744n;account_=;0l;lbreak_=;275,48p;lbounce_=;265,15p;sbreak_=;262,46p;sbounce_=;272,98p
 22.02.2021;18:30:00.000;2745;#step_=;2745n;account_=;0l;lbreak_=;275,47p;lbounce_=;265,15p;sbreak_=;262,46p;sbounce_=;272,98p
-22.02.2021;18:30:00.000;2745;imitator: Open short;273;300;81900;832;-45,864
-22.02.2021;18:30:00.000;2745;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1644;status_=;matched;
+22.02.2021;18:30:00.000;2745;imitator: Open short;273;300;81900;862;-45,864
+22.02.2021;18:30:00.000;2745;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1704;status_=;matched;
 22.02.2021;18:30:00.000;2745;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-22.02.2021;18:30:00.000;2745;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1644;tradeno_=;1644;quantity_=;30;price_=;273;
+22.02.2021;18:30:00.000;2745;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1704;tradeno_=;1704;quantity_=;30;price_=;273;
 22.02.2021;18:30:00.000;2745;dealer_onTrade;SELL;quantity;30;price;273;money;81900
 22.02.2021;18:30:00.000;2745;#short_lr_bounce_open_following;pos.price_=;273,00p;account_=;-30l;LR_=;272,98p
 22.02.2021;18:45:00.000;2746;#step_=;2746n;account_=;-30l;lbreak_=;275,47p;lbounce_=;265,15p;sbreak_=;262,46p;sbounce_=;272,97p
@@ -3121,17 +3121,17 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 25.02.2021;23:45:00.000;2880;#step_=;2880n;account_=;-30l;lbreak_=;278,55p;lbounce_=;267,38p;sbreak_=;264,72p;sbounce_=;275,89p
 26.02.2021;09:45:00.000;2881;#step_=;2881n;account_=;-30l;lbreak_=;278,51p;lbounce_=;270,40p;sbreak_=;268,13p;sbounce_=;276,21p
 26.02.2021;10:00:00.000;2882;#step_=;2882n;account_=;-30l;lbreak_=;278,52p;lbounce_=;270,42p;sbreak_=;268,14p;sbounce_=;276,23p
-26.02.2021;10:00:00.000;2882;imitator: Close short;267,42;300;-80226;832;-44,92656;137;276,48;266,43;3,77209773674136;65,3731343283581;90,1492537313432;55,5223880597013;No
-26.02.2021;10:00:00.000;2882;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1645;status_=;matched;
+26.02.2021;10:00:00.000;2882;imitator: Close short;267,42;300;-80226;862;-44,92656;137;276,48;266,43;3,77209773674136;65,3731343283581;90,1492537313432;55,5223880597013;No
+26.02.2021;10:00:00.000;2882;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1705;status_=;matched;
 26.02.2021;10:00:00.000;2882;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;273;pos.Bought_=;0;pos.Sold_=;81900;
-26.02.2021;10:00:00.000;2882;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1645;tradeno_=;1645;quantity_=;30;price_=;267,42;
+26.02.2021;10:00:00.000;2882;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1705;tradeno_=;1705;quantity_=;30;price_=;267,42;
 26.02.2021;10:00:00.000;2882;dealer_onTrade;BUY;quantity;30;price;267,42;money;80226
 26.02.2021;10:00:00.000;2882;dealer_onOrder: trade complete;SHORT;posMargin_=;1674;pos.Bought_=;-80226;pos.Sold_=;81900;
 26.02.2021;10:00:00.000;2882;#short_lr_TP_following;pos.abs_profit_=;1 674,00p;pos.age_=;0c;LRTP_=;270,42p
-26.02.2021;10:00:00.000;2882;imitator: Open short;267,42;300;80226;833;-44,92656
-26.02.2021;10:00:00.000;2882;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1646;status_=;matched;
+26.02.2021;10:00:00.000;2882;imitator: Open short;267,42;300;80226;863;-44,92656
+26.02.2021;10:00:00.000;2882;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1706;status_=;matched;
 26.02.2021;10:00:00.000;2882;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-26.02.2021;10:00:00.000;2882;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1646;tradeno_=;1646;quantity_=;30;price_=;267,42;
+26.02.2021;10:00:00.000;2882;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1706;tradeno_=;1706;quantity_=;30;price_=;267,42;
 26.02.2021;10:00:00.000;2882;dealer_onTrade;SELL;quantity;30;price;267,42;money;80226
 26.02.2021;10:00:00.000;2882;#short_lr_break_open_following;pos.price_=;267,42p;account_=;-30l;LR_=;264,72p
 26.02.2021;10:00:00.000;2882;#account_<_0l_already
@@ -3281,17 +3281,17 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 02.03.2021;17:00:00.000;3024;#step_=;3024n;account_=;-30l;lbreak_=;278,73p;lbounce_=;268,46p;sbreak_=;265,90p;sbounce_=;276,18p
 02.03.2021;17:15:00.000;3025;#step_=;3025n;account_=;-30l;lbreak_=;278,73p;lbounce_=;268,46p;sbreak_=;265,90p;sbounce_=;276,18p
 02.03.2021;17:30:00.000;3026;#step_=;3026n;account_=;-30l;lbreak_=;278,74p;lbounce_=;268,47p;sbreak_=;265,91p;sbounce_=;276,19p
-02.03.2021;17:30:00.000;3026;imitator: Close short;278,56;300;-83568;833;-46,79808;144;279,56;266,43;4,92812370979244;7,53998476770761;7,61614623000762;-84,8438690022848;No
-02.03.2021;17:30:00.000;3026;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1647;status_=;matched;
+02.03.2021;17:30:00.000;3026;imitator: Close short;278,56;300;-83568;863;-46,79808;144;279,56;266,43;4,92812370979244;7,53998476770761;7,61614623000762;-84,8438690022848;No
+02.03.2021;17:30:00.000;3026;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1707;status_=;matched;
 02.03.2021;17:30:00.000;3026;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;267,42;pos.Bought_=;0;pos.Sold_=;80226;
-02.03.2021;17:30:00.000;3026;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1647;tradeno_=;1647;quantity_=;30;price_=;278,56;
+02.03.2021;17:30:00.000;3026;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1707;tradeno_=;1707;quantity_=;30;price_=;278,56;
 02.03.2021;17:30:00.000;3026;dealer_onTrade;BUY;quantity;30;price;278,56;money;83568
 02.03.2021;17:30:00.000;3026;dealer_onOrder: trade complete;SHORT;posMargin_=;-3342;pos.Bought_=;-83568;pos.Sold_=;80226;
 02.03.2021;17:30:00.000;3026;#short_lr_SL_following;pos.abs_profit_=;-3 342,00p;pos.age_=;0c;LRSL_=;278,73p
-02.03.2021;17:30:00.000;3026;imitator: Open long;278,56;300;-83568;834;-46,79808
-02.03.2021;17:30:00.000;3026;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1648;status_=;matched;
+02.03.2021;17:30:00.000;3026;imitator: Open long;278,56;300;-83568;864;-46,79808
+02.03.2021;17:30:00.000;3026;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1708;status_=;matched;
 02.03.2021;17:30:00.000;3026;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-02.03.2021;17:30:00.000;3026;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1648;tradeno_=;1648;quantity_=;30;price_=;278,56;
+02.03.2021;17:30:00.000;3026;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1708;tradeno_=;1708;quantity_=;30;price_=;278,56;
 02.03.2021;17:30:00.000;3026;dealer_onTrade;BUY;quantity;30;price;278,56;money;83568
 02.03.2021;17:30:00.000;3026;#long_lr_break_open_following;pos.price_=;278,56p;account_=;30l;LR_=;278,73p
 02.03.2021;17:30:00.000;3026;#account_>_0l_already
@@ -3301,10 +3301,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 02.03.2021;18:00:00.000;3028;#long_lr_stop_following_looking_for_TP_conditions
 02.03.2021;18:15:00.000;3029;#step_=;3029n;account_=;30l;lbreak_=;278,76p;lbounce_=;268,48p;sbreak_=;265,92p;sbounce_=;276,21p
 02.03.2021;18:30:00.000;3030;#step_=;3030n;account_=;30l;lbreak_=;278,76p;lbounce_=;268,49p;sbreak_=;265,93p;sbounce_=;276,21p
-02.03.2021;18:30:00.000;3030;imitator: Close long;279,2;300;83760;834;-46,9056;4;280;278,34;0,596392900768853;13,2530120481942;48,1927710843373;-38,5542168674685;No
-02.03.2021;18:30:00.000;3030;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1649;status_=;matched;
+02.03.2021;18:30:00.000;3030;imitator: Close long;279,2;300;83760;864;-46,9056;4;280;278,34;0,596392900768853;13,2530120481942;48,1927710843373;-38,5542168674685;No
+02.03.2021;18:30:00.000;3030;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1709;status_=;matched;
 02.03.2021;18:30:00.000;3030;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;278,56;pos.Bought_=;-83568;pos.Sold_=;0;
-02.03.2021;18:30:00.000;3030;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1649;tradeno_=;1649;quantity_=;30;price_=;279,2;
+02.03.2021;18:30:00.000;3030;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1709;tradeno_=;1709;quantity_=;30;price_=;279,2;
 02.03.2021;18:30:00.000;3030;dealer_onTrade;SELL;quantity;30;price;279,2;money;83760
 02.03.2021;18:30:00.000;3030;dealer_onOrder: trade complete;LONG;posMargin_=;192;pos.Bought_=;-83568;pos.Sold_=;83760;
 02.03.2021;18:30:00.000;3030;#long_lr_TP_following;pos.abs_profit_=;192,00p;pos.age_=;0c;LRTP_=;279,97p
@@ -3314,10 +3314,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 02.03.2021;19:30:00.000;3034;#step_=;3034n;account_=;0l;lbreak_=;278,78p;lbounce_=;268,51p;sbreak_=;265,95p;sbounce_=;276,23p
 02.03.2021;19:45:00.000;3035;#step_=;3035n;account_=;0l;lbreak_=;278,79p;lbounce_=;268,52p;sbreak_=;265,95p;sbounce_=;276,24p
 02.03.2021;20:00:00.000;3036;#step_=;3036n;account_=;0l;lbreak_=;278,80p;lbounce_=;268,52p;sbreak_=;265,96p;sbounce_=;276,25p
-02.03.2021;20:00:00.000;3036;imitator: Open long;278,9;300;-83670;835;-46,8552
-02.03.2021;20:00:00.000;3036;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1650;status_=;matched;
+02.03.2021;20:00:00.000;3036;imitator: Open long;278,9;300;-83670;865;-46,8552
+02.03.2021;20:00:00.000;3036;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1710;status_=;matched;
 02.03.2021;20:00:00.000;3036;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-02.03.2021;20:00:00.000;3036;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1650;tradeno_=;1650;quantity_=;30;price_=;278,9;
+02.03.2021;20:00:00.000;3036;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1710;tradeno_=;1710;quantity_=;30;price_=;278,9;
 02.03.2021;20:00:00.000;3036;dealer_onTrade;BUY;quantity;30;price;278,9;money;83670
 02.03.2021;20:00:00.000;3036;#long_lr_break_open_following;pos.price_=;278,90p;account_=;30l;LR_=;278,78p
 02.03.2021;20:15:00.000;3037;#step_=;3037n;account_=;30l;lbreak_=;278,80p;lbounce_=;268,53p;sbreak_=;265,97p;sbounce_=;276,25p
@@ -3364,10 +3364,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 03.03.2021;15:45:00.000;3076;#step_=;3076n;account_=;30l;lbreak_=;282,43p;lbounce_=;270,95p;sbreak_=;267,40p;sbounce_=;278,84p
 03.03.2021;16:00:00.000;3077;#step_=;3077n;account_=;30l;lbreak_=;282,44p;lbounce_=;270,96p;sbreak_=;267,42p;sbounce_=;278,86p
 03.03.2021;16:15:00.000;3078;#step_=;3078n;account_=;30l;lbreak_=;282,45p;lbounce_=;270,97p;sbreak_=;267,43p;sbounce_=;278,87p
-03.03.2021;16:15:00.000;3078;imitator: Close long;281,88;300;84564;835;-47,35584;42;283,83;278,4;1,95043103448276;9,20810313075505;35,9116022099445;-54,8802946593005;No
-03.03.2021;16:15:00.000;3078;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1651;status_=;matched;
+03.03.2021;16:15:00.000;3078;imitator: Close long;281,88;300;84564;865;-47,35584;42;283,83;278,4;1,95043103448276;9,20810313075505;35,9116022099445;-54,8802946593005;No
+03.03.2021;16:15:00.000;3078;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1711;status_=;matched;
 03.03.2021;16:15:00.000;3078;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;278,9;pos.Bought_=;-83670;pos.Sold_=;0;
-03.03.2021;16:15:00.000;3078;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1651;tradeno_=;1651;quantity_=;30;price_=;281,88;
+03.03.2021;16:15:00.000;3078;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1711;tradeno_=;1711;quantity_=;30;price_=;281,88;
 03.03.2021;16:15:00.000;3078;dealer_onTrade;SELL;quantity;30;price;281,88;money;84564
 03.03.2021;16:15:00.000;3078;dealer_onOrder: trade complete;LONG;posMargin_=;894;pos.Bought_=;-83670;pos.Sold_=;84564;
 03.03.2021;16:15:00.000;3078;#long_lr_TP_following;pos.abs_profit_=;894,00p;pos.age_=;0c;LRTP_=;281,01p
@@ -3413,10 +3413,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 04.03.2021;12:00:00.000;3118;#step_=;3118n;account_=;0l;lbreak_=;287,48p;lbounce_=;276,05p;sbreak_=;271,61p;sbounce_=;283,04p
 04.03.2021;12:15:00.000;3119;#step_=;3119n;account_=;0l;lbreak_=;287,51p;lbounce_=;276,08p;sbreak_=;271,64p;sbounce_=;283,07p
 04.03.2021;12:30:00.000;3120;#step_=;3120n;account_=;0l;lbreak_=;287,54p;lbounce_=;276,11p;sbreak_=;271,67p;sbounce_=;283,11p
-04.03.2021;12:30:00.000;3120;imitator: Open long;276,1;300;-82830;836;-46,3848
-04.03.2021;12:30:00.000;3120;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1652;status_=;matched;
+04.03.2021;12:30:00.000;3120;imitator: Open long;276,1;300;-82830;866;-46,3848
+04.03.2021;12:30:00.000;3120;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1712;status_=;matched;
 04.03.2021;12:30:00.000;3120;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-04.03.2021;12:30:00.000;3120;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1652;tradeno_=;1652;quantity_=;30;price_=;276,1;
+04.03.2021;12:30:00.000;3120;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1712;tradeno_=;1712;quantity_=;30;price_=;276,1;
 04.03.2021;12:30:00.000;3120;dealer_onTrade;BUY;quantity;30;price;276,1;money;82830
 04.03.2021;12:30:00.000;3120;#long_lr_bounce_open_following;pos.price_=;276,10p;account_=;30l;LR_=;276,05p
 04.03.2021;12:45:00.000;3121;#step_=;3121n;account_=;30l;lbreak_=;287,57p;lbounce_=;276,14p;sbreak_=;271,70p;sbounce_=;283,14p
@@ -3543,10 +3543,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 09.03.2021;14:00:00.000;3240;#step_=;3240n;account_=;30l;lbreak_=;290,23p;lbounce_=;276,46p;sbreak_=;271,39p;sbounce_=;285,16p
 09.03.2021;14:15:00.000;3241;#step_=;3241n;account_=;30l;lbreak_=;290,25p;lbounce_=;276,48p;sbreak_=;271,41p;sbounce_=;285,18p
 09.03.2021;14:30:00.000;3242;#step_=;3242n;account_=;30l;lbreak_=;290,27p;lbounce_=;276,50p;sbreak_=;271,43p;sbounce_=;285,20p
-09.03.2021;14:30:00.000;3242;imitator: Close long;284,94;300;85482;836;-47,86992;122;285,49;272,76;4,66710661387301;26,2372348782406;4,32050274941092;-69,4422623723485;No
-09.03.2021;14:30:00.000;3242;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1653;status_=;matched;
+09.03.2021;14:30:00.000;3242;imitator: Close long;284,94;300;85482;866;-47,86992;122;285,49;272,76;4,66710661387301;26,2372348782406;4,32050274941092;-69,4422623723485;No
+09.03.2021;14:30:00.000;3242;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1713;status_=;matched;
 09.03.2021;14:30:00.000;3242;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;276,1;pos.Bought_=;-82830;pos.Sold_=;0;
-09.03.2021;14:30:00.000;3242;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1653;tradeno_=;1653;quantity_=;30;price_=;284,94;
+09.03.2021;14:30:00.000;3242;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1713;tradeno_=;1713;quantity_=;30;price_=;284,94;
 09.03.2021;14:30:00.000;3242;dealer_onTrade;SELL;quantity;30;price;284,94;money;85482
 09.03.2021;14:30:00.000;3242;dealer_onOrder: trade complete;LONG;posMargin_=;2652;pos.Bought_=;-82830;pos.Sold_=;85482;
 09.03.2021;14:30:00.000;3242;#long_lr_TP_following;pos.abs_profit_=;2 652,00p;pos.age_=;0c;LRTP_=;285,20p
@@ -3893,10 +3893,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 17.03.2021;14:15:00.000;3583;#step_=;3583n;account_=;0l;lbreak_=;298,20p;lbounce_=;289,26p;sbreak_=;285,68p;sbounce_=;294,64p
 17.03.2021;14:30:00.000;3584;#step_=;3584n;account_=;0l;lbreak_=;298,23p;lbounce_=;289,29p;sbreak_=;285,71p;sbounce_=;294,67p
 17.03.2021;14:45:00.000;3585;#step_=;3585n;account_=;0l;lbreak_=;298,26p;lbounce_=;289,32p;sbreak_=;285,74p;sbounce_=;294,70p
-17.03.2021;14:45:00.000;3585;imitator: Open short;284,37;300;85311;837;-47,77416
-17.03.2021;14:45:00.000;3585;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1654;status_=;matched;
+17.03.2021;14:45:00.000;3585;imitator: Open short;284,37;300;85311;867;-47,77416
+17.03.2021;14:45:00.000;3585;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1714;status_=;matched;
 17.03.2021;14:45:00.000;3585;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-17.03.2021;14:45:00.000;3585;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1654;tradeno_=;1654;quantity_=;30;price_=;284,37;
+17.03.2021;14:45:00.000;3585;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1714;tradeno_=;1714;quantity_=;30;price_=;284,37;
 17.03.2021;14:45:00.000;3585;dealer_onTrade;SELL;quantity;30;price;284,37;money;85311
 17.03.2021;14:45:00.000;3585;#short_lr_break_open_following;pos.price_=;284,37p;account_=;-30l;LR_=;285,68p
 17.03.2021;15:00:00.000;3586;#step_=;3586n;account_=;-30l;lbreak_=;298,29p;lbounce_=;289,35p;sbreak_=;285,77p;sbounce_=;294,73p
@@ -3964,10 +3964,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 18.03.2021;15:45:00.000;3646;#step_=;3646n;account_=;-30l;lbreak_=;298,86p;lbounce_=;283,09p;sbreak_=;277,75p;sbounce_=;293,60p
 18.03.2021;16:00:00.000;3647;#step_=;3647n;account_=;-30l;lbreak_=;298,88p;lbounce_=;283,10p;sbreak_=;277,77p;sbounce_=;293,62p
 18.03.2021;16:15:00.000;3648;#step_=;3648n;account_=;-30l;lbreak_=;298,90p;lbounce_=;283,12p;sbreak_=;277,78p;sbounce_=;293,63p
-18.03.2021;16:15:00.000;3648;imitator: Close short;281,63;300;-84489;837;-47,31384;63;285,79;279,6;2,21387696709585;77,0597738287558;67,2051696284334;44,2649434571892;No
-18.03.2021;16:15:00.000;3648;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1655;status_=;matched;
+18.03.2021;16:15:00.000;3648;imitator: Close short;281,63;300;-84489;867;-47,31384;63;285,79;279,6;2,21387696709585;77,0597738287558;67,2051696284334;44,2649434571892;No
+18.03.2021;16:15:00.000;3648;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1715;status_=;matched;
 18.03.2021;16:15:00.000;3648;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;284,37;pos.Bought_=;0;pos.Sold_=;85311;
-18.03.2021;16:15:00.000;3648;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1655;tradeno_=;1655;quantity_=;30;price_=;281,63;
+18.03.2021;16:15:00.000;3648;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1715;tradeno_=;1715;quantity_=;30;price_=;281,63;
 18.03.2021;16:15:00.000;3648;dealer_onTrade;BUY;quantity;30;price;281,63;money;84489
 18.03.2021;16:15:00.000;3648;dealer_onOrder: trade complete;SHORT;posMargin_=;822;pos.Bought_=;-84489;pos.Sold_=;85311;
 18.03.2021;16:15:00.000;3648;#short_lr_TP_following;pos.abs_profit_=;822,00p;pos.age_=;0c;LRTP_=;283,26p
@@ -4069,10 +4069,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 22.03.2021;11:45:00.000;3744;#step_=;3744n;account_=;0l;lbreak_=;292,60p;lbounce_=;278,96p;sbreak_=;272,56p;sbounce_=;286,32p
 22.03.2021;12:00:00.000;3745;#step_=;3745n;account_=;0l;lbreak_=;292,58p;lbounce_=;278,94p;sbreak_=;272,54p;sbounce_=;286,29p
 22.03.2021;12:15:00.000;3746;#step_=;3746n;account_=;0l;lbreak_=;292,56p;lbounce_=;278,92p;sbreak_=;272,51p;sbounce_=;286,27p
-22.03.2021;12:15:00.000;3746;imitator: Open short;286,59;300;85977;838;-48,14712
-22.03.2021;12:15:00.000;3746;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1656;status_=;matched;
+22.03.2021;12:15:00.000;3746;imitator: Open short;286,59;300;85977;868;-48,14712
+22.03.2021;12:15:00.000;3746;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1716;status_=;matched;
 22.03.2021;12:15:00.000;3746;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-22.03.2021;12:15:00.000;3746;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1656;tradeno_=;1656;quantity_=;30;price_=;286,59;
+22.03.2021;12:15:00.000;3746;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1716;tradeno_=;1716;quantity_=;30;price_=;286,59;
 22.03.2021;12:15:00.000;3746;dealer_onTrade;SELL;quantity;30;price;286,59;money;85977
 22.03.2021;12:15:00.000;3746;#short_lr_bounce_open_following;pos.price_=;286,59p;account_=;-30l;LR_=;286,32p
 22.03.2021;12:30:00.000;3747;#step_=;3747n;account_=;-30l;lbreak_=;292,53p;lbounce_=;278,90p;sbreak_=;272,49p;sbounce_=;286,25p
@@ -4467,10 +4467,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 30.03.2021;23:45:00.000;4134;#step_=;4134n;account_=;-30l;lbreak_=;300,86p;lbounce_=;290,41p;sbreak_=;286,09p;sbounce_=;296,49p
 31.03.2021;09:45:00.000;4135;#step_=;4135n;account_=;-30l;lbreak_=;299,99p;lbounce_=;293,07p;sbreak_=;291,10p;sbounce_=;297,89p
 31.03.2021;10:00:00.000;4136;#step_=;4136n;account_=;-30l;lbreak_=;300,03p;lbounce_=;293,11p;sbreak_=;291,13p;sbounce_=;297,93p
-31.03.2021;10:00:00.000;4136;imitator: Close short;293,94;300;-88182;838;-49,38192;390;295,72;282,11;4,82435929247457;32,916972814107;13,0786186627482;-54,0044085231449;No
-31.03.2021;10:00:00.000;4136;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1657;status_=;matched;
+31.03.2021;10:00:00.000;4136;imitator: Close short;293,94;300;-88182;868;-49,38192;390;295,72;282,11;4,82435929247457;32,916972814107;13,0786186627482;-54,0044085231449;No
+31.03.2021;10:00:00.000;4136;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1717;status_=;matched;
 31.03.2021;10:00:00.000;4136;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;286,59;pos.Bought_=;0;pos.Sold_=;85977;
-31.03.2021;10:00:00.000;4136;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1657;tradeno_=;1657;quantity_=;30;price_=;293,94;
+31.03.2021;10:00:00.000;4136;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1717;tradeno_=;1717;quantity_=;30;price_=;293,94;
 31.03.2021;10:00:00.000;4136;dealer_onTrade;BUY;quantity;30;price;293,94;money;88182
 31.03.2021;10:00:00.000;4136;dealer_onOrder: trade complete;SHORT;posMargin_=;-2205,00000000001;pos.Bought_=;-88182;pos.Sold_=;85977;
 31.03.2021;10:00:00.000;4136;#short_lr_TP_following;pos.abs_profit_=;-2 205,00p;pos.age_=;0c;LRTP_=;293,11p
@@ -4487,10 +4487,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 31.03.2021;12:45:00.000;4147;#step_=;4147n;account_=;0l;lbreak_=;300,43p;lbounce_=;293,52p;sbreak_=;291,55p;sbounce_=;298,33p
 31.03.2021;13:00:00.000;4148;#step_=;4148n;account_=;0l;lbreak_=;300,47p;lbounce_=;293,56p;sbreak_=;291,59p;sbounce_=;298,37p
 31.03.2021;13:15:00.000;4149;#step_=;4149n;account_=;0l;lbreak_=;300,51p;lbounce_=;293,60p;sbreak_=;291,62p;sbounce_=;298,40p
-31.03.2021;13:15:00.000;4149;imitator: Open short;291,2;300;87360;839;-48,9216
-31.03.2021;13:15:00.000;4149;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1658;status_=;matched;
+31.03.2021;13:15:00.000;4149;imitator: Open short;291,2;300;87360;869;-48,9216
+31.03.2021;13:15:00.000;4149;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1718;status_=;matched;
 31.03.2021;13:15:00.000;4149;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-31.03.2021;13:15:00.000;4149;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1658;tradeno_=;1658;quantity_=;30;price_=;291,2;
+31.03.2021;13:15:00.000;4149;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1718;tradeno_=;1718;quantity_=;30;price_=;291,2;
 31.03.2021;13:15:00.000;4149;dealer_onTrade;SELL;quantity;30;price;291,2;money;87360
 31.03.2021;13:15:00.000;4149;#short_lr_break_open_following;pos.price_=;291,20p;account_=;-30l;LR_=;291,55p
 31.03.2021;13:30:00.000;4150;#step_=;4150n;account_=;-30l;lbreak_=;300,54p;lbounce_=;293,63p;sbreak_=;291,66p;sbounce_=;298,44p
@@ -4678,10 +4678,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 05.04.2021;15:45:00.000;4330;#step_=;4330n;account_=;-30l;lbreak_=;296,58p;lbounce_=;289,52p;sbreak_=;287,19p;sbounce_=;294,22p
 05.04.2021;16:00:00.000;4331;#step_=;4331n;account_=;-30l;lbreak_=;296,58p;lbounce_=;289,52p;sbreak_=;287,19p;sbounce_=;294,22p
 05.04.2021;16:15:00.000;4332;#step_=;4332n;account_=;-30l;lbreak_=;296,58p;lbounce_=;289,52p;sbreak_=;287,19p;sbounce_=;294,21p
-05.04.2021;16:15:00.000;4332;imitator: Close short;288,04;300;-86412;839;-48,39072;183;294,72;287,07;2,66485526178285;53,9869281045749;87,3202614379082;41,3071895424831;No
-05.04.2021;16:15:00.000;4332;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1659;status_=;matched;
+05.04.2021;16:15:00.000;4332;imitator: Close short;288,04;300;-86412;869;-48,39072;183;294,72;287,07;2,66485526178285;53,9869281045749;87,3202614379082;41,3071895424831;No
+05.04.2021;16:15:00.000;4332;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1719;status_=;matched;
 05.04.2021;16:15:00.000;4332;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;291,2;pos.Bought_=;0;pos.Sold_=;87360;
-05.04.2021;16:15:00.000;4332;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1659;tradeno_=;1659;quantity_=;30;price_=;288,04;
+05.04.2021;16:15:00.000;4332;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1719;tradeno_=;1719;quantity_=;30;price_=;288,04;
 05.04.2021;16:15:00.000;4332;dealer_onTrade;BUY;quantity;30;price;288,04;money;86412
 05.04.2021;16:15:00.000;4332;dealer_onOrder: trade complete;SHORT;posMargin_=;948;pos.Bought_=;-86412;pos.Sold_=;87360;
 05.04.2021;16:15:00.000;4332;#short_lr_TP_following;pos.abs_profit_=;948,00p;pos.age_=;0c;LRTP_=;287,91p
@@ -4719,10 +4719,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 06.04.2021;10:00:00.000;4364;#step_=;4364n;account_=;0l;lbreak_=;293,02p;lbounce_=;287,20p;sbreak_=;285,57p;sbounce_=;291,38p
 06.04.2021;10:15:00.000;4365;#step_=;4365n;account_=;0l;lbreak_=;293,01p;lbounce_=;287,19p;sbreak_=;285,56p;sbounce_=;291,36p
 06.04.2021;10:30:00.000;4366;#step_=;4366n;account_=;0l;lbreak_=;292,99p;lbounce_=;287,17p;sbreak_=;285,54p;sbounce_=;291,35p
-06.04.2021;10:30:00.000;4366;imitator: Open short;284,74;300;85422;840;-47,83632
-06.04.2021;10:30:00.000;4366;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1660;status_=;matched;
+06.04.2021;10:30:00.000;4366;imitator: Open short;284,74;300;85422;870;-47,83632
+06.04.2021;10:30:00.000;4366;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1720;status_=;matched;
 06.04.2021;10:30:00.000;4366;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-06.04.2021;10:30:00.000;4366;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1660;tradeno_=;1660;quantity_=;30;price_=;284,74;
+06.04.2021;10:30:00.000;4366;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1720;tradeno_=;1720;quantity_=;30;price_=;284,74;
 06.04.2021;10:30:00.000;4366;dealer_onTrade;SELL;quantity;30;price;284,74;money;85422
 06.04.2021;10:30:00.000;4366;#short_lr_break_open_following;pos.price_=;284,74p;account_=;-30l;LR_=;285,57p
 06.04.2021;10:45:00.000;4367;#step_=;4367n;account_=;-30l;lbreak_=;292,98p;lbounce_=;287,16p;sbreak_=;285,53p;sbounce_=;291,33p
@@ -4750,10 +4750,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 06.04.2021;15:45:00.000;4387;#step_=;4387n;account_=;-30l;lbreak_=;292,68p;lbounce_=;286,87p;sbreak_=;285,24p;sbounce_=;291,03p
 06.04.2021;16:00:00.000;4388;#step_=;4388n;account_=;-30l;lbreak_=;292,66p;lbounce_=;286,85p;sbreak_=;285,22p;sbounce_=;291,02p
 06.04.2021;16:15:00.000;4389;#step_=;4389n;account_=;-30l;lbreak_=;292,65p;lbounce_=;286,84p;sbreak_=;285,21p;sbounce_=;291,00p
-06.04.2021;16:15:00.000;4389;imitator: Close short;284,31;300;-85293;840;-47,76408;23;285,68;282,86;0,996959626670435;66,6666666666667;48,5815602836882;15,2482269503549;No
-06.04.2021;16:15:00.000;4389;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1661;status_=;matched;
+06.04.2021;16:15:00.000;4389;imitator: Close short;284,31;300;-85293;870;-47,76408;23;285,68;282,86;0,996959626670435;66,6666666666667;48,5815602836882;15,2482269503549;No
+06.04.2021;16:15:00.000;4389;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1721;status_=;matched;
 06.04.2021;16:15:00.000;4389;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;284,74;pos.Bought_=;0;pos.Sold_=;85422;
-06.04.2021;16:15:00.000;4389;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1661;tradeno_=;1661;quantity_=;30;price_=;284,31;
+06.04.2021;16:15:00.000;4389;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1721;tradeno_=;1721;quantity_=;30;price_=;284,31;
 06.04.2021;16:15:00.000;4389;dealer_onTrade;BUY;quantity;30;price;284,31;money;85293
 06.04.2021;16:15:00.000;4389;dealer_onOrder: trade complete;SHORT;posMargin_=;129;pos.Bought_=;-85293;pos.Sold_=;85422;
 06.04.2021;16:15:00.000;4389;#short_lr_TP_following;pos.abs_profit_=;129,00p;pos.age_=;0c;LRTP_=;286,84p
@@ -4855,10 +4855,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 08.04.2021;11:45:00.000;4485;#step_=;4485n;account_=;0l;lbreak_=;286,74p;lbounce_=;277,70p;sbreak_=;274,74p;sbounce_=;283,96p
 08.04.2021;12:00:00.000;4486;#step_=;4486n;account_=;0l;lbreak_=;286,71p;lbounce_=;277,66p;sbreak_=;274,70p;sbounce_=;283,92p
 08.04.2021;12:15:00.000;4487;#step_=;4487n;account_=;0l;lbreak_=;286,67p;lbounce_=;277,63p;sbreak_=;274,67p;sbounce_=;283,89p
-08.04.2021;12:15:00.000;4487;imitator: Open short;283,41;300;85023;841;-47,61288
-08.04.2021;12:15:00.000;4487;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1662;status_=;matched;
+08.04.2021;12:15:00.000;4487;imitator: Open short;283,41;300;85023;871;-47,61288
+08.04.2021;12:15:00.000;4487;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1722;status_=;matched;
 08.04.2021;12:15:00.000;4487;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-08.04.2021;12:15:00.000;4487;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1662;tradeno_=;1662;quantity_=;30;price_=;283,41;
+08.04.2021;12:15:00.000;4487;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1722;tradeno_=;1722;quantity_=;30;price_=;283,41;
 08.04.2021;12:15:00.000;4487;dealer_onTrade;SELL;quantity;30;price;283,41;money;85023
 08.04.2021;12:15:00.000;4487;#short_lr_bounce_open_following;pos.price_=;283,41p;account_=;-30l;LR_=;283,96p
 08.04.2021;12:30:00.000;4488;#step_=;4488n;account_=;-30l;lbreak_=;286,63p;lbounce_=;277,59p;sbreak_=;274,63p;sbounce_=;283,85p
@@ -4975,17 +4975,17 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 12.04.2021;11:15:00.000;4597;#step_=;4597n;account_=;-30l;lbreak_=;284,01p;lbounce_=;274,57p;sbreak_=;271,47p;sbounce_=;281,17p
 12.04.2021;11:30:00.000;4598;#step_=;4598n;account_=;-30l;lbreak_=;283,97p;lbounce_=;274,54p;sbreak_=;271,44p;sbounce_=;281,14p
 12.04.2021;11:45:00.000;4599;#step_=;4599n;account_=;-30l;lbreak_=;283,94p;lbounce_=;274,51p;sbreak_=;271,41p;sbounce_=;281,11p
-12.04.2021;11:45:00.000;4599;imitator: Close short;284,14;300;-85242;841;-47,73552;112;285,35;278;2,64388489208634;73,6054421768709;16,462585034014;-9,93197278911509;No
-12.04.2021;11:45:00.000;4599;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1663;status_=;matched;
+12.04.2021;11:45:00.000;4599;imitator: Close short;284,14;300;-85242;871;-47,73552;112;285,35;278;2,64388489208634;73,6054421768709;16,462585034014;-9,93197278911509;No
+12.04.2021;11:45:00.000;4599;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1723;status_=;matched;
 12.04.2021;11:45:00.000;4599;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;283,41;pos.Bought_=;0;pos.Sold_=;85023;
-12.04.2021;11:45:00.000;4599;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1663;tradeno_=;1663;quantity_=;30;price_=;284,14;
+12.04.2021;11:45:00.000;4599;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1723;tradeno_=;1723;quantity_=;30;price_=;284,14;
 12.04.2021;11:45:00.000;4599;dealer_onTrade;BUY;quantity;30;price;284,14;money;85242
 12.04.2021;11:45:00.000;4599;dealer_onOrder: trade complete;SHORT;posMargin_=;-218,999999999971;pos.Bought_=;-85242;pos.Sold_=;85023;
 12.04.2021;11:45:00.000;4599;#short_lr_SL_following;pos.abs_profit_=;-219,00p;pos.age_=;0c;LRSL_=;283,97p
-12.04.2021;11:45:00.000;4599;imitator: Open long;284,14;300;-85242;842;-47,73552
-12.04.2021;11:45:00.000;4599;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1664;status_=;matched;
+12.04.2021;11:45:00.000;4599;imitator: Open long;284,14;300;-85242;872;-47,73552
+12.04.2021;11:45:00.000;4599;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1724;status_=;matched;
 12.04.2021;11:45:00.000;4599;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-12.04.2021;11:45:00.000;4599;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1664;tradeno_=;1664;quantity_=;30;price_=;284,14;
+12.04.2021;11:45:00.000;4599;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1724;tradeno_=;1724;quantity_=;30;price_=;284,14;
 12.04.2021;11:45:00.000;4599;dealer_onTrade;BUY;quantity;30;price;284,14;money;85242
 12.04.2021;11:45:00.000;4599;#long_lr_break_open_following;pos.price_=;284,14p;account_=;30l;LR_=;284,01p
 12.04.2021;11:45:00.000;4599;#account_>_0l_already
@@ -5457,10 +5457,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 22.04.2021;13:45:00.000;5063;#step_=;5063n;account_=;30l;lbreak_=;295,34p;lbounce_=;285,19p;sbreak_=;282,36p;sbounce_=;292,56p
 22.04.2021;14:00:00.000;5064;#step_=;5064n;account_=;30l;lbreak_=;295,35p;lbounce_=;285,20p;sbreak_=;282,37p;sbounce_=;292,57p
 22.04.2021;14:15:00.000;5065;#step_=;5065n;account_=;30l;lbreak_=;295,36p;lbounce_=;285,21p;sbreak_=;282,38p;sbounce_=;292,58p
-22.04.2021;14:15:00.000;5065;imitator: Close long;291,63;300;87489;842;-48,99384;466;292,2;280,67;4,10802722057932;30,09540329575;4,94362532523846;-64,9609713790115;No
-22.04.2021;14:15:00.000;5065;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1665;status_=;matched;
+22.04.2021;14:15:00.000;5065;imitator: Close long;291,63;300;87489;872;-48,99384;466;292,2;280,67;4,10802722057932;30,09540329575;4,94362532523846;-64,9609713790115;No
+22.04.2021;14:15:00.000;5065;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1725;status_=;matched;
 22.04.2021;14:15:00.000;5065;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;284,14;pos.Bought_=;-85242;pos.Sold_=;0;
-22.04.2021;14:15:00.000;5065;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1665;tradeno_=;1665;quantity_=;30;price_=;291,63;
+22.04.2021;14:15:00.000;5065;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1725;tradeno_=;1725;quantity_=;30;price_=;291,63;
 22.04.2021;14:15:00.000;5065;dealer_onTrade;SELL;quantity;30;price;291,63;money;87489
 22.04.2021;14:15:00.000;5065;dealer_onOrder: trade complete;LONG;posMargin_=;2247,00000000001;pos.Bought_=;-85242;pos.Sold_=;87489;
 22.04.2021;14:15:00.000;5065;#long_lr_TP_following;pos.abs_profit_=;2 247,00p;pos.age_=;0c;LRTP_=;290,44p
@@ -5630,10 +5630,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 27.04.2021;12:30:00.000;5229;#step_=;5229n;account_=;0l;lbreak_=;299,62p;lbounce_=;292,35p;sbreak_=;290,36p;sbounce_=;297,60p
 27.04.2021;12:45:00.000;5230;#step_=;5230n;account_=;0l;lbreak_=;299,65p;lbounce_=;292,37p;sbreak_=;290,38p;sbounce_=;297,63p
 27.04.2021;13:00:00.000;5231;#step_=;5231n;account_=;0l;lbreak_=;299,67p;lbounce_=;292,40p;sbreak_=;290,41p;sbounce_=;297,66p
-27.04.2021;13:00:00.000;5231;imitator: Open long;299,29;300;-89787;843;-50,28072
-27.04.2021;13:00:00.000;5231;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1666;status_=;matched;
+27.04.2021;13:00:00.000;5231;imitator: Open long;299,29;300;-89787;873;-50,28072
+27.04.2021;13:00:00.000;5231;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1726;status_=;matched;
 27.04.2021;13:00:00.000;5231;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-27.04.2021;13:00:00.000;5231;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1666;tradeno_=;1666;quantity_=;30;price_=;299,29;
+27.04.2021;13:00:00.000;5231;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1726;tradeno_=;1726;quantity_=;30;price_=;299,29;
 27.04.2021;13:00:00.000;5231;dealer_onTrade;BUY;quantity;30;price;299,29;money;89787
 27.04.2021;13:00:00.000;5231;#long_lr_break_open_following;pos.price_=;299,29p;account_=;30l;LR_=;299,62p
 27.04.2021;13:15:00.000;5232;#step_=;5232n;account_=;30l;lbreak_=;299,70p;lbounce_=;292,42p;sbreak_=;290,43p;sbounce_=;297,68p
@@ -5651,10 +5651,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 27.04.2021;15:45:00.000;5242;#step_=;5242n;account_=;30l;lbreak_=;299,95p;lbounce_=;292,68p;sbreak_=;290,69p;sbounce_=;297,94p
 27.04.2021;16:00:00.000;5243;#step_=;5243n;account_=;30l;lbreak_=;299,98p;lbounce_=;292,71p;sbreak_=;290,72p;sbounce_=;297,96p
 27.04.2021;16:15:00.000;5244;#step_=;5244n;account_=;30l;lbreak_=;300,00p;lbounce_=;292,73p;sbreak_=;290,74p;sbounce_=;297,99p
-27.04.2021;16:15:00.000;5244;imitator: Close long;297,35;300;89205;843;-49,9548;13;299,88;296,66;1,08541764983482;81,677018633541;78,5714285714284;60,2484472049694;No
-27.04.2021;16:15:00.000;5244;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1667;status_=;matched;
+27.04.2021;16:15:00.000;5244;imitator: Close long;297,35;300;89205;873;-49,9548;13;299,88;296,66;1,08541764983482;81,677018633541;78,5714285714284;60,2484472049694;No
+27.04.2021;16:15:00.000;5244;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1727;status_=;matched;
 27.04.2021;16:15:00.000;5244;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;299,29;pos.Bought_=;-89787;pos.Sold_=;0;
-27.04.2021;16:15:00.000;5244;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1667;tradeno_=;1667;quantity_=;30;price_=;297,35;
+27.04.2021;16:15:00.000;5244;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1727;tradeno_=;1727;quantity_=;30;price_=;297,35;
 27.04.2021;16:15:00.000;5244;dealer_onTrade;SELL;quantity;30;price;297,35;money;89205
 27.04.2021;16:15:00.000;5244;dealer_onOrder: trade complete;LONG;posMargin_=;-582;pos.Bought_=;-89787;pos.Sold_=;89205;
 27.04.2021;16:15:00.000;5244;#long_lr_TP_following;pos.abs_profit_=;-582,00p;pos.age_=;0c;LRTP_=;293,10p
@@ -5768,10 +5768,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 29.04.2021;14:45:00.000;5352;#step_=;5352n;account_=;0l;lbreak_=;305,44p;lbounce_=;298,16p;sbreak_=;296,36p;sbounce_=;303,49p
 29.04.2021;15:00:00.000;5353;#step_=;5353n;account_=;0l;lbreak_=;305,47p;lbounce_=;298,19p;sbreak_=;296,40p;sbounce_=;303,53p
 29.04.2021;15:15:00.000;5354;#step_=;5354n;account_=;0l;lbreak_=;305,50p;lbounce_=;298,23p;sbreak_=;296,43p;sbounce_=;303,56p
-29.04.2021;15:15:00.000;5354;imitator: Open long;298,44;300;-89532;844;-50,13792
-29.04.2021;15:15:00.000;5354;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1668;status_=;matched;
+29.04.2021;15:15:00.000;5354;imitator: Open long;298,44;300;-89532;874;-50,13792
+29.04.2021;15:15:00.000;5354;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1728;status_=;matched;
 29.04.2021;15:15:00.000;5354;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-29.04.2021;15:15:00.000;5354;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1668;tradeno_=;1668;quantity_=;30;price_=;298,44;
+29.04.2021;15:15:00.000;5354;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1728;tradeno_=;1728;quantity_=;30;price_=;298,44;
 29.04.2021;15:15:00.000;5354;dealer_onTrade;BUY;quantity;30;price;298,44;money;89532
 29.04.2021;15:15:00.000;5354;#long_lr_bounce_open_following;pos.price_=;298,44p;account_=;30l;LR_=;298,16p
 29.04.2021;15:30:00.000;5355;#step_=;5355n;account_=;30l;lbreak_=;305,54p;lbounce_=;298,26p;sbreak_=;296,47p;sbounce_=;303,60p
@@ -5783,17 +5783,17 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 29.04.2021;16:30:00.000;5359;#step_=;5359n;account_=;30l;lbreak_=;305,68p;lbounce_=;298,40p;sbreak_=;296,61p;sbounce_=;303,73p
 29.04.2021;16:45:00.000;5360;#step_=;5360n;account_=;30l;lbreak_=;305,71p;lbounce_=;298,44p;sbreak_=;296,64p;sbounce_=;303,77p
 29.04.2021;17:00:00.000;5361;#step_=;5361n;account_=;30l;lbreak_=;305,75p;lbounce_=;298,47p;sbreak_=;296,68p;sbounce_=;303,80p
-29.04.2021;17:00:00.000;5361;imitator: Close long;296;300;88800;844;-49,728;7;299,09;294,79;1,45866549068827;84,8837209302329;71,8604651162792;56,7441860465122;No
-29.04.2021;17:00:00.000;5361;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1669;status_=;matched;
+29.04.2021;17:00:00.000;5361;imitator: Close long;296;300;88800;874;-49,728;7;299,09;294,79;1,45866549068827;84,8837209302329;71,8604651162792;56,7441860465122;No
+29.04.2021;17:00:00.000;5361;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1729;status_=;matched;
 29.04.2021;17:00:00.000;5361;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;298,44;pos.Bought_=;-89532;pos.Sold_=;0;
-29.04.2021;17:00:00.000;5361;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1669;tradeno_=;1669;quantity_=;30;price_=;296;
+29.04.2021;17:00:00.000;5361;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1729;tradeno_=;1729;quantity_=;30;price_=;296;
 29.04.2021;17:00:00.000;5361;dealer_onTrade;SELL;quantity;30;price;296;money;88800
 29.04.2021;17:00:00.000;5361;dealer_onOrder: trade complete;LONG;posMargin_=;-732;pos.Bought_=;-89532;pos.Sold_=;88800;
 29.04.2021;17:00:00.000;5361;#long_lr_SL_following;pos.abs_profit_=;-732,00p;pos.age_=;0c;LRSL_=;296,64p
-29.04.2021;17:00:00.000;5361;imitator: Open short;296;300;88800;845;-49,728
-29.04.2021;17:00:00.000;5361;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1670;status_=;matched;
+29.04.2021;17:00:00.000;5361;imitator: Open short;296;300;88800;875;-49,728
+29.04.2021;17:00:00.000;5361;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1730;status_=;matched;
 29.04.2021;17:00:00.000;5361;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-29.04.2021;17:00:00.000;5361;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1670;tradeno_=;1670;quantity_=;30;price_=;296;
+29.04.2021;17:00:00.000;5361;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1730;tradeno_=;1730;quantity_=;30;price_=;296;
 29.04.2021;17:00:00.000;5361;dealer_onTrade;SELL;quantity;30;price;296;money;88800
 29.04.2021;17:00:00.000;5361;#short_lr_break_open_following;pos.price_=;296,00p;account_=;-30l;LR_=;296,61p
 29.04.2021;17:00:00.000;5361;#account_<_0l_already
@@ -6004,17 +6004,17 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 06.05.2021;10:45:00.000;5564;#step_=;5564n;account_=;-30l;lbreak_=;309,60p;lbounce_=;300,71p;sbreak_=;297,34p;sbounce_=;306,30p
 06.05.2021;11:00:00.000;5565;#step_=;5565n;account_=;-30l;lbreak_=;309,63p;lbounce_=;300,73p;sbreak_=;297,36p;sbounce_=;306,32p
 06.05.2021;11:15:00.000;5566;#step_=;5566n;account_=;-30l;lbreak_=;309,65p;lbounce_=;300,75p;sbreak_=;297,39p;sbounce_=;306,35p
-06.05.2021;11:15:00.000;5566;imitator: Close short;310,19;300;-93057;845;-52,11192;205;310,3;294,79;5,26137250245937;7,80141843971618;0,709219858156117;-91,4893617021277;No
-06.05.2021;11:15:00.000;5566;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1671;status_=;matched;
+06.05.2021;11:15:00.000;5566;imitator: Close short;310,19;300;-93057;875;-52,11192;205;310,3;294,79;5,26137250245937;7,80141843971618;0,709219858156117;-91,4893617021277;No
+06.05.2021;11:15:00.000;5566;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1731;status_=;matched;
 06.05.2021;11:15:00.000;5566;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;296;pos.Bought_=;0;pos.Sold_=;88800;
-06.05.2021;11:15:00.000;5566;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1671;tradeno_=;1671;quantity_=;30;price_=;310,19;
+06.05.2021;11:15:00.000;5566;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1731;tradeno_=;1731;quantity_=;30;price_=;310,19;
 06.05.2021;11:15:00.000;5566;dealer_onTrade;BUY;quantity;30;price;310,19;money;93057
 06.05.2021;11:15:00.000;5566;dealer_onOrder: trade complete;SHORT;posMargin_=;-4257;pos.Bought_=;-93057;pos.Sold_=;88800;
 06.05.2021;11:15:00.000;5566;#short_lr_SL_following;pos.abs_profit_=;-4 257,00p;pos.age_=;0c;LRSL_=;309,63p
-06.05.2021;11:15:00.000;5566;imitator: Open long;310,19;300;-93057;846;-52,11192
-06.05.2021;11:15:00.000;5566;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1672;status_=;matched;
+06.05.2021;11:15:00.000;5566;imitator: Open long;310,19;300;-93057;876;-52,11192
+06.05.2021;11:15:00.000;5566;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1732;status_=;matched;
 06.05.2021;11:15:00.000;5566;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
-06.05.2021;11:15:00.000;5566;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1672;tradeno_=;1672;quantity_=;30;price_=;310,19;
+06.05.2021;11:15:00.000;5566;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1732;tradeno_=;1732;quantity_=;30;price_=;310,19;
 06.05.2021;11:15:00.000;5566;dealer_onTrade;BUY;quantity;30;price;310,19;money;93057
 06.05.2021;11:15:00.000;5566;#long_lr_break_open_following;pos.price_=;310,19p;account_=;30l;LR_=;309,60p
 06.05.2021;11:15:00.000;5566;#account_>_0l_already
@@ -6040,10 +6040,10 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 06.05.2021;15:45:00.000;5584;#step_=;5584n;account_=;30l;lbreak_=;310,07p;lbounce_=;301,17p;sbreak_=;297,80p;sbounce_=;306,76p
 06.05.2021;16:00:00.000;5585;#step_=;5585n;account_=;30l;lbreak_=;310,09p;lbounce_=;301,20p;sbreak_=;297,83p;sbounce_=;306,79p
 06.05.2021;16:15:00.000;5586;#step_=;5586n;account_=;30l;lbreak_=;310,11p;lbounce_=;301,22p;sbreak_=;297,85p;sbounce_=;306,81p
-06.05.2021;16:15:00.000;5586;imitator: Close long;310,74;300;93222;846;-52,20432;20;310,96;309,39;0,507450143831408;50,9554140127398;14,0127388535014;-35,0318471337588;No
-06.05.2021;16:15:00.000;5586;InternalOnOrder;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1673;status_=;matched;
+06.05.2021;16:15:00.000;5586;imitator: Close long;310,74;300;93222;876;-52,20432;20;310,96;309,39;0,507450143831408;50,9554140127398;14,0127388535014;-35,0318471337588;No
+06.05.2021;16:15:00.000;5586;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1733;status_=;matched;
 06.05.2021;16:15:00.000;5586;dealer_onOrder;SELL;quantity_=;-30;pos.Price_=;310,19;pos.Bought_=;-93057;pos.Sold_=;0;
-06.05.2021;16:15:00.000;5586;InternalOnTrade;brokerref_=;AAAAAAAAAAAW;RestoredId_=;22;RobotId_=;22;orderno_=;1673;tradeno_=;1673;quantity_=;30;price_=;310,74;
+06.05.2021;16:15:00.000;5586;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1733;tradeno_=;1733;quantity_=;30;price_=;310,74;
 06.05.2021;16:15:00.000;5586;dealer_onTrade;SELL;quantity;30;price;310,74;money;93222
 06.05.2021;16:15:00.000;5586;dealer_onOrder: trade complete;LONG;posMargin_=;165;pos.Bought_=;-93057;pos.Sold_=;93222;
 06.05.2021;16:15:00.000;5586;#long_lr_TP_following;pos.abs_profit_=;165,00p;pos.age_=;0c;LRTP_=;307,95p
@@ -6056,3 +6056,53 @@ Date;Time;candleNo;tradeType;Price;Quantity;Total;dealNum;coms;Age;posHigh;posLo
 06.05.2021;18:00:00.000;5593;#step_=;5593n;account_=;0l;lbreak_=;310,27p;lbounce_=;301,38p;sbreak_=;298,01p;sbounce_=;306,97p
 06.05.2021;18:15:00.000;5594;#step_=;5594n;account_=;0l;lbreak_=;310,30p;lbounce_=;301,40p;sbreak_=;298,04p;sbounce_=;306,99p
 06.05.2021;18:30:00.000;5595;#step_=;5595n;account_=;0l;lbreak_=;310,32p;lbounce_=;301,43p;sbreak_=;298,06p;sbounce_=;307,02p
+06.05.2021;18:45:00.000;5596;#step_=;5596n;account_=;0l;lbreak_=;310,34p;lbounce_=;301,45p;sbreak_=;298,08p;sbounce_=;307,04p
+06.05.2021;19:00:00.000;5597;#step_=;5597n;account_=;0l;lbreak_=;310,37p;lbounce_=;301,47p;sbreak_=;298,11p;sbounce_=;307,06p
+06.05.2021;19:15:00.000;5598;#step_=;5598n;account_=;0l;lbreak_=;310,39p;lbounce_=;301,50p;sbreak_=;298,13p;sbounce_=;307,09p
+06.05.2021;19:30:00.000;5599;#step_=;5599n;account_=;0l;lbreak_=;310,41p;lbounce_=;301,52p;sbreak_=;298,15p;sbounce_=;307,11p
+06.05.2021;19:45:00.000;5600;#step_=;5600n;account_=;0l;lbreak_=;310,43p;lbounce_=;301,54p;sbreak_=;298,18p;sbounce_=;307,13p
+06.05.2021;20:00:00.000;5601;#step_=;5601n;account_=;0l;lbreak_=;310,46p;lbounce_=;301,57p;sbreak_=;298,20p;sbounce_=;307,15p
+06.05.2021;20:15:00.000;5602;#step_=;5602n;account_=;0l;lbreak_=;310,48p;lbounce_=;301,59p;sbreak_=;298,22p;sbounce_=;307,18p
+06.05.2021;20:30:00.000;5603;#step_=;5603n;account_=;0l;lbreak_=;310,50p;lbounce_=;301,61p;sbreak_=;298,25p;sbounce_=;307,20p
+06.05.2021;20:45:00.000;5604;#step_=;5604n;account_=;0l;lbreak_=;310,53p;lbounce_=;301,64p;sbreak_=;298,27p;sbounce_=;307,22p
+06.05.2021;21:00:00.000;5605;#step_=;5605n;account_=;0l;lbreak_=;310,55p;lbounce_=;301,66p;sbreak_=;298,29p;sbounce_=;307,25p
+06.05.2021;21:15:00.000;5606;#step_=;5606n;account_=;0l;lbreak_=;310,57p;lbounce_=;301,68p;sbreak_=;298,32p;sbounce_=;307,27p
+06.05.2021;21:30:00.000;5607;#step_=;5607n;account_=;0l;lbreak_=;310,60p;lbounce_=;301,71p;sbreak_=;298,34p;sbounce_=;307,29p
+06.05.2021;21:45:00.000;5608;#step_=;5608n;account_=;0l;lbreak_=;310,62p;lbounce_=;301,73p;sbreak_=;298,36p;sbounce_=;307,32p
+06.05.2021;22:00:00.000;5609;#step_=;5609n;account_=;0l;lbreak_=;310,64p;lbounce_=;301,75p;sbreak_=;298,39p;sbounce_=;307,34p
+06.05.2021;22:15:00.000;5610;#step_=;5610n;account_=;0l;lbreak_=;310,67p;lbounce_=;301,78p;sbreak_=;298,41p;sbounce_=;307,36p
+06.05.2021;22:30:00.000;5611;#step_=;5611n;account_=;0l;lbreak_=;310,69p;lbounce_=;301,80p;sbreak_=;298,43p;sbounce_=;307,39p
+06.05.2021;22:45:00.000;5612;#step_=;5612n;account_=;0l;lbreak_=;310,71p;lbounce_=;301,82p;sbreak_=;298,45p;sbounce_=;307,41p
+06.05.2021;23:00:00.000;5613;#step_=;5613n;account_=;0l;lbreak_=;310,73p;lbounce_=;301,85p;sbreak_=;298,48p;sbounce_=;307,43p
+06.05.2021;23:15:00.000;5614;#step_=;5614n;account_=;0l;lbreak_=;310,76p;lbounce_=;301,87p;sbreak_=;298,50p;sbounce_=;307,45p
+06.05.2021;23:30:00.000;5615;#step_=;5615n;account_=;0l;lbreak_=;310,78p;lbounce_=;301,89p;sbreak_=;298,52p;sbounce_=;307,48p
+06.05.2021;23:45:00.000;5616;#step_=;5616n;account_=;0l;lbreak_=;310,80p;lbounce_=;301,92p;sbreak_=;298,55p;sbounce_=;307,50p
+07.05.2021;09:45:00.000;5617;#step_=;5617n;account_=;0l;lbreak_=;317,92p;lbounce_=;308,05p;sbreak_=;303,52p;sbounce_=;313,36p
+07.05.2021;10:00:00.000;5618;#step_=;5618n;account_=;0l;lbreak_=;317,97p;lbounce_=;308,10p;sbreak_=;303,57p;sbounce_=;313,41p
+07.05.2021;10:15:00.000;5619;#step_=;5619n;account_=;0l;lbreak_=;318,02p;lbounce_=;308,15p;sbreak_=;303,62p;sbounce_=;313,46p
+07.05.2021;10:30:00.000;5620;#step_=;5620n;account_=;0l;lbreak_=;318,07p;lbounce_=;308,20p;sbreak_=;303,67p;sbounce_=;313,51p
+07.05.2021;10:45:00.000;5621;#step_=;5621n;account_=;0l;lbreak_=;318,12p;lbounce_=;308,25p;sbreak_=;303,71p;sbounce_=;313,56p
+07.05.2021;10:45:00.000;5621;imitator: Open long;317,91;300;-95373;877;-53,40888
+07.05.2021;10:45:00.000;5621;InternalOnOrder;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1734;status_=;matched;
+07.05.2021;10:45:00.000;5621;dealer_onOrder;BUY;quantity_=;30;pos.Price_=;0;pos.Bought_=;0;pos.Sold_=;0;
+07.05.2021;10:45:00.000;5621;InternalOnTrade;brokerref_=;AAAAAAAAAAAY;RestoredId_=;24;RobotId_=;24;orderno_=;1734;tradeno_=;1734;quantity_=;30;price_=;317,91;
+07.05.2021;10:45:00.000;5621;dealer_onTrade;BUY;quantity;30;price;317,91;money;95373
+07.05.2021;10:45:00.000;5621;#long_lr_break_open_following;pos.price_=;317,91p;account_=;30l;LR_=;318,02p
+07.05.2021;11:00:00.000;5622;#step_=;5622n;account_=;30l;lbreak_=;318,16p;lbounce_=;308,29p;sbreak_=;303,76p;sbounce_=;313,61p
+07.05.2021;11:15:00.000;5623;#step_=;5623n;account_=;30l;lbreak_=;318,21p;lbounce_=;308,34p;sbreak_=;303,81p;sbounce_=;313,65p
+07.05.2021;11:15:00.000;5623;#long_lr_stop_following_looking_for_SL_conditions
+07.05.2021;11:15:00.000;5623;#long_lr_stop_following_looking_for_TP_conditions
+07.05.2021;11:30:00.000;5624;#step_=;5624n;account_=;30l;lbreak_=;318,26p;lbounce_=;308,39p;sbreak_=;303,86p;sbounce_=;313,70p
+07.05.2021;11:45:00.000;5625;#step_=;5625n;account_=;30l;lbreak_=;318,31p;lbounce_=;308,44p;sbreak_=;303,91p;sbounce_=;313,75p
+07.05.2021;12:00:00.000;5626;#step_=;5626n;account_=;30l;lbreak_=;318,36p;lbounce_=;308,49p;sbreak_=;303,96p;sbounce_=;313,80p
+07.05.2021;12:15:00.000;5627;#step_=;5627n;account_=;30l;lbreak_=;318,41p;lbounce_=;308,54p;sbreak_=;304,01p;sbounce_=;313,85p
+07.05.2021;12:30:00.000;5628;#step_=;5628n;account_=;30l;lbreak_=;318,46p;lbounce_=;308,59p;sbreak_=;304,06p;sbounce_=;313,90p
+07.05.2021;12:45:00.000;5629;#step_=;5629n;account_=;30l;lbreak_=;318,51p;lbounce_=;308,64p;sbreak_=;304,10p;sbounce_=;313,95p
+07.05.2021;13:00:00.000;5630;#step_=;5630n;account_=;30l;lbreak_=;318,55p;lbounce_=;308,68p;sbreak_=;304,15p;sbounce_=;313,99p
+07.05.2021;13:15:00.000;5631;#step_=;5631n;account_=;30l;lbreak_=;318,60p;lbounce_=;308,73p;sbreak_=;304,20p;sbounce_=;314,04p
+07.05.2021;13:30:00.000;5632;#step_=;5632n;account_=;30l;lbreak_=;318,65p;lbounce_=;308,78p;sbreak_=;304,25p;sbounce_=;314,09p
+07.05.2021;13:45:00.000;5633;#step_=;5633n;account_=;30l;lbreak_=;318,70p;lbounce_=;308,83p;sbreak_=;304,30p;sbounce_=;314,14p
+07.05.2021;14:00:00.000;5634;#step_=;5634n;account_=;30l;lbreak_=;318,75p;lbounce_=;308,88p;sbreak_=;304,35p;sbounce_=;314,19p
+07.05.2021;14:15:00.000;5635;#step_=;5635n;account_=;30l;lbreak_=;318,80p;lbounce_=;308,93p;sbreak_=;304,40p;sbounce_=;314,24p
+07.05.2021;14:30:00.000;5636;#step_=;5636n;account_=;30l;lbreak_=;318,85p;lbounce_=;308,98p;sbreak_=;304,45p;sbounce_=;314,29p
+07.05.2021;14:45:00.000;5637;#step_=;5637n;account_=;30l;lbreak_=;318,89p;lbounce_=;309,03p;sbreak_=;304,50p;sbounce_=;314,33p
