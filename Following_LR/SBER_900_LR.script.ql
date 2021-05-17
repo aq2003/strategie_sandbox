@@ -56,10 +56,10 @@ reporter(start_time, end_time) :=
 	a = 1n;
 	log("step_=;" + step 
 		+ ";account_=;" + account 
-		+ ";lbreak_=;" + ind("LinearRegression", "high", "high", "day", "high", p_lbreak_train_window_resistance) 
-		+ ";lbounce_=;" + ind("LinearRegression", "high", "low", "day", "low", p_lbounce_train_window_support) 
-		+ ";sbreak_=;" + ind("LinearRegression", "low", "low", "day", "low", p_sbreak_train_window_support) 
-		+ ";sbounce_=;" + ind("LinearRegression", "low", "high", "day", "high", p_sbounce_train_window_resistance)
+		+ ";lbreak_=;" + ind("LinearRegression", "high", "high", "day", "high", p_lbreak_train_window_resistance)[09:45] 
+		+ ";lbounce_=;" + ind("LinearRegression", "high", "low", "day", "low", p_lbounce_train_window_support)[09:45]
+		+ ";sbreak_=;" + ind("LinearRegression", "low", "low", "day", "low", p_sbreak_train_window_support)[09:45]
+		+ ";sbounce_=;" + (ind("LinearRegression", "low", "high", "day", "high", p_sbounce_train_window_resistance)[09:45])[-57c]
 	);
 	step += 1n; 
 	~
