@@ -33,9 +33,9 @@ tune_period() :=
 	result = 0n;
 	
 	{
-		period += 2c << pos.abs_profit > /*my_abs_profit*/ 0p & period < max_period
+		period += 2c << pos.abs_profit > my_abs_profit & period < max_period
 	||
-		/*period -= 2c*/period = min_period << pos.abs_profit < /*my_abs_profit*/ 0p //& period > min_period 
+		period -= 2c << pos.abs_profit < /*my_abs_profit*/ 0p & period > min_period 
 	};
 	
 	my_abs_profit = pos.abs_profit;
