@@ -5,7 +5,9 @@
 expiration_time = 23:55_31.12.21; // Time when the trading stops
 
 // Convolution parameters
-period = 12c;
+period = 10c;
+max_period = 18c;
+min_period = 2c;
 
 // trading parameters
 lots_to_open = 200000p;
@@ -31,9 +33,9 @@ tune_period() :=
 	result = 0n;
 	
 	{
-		period += 2c << pos.abs_profit > my_abs_profit //& period > 2c
+		period += 2c << pos.abs_profit > my_abs_profit & period < max_period
 	||
-		period -= 2c << pos.abs_profit < my_abs_profit & period > 2c 
+		period -= 2c << pos.abs_profit < my_abs_profit & period > min_period 
 	};
 	
 	my_abs_profit = pos.abs_profit;
