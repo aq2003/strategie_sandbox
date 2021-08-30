@@ -11,7 +11,7 @@ min_period = 2c;
 
 // trading parameters
 lots_to_open = 200000p;
-treshold = 0.5p;
+treshold = 0.0p;
 expiration_time = 15:00_17.12.21;
 // --- Parameters
 
