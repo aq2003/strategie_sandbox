@@ -5,9 +5,9 @@
 expiration_time = 23:55_31.12.21; // Time when the trading stops
 
 // Convolution parameters
-period = 6c;
-max_period = 12c;
-min_period = 2c;
+period = 3c;
+max_period = 9c;
+min_period = 3c;
 
 // trading parameters
 lots_to_open = 200000p;
