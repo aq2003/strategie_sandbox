@@ -38,7 +38,7 @@ c1_period = 24c;
 c2_period = 144c;
 ema_period = 48c;
 
-lib_path = "C:\Users\Admin\OneDrive\Documents\My Stocks\Stock\HP-HP\Libs Sandbox\";
+lib_path = "C:\Users\Admin\Documents\GitHub\libs_sandbox\Libs Sandbox\";
 import(lib_path + "trade_lib.aql");
 
 p_lbreak_train_window_resistance = 330c;
