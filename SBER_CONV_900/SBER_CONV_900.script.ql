@@ -5,13 +5,13 @@
 expiration_time = 23:55_31.12.21; // Time when the trading stops
 
 // Convolution parameters
-period = 10c;
-max_period = 18c;
+period = 6c;
+max_period = 12c;
 min_period = 2c;
 
 // trading parameters
 lots_to_open = 200000p;
-treshold = 0p;
+treshold = 0.5p;
 expiration_time = 15:00_17.12.21;
 // --- Parameters
 
@@ -46,20 +46,22 @@ tune_period() :=
 ||	
 	..[time < expiration_time]
 	{
-		long(lots_to_open) << close - open[-period] > treshold & account == 0l;
+		long(lots_to_open) << close - open[-period + 1c] > treshold & account == 0l & time >= 09:00 & time <= 23:45;
 		log("long;account=;" + account) << account > 0l;
 		~
 	||		
-		stop() << close - open[-period] < 0p & account > 0l;
+		stop() << close - open[-period + 1c] < 0p & account > 0l //& time < 18:45
+		;
 		log("long_bs_stop") << account == 0l;
 		
 		tune_period();
 	||	
-		short(lots_to_open) << close - open[-period] < -treshold & account == 0l;
+		short(lots_to_open) << close - open[-period + 1c] < -treshold & account == 0l & time >= 09:00 & time <= 23:45;
 		log("short;account=;" + account) << account < 0l;
 		~
 	||		
-		stop() << (close - open[-period]) > 0p & account < 0l;
+		stop() << (close - open[-period + 1c]) > 0p & account < 0l //& time < 18:45
+		;
 		log("short_bs_stop") << account == 0l;
 		
 		tune_period();
