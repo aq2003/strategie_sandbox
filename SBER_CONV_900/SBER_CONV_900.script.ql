@@ -46,21 +46,21 @@ tune_period() :=
 ||	
 	..[time < expiration_time]
 	{
-		long(lots_to_open) << close - open[-period + 1c] > treshold & account == 0l & time >= 09:00 & time <= 23:45;
+		long(lots_to_open) << close[-1c] - open[-period] > treshold & account == 0l & time >= 09:00 & time <= 23:45;
 		log("long;account=;" + account) << account > 0l;
 		~
 	||		
-		stop() << close - open[-period + 1c] < 0p & account > 0l //& time < 18:45
+		stop() << close[-1c] - open[-period] < 0p & account > 0l //& time < 18:45
 		;
 		log("long_bs_stop") << account == 0l;
 		
 		tune_period();
 	||	
-		short(lots_to_open) << close - open[-period + 1c] < -treshold & account == 0l & time >= 09:00 & time <= 23:45;
+		short(lots_to_open) << close[-1c] - open[-period] < -treshold & account == 0l & time >= 09:00 & time <= 23:45;
 		log("short;account=;" + account) << account < 0l;
 		~
 	||		
-		stop() << (close - open[-period + 1c]) > 0p & account < 0l //& time < 18:45
+		stop() << (close[-1c] - open[-period]) > 0p & account < 0l //& time < 18:45
 		;
 		log("short_bs_stop") << account == 0l;
 		
