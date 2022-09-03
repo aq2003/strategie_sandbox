@@ -12,6 +12,7 @@ min_period = 2c;
 // trading parameters
 lots_to_open = 200000p;
 treshold = 0.0p;
+accepted_loss = 0.0p;
 expiration_time = 15:00_17.12.21;
 // --- Parameters
 
@@ -35,7 +36,7 @@ tune_period() :=
 	{
 		period += 2c << pos.abs_profit > my_abs_profit & period < max_period
 	||
-		period -= 2c << pos.abs_profit < /*my_abs_profit*/ 0p & period > min_period 
+		period -= 2c << pos.abs_profit < /*my_abs_profit*/ accepted_loss & period > min_period 
 	};
 	
 	my_abs_profit = pos.abs_profit;

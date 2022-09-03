@@ -1,5 +1,5 @@
-// 06.05.2021 10:07:18 SBER_900_LR ql script
-// Created 06.05.2021 10:07:18
+// 09.02.2022 8:44:30 MTLR_900_LR ql script
+// Created 09.02.2022 8:44:30
 
 // 28.09.2021 11:52:07 GAZP_900_LR ql script
 // Created 28.09.2021 11:52:07
@@ -48,7 +48,7 @@ lots = 250000p;
 expiration_time = 18:00_30.12.22;
 	
 predict_window = "day"; 
-train_window = 120c;
+train_window = 80c;
 high_offset = "high";
 low_offset = "low";
 
@@ -56,9 +56,9 @@ slope_long_start = 0.01n;
 slope_short_start = -0.01n;
 
 predict_window_support = "week";
-train_window_support = 800c;
+train_window_support = 1500c;
 predict_window_resistance = "week";
-train_window_resistance = 800c;
+train_window_resistance = 1500c;
 
 channel_width = /*9.5*/0p;
 // --- parameters -----------------------------------------------------------------------------------------
@@ -183,11 +183,10 @@ slope_short = slope_short_start;
 				& close[-1c] #^ (LR = ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[-1c])
 				& (
 					close[-1c] < (LR_sup = ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
-					& ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[-1c] <= 0n
 				|
 					ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[-1c] > 0n
 				)
-				& close[-1c] > (LR_sup = ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[-1c])
+				//& close[-1c] > (LR_sup = ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[-1c])
 				& (ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
 					- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width
 			;
@@ -200,13 +199,12 @@ slope_short = slope_short_start;
 		||
 			short(lots) << time < expiration_time & account == 0l
 				& close[-1c] #_ (LR = ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[-1c])
+				//& close[-1c] < (LR_sup = ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
 				& (
 					close[-1c] > (LR_sup = ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[-1c])
-					& ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[-1c] >= 0n
 				|
 					ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[-1c] < 0n
 				)
-				& close[-1c] < (LR_sup = ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
 				& (ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
 					- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width
 			;

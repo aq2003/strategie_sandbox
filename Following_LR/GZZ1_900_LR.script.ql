@@ -1,8 +1,8 @@
-// 06.05.2021 10:07:18 SBER_900_LR ql script
-// Created 06.05.2021 10:07:18
+// 11.10.2021 8:34:26 GZZ1_900_LR_7600yup ql script
+// Created 11.10.2021 8:34:26
 
-// 28.09.2021 11:52:07 GAZP_900_LR ql script
-// Created 28.09.2021 11:52:07
+// 29.09.2021 8:27:41 GZZ1_900_LR ql script
+// Created 29.09.2021 8:27:41
 
 // 26.09.2021 18:18:48 SRZ1_900_LR ql script
 // Created 26.09.2021 18:18:48
@@ -44,23 +44,23 @@
 // Created 18.09.2020 9:56:34
 
 // +++ parameters -----------------------------------------------------------------------------------------
-lots = 250000p;
-expiration_time = 18:00_30.12.22;
+lots = 1l;
+expiration_time = 15:00_18.06.22;
 	
 predict_window = "day"; 
-train_window = 120c;
+train_window = 35c;
 high_offset = "high";
 low_offset = "low";
 
-slope_long_start = 0.01n;
-slope_short_start = -0.01n;
+slope_long_start = 10n;
+slope_short_start = -10n;
 
 predict_window_support = "week";
 train_window_support = 800c;
 predict_window_resistance = "week";
 train_window_resistance = 800c;
 
-channel_width = /*9.5*/0p;
+channel_width = /*950*/0p;
 // --- parameters -----------------------------------------------------------------------------------------
 		
 //lib_path = "C:\Users\Admin\Documents\GitHub\libs_sandbox\Libs Sandbox\";
@@ -183,11 +183,10 @@ slope_short = slope_short_start;
 				& close[-1c] #^ (LR = ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[-1c])
 				& (
 					close[-1c] < (LR_sup = ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
-					& ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[-1c] <= 0n
 				|
 					ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[-1c] > 0n
 				)
-				& close[-1c] > (LR_sup = ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[-1c])
+				//& close[-1c] > (LR_sup = ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[-1c])
 				& (ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
 					- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width
 			;
@@ -200,13 +199,12 @@ slope_short = slope_short_start;
 		||
 			short(lots) << time < expiration_time & account == 0l
 				& close[-1c] #_ (LR = ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[-1c])
+				//& close[-1c] < (LR_sup = ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
 				& (
 					close[-1c] > (LR_sup = ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[-1c])
-					& ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[-1c] >= 0n
 				|
 					ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[-1c] < 0n
 				)
-				& close[-1c] < (LR_sup = ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
 				& (ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
 					- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width
 			;
@@ -228,13 +226,13 @@ slope_short = slope_short_start;
 						;
 						log("long_lr_SL;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
 					||*/
-						stop() << time > 10:00 & account > 0l
+						stop() << time > 07:00 & account > 0l
 							& high[-1c] > (LRSL = ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
 							& !(ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[-1c] > 0n)
 						;
 						log("long_lr_TP;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
 					||
-						stop() << time > 10:00 & account > 0l
+						stop() << time > 07:00 & account > 0l
 							/*& close[-1c] < (LRSL = ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[-1c])*/
 							& close[-1c] < (LRSL = nextSLlong)
 							//& ind("LinearRegression", "high", "high", predict_window, "none", train_window)[-1c]
@@ -256,13 +254,13 @@ slope_short = slope_short_start;
 					;
 					log("short_lr_SL;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
 				||*/
-					stop() << time > 10:00 & account < 0l
+					stop() << time > 07:00 & account < 0l
 						& low[-1c] < (LRSL = ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[-1c])
 						& !(ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[-1c] < 0n)
 					;
 					log("short_lr_TP;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
 				||
-					stop() << time > 10:00 & account < 0l
+					stop() << time > 07:00 & account < 0l
 						/*& close[-1c] > (LRSL = ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[-1c])*/
 						& close[-1c] > (LRSL = nextSLshort)
 						//& ind("LinearRegression", "high", "high", predict_window, "none", train_window)[-1c]
