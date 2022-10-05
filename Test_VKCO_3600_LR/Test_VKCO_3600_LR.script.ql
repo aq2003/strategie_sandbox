@@ -1,3 +1,12 @@
+// 25.09.2022 15:13:34 Test_VKCO_3600_LR ql script
+// Created 25.09.2022 15:13:34
+
+// 12.08.2022 22:42:04 Test_VKCO_900_LR ql script
+// Created 12.08.2022 22:42:04
+
+// 21.05.2022 11:06:55 Test_SIM2_900_LR ql script
+// Created 21.05.2022 11:06:55
+
 // 14.05.2022 15:42:52 Test_SRM2_900_LR ql script
 // Created 14.05.2022 15:42:52
 
@@ -53,20 +62,20 @@
 // Created 18.09.2020 9:56:34
 
 // +++ parameters -----------------------------------------------------------------------------------------
-lots = 1l;
-expiration_time = 15:00_19.09.22;
+lots = 100000p;
+expiration_time = 15:00_15.12.22;
 	
 predict_window = "candle"; 
-train_window = 20c;
-high_offset = "close";
+train_window = 35c;
+high_offset = "none";
 low_offset = "none";
 
 slope_long_start = 0n;
 slope_short_start = 0n;
 
-predict_window_support = "candle";
+predict_window_support = "week";
 train_window_support = 300c;
-predict_window_resistance = "candle";
+predict_window_resistance = "week";
 train_window_resistance = 300c;
 
 channel_width = /*950*/0p;
@@ -84,7 +93,7 @@ my_slope_long_start = slope_long_start;
 my_slope_short_start = slope_short_start;
 
 count2 = 0i;
-..[my_slope_long_start <= 22n]
+..[my_slope_long_start < 30n]
 {
 	my_train_window_support = train_window_support;
 	my_train_window_resistance = train_window_resistance;
@@ -101,8 +110,6 @@ count2 = 0i;
 				+ ";equity=;" + equity + ";account=;" + account
 				+ ";train_window=;" + my_train_window + ";train_window_support=;" + my_train_window_support 
 				+ ";slope_long_start=;" + my_slope_long_start);
-			
-			start_equity = equity;
 		
 			log.level = -1i;
 			..[candles.is_calculated != 1n] 

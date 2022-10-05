@@ -136,7 +136,8 @@ count2 = 0i;
 		count = 0i;
 		..[my_train_window <= train_window_stop]
 		{
-			log("test_starting_history...;count=;" + count2 + "." + count1 + "." + count 
+			log("test_starting_history...;count=;" + count2 + "." + count1 + "." + count
+				+ ";equity=;" + equity + ";account=;" + account
 				+ ";train_window=;" + my_train_window + ";train_window_support=;" + my_train_window_support 
 				+ ";slope_long_start=;" + my_slope_long_start);
 		
@@ -165,7 +166,7 @@ count2 = 0i;
 		
 			log.level = 0i;
 			log("test_history_completed;count=;" + count2 + "." + count1 + "." + count 
-				+ ";equity=;" + equity 
+				+ ";equity=;" + equity + ";account=;" + account 
 				+ ";train_window=;" + my_train_window + ";train_window_support=;" + my_train_window_support 
 				+ ";slope_long_start=;" + my_slope_long_start 
 				+ ";best_equity=;" + best_equity 
