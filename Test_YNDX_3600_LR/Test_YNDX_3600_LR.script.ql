@@ -84,7 +84,7 @@ train_window_resistance = 300c;
 channel_width = /*950*/0p;
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%OneDrive%\Documents\My Stocks\Stock\AQ-SERVER\QM_Imit\SRM2_900_LR\LR_lib.aql");
+import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib-YNDX.aql");
 
 best_equity = 0p;
 best_train_window = 0c;
