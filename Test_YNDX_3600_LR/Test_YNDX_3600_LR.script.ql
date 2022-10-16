@@ -83,6 +83,9 @@ train_window_resistance = 300c;
 
 channel_width = /*950*/0p;
 // --- parameters -----------------------------------------------------------------------------------------
+stop_slope_long_start = 30n;
+stop_train_window_support = 2000c;
+stop_train_window = 300c;
 		
 import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib-YNDX.aql");
 
@@ -96,18 +99,18 @@ my_slope_long_start = slope_long_start;
 my_slope_short_start = slope_short_start;
 
 count2 = 0i;
-..[my_slope_long_start < 30n]
+..[my_slope_long_start < stop_slope_long_start]
 {
 	my_train_window_support = train_window_support;
 	my_train_window_resistance = train_window_resistance;
 	
 	count1 = 0i;
-	..[my_train_window_support <= 2000c]
+	..[my_train_window_support <= stop_train_window_support]
 	{
 		my_train_window = train_window;
 		
 		count = 0i;
-		..[my_train_window <= 300c]
+		..[my_train_window <= stop_train_window]
 		{
 			log("test_starting_history...;count=;" + count2 + "." + count1 + "." + count
 				+ ";equity=;" + equity + ";account=;" + account
