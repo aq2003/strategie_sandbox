@@ -157,13 +157,13 @@ LR_strategy(
 			{
 				nextSLlong = ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[-1c] << 
 					ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[-1c] > nextSLlong
-					& ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c] >= slope_long;
+					| ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c] >= slope_long;
 				
 				slope_long = ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c];
 			||
 				nextSLlong += (1p * slope_long) << 
 					!(ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[-1c] > nextSLlong
-					& ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c] >= slope_long)
+					| ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c] >= slope_long)
 			};
 					
 			~
@@ -171,13 +171,13 @@ LR_strategy(
 			{
 				nextSLshort = ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[-1c] << 
 					ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[-1c] < nextSLshort
-					& ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c] <= slope_short;
+					| ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c] <= slope_short;
 				
 				slope_short = ind("LinearRegression", "slope", "high", predict_window, low_offset, train_window)[-1c];
 			||
 				nextSLshort += (1p * slope_short) << 
 					!(ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[-1c] < nextSLshort
-					& ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c] <= slope_short)
+					| ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c] <= slope_short)
 			};
 					
 			~
