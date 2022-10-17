@@ -84,8 +84,8 @@ train_window_resistance = 300c;
 channel_width = /*950*/0p;
 // --- parameters -----------------------------------------------------------------------------------------
 // +++ test stop parameters -------------------------------------------------------------------------------
-stop_slope_long_start = 6n;
-stop_train_window_support = 1000c;
+stop_slope_long_start = 10n;
+stop_train_window_support = 1800c;
 stop_train_window = 200c;
 // --- test stop parameters -------------------------------------------------------------------------------
 		
