@@ -81,7 +81,7 @@ train_window_support = 300c;
 predict_window_resistance = "week";
 train_window_resistance = 300c;
 
-channel_width = /*950*/0p;
+channel_width = /*950*/100p;
 // --- parameters -----------------------------------------------------------------------------------------
 // +++ test stop parameters -------------------------------------------------------------------------------
 stop_slope_long_start = 10n;
