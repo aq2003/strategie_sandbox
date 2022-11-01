@@ -157,7 +157,7 @@ count2 = 0i;
 					my_slope_long_start, my_slope_short_start,
 					predict_window_support, my_train_window_support,
 					predict_window_resistance, my_train_window_resistance,
-					channel_width
+					my_channel_width
 					);
 			};
 	
