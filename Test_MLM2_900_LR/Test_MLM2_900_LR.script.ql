@@ -163,7 +163,7 @@ count2 = 0i;
 				best_equity = equity << equity > best_equity;
 				best_train_window = my_train_window;
 				best_train_window_support = my_train_window_support;
-				best_slope_long_start = my_slope_long_start
+				best_channel_width = my_channel_width
 			||
 				best_equity = best_equity << equity <= best_equity
 			};
