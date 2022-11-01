@@ -85,7 +85,9 @@ train_window_resistance_start = 300c;
 train_window_resistance_stop = 2000c;
 train_window_resistance_step = 300c;
 
-channel_width = /*950*/0p;
+channel_width_start = 0p;
+channel_width_stop = 1200p;
+channel_width_step = 100p;
 
 log("lots_=;" + lots);
 log("expiration_time_=;" + expiration_time);
@@ -118,12 +120,14 @@ best_train_window = 0c;
 best_train_window_support = 0c;
 best_slope_long_start = 0n;
 best_slope_short_start = 0n;
+best_channel_width = 0p;
 
 my_slope_long_start = slope_long_start;
 my_slope_short_start = slope_short_start;
+my_channel_width = channel_width_start;
 
 count2 = 0i;
-..[my_slope_long_start < slope_long_stop]
+..[my_channel_width <= channel_width_stop]
 {
 	my_train_window_support = train_window_support_start;
 	my_train_window_resistance = train_window_resistance_start;
@@ -184,8 +188,7 @@ count2 = 0i;
 		count1 += 1i;
 	};
 	
-	my_slope_long_start += slope_long_step;
-	my_slope_short_start -= slope_long_step;
+	my_channel_width += channel_width_step;
 	count2 += 1i;
 };
 
