@@ -110,7 +110,9 @@ log("train_window_support_step_=;" + train_window_support_step);
 log("train_window_resistance_start_=;" + train_window_resistance_start);
 log("train_window_resistance_stop_=;" + train_window_resistance_stop);
 log("train_window_resistance_step_=;" + train_window_resistance_step);
-log("channel_width_=;" + channel_width);
+log("channel_width_start_=;" + channel_width_start);
+log("channel_width_stop_=;" + channel_width_stop);
+log("channel_width_step_=;" + channel_width_step);
 // --- parameters -----------------------------------------------------------------------------------------
 		
 import("%OneDrive%\Documents\My Stocks\Stock\AQ-SERVER\QM_Imit\SRM2_900_LR\LR_lib.aql");
