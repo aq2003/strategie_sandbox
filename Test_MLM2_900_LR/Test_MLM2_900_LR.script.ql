@@ -145,7 +145,7 @@ count2 = 0i;
 			log("test_starting_history...;count=;" + count2 + "." + count1 + "." + count
 				+ ";equity=;" + equity + ";account=;" + account
 				+ ";train_window=;" + my_train_window + ";train_window_support=;" + my_train_window_support 
-				+ ";slope_long_start=;" + my_slope_long_start);
+				+ ";my_channel_width=;" + my_channel_width);
 		
 			log.level = -1i;
 			..[candles.is_calculated != 1n] 
@@ -177,7 +177,7 @@ count2 = 0i;
 				+ ";slope_long_start=;" + my_slope_long_start 
 				+ ";best_equity=;" + best_equity 
 				+ ";best_train_window=;" + best_train_window + ";best_train_window_support=;" + best_train_window_support
-				+ ";best_slope_long_start=;" + best_slope_long_start);
+				+ ";best_channel_width=;" + best_channel_width);
 	
 			reset_history();
 			my_train_window += train_window_step;
