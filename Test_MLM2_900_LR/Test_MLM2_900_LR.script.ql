@@ -86,8 +86,8 @@ train_window_resistance_stop = 2000c;
 train_window_resistance_step = 300c;
 
 channel_width_start = 0p;
-channel_width_stop = 1200p;
-channel_width_step = 100p;
+channel_width_stop = 300p;
+channel_width_step = 50p;
 
 log("lots_=;" + lots);
 log("expiration_time_=;" + expiration_time);
@@ -115,7 +115,7 @@ log("channel_width_stop_=;" + channel_width_stop);
 log("channel_width_step_=;" + channel_width_step);
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib (2).ql");
+import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib (2).aql");
 
 best_equity = 0p;
 best_train_window = 0c;
