@@ -1,11 +1,8 @@
-// 11.10.2022 16:18:35 Test_YNDX_3600_LR ql script
-// Created 11.10.2022 16:18:35
+// 29.10.2022 10:15:28 YNZ2_900_LR ql script
+// Created 29.10.2022 10:15:28
 
-// 25.09.2022 15:13:34 Test_VKCO_3600_LR ql script
-// Created 25.09.2022 15:13:34
-
-// 12.08.2022 22:42:04 Test_VKCO_900_LR ql script
-// Created 12.08.2022 22:42:04
+// 05.06.2022 9:41:44 Test_MLM2_900_LR ql script
+// Created 05.06.2022 9:41:44
 
 // 21.05.2022 11:06:55 Test_SIM2_900_LR ql script
 // Created 21.05.2022 11:06:55
@@ -65,31 +62,59 @@
 // Created 18.09.2020 9:56:34
 
 // +++ parameters -----------------------------------------------------------------------------------------
-lots = 100000p;
+lots = 1l;
 expiration_time = 15:00_15.12.22;
 	
 predict_window = "candle"; 
-train_window = 35c;
 high_offset = "none";
 low_offset = "none";
+train_window_start = 5c;
+train_window_stop = 300c;
+train_window_step = 15c;
 
 slope_long_start = 0n;
+slope_long_stop = 20n;
+slope_long_step = 2n;
 slope_short_start = 0n;
+slope_short_stop = 20n;
+slope_short_step = 2n;
 
 predict_window_support = "week";
-train_window_support = 300c;
 predict_window_resistance = "week";
-train_window_resistance = 300c;
+train_window_support_start = 300c;
+train_window_support_stop = 2000c;
+train_window_support_step = 100c;
+train_window_resistance_start = 300c;
+train_window_resistance_stop = 2000c;
+train_window_resistance_step = 300c;
 
-channel_width = /*950*/100p;
+channel_width = /*950*/0p;
+
+log("lots_=;" + lots);
+log("expiration_time_=;" + expiration_time);
+log("predict_window_=;" + predict_window);
+log("high_offset_=;" + high_offset);
+log("train_window_start_=;" + train_window_start);
+log("train_window_stop_=;" + train_window_stop);
+log("train_window_step_=;" + train_window_step);
+log("slope_long_start_=;" + slope_long_start);
+log("slope_long_stop_=;" + slope_long_stop);
+log("slope_long_step_=;" + slope_long_step);
+log("slope_short_start_=;" + slope_short_start);
+log("slope_short_stop_=;" + slope_short_stop);
+log("slope_short_step_=;" + slope_short_step);
+log("predict_window_support_=;" + predict_window_support);
+log("predict_window_resistance_=;" + predict_window_resistance);
+log("train_window_support_start_=;" + train_window_support_start);
+log("train_window_support_stop_=;" + train_window_support_stop);
+log("train_window_support_step_=;" + train_window_support_step);
+log("train_window_resistance_start_=;" + train_window_resistance_start);
+log("train_window_resistance_stop_=;" + train_window_resistance_stop);
+log("train_window_resistance_step_=;" + train_window_resistance_step);
+log("channel_width_=;" + channel_width);
 // --- parameters -----------------------------------------------------------------------------------------
-// +++ test stop parameters -------------------------------------------------------------------------------
-stop_slope_long_start = 10n;
-stop_train_window_support = 1800c;
-stop_train_window = 200c;
-// --- test stop parameters -------------------------------------------------------------------------------
 		
-import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib-YNDX.aql");
+import("%OneDrive%\Documents\My Stocks\Stock\AQ-SERVER\QM_Imit\SRM2_900_LR\LR_lib.aql");
 
 best_equity = 0p;
 best_train_window = 0c;
@@ -101,18 +126,18 @@ my_slope_long_start = slope_long_start;
 my_slope_short_start = slope_short_start;
 
 count2 = 0i;
-..[my_slope_long_start < stop_slope_long_start]
+..[my_slope_long_start < slope_long_stop]
 {
-	my_train_window_support = train_window_support;
-	my_train_window_resistance = train_window_resistance;
+	my_train_window_support = train_window_support_start;
+	my_train_window_resistance = train_window_resistance_start;
 	
 	count1 = 0i;
-	..[my_train_window_support <= stop_train_window_support]
+	..[my_train_window_support <= train_window_support_stop]
 	{
-		my_train_window = train_window;
+		my_train_window = train_window_start;
 		
 		count = 0i;
-		..[my_train_window <= stop_train_window]
+		..[my_train_window <= train_window_stop]
 		{
 			log("test_starting_history...;count=;" + count2 + "." + count1 + "." + count
 				+ ";equity=;" + equity + ";account=;" + account
@@ -152,18 +177,18 @@ count2 = 0i;
 				+ ";best_slope_long_start=;" + best_slope_long_start);
 	
 			reset_history();
-			my_train_window += 15c;
+			my_train_window += train_window_step;
 			
 			count += 1i;
 		};
 	
-		my_train_window_support += 100c;
-		my_train_window_resistance += 100c;
+		my_train_window_support += train_window_support_step;
+		my_train_window_resistance += train_window_resistance_step;
 		count1 += 1i;
 	};
 	
-	my_slope_long_start += 1n;
-	my_slope_short_start -= 1n;
+	my_slope_long_start += slope_long_step;
+	my_slope_short_start -= slope_long_step;
 	count2 += 1i;
 };
 
