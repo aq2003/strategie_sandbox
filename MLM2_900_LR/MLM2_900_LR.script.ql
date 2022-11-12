@@ -50,7 +50,7 @@
 // Created 18.09.2020 9:56:34
 
 // +++ parameters -----------------------------------------------------------------------------------------
-lots = 100000p;
+lots = 1l;
 expiration_time = 23:00_31.12.22;
 	
 predict_window = "candle"; 
@@ -69,9 +69,9 @@ train_window_resistance = 1400c;
 channel_width = /*9.5*/0p;
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib (2).ql");
+import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib (2).aql");
 
-log("test_starting_history...;count=;" + count2 + "." + count1 + "." + count
+log("test_starting_history...;"
 	+ ";equity=;" + equity + ";account=;" + account
 	+ ";train_window=;" + train_window + ";train_window_support=;" + train_window_support 
 	+ ";channel_width=;" + channel_width);
@@ -86,7 +86,7 @@ LR_strategy(
 			channel_width
 		);
 					
-log("test_history_completed;count=;" + count2 + "." + count1 + "." + count 
+log("test_history_completed;" 
 	+ ";equity=;" + equity + ";account=;" + account 
 	+ ";train_window=;" + train_window + ";train_window_support=;" + train_window_support 
 	+ ";slope_long=;" + slope_long 
