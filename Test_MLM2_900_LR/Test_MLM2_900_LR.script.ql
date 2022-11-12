@@ -115,7 +115,7 @@ log("channel_width_stop_=;" + channel_width_stop);
 log("channel_width_step_=;" + channel_width_step);
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%OneDrive%\Documents\My Stocks\Stock\AQ-SERVER\QM_Imit\SRM2_900_LR\LR_lib (2).aql");
+import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib (2).ql");
 
 best_equity = 0p;
 best_train_window = 0c;
