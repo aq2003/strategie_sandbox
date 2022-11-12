@@ -75,19 +75,19 @@ reporter(
 	log("step_=;" + step 
 		+ ";account_=;" + account 
 		+ ";equity_=;" + equity 
-		+ ";lhigh_=;" + hhigh = ind("LinearRegression", "line", "high", predict_window, high_offset, train_window) 
-		+ ";lhigh.high_=;" + ind("LinearRegression", "high", "high", predict_window, high_offset, train_window) 
-		+ ";lhigh.low_=;" + ind("LinearRegression", "low", "high", predict_window, high_offset, train_window) 
-		+ ";lhigh.slope_=;" + ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window) 
-		+ ";lhigh.mae_=;" + ind("LinearRegression", "mae", "high", predict_window, high_offset, train_window) 
-		+ ";llow_=;" + ind("LinearRegression", "line", "low", predict_window, low_offset, train_window)
-		+ ";llow.high_=;" + ind("LinearRegression", "high", "low", predict_window, low_offset, train_window)
-		+ ";llow.low_=;" + llow = ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)
+		+ ";high_=;" + ind("LinearRegression", "line", "high", predict_window, high_offset, train_window) 
+		+ ";hhigh_=;" + ind("LinearRegression", "high", "high", predict_window, high_offset, train_window) 
+		+ ";lhigh_=;" + lhigh = ind("LinearRegression", "low", "high", predict_window, high_offset, train_window) 
+		+ ";high.slope_=;" + ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window) 
+		+ ";high.mae_=;" + ind("LinearRegression", "mae", "high", predict_window, high_offset, train_window) 
+		+ ";low_=;" + ind("LinearRegression", "line", "low", predict_window, low_offset, train_window)
+		+ ";hlow_=;" + hlow = ind("LinearRegression", "high", "low", predict_window, low_offset, train_window)
+		+ ";llow_=;" + ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)
 		+ ";llow.slope_=;" + ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)
 		+ ";llow.mae_=;" + ind("LinearRegression", "mae", "low", predict_window, low_offset, train_window)
 		+ ";nextSLlong_=;" + nextSLlong + ";slope_long_=;" + slope_long
 		+ ";nextSLshort_=;" + nextSLshort + ";slope_short_=;" + slope_short
-		+ ";channel_width_=;" + (hhigh - llow)
+		+ ";channel_width_=;" + (lhigh - hlow)
 	);
 	step += 1n; 
 	~
@@ -205,8 +205,8 @@ LR_strategy(
 						ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[-1c] > 0n
 					)
 					//& close[-1c] > (LR_sup = ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[-1c])
-					& (ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
-						- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width
+					& (ind("LinearRegression", "low", "high", predict_window_support, high_offset, train_window_support) 
+						- ind("LinearRegression", "high", "low", predict_window_support, low_offset, train_window_support)) > channel_width
 				;
 				nextSLlong = find_min_price(train_window);
 				slope_long = slope_long_start;
@@ -223,8 +223,8 @@ LR_strategy(
 					|
 						ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[-1c] < 0n
 					)
-					& (ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
-						- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width
+					& (ind("LinearRegression", "low", "high", predict_window_support, high_offset, train_window_support) 
+						- ind("LinearRegression", "high", "low", predict_window_support, low_offset, train_window_support)) > channel_width
 				;
 				nextSLshort = find_max_price(train_window);
 				slope_short = slope_short_start;
