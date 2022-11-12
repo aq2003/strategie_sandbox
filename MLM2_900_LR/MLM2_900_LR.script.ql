@@ -66,7 +66,7 @@ train_window_support = 1400c;
 predict_window_resistance = "week";
 train_window_resistance = 1400c;
 
-channel_width = /*9.5*/0p;
+channel_width = 200p;
 // --- parameters -----------------------------------------------------------------------------------------
 		
 import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib (2).aql");
@@ -89,10 +89,7 @@ LR_strategy(
 log("test_history_completed;" 
 	+ ";equity=;" + equity + ";account=;" + account 
 	+ ";train_window=;" + train_window + ";train_window_support=;" + train_window_support 
-	+ ";slope_long=;" + slope_long 
-	+ ";best_equity=;" + best_equity 
-	+ ";best_train_window=;" + best_train_window + ";best_train_window_support=;" + best_train_window_support
-	+ ";best_channel_width=;" + best_channel_width);
+	+ ";slope_long=;" + slope_long);
 	
 {
 	stop() << time > expiration_time;
