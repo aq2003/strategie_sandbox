@@ -205,8 +205,8 @@ LR_strategy(
 						ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[-1c] > 0n
 					)
 					//& close[-1c] > (LR_sup = ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[-1c])
-					& (ind("LinearRegression", "high", "high", predict_window_support, high_offset, train_window_support) 
-						- ind("LinearRegression", "low", "low", predict_window_support, low_offset, train_window_support)) > channel_width
+					& (ind("LinearRegression", "high", "high", predict_window, high_offset, train_window) 
+						- ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)) > channel_width
 				;
 				nextSLlong = find_min_price(train_window);
 				slope_long = slope_long_start;
@@ -223,8 +223,8 @@ LR_strategy(
 					|
 						ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[-1c] < 0n
 					)
-					& (ind("LinearRegression", "high", "high", predict_window_support, high_offset, train_window_support) 
-						- ind("LinearRegression", "low", "low", predict_window_support, low_offset, train_window_support)) > channel_width
+					& (ind("LinearRegression", "high", "high", predict_window, high_offset, train_window) 
+						- ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)) > channel_width
 				;
 				nextSLshort = find_max_price(train_window);
 				slope_short = slope_short_start;
