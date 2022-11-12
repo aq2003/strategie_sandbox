@@ -66,7 +66,7 @@ train_window_support = 1400c;
 predict_window_resistance = "week";
 train_window_resistance = 1400c;
 
-channel_width = 200p;
+channel_width = 75p;
 // --- parameters -----------------------------------------------------------------------------------------
 		
 import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib (2).aql");
