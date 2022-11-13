@@ -57,7 +57,7 @@ predict_window_type = "candle";
 
 train_window_max = 160c;
 train_window_min = 40c;
-train_window_divider = 1.5n;
+train_window_divider = 1.1n;
 
 high_offset = "none";
 low_offset = "none";
@@ -70,8 +70,8 @@ train_window_support = 1400c;
 predict_window_type_resistance = "week";
 train_window_resistance = 1400c;
 
-channel_width_max = 50p;
-channel_width_min = 150p;
+channel_width_min = 50p;
+channel_width_max = 150p;
 // --- parameters -----------------------------------------------------------------------------------------
 		
 import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib (2).aql");
