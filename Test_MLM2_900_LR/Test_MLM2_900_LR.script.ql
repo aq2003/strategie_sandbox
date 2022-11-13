@@ -128,15 +128,27 @@ count0 = 0i;
 ..[my_channel_width_min <= channel_width_min_stop]
 {
 	count1 = 0i;
+	
+	my_train_window_max = train_window_max_start;
+	
 	..[my_channel_width_max <= channel_width_max_stop]
 	{
 		count2 = 0i;
+		
+		my_train_window_divider = train_window_divider_start;
+		
 		..[my_train_window_divider <= train_window_divider_stop]
 		{
 			count3 = 0i;
+			
+			my_train_window_min = train_window_min_start;
+			
 			..[my_train_window_min <= train_window_min_stop]
 			{
 				count4 = 0i;
+				
+				my_train_window_max = train_window_max_start;
+				
 				..[my_train_window_max <= train_window_max_stop]
 				{
 					log("test_starting_history..." 
