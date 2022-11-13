@@ -57,7 +57,7 @@ predict_window_type = "candle";
 
 train_window_max = 160c;
 train_window_min = 40c;
-train_window_divider = 1.1n;
+train_window_divider = 1.2n;
 
 high_offset = "none";
 low_offset = "none";
