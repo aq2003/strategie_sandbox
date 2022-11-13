@@ -194,16 +194,35 @@ LR_strategy(
 			};
 					
 			~
-		&&
+		}
+		
+	||
+		..{
 			channel_width = (ind("LinearRegression", "high", "high", predict_window_type, high_offset, train_window) 
 						- ind("LinearRegression", "low", "low", predict_window_type, low_offset, train_window));
 						
 			{
-				train_window /= train_window_divider << channel_width > channel_width_max & train_window > train_window_min;
+				log("start_adjusting...;increase_train_window" 
+					+ ";train_window=;" + train_window + ";train_window_min=;" + train_window_min 
+					+ ";channel_width=;" + channel_width + ";channel_width_max=;" + channel_width_max)
+				<< channel_width > channel_width_max & train_window > train_window_min;
+				
+				train_window /= train_window_divider;
 				log("adjusting;increase_train_window;train_window_=;" + train_window)
 			||
-				train_window *= train_window_divider << channel_width < channel_width_min & train_window < train_window_max;
+				log("start_adjusting...;decrease_train_window" 
+					+ ";train_window=;" + train_window + ";train_window_max=;" + train_window_max 
+					+ ";channel_width=;" + channel_width + ";channel_width_min=;" + channel_width_min)
+				<< channel_width < channel_width_min & train_window < train_window_max;
+				
+				train_window *= train_window_divider;
 				log("adjusting;decrease_train_window;train_window_=;" + train_window)
+			||
+				log("adjusting;" 
+					+ ";train_window=;" + train_window + ";train_window_min=;" + train_window_min + ";train_window_max=;" + train_window_max 
+					+ ";channel_width=;" + channel_width + ";channel_width_min=;" + channel_width_min + ";channel_width_max=;" + channel_width_max)
+				<< !(channel_width > channel_width_max & train_window > train_window_min) 
+					& !(channel_width < channel_width_min & train_window < train_window_max)
 			};
 			~
 		}
