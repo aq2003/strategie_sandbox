@@ -118,18 +118,15 @@ best_train_window_divider = 0n;
 best_channel_width_min = 0p;
 best_channel_width_max = 0p;
 
-my_train_window_min = train_window_min_start;
-my_train_window_max = train_window_max_start;
-my_train_window_divider = train_window_divider_start;
-my_channel_width_min = channel_width_min_start;
-my_channel_width_max = channel_width_max_start;
-
 count0 = 0i;
+
+my_channel_width_min = channel_width_min_start;
+
 ..[my_channel_width_min <= channel_width_min_stop]
 {
 	count1 = 0i;
 	
-	my_train_window_max = train_window_max_start;
+	my_channel_width_max = channel_width_max_start;
 	
 	..[my_channel_width_max <= channel_width_max_stop]
 	{
