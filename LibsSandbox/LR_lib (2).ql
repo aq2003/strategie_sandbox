@@ -87,6 +87,7 @@ reporter(
 		+ ";llow.mae_=;" + ind("LinearRegression", "mae", "low", predict_window_type, low_offset, train_window)
 		+ ";nextSLlong_=;" + nextSLlong + ";slope_long_=;" + slope_long
 		+ ";nextSLshort_=;" + nextSLshort + ";slope_short_=;" + slope_short
+		+ ";train_window_=;" + train_window
 		+ ";channel_width_=;" + (hhigh - llow)
 	);
 	step += 1n; 
