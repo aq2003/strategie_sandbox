@@ -64,7 +64,7 @@ my_stop() :=
 };
 
 reporter(
-		predict_window_type,	// Signal line predict window type := ("week" || "day" || "candle")
+		predict_window,	// Signal line predict window type := ("week" || "day" || "candle")
 		train_window,	// Signal line width of training window in candle number
 		high_offset,	// Which type of price to take for the high line offset
 		low_offset		// Which type of price to take for the low line offset
@@ -75,19 +75,18 @@ reporter(
 	log("step_=;" + step 
 		+ ";account_=;" + account 
 		+ ";equity_=;" + equity 
-		+ ";high_=;" + ind("LinearRegression", "line", "high", predict_window_type, high_offset, train_window) 
-		+ ";hhigh_=;" + hhigh = ind("LinearRegression", "high", "high", predict_window_type, high_offset, train_window) 
-		+ ";lhigh_=;" + ind("LinearRegression", "low", "high", predict_window_type, high_offset, train_window) 
-		+ ";high.slope_=;" + ind("LinearRegression", "slope", "high", predict_window_type, high_offset, train_window) 
-		+ ";high.mae_=;" + ind("LinearRegression", "mae", "high", predict_window_type, high_offset, train_window) 
-		+ ";low_=;" + ind("LinearRegression", "line", "low", predict_window_type, low_offset, train_window)
-		+ ";hlow_=;" + ind("LinearRegression", "high", "low", predict_window_type, low_offset, train_window)
-		+ ";llow_=;" + llow = ind("LinearRegression", "low", "low", predict_window_type, low_offset, train_window)
-		+ ";llow.slope_=;" + ind("LinearRegression", "slope", "low", predict_window_type, low_offset, train_window)
-		+ ";llow.mae_=;" + ind("LinearRegression", "mae", "low", predict_window_type, low_offset, train_window)
+		+ ";high_=;" + ind("LinearRegression", "line", "high", predict_window, high_offset, train_window) 
+		+ ";hhigh_=;" + hhigh = ind("LinearRegression", "high", "high", predict_window, high_offset, train_window) 
+		+ ";lhigh_=;" + ind("LinearRegression", "low", "high", predict_window, high_offset, train_window) 
+		+ ";high.slope_=;" + ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window) 
+		+ ";high.mae_=;" + ind("LinearRegression", "mae", "high", predict_window, high_offset, train_window) 
+		+ ";low_=;" + ind("LinearRegression", "line", "low", predict_window, low_offset, train_window)
+		+ ";hlow_=;" + ind("LinearRegression", "high", "low", predict_window, low_offset, train_window)
+		+ ";llow_=;" + llow = ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)
+		+ ";llow.slope_=;" + ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)
+		+ ";llow.mae_=;" + ind("LinearRegression", "mae", "low", predict_window, low_offset, train_window)
 		+ ";nextSLlong_=;" + nextSLlong + ";slope_long_=;" + slope_long
 		+ ";nextSLshort_=;" + nextSLshort + ";slope_short_=;" + slope_short
-		+ ";train_window_=;" + train_window
 		+ ";channel_width_=;" + (hhigh - llow)
 	);
 	step += 1n; 
@@ -138,111 +137,76 @@ LR_strategy(
 		lots,				// Number of lots to open a position
 		expiration_time, 	// Time when to stop the strategy
 	
-		predict_window_type,	// Signal line predict window type := ("week" || "day" || "candle")
-		train_window_max,	// Maximum training window size of Signal line in candles
-		train_window_min,	// Minimum training window size of Signal line in candles
-		train_window_divider,	// Divider and multiplier to adjust train_window by channel_width value
-		
+		predict_window,	// Signal line predict window type := ("week" || "day" || "candle")
+		train_window,	// Signal line width of training window in candle number
 		high_offset,	// Which type of price to take for the high line offset
 		low_offset,	// Which type of price to take for the low line offset
 
 		slope_long_start,	// Starting slope of linear regression for a long position
 		slope_short_start,	// Starting slope of linear regression for a short position
 
-		predict_window_type_support,	// Support line predict window type := ("week" || "day" || "candle")
+		predict_window_support,	// Support line predict window type := ("week" || "day" || "candle")
 		train_window_support,		// Support line width of training window in candle number
-		predict_window_type_resistance,	// Resistance line predict window type := ("week" || "day" || "candle")
+		predict_window_resistance,	// Resistance line predict window type := ("week" || "day" || "candle")
 		train_window_resistance,	// Resistance line width of training window in candle number
 
-		channel_width_max,	// Max edge of channel_width range
-		channel_width_min	// Min edge of channel_width range
+		channel_width	// Width of signal channel to disable trading
 		) :=
 {
 	nextSLlong = low;
 	nextSLshort = high;
-	
-	channel_width = 0p;
-	train_window = train_window_max;
+	slope_long = slope_long_start;
+	slope_short = slope_short_start;
 
 	{
-		step = 0n; ..reporter(predict_window_type,	train_window, high_offset, low_offset)
+		step = 0n; ..reporter(predict_window,	train_window, high_offset, low_offset)
 	||
 		..{
 			{
-				nextSLlong = ind("LinearRegression", "low", "low", predict_window_type, low_offset, train_window)[-1c] << 
-					ind("LinearRegression", "low", "low", predict_window_type, low_offset, train_window)[-1c] > nextSLlong
-					& ind("LinearRegression", "slope", "low", predict_window_type, low_offset, train_window)[-1c] >= slope_long;
+				nextSLlong = ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[-1c] << 
+					ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[-1c] > nextSLlong
+					& ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c] >= slope_long;
 				
-				slope_long = ind("LinearRegression", "slope", "low", predict_window_type, low_offset, train_window)[-1c];
+				slope_long = ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c];
 			||
 				nextSLlong += (1p * slope_long) << 
-					!(ind("LinearRegression", "low", "low", predict_window_type, low_offset, train_window)[-1c] > nextSLlong
-					& ind("LinearRegression", "slope", "low", predict_window_type, low_offset, train_window)[-1c] >= slope_long)
+					!(ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[-1c] > nextSLlong
+					& ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c] >= slope_long)
 			};
 					
 			~
 		&&
 			{
-				nextSLshort = ind("LinearRegression", "high", "high", predict_window_type, high_offset, train_window)[-1c] << 
-					ind("LinearRegression", "high", "high", predict_window_type, high_offset, train_window)[-1c] < nextSLshort
-					& ind("LinearRegression", "slope", "low", predict_window_type, low_offset, train_window)[-1c] <= slope_short;
+				nextSLshort = ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[-1c] << 
+					ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[-1c] < nextSLshort
+					& ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c] <= slope_short;
 				
-				slope_short = ind("LinearRegression", "slope", "high", predict_window_type, low_offset, train_window)[-1c];
+				slope_short = ind("LinearRegression", "slope", "high", predict_window, low_offset, train_window)[-1c];
 			||
 				nextSLshort += (1p * slope_short) << 
-					!(ind("LinearRegression", "high", "high", predict_window_type, high_offset, train_window)[-1c] < nextSLshort
-					& ind("LinearRegression", "slope", "low", predict_window_type, low_offset, train_window)[-1c] <= slope_short)
+					!(ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[-1c] < nextSLshort
+					& ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c] <= slope_short)
 			};
 					
 			~
 		}
-		
 	||
-		..{
-			channel_width = (ind("LinearRegression", "high", "high", predict_window_type, high_offset, train_window) 
-						- ind("LinearRegression", "low", "low", predict_window_type, low_offset, train_window));
-						
-			{
-				log("start_adjusting...;increase_train_window" 
-					+ ";train_window=;" + train_window + ";train_window_min=;" + train_window_min 
-					+ ";channel_width=;" + channel_width + ";channel_width_max=;" + channel_width_max)
-				<< channel_width > channel_width_max & train_window > train_window_min;
-				
-				train_window /= train_window_divider;
-				log("adjusting;increase_train_window;train_window_=;" + train_window)
-			||
-				log("start_adjusting...;decrease_train_window" 
-					+ ";train_window=;" + train_window + ";train_window_max=;" + train_window_max 
-					+ ";channel_width=;" + channel_width + ";channel_width_min=;" + channel_width_min)
-				<< channel_width < channel_width_min & train_window < train_window_max;
-				
-				train_window *= train_window_divider;
-				log("adjusting;decrease_train_window;train_window_=;" + train_window)
-			||
-				log("adjusting;" 
-					+ ";train_window=;" + train_window + ";train_window_min=;" + train_window_min + ";train_window_max=;" + train_window_max 
-					+ ";channel_width=;" + channel_width + ";channel_width_min=;" + channel_width_min + ";channel_width_max=;" + channel_width_max)
-				<< !(channel_width > channel_width_max & train_window > train_window_min) 
-					& !(channel_width < channel_width_min & train_window < train_window_max)
-			};
-			~
-		}
-	||
+		thread = "";
 	
 		..[time < expiration_time]
 		{
 			my_account = account;
 			{
 				long(lots) << time < expiration_time & account == 0l
-					& close[-1c] #^ (LR = ind("LinearRegression", "high", "high", predict_window_type, high_offset, train_window)[-1c])
+					& close[-1c] #^ (LR = ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[-1c])
 					& (
-						close[-1c] < (LR_sup = ind("LinearRegression", "low", "high", predict_window_type_resistance, "high", train_window_resistance)[-1c])
+						close[-1c] < (LR_sup = ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
 					|
-						ind("LinearRegression", "slope", "low", predict_window_type_support, "low", train_window_support)[-1c] > 0n
+						ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[-1c] > 0n
 					)
-					//& close[-1c] > (LR_sup = ind("LinearRegression", "low", "low", predict_window_type_support, "low", train_window_support)[-1c])
-					& (ind("LinearRegression", "high", "high", predict_window_type, high_offset, train_window) 
-						- ind("LinearRegression", "low", "low", predict_window_type, low_offset, train_window)) > 0p
+					//& close[-1c] > (LR_sup = ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[-1c])
+					& (ind("LinearRegression", "high", "high", predict_window, high_offset, train_window) 
+						- ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)) > channel_width
 				;
 				nextSLlong = find_min_price(train_window);
 				slope_long = slope_long_start;
@@ -252,15 +216,15 @@ LR_strategy(
 				log("account_>_0l_already") << my_account > 0l
 			||
 				short(lots) << time < expiration_time & account == 0l
-					& close[-1c] #_ (LR = ind("LinearRegression", "low", "low", predict_window_type, low_offset, train_window)[-1c])
-					//& close[-1c] < (LR_sup = ind("LinearRegression", "high", "high", predict_window_type_resistance, "high", train_window_resistance)[-1c])
+					& close[-1c] #_ (LR = ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[-1c])
+					//& close[-1c] < (LR_sup = ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
 					& (
-						close[-1c] > (LR_sup = ind("LinearRegression", "high", "low", predict_window_type_support, "low", train_window_support)[-1c])
+						close[-1c] > (LR_sup = ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[-1c])
 					|
-						ind("LinearRegression", "slope", "high", predict_window_type_resistance, "high", train_window_resistance)[-1c] < 0n
+						ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[-1c] < 0n
 					)
-					& (ind("LinearRegression", "high", "high", predict_window_type, high_offset, train_window) 
-						- ind("LinearRegression", "low", "low", predict_window_type, low_offset, train_window)) > 0p
+					& (ind("LinearRegression", "high", "high", predict_window, high_offset, train_window) 
+						- ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)) > channel_width
 				;
 				nextSLshort = find_max_price(train_window);
 				slope_short = slope_short_start;
@@ -276,21 +240,21 @@ LR_strategy(
 					{
 						{
 						/*	stop() << time > 10:00 & account > 0l
-								& close[-1c] < (LRSL = ind("LinearRegression", "low", "low", predict_window_type_support, "low", train_window_support)[-1c])
+								& close[-1c] < (LRSL = ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[-1c])
 							;
 							log("long_lr_SL;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
 						||*/
 							stop() << time > 07:00 & account > 0l
-								& high[-1c] > (LRSL = ind("LinearRegression", "low", "high", predict_window_type_resistance, "high", train_window_resistance)[-1c])
-								& !(ind("LinearRegression", "slope", "low", predict_window_type_support, "low", train_window_support)[-1c] > 0n)
+								& high[-1c] > (LRSL = ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
+								& !(ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[-1c] > 0n)
 							;
 							log("long_lr_TP;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
 						||
 							stop() << time > 07:00 & account > 0l
-								/*& close[-1c] < (LRSL = ind("LinearRegression", "low", "low", predict_window_type, low_offset, train_window)[-1c])*/
+								/*& close[-1c] < (LRSL = ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[-1c])*/
 								& close[-1c] < (LRSL = nextSLlong)
-								//& ind("LinearRegression", "high", "high", predict_window_type, "none", train_window)[-1c]
-								//	- ind("LinearRegression", "low", "low", predict_window_type, "none", train_window)[-1c] >= 2p
+								//& ind("LinearRegression", "high", "high", predict_window, "none", train_window)[-1c]
+								//	- ind("LinearRegression", "low", "low", predict_window, "none", train_window)[-1c] >= 2p
 							;
 							log("long_lr_TS;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
 						/*||
@@ -304,21 +268,21 @@ LR_strategy(
 					log("looking_for_closing_short") << account < 0l;
 					{
 					/*	stop() << time > 10:00 & account < 0l
-							& close[-1c] > (LRSL = ind("LinearRegression", "high", "high", predict_window_type_resistance, "high", train_window_resistance)[-1c])
+							& close[-1c] > (LRSL = ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
 						;
 						log("short_lr_SL;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
 					||*/
 						stop() << time > 07:00 & account < 0l
-							& low[-1c] < (LRSL = ind("LinearRegression", "high", "low", predict_window_type_support, "low", train_window_support)[-1c])
-							& !(ind("LinearRegression", "slope", "high", predict_window_type_resistance, "high", train_window_resistance)[-1c] < 0n)
+							& low[-1c] < (LRSL = ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[-1c])
+							& !(ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[-1c] < 0n)
 						;
 						log("short_lr_TP;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
 					||
 						stop() << time > 07:00 & account < 0l
-							/*& close[-1c] > (LRSL = ind("LinearRegression", "high", "high", predict_window_type, high_offset, train_window)[-1c])*/
+							/*& close[-1c] > (LRSL = ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[-1c])*/
 							& close[-1c] > (LRSL = nextSLshort)
-							//& ind("LinearRegression", "high", "high", predict_window_type, "none", train_window)[-1c]
-							//	- ind("LinearRegression", "low", "low", predict_window_type, "none", train_window)[-1c] >= 2p
+							//& ind("LinearRegression", "high", "high", predict_window, "none", train_window)[-1c]
+							//	- ind("LinearRegression", "low", "low", predict_window, "none", train_window)[-1c] >= 2p
 						;
 						log("short_lr_TS;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
 					/*||
