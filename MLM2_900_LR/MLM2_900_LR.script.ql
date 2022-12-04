@@ -66,10 +66,10 @@ train_window_support = 1400c;
 predict_window_resistance = "week";
 train_window_resistance = 1400c;
 
-channel_width = 75p;
+channel_width = 0p;
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib (2).aql");
+import("%OneDrive%\Documents\My Stocks\Stock\SASHA-SERVER\GitHub\strategie_sandbox\strategie_sandbox\LibsSandbox\LR_lib.aql");
 
 log("test_starting_history...;"
 	+ ";equity=;" + equity + ";account=;" + account
