@@ -55,9 +55,9 @@ expiration_time = 23:00_31.12.22;
 	
 predict_window_type = "candle"; 
 
-train_window_max = 160c;
-train_window_min = 40c;
-train_window_divider = 1.1n;
+train_window_max = 240c;
+train_window_min = 20c;
+train_window_divider = 1.3n;
 
 high_offset = "none";
 low_offset = "none";
@@ -70,8 +70,8 @@ train_window_support = 1400c;
 predict_window_type_resistance = "week";
 train_window_resistance = 1400c;
 
-channel_width_min = 100p;
-channel_width_max = 200p;
+channel_width_min = 20p;
+channel_width_max = 250p;
 // --- parameters -----------------------------------------------------------------------------------------
 		
 import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib (2).aql");
