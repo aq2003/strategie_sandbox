@@ -134,7 +134,8 @@ find_min_price(period) :=
 	result = min;
 };
 
-LR_strategy(
+// A strategy which tunes adaptive its train_window size according to channel_width value with train_window_divider pace
+LRS_adaptive(
 		lots,				// Number of lots to open a position
 		expiration_time, 	// Time when to stop the strategy
 	
@@ -339,7 +340,8 @@ LR_strategy(
 	log("LR_strategy_has_stopped")
 };
 
-LR_strategy1(
+// Original LR strategy
+LR_strategy(
 		lots,				// Number of lots to open a position
 		expiration_time, 	// Time when to stop the strategy
 	
