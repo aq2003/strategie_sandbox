@@ -473,14 +473,20 @@ LR_strategy1(
 	log("LR_strategy1_has_stopped")
 };
 
+// The strategy watches fast and slow line crossing
 LR_strategy2(
 		lots,				// Number of lots to open a position
 		expiration_time, 	// Time when to stop the strategy
 	
-		predict_window,	// Signal line predict window type := ("week" || "day" || "candle")
-		train_window,	// Signal line width of training window in candle number
-		high_offset,	// Which type of price to take for the high line offset
-		low_offset,	// Which type of price to take for the low line offset
+		predict_window,	// Fast Signal line predict window type := ("week" || "day" || "candle")
+		train_window,	// Fast Signal line width of training window in candle number
+		high_offset,	// Which type of price to take for the fast high line offset
+		low_offset,	// Which type of price to take for the fast low line offset
+
+		slow_predict_window,	// Slow Signal line predict window type := ("week" || "day" || "candle")
+		slow_train_window,	// Slow Signal line width of training window in candle number
+		slow_high_offset,	// Which type of price to take for the slow high line offset
+		slow_low_offset,	// Which type of price to take for the slow low line offset
 
 		slope_long_start,	// Starting slope of linear regression for a long position
 		slope_short_start,	// Starting slope of linear regression for a short position
@@ -547,6 +553,8 @@ LR_strategy2(
 					//& close[-1c] > (LR_sup = ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[-1c])
 					& (ind("LinearRegression", "high", "high", predict_window, high_offset, train_window) 
 						- ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)) > channel_width
+					& ind("LinearRegression", "high", "high", predict_window, high_offset, train_window) 
+						> ind("LinearRegression", "high", "high", slow_predict_window, slow_high_offset, slow_train_window)
 				;
 				nextSLlong = find_min_price(train_window);
 				slope_long = slope_long_start;
@@ -565,6 +573,8 @@ LR_strategy2(
 					)
 					& (ind("LinearRegression", "high", "high", predict_window, high_offset, train_window) 
 						- ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)) > channel_width
+					& ind("LinearRegression", "low", "low", predict_window, high_offset, train_window) 
+						< ind("LinearRegression", "low", "low", slow_predict_window, slow_high_offset, slow_train_window)
 				;
 				nextSLshort = find_max_price(train_window);
 				slope_short = slope_short_start;
