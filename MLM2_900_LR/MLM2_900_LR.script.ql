@@ -53,65 +53,37 @@
 lots = 1l;
 expiration_time = 23:00_31.12.22;
 	
-predict_window_type = "candle"; 
-
-train_window_max = 240c;
-train_window_min = 20c;
-train_window_divider = 1.3n;
-
+predict_window = "candle"; 
+train_window = 160c;
 high_offset = "none";
 low_offset = "none";
 
 slope_long = 0.00n;
 slope_short = 0.00n;
 
-predict_window_type_support = "week";
+predict_window_support = "week";
 train_window_support = 1400c;
-predict_window_type_resistance = "week";
+predict_window_resistance = "week";
 train_window_resistance = 1400c;
 
-<<<<<<< HEAD
 channel_width = 0p;
-=======
-channel_width_min = 20p;
-channel_width_max = 250p;
->>>>>>> LR_with_adaptive_period
 // --- parameters -----------------------------------------------------------------------------------------
 		
 import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib (2).aql");
 
 log("test_starting_history...;"
 	+ ";equity=;" + equity + ";account=;" + account
-	+ ";train_window_max=;" + train_window_max 
-	+ ";train_window_min=;" + train_window_min 
-	+ ";train_window_support=;" + train_window_support 
-	+ ";train_window_resistance=;" + train_window_resistance 
-	+ ";channel_width_max=;" + channel_width_max
-	+ ";channel_width_min=;" + channel_width_min
-	);
+	+ ";train_window=;" + train_window + ";train_window_support=;" + train_window_support 
+	+ ";channel_width=;" + channel_width);
 		
 LR_strategy(
-		lots,				// Number of lots to open a position
-		expiration_time, 	// Time when to stop the strategy
-	
-		predict_window_type,	// Signal line predict window type := ("week" || "day" || "candle")
-		train_window_max,	// Maximum training window size of Signal line in candles
-		train_window_min,	// Minimum training window size of Signal line in candles
-		train_window_divider,	// Divider and multiplier to adjust train_window by channel_width value
-		
-		high_offset,	// Which type of price to take for the high line offset
-		low_offset,	// Which type of price to take for the low line offset
-
-		slope_long,	// Starting slope of linear regression for a long position
-		slope_short,	// Starting slope of linear regression for a short position
-
-		predict_window_type_support,	// Support line predict window type := ("week" || "day" || "candle")
-		train_window_support,		// Support line width of training window in candle number
-		predict_window_type_resistance,	// Resistance line predict window type := ("week" || "day" || "candle")
-		train_window_resistance,	// Resistance line width of training window in candle number
-
-		channel_width_max,	// Max edge of channel_width range
-		channel_width_min	// Min edge of channel_width range
+			lots, expiration_time,
+			predict_window, train_window,
+			high_offset, low_offset,
+			slope_long, slope_short,
+			predict_window_support, train_window_support,
+			predict_window_resistance, train_window_resistance,
+			channel_width
 		);
 					
 log("test_history_completed;" 
