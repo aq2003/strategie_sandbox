@@ -69,7 +69,7 @@ train_window_resistance = 1400c;
 channel_width = 0p;
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%OneDrive%\Documents\My Stocks\Stock\SASHA-SERVER\GitHub\strategie_sandbox\strategie_sandbox\LibsSandbox\LR_lib.aql");
+import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib (2).aql");
 
 log("test_starting_history...;"
 	+ ";equity=;" + equity + ";account=;" + account
