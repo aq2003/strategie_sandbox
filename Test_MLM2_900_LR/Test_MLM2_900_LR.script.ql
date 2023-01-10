@@ -60,7 +60,7 @@
 
 // +++ parameters -----------------------------------------------------------------------------------------
 lots = 1l;
-expiration_time = 15:00_15.12.22;
+expiration_time = 15:00_15.12.23;
 	
 predict_window = "candle"; 
 high_offset = "none";
