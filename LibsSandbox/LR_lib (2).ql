@@ -367,7 +367,10 @@ slope_long = slope_long_start;
 slope_short = slope_short_start;
 
 {
-	step = 0n; ..reporter(10:00_20.11.20, 23:30_24.11.20)
+	step = 0n; ..reporter(predict_window,	// Signal line predict window type := ("week" || "day" || "candle")
+					train_window,	// Signal line width of training window in candle number
+					high_offset,	// Which type of price to take for the high line offset
+					low_offset)
 ||
 	..{
 		{
