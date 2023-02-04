@@ -374,8 +374,8 @@ slope_short = slope_short_start;
 ||
 	..{
 		{
-			nextSLlong = ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[-1c] << 
-				ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[-1c] > nextSLlong
+			nextSLlong = ind("LinearRegression", "low", "high", predict_window, low_offset, train_window)[-1c] << 
+				ind("LinearRegression", "low", "high", predict_window, low_offset, train_window)[-1c] > nextSLlong
 				& ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c] >= slope_long;
 				
 			slope_long = ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c];
@@ -386,9 +386,9 @@ slope_short = slope_short_start;
 		~
 	&&
 		{
-			nextSLshort = ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[-1c] << 
-				ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[-1c] < nextSLshort
-				& ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c] <= slope_short;
+			nextSLshort = ind("LinearRegression", "high", "low", predict_window, high_offset, train_window)[-1c] << 
+				ind("LinearRegression", "high", "low", predict_window, high_offset, train_window)[-1c] < nextSLshort
+				& ind("LinearRegression", "slope", "high", predict_window, low_offset, train_window)[-1c] <= slope_short;
 				
 			slope_short = ind("LinearRegression", "slope", "high", predict_window, low_offset, train_window)[-1c];
 		||
