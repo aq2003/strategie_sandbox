@@ -78,9 +78,9 @@ train_window_resistance = 1200c;
 channel_width = /*950*/0p;
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib (2).aql");
+import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib.aql");
 
-/*LR_strategy(
+LR_strategy_w_adaptive_MAE(
 		lots, expiration_time,
 		predict_window, train_window,
 		high_offset, low_offset,
@@ -88,13 +88,13 @@ import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\stra
 		predict_window_support, train_window_support,
 		predict_window_resistance, train_window_resistance,
 		channel_width
-		);*/
+		);
 		
-..
+/*..
 {
 	log("high=;" + high + ";low=;" + low + ";open=;" + open + ";close=;" + close);
 	~
-};
+};*/
 		
 stop();
 
