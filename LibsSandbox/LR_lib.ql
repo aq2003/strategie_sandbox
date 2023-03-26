@@ -147,13 +147,13 @@ reporter_adaptive_MAE(step,
 	
 	line_high = ind("LinearRegression", "line", "high", predict_window_type, high_offset, train_window);
 	slope_high = ind("LinearRegression", "slope", "high", predict_window_type, high_offset, train_window);
-	mae_high = (ind("LinearRegression", "mae", "high", predict_window_type, high_offset, train_window) / slope_high);
+	mae_high = (ind("LinearRegression", "mae", "high", predict_window_type, high_offset, train_window) / abs(slope_high));
 	high_high = (line_high + mae_high);
 	low_high = (line_high - mae_high);
 	
 	line_low = ind("LinearRegression", "line", "high", predict_window_type, high_offset, train_window);
 	slope_low = ind("LinearRegression", "slope", "high", predict_window_type, high_offset, train_window);
-	mae_low = (ind("LinearRegression", "mae", "high", predict_window_type, high_offset, train_window) / slope_low);
+	mae_low = (ind("LinearRegression", "mae", "high", predict_window_type, high_offset, train_window) / abs(slope_low));
 	high_low = (line_low + mae_low);
 	low_low = (line_low - mae_low);
 	
@@ -603,7 +603,7 @@ LR_strategy_w_adaptive_MAE(
 			};
 			
 			high_adaptive_MAE = (ind("LinearRegression", "mae", "high", predict_window, low_offset, train_window)[-1c] /
-							ind("LinearRegression", "slope", "high", predict_window, low_offset, train_window)[-1c]);
+							abs(ind("LinearRegression", "slope", "high", predict_window, low_offset, train_window)[-1c]));
 					
 			~
 		&&
@@ -618,7 +618,7 @@ LR_strategy_w_adaptive_MAE(
 			};
 					
 			low_adaptive_MAE = (ind("LinearRegression", "mae", "low", predict_window, low_offset, train_window)[-1c] /
-							ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c]);
+							abs(ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c]));
 					
 			~
 		}
