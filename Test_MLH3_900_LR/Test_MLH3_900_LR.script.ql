@@ -79,8 +79,8 @@ slope_short_start = 0n;
 slope_short_stop = 20n;
 slope_short_step = 2n;
 
-predict_window_support = "week";
-predict_window_resistance = "week";
+predict_window_support = "day";
+predict_window_resistance = "day";
 train_window_support_start = 300c;
 train_window_support_stop = 2000c;
 train_window_support_step = 100c;
