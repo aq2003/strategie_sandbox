@@ -64,6 +64,10 @@
 // +++ parameters -----------------------------------------------------------------------------------------
 lots = 1l;
 expiration_time = 15:00_15.12.23;
+
+start_time = 09:00; 
+end_time = 23:00; 
+day_start_time = 09:00;
 	
 predict_window = "candle"; 
 high_offset = "none";
@@ -155,6 +159,7 @@ count2 = 0i;
 			{
 				LR_strategy(
 					lots, expiration_time,
+					start_time, end_time, day_start_time,
 					predict_window, my_train_window,
 					high_offset, low_offset,
 					my_slope_long_start, my_slope_short_start,
