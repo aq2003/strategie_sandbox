@@ -385,10 +385,31 @@ LRS_adaptive(
 	log("LR_strategy_has_stopped")
 };
 
+// Moves time bounds which define when the script trading starts and is over
+MovingTimeBounds(
+			start_time,	// Time of a day when the script trading gets allowed
+			end_time,		// Time of a day when the script trading gets not allowed
+			day_start_time	// Time of a day when the stock exchange starts
+			) :=
+{
+	result = 0n;
+	
+	..{
+		log("time_watch_started" + ";start_time=;" + start_time + ";end_time=;" + end_time + ";day_start_time=;" + day_start_time);
+		start_time += 1D << time > end_time;
+		end_time += 1D;
+		day_start_time += 1D;
+		log("time_moved" + ";start_time=;" + start_time + ";end_time=;" + end_time + ";day_start_time=;" + day_start_time)
+	}
+};
+	
 // Original LR strategy
 LR_strategy(
 		lots,				// Number of lots to open a position
 		expiration_time, 	// Time when to stop the strategy
+		start_time,	// Time of a day when the script trading gets allowed
+		end_time,		// Time of a day when the script trading gets not allowed
+		day_start_time,	// Time of a day when the stock exchange starts
 	
 		predict_window,	// Signal line predict window type := ("week" || "day" || "candle")
 		train_window,	// Signal line width of training window in candle number
@@ -449,14 +470,13 @@ LR_strategy(
 		{
 			my_account = account;
 			{
-				long(lots) << time < expiration_time & account == 0l
+				long(lots) << time >= day_start_time & time >= start_time & time < end_time & time < expiration_time & account == 0l
 					& close[-1c] #^ (LR = ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[-1c])
 					& (
 						close[-1c] < (LR_sup = ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
 						|
 						ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[-1c] > 0n
 					)
-					//& close[-1c] > (LR_sup = ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[-1c])
 					& (ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
 						- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width
 				;
@@ -467,9 +487,8 @@ LR_strategy(
 			||
 				log("account_>_0l_already") << my_account > 0l
 			||
-				short(lots) << time < expiration_time & account == 0l
+				short(lots) << time >= day_start_time & time >= start_time & time < end_time & time < expiration_time & account == 0l
 					& close[-1c] #_ (LR = ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[-1c])
-					//& close[-1c] < (LR_sup = ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
 					& (
 						close[-1c] > (LR_sup = ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[-1c])
 						|
@@ -491,57 +510,31 @@ LR_strategy(
 					log("looking_for_closing_long") << account > 0l;
 					{
 						{
-						/*	stop() << time > 10:00 & account > 0l
-								& close[-1c] < (LRSL = ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[-1c])
-							;
-							log("long_lr_SL;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
-						||*/
-							stop() << time > 07:00 & account > 0l
+							stop() << time > day_start_time & account > 0l
 								& high[-1c] > (LRSL = ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
 								& !(ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[-1c] > 0n)
 							;
 							log("long_lr_TP;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
 						||
-							stop() << time > 07:00 & account > 0l
-								/*& close[-1c] < (LRSL = ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[-1c])*/
+							stop() << time > day_start_time & account > 0l
 								& close[-1c] < (LRSL = nextSLlong)
-								//& ind("LinearRegression", "high", "high", predict_window, "none", train_window)[-1c]
-								//	- ind("LinearRegression", "low", "low", predict_window, "none", train_window)[-1c] >= 2p
 							;
 							log("long_lr_TS;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
-						/*||
-							stop() << time > 10:00 & account > 0l
-								& close[-1c] < absoluteSL
-							;
-							log("long_lr_absoluteSL;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";absoluteSL_=;" + absoluteSL) << account == 0l*/
 						}
 					}
 				||
 					log("looking_for_closing_short") << account < 0l;
 					{
-					/*	stop() << time > 10:00 & account < 0l
-							& close[-1c] > (LRSL = ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
-						;
-						log("short_lr_SL;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
-					||*/
-						stop() << time > 07:00 & account < 0l
+						stop() << time > day_start_time & account < 0l
 							& low[-1c] < (LRSL = ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[-1c])
 							& !(ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[-1c] < 0n)
 						;
 						log("short_lr_TP;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
 					||
-						stop() << time > 07:00 & account < 0l
-							/*& close[-1c] > (LRSL = ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[-1c])*/
+						stop() << time > day_start_time & account < 0l
 							& close[-1c] > (LRSL = nextSLshort)
-							//& ind("LinearRegression", "high", "high", predict_window, "none", train_window)[-1c]
-							//	- ind("LinearRegression", "low", "low", predict_window, "none", train_window)[-1c] >= 2p
 						;
 						log("short_lr_TS;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
-					/*||
-						stop() << time > 10:00 & account > 0l
-							& close[-1c] > absoluteSL
-						;
-						log("short_lr_absoluteSL;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";absoluteSL_=;" + absoluteSL) << account == 0l*/
 					}
 				}
 			}
@@ -553,6 +546,9 @@ LR_strategy(
 	stop();
 
 	log("script_stopped")
+	
+||
+	MovingTimeBounds(start_time, end_time, day_start_time)
 };
 
 // An LR strategy which tunes MAE adaptively depending on slope value
