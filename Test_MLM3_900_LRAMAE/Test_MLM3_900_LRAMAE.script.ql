@@ -71,9 +71,9 @@ expiration_time = 15:00_15.12.23;
 predict_window = "candle"; 
 high_offset = "none";
 low_offset = "none";
-train_window_start = 5c;
+train_window_start = 10c;
 train_window_stop = 300c;
-train_window_step = 15c;
+train_window_step = 20%;
 
 slope_long_start = 0n;
 slope_long_stop = 20n;
