@@ -535,6 +535,9 @@ LR_strategy(
 				}
 			}
 		}
+	
+	||
+		MovingTimeBounds()
 	};
 
 	log("expiration_stop");
@@ -542,9 +545,6 @@ LR_strategy(
 	stop();
 
 	log("script_stopped")
-	
-||
-	MovingTimeBounds(start_time, end_time, day_start_time)
 };
 
 // An LR strategy which tunes MAE adaptively depending on slope value
