@@ -386,11 +386,7 @@ LRS_adaptive(
 };
 
 // Moves time bounds which define when the script trading starts and is over
-MovingTimeBounds(
-			start_time,	// Time of a day when the script trading gets allowed
-			end_time,		// Time of a day when the script trading gets not allowed
-			day_start_time	// Time of a day when the stock exchange starts
-			) :=
+MovingTimeBounds() :=
 {
 	result = 0n;
 	
