@@ -69,7 +69,7 @@ lots = 1l;
 expiration_time = 15:00_15.12.23;
 
 start_time = 09:00; 
-end_time = 23:00; 
+end_time = 23:59; 
 day_start_time = 09:00;
 	
 predict_window = "candle"; 
@@ -125,7 +125,7 @@ log("channel_width_stop_=;" + channel_width_stop);
 log("channel_width_step_=;" + channel_width_step);
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib.aql");
+import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_strategy.aql");
 
 best_equity = 0p;
 best_train_window = 0c;
@@ -154,6 +154,7 @@ count2 = 0i;
 		{
 			log("test_starting_history...;count=;" + count2 + "." + count1 + "." + count
 				+ ";equity=;" + equity + ";account=;" + account
+				+ ";start_time=;" + start_time + ";end_time=;" + end_time + ";day_start_time=;" + day_start_time
 				+ ";train_window=;" + my_train_window + ";train_window_support=;" + my_train_window_support 
 				+ ";my_channel_width=;" + my_channel_width);
 		
