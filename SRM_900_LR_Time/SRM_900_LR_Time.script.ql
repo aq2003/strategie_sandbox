@@ -58,7 +58,7 @@ end_time = 23:45;
 day_start_time = 09:00;
 	
 predict_window = "candle"; 
-train_window = 160c;
+train_window = 12c;
 high_offset = "none";
 low_offset = "none";
 
@@ -73,7 +73,7 @@ train_window_resistance = 400c;
 channel_width = /*950*/0p;
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib.aql");
+import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_strategy.aql");
 
 LR_strategy(
 			lots, expiration_time,
