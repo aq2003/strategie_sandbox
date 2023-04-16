@@ -107,11 +107,11 @@ MovingTimeBounds() :=
 	result = 0n;
 	
 	..{
-		log("time_watch_started" + ";start_time=;" + start_time + ";end_time=;" + end_time + ";day_start_time=;" + day_start_time);
-		start_time += 1D << time > end_time;
-		end_time += 1D;
-		day_start_time += 1D;
-		log("time_moved" + ";start_time=;" + start_time + ";end_time=;" + end_time + ";day_start_time=;" + day_start_time)
+		log("time_watch_started" + ";start_time=;" + my_start_time + ";end_time=;" + my_end_time + ";day_start_time=;" + my_day_start_time);
+		my_start_time += 1D << time > my_end_time;
+		my_end_time += 1D;
+		my_day_start_time += 1D;
+		log("time_moved" + ";start_time=;" + my_start_time + ";end_time=;" + my_end_time + ";day_start_time=;" + my_day_start_time)
 	}
 };
 // --- MovingTimeBounds --------------------------------------------------------------------------------------------------------------------
