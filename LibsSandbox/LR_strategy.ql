@@ -76,6 +76,7 @@ reporter(
 		+ ";nextSLshort_=;" + nextSLshort + ";slope_short_=;" + slope_short
 		+ ";train_window_=;" + train_window
 		+ ";channel_width_=;" + (hhigh - llow)
+		+ ";start_time_=;" + my_start_time + ";end_time_=;" + my_end_time + ";day_start_time_=;" + my_day_start_time
 	);
 	step += 1n; 
 	~

@@ -1,5 +1,5 @@
-// 15.04.2023 21:09:12 Test_SRM3_900_LR_Time ql script
-// Created 15.04.2023 21:09:12
+// 05.03.2023 12:28:36 Test_MLH3_900_LRAMAE ql script
+// Created 05.03.2023 12:28:36
 
 // 10.01.2023 17:47:36 Test_MLH3_900_LR ql script
 // Created 10.01.2023 17:47:36
@@ -67,27 +67,23 @@
 // +++ parameters -----------------------------------------------------------------------------------------
 lots = 1l;
 expiration_time = 15:00_15.12.23;
-
-start_time = 09:00; 
-end_time = 23:59; 
-day_start_time = 09:00;
 	
 predict_window = "candle"; 
 high_offset = "none";
 low_offset = "none";
-train_window_start = 10c;
+train_window_start = 5c;
 train_window_stop = 300c;
-train_window_step = 20%;
+train_window_step = 15c;
 
-slope_long_start = 0%;
-slope_long_stop = 0.5%;
-slope_long_step = 0.05%;
-slope_short_start = 0%;
-slope_short_stop = 0.5%;
-slope_short_step = 0.05%;
+slope_long_start = 0n;
+slope_long_stop = 20n;
+slope_long_step = 2n;
+slope_short_start = 0n;
+slope_short_stop = 20n;
+slope_short_step = 2n;
 
-predict_window_support = "day";
-predict_window_resistance = "day";
+predict_window_support = "week";
+predict_window_resistance = "week";
 train_window_support_start = 300c;
 train_window_support_stop = 2000c;
 train_window_support_step = 100c;
@@ -125,7 +121,7 @@ log("channel_width_stop_=;" + channel_width_stop);
 log("channel_width_step_=;" + channel_width_step);
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_strategy.aql");
+import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib.aql");
 
 best_equity = 0p;
 best_train_window = 0c;
@@ -153,18 +149,15 @@ count2 = 0i;
 		..[my_train_window <= train_window_stop]
 		{
 			log("test_starting_history...;count=;" + count2 + "." + count1 + "." + count
-				+ ";start_time=;" + start_time + ";end_time=;" + end_time + ";day_start_time=;" + day_start_time
 				+ ";equity=;" + equity + ";account=;" + account
-				+ ";start_time=;" + start_time + ";end_time=;" + end_time + ";day_start_time=;" + day_start_time
 				+ ";train_window=;" + my_train_window + ";train_window_support=;" + my_train_window_support 
 				+ ";my_channel_width=;" + my_channel_width);
 		
-			//log.level = -1i;
+			log.level = -1i;
 			..[candles.is_calculated != 1n] 
 			{
-				LR_strategy(
+				LR_strategy_w_adaptive_MAE(
 					lots, expiration_time,
-					start_time, end_time, day_start_time,
 					predict_window, my_train_window,
 					high_offset, low_offset,
 					my_slope_long_start, my_slope_short_start,
@@ -183,7 +176,7 @@ count2 = 0i;
 				best_equity = best_equity << equity <= best_equity
 			};
 		
-			//log.level = 0i;
+			log.level = 0i;
 			log("test_history_completed;count=;" + count2 + "." + count1 + "." + count 
 				+ ";equity=;" + equity + ";account=;" + account 
 				+ ";train_window=;" + my_train_window + ";train_window_support=;" + my_train_window_support 
