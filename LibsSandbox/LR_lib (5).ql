@@ -683,7 +683,12 @@ LR_strategy_long_condition() :=
 		|
 			ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[offset] > 0n
 		)
-		//& close[-1c] > (LR_sup = ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[-1c])
+		& ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] > slope_long_level		
+		& (
+			close[-1c] > close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] > ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
+			|
+			close[-1c] < close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] < ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
+		)
 		& (ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
 			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width
 	)
@@ -715,18 +720,15 @@ LR_strategy_long_SlopeLevel(
 	day_start_time	// Start time of the day trading session
 ) :=
 {
-	long(lots) << 
-		LR_strategy_long_condition()
-		& ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] > slope_long_level
-	;
+	long(lots) << LR_strategy_long_condition();
 			
 	nextSLlong_index = (find_min_price_index(train_window) - 1c);
 	//nextSLlong = (low[nextSLlong_index] + 1p * (slope_long = slope_long_start) * (-nextSLlong_index / 1c));
-	nextSLlong = ind("LinearRegression", "line", "low", "once", "low", candle.time[nextSLlong_index], candle.time);
-	slope_long = ind("LinearRegression", "slope", "low", "once", "low", candle.time[nextSLlong_index], candle.time);
+	nextSLlong = ind("LinearRegression", "line", "low", "once", "low", candle.time[nextSLlong_index-1c], candle.time[-1c]);
+	slope_long = ind("LinearRegression", "slope", "low", "once", "low", candle.time[nextSLlong_index-1c], candle.time[-1c]);
 	log("long_lr_break_open_following;pos.price_=;" + pos.price + ";account_=;" + account 
-		+ ";start_time=;" + candle.time[nextSLlong_index] + ";start_low=;" + low[nextSLlong_index] 
-		+ ";nextSLlong_time=;" + candle.time + ";nextSLlong=;" + nextSLlong + ";slope_long=;" + slope_long) << account > my_account;
+		+ ";start_time=;" + candle.time[nextSLlong_index-1c] + ";start_low=;" + low[nextSLlong_index-1c] 
+		+ ";nextSLlong_time=;" + candle.time[-1c] + ";nextSLlong=;" + nextSLlong + ";slope_long=;" + slope_long) << account > my_account;
 	~
 };
 
@@ -744,7 +746,12 @@ LR_strategy_short_condition() :=
 		|
 			ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[offset] < 0n
 		)
-		//& close[-1c] < (LR_sup = ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
+		& ind("LinearRegression", "slope", "low", predict_window, high_offset, train_window)[-1c] < slope_short_level
+		& (
+			close[-1c] > close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] > ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
+			|
+			close[-1c] < close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] < ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
+		)
 		& (ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
 			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width
 	)
@@ -776,18 +783,15 @@ LR_strategy_short_SlopeLevel(
 	day_start_time	// Start time of the day trading session
 ) :=
 {			
-	short(lots) << 
-		LR_strategy_short_condition()
-		& ind("LinearRegression", "slope", "low", predict_window, high_offset, train_window)[-1c] < slope_short_level
-	;
+	short(lots) << LR_strategy_short_condition();
 			
 	nextSLshort_index = (find_max_price_index(train_window) - 1c);
 	//nextSLshort = (high[nextSLshort_index] + 1p * (slope_short = slope_short_start) * (-nextSLshort_index / 1c));
-	nextSLshort = ind("LinearRegression", "line", "high", "once", "high", candle.time[nextSLshort_index], candle.time);
-	slope_short = ind("LinearRegression", "slope", "high", "once", "high", candle.time[nextSLshort_index], candle.time);
+	nextSLshort = ind("LinearRegression", "line", "high", "once", "high", candle.time[nextSLshort_index-1c], candle.time[-1c]);
+	slope_short = ind("LinearRegression", "slope", "high", "once", "high", candle.time[nextSLshort_index-1c], candle.time[-1c]);
 	log("short_lr_break_open_following;pos.price_=;" + pos.price + ";account_=;" + account 
-		+ ";start_time=;" + candle.time[nextSLshort_index] + ";start_high=;" + high[nextSLshort_index] 
-		+ ";nextSLshort_time=;" + candle.time + ";nextSLshort=;" + nextSLshort + ";slope_short=;" + slope_short) << account < my_account;
+		+ ";start_time=;" + candle.time[nextSLshort_index-1c] + ";start_high=;" + high[nextSLshort_index-1c] 
+		+ ";nextSLshort_time=;" + candle.time[-1c] + ";nextSLshort=;" + nextSLshort + ";slope_short=;" + slope_short) << account < my_account;
 	~
 };
 

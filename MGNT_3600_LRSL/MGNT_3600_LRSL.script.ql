@@ -71,9 +71,9 @@ slope_long_level = -1.5n;
 slope_short_level = 1n;
 
 predict_window_support = "week";
-train_window_support = 800c;
+train_window_support = 1834c;
 predict_window_resistance = "week";
-train_window_resistance = 800c;
+train_window_resistance = 1834c;
 
 channel_width = /*950*/0p;
 // --- parameters -----------------------------------------------------------------------------------------
