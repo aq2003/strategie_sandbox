@@ -76,6 +76,7 @@
 // +++ parameters -----------------------------------------------------------------------------------------
 lots = 1l;
 expiration_time = 15:00_15.12.24;
+day_start_time = 09:00;
 	
 predict_window = "candle"; 
 high_offset = "none";
@@ -119,6 +120,17 @@ Test_LR_strategy_SlopeLevel = "%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imi
 
 import(Test_LR_strategy_SlopeLevel);
 
+best_equity = 0p;
+best_max_equity = 0p;
+best_train_window = 0c;
+best_train_window_support = 0c;
+best_slope_long = 0n;
+best_slope_short = 0n;
+best_slope_long_level = 0n;
+best_slope_short_level = 0n;
+best_channel_width = 0p;
+
+log("1st_turn");
 Test_LR_strategy_SlopeLevel(
 	lots, // = 1l;
 	expiration_time, // = 15:00_15.12.23;
@@ -128,6 +140,51 @@ Test_LR_strategy_SlopeLevel(
 	low_offset, // = "none";
 	train_window_start, // = 25c;
 	train_window_stop, // = 300c;
+	train_window_step, // = 20%;
+
+	slope_long_stop, // = 0n;
+	slope_long_stop, // = 20n;
+	slope_long_step, // = 2n;
+	slope_short_stop, // = 0n;
+	slope_short_stop, // = 20n;
+	slope_short_step, // = 2n;
+
+	slope_long_level_start, // = -10n;
+	slope_long_level_start, // = 0n;
+	slope_long_level_step, // = 1n;
+	slope_short_level_stop, // = 10n;
+	slope_short_level_stop, // = 0n;
+	slope_short_level_step, // = -1n;
+
+	predict_window_support, // = "week";
+	predict_window_resistance, // = "week";
+	train_window_support_start, // = 300c;
+	train_window_support_stop, // = 2000c;
+	train_window_support_step, // = 20%;
+	train_window_resistance_start, // = 300c;
+	train_window_resistance_stop, // = 2000c;
+	train_window_resistance_step, // = 20%;
+
+	channel_width_start, // = 0p;
+	channel_width_start, // = 300p;
+	channel_width_step, // = 50p;
+	
+	"best_equity", // target_type := ("best_equity", "equity_closest_to_max_equity")
+	
+	day_start_time
+);
+
+log("2nd_turn");
+
+Test_LR_strategy_SlopeLevel(
+	lots, // = 1l;
+	expiration_time, // = 15:00_15.12.23;
+	
+	predict_window, // = "candle"; 
+	high_offset, // = "none";
+	low_offset, // = "none";
+	best_train_window, // = 25c;
+	best_train_window, // = 300c;
 	train_window_step, // = 20%;
 
 	slope_long_start, // = 0n;
@@ -146,16 +203,18 @@ Test_LR_strategy_SlopeLevel(
 
 	predict_window_support, // = "week";
 	predict_window_resistance, // = "week";
-	train_window_support_start, // = 300c;
-	train_window_support_stop, // = 2000c;
+	best_train_window_support, // = 300c;
+	best_train_window_support, // = 2000c;
 	train_window_support_step, // = 20%;
-	train_window_resistance_start, // = 300c;
-	train_window_resistance_stop, // = 2000c;
+	best_train_window_support, // = 300c;
+	best_train_window_support, // = 2000c;
 	train_window_resistance_step, // = 20%;
 
 	channel_width_start, // = 0p;
 	channel_width_stop, // = 300p;
 	channel_width_step, // = 50p;
 	
-	target_type // target_type := ("best_equity", "equity_closest_to_max_equity")
+	"equity_closest_to_max_equity", // target_type := ("best_equity", "equity_closest_to_max_equity")
+	
+	day_start_time
 )

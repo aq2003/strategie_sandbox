@@ -74,8 +74,9 @@
 // Created 18.09.2020 9:56:34
 
 // +++ parameters -----------------------------------------------------------------------------------------
-lots = 1l;
+lots = 100000p;
 expiration_time = 15:00_15.12.24;
+day_start_time = 10:00;
 	
 predict_window = "candle"; 
 high_offset = "none";
