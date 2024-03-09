@@ -81,9 +81,9 @@ day_start_time = 09:00;
 predict_window = "candle"; 
 high_offset = "none";
 low_offset = "none";
-train_window_start = 100c;
+train_window_start = 50c;
 train_window_stop = 300c;
-train_window_step = 20%;
+train_window_step = 10%;
 
 slope_long_start = 0n;
 slope_long_stop = -2n;
@@ -92,12 +92,12 @@ slope_short_start = 0n;
 slope_short_stop = 2n;
 slope_short_step = 2n;
 
-slope_long_level_start = -20n;
+slope_long_level_start = -5n;
 slope_long_level_stop = 0n;
-slope_long_level_step = 2n;
-slope_short_level_start = 20n;
-slope_short_level_stop = 0n;
-slope_short_level_step = -2n;
+slope_long_level_step = 0.5n;
+slope_short_level_start = 0n;
+slope_short_level_stop = 5n;
+slope_short_level_step = 0.5n;
 
 predict_window_support = "week";
 predict_window_resistance = "week";
