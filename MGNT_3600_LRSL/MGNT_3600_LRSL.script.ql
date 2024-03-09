@@ -61,19 +61,19 @@ expiration_time = 15:00_21.12.24;
 day_start_time = 10:00;
 
 predict_window = "candle"; 
-train_window = 158c;
+train_window = 98c;
 high_offset = "none";
 low_offset = "none";
 
 slope_long_start = 0n;
 slope_short_start = 0n;
-slope_long_level = -1.5n;
-slope_short_level = 1n;
+slope_long_level = -3.5n;
+slope_short_level = 2n;
 
 predict_window_support = "week";
-train_window_support = 1834c;
+train_window_support = 800c;
 predict_window_resistance = "week";
-train_window_resistance = 1834c;
+train_window_resistance = 800c;
 
 channel_width = /*950*/0p;
 // --- parameters -----------------------------------------------------------------------------------------
