@@ -61,21 +61,22 @@
 // +++ parameters -----------------------------------------------------------------------------------------
 lots = 1l;
 expiration_time = 15:00_21.12.24;
+day_start_time = 09:00;
 
 predict_window = "candle"; 
-train_window = 144c;
+train_window = 118c;
 high_offset = "none";
 low_offset = "none";
 
 slope_long_start = 0n;
 slope_short_start = 0n;
-slope_long_level = -5n;
-slope_short_level = 5n;
+slope_long_level = -2.5n;
+slope_short_level = 0n;
 
 predict_window_support = "week";
-train_window_support = 518c;
+train_window_support = 1834c;
 predict_window_resistance = "week";
-train_window_resistance = 518c;
+train_window_resistance = 1834c;
 
 channel_width = /*950*/0p;
 // --- parameters -----------------------------------------------------------------------------------------
@@ -90,7 +91,8 @@ LR_strategy_SlopeLevel(
 			slope_long_level, slope_short_level,
 			predict_window_support, train_window_support,
 			predict_window_resistance, train_window_resistance,
-			channel_width
+			channel_width,
+			day_start_time
 		);
 
 log("expiration_stop");
