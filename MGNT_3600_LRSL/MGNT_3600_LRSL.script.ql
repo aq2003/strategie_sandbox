@@ -68,12 +68,12 @@ low_offset = "none";
 slope_long_start = 0n;
 slope_short_start = 0n;
 slope_long_level = -3.5n;
-slope_short_level = 2n;
+slope_short_level = 0n;
 
 predict_window_support = "week";
-train_window_support = 800c;
+train_window_support = 584c;
 predict_window_resistance = "week";
-train_window_resistance = 800c;
+train_window_resistance = 584c;
 
 channel_width = /*950*/0p;
 // --- parameters -----------------------------------------------------------------------------------------
