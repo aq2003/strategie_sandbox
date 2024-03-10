@@ -111,7 +111,9 @@ Test_LR_strategy_SlopeLevel(
 	
 	target_type, // target_type := ("best_equity", "equity_closest_to_max_equity")
 	
-	day_start_time //= 10:00;
+	day_start_time, //= 10:00;
+	
+	base_log_level  // "Error"
 ) :=
 {
 	log("Test_LR_strategy_SlopeLevel_started");
@@ -285,7 +287,8 @@ Test_LR_strategy_SlopeLevel(
 					+ ";my_channel_width=;" + my_channel_width);
 		
 					real_log_level = log.level;
-					log.level = "Error";
+					//log.level = "Error";
+					log.level = base_log_level;
 					..[candles.is_calculated != 1n] 
 					{
 						// +++ History loop
