@@ -347,10 +347,11 @@ Test_LR_strategy_SlopeLevel(
 					+ ";my_channel_width=;" + my_channel_width
 					);
 	
-					reset_history();
 					my_train_window += train_window_step;
 			
 					count += 1i;
+					
+					reset_history()
 					// --- History turn
 				};
 				// --- train_window loop
