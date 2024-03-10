@@ -338,6 +338,10 @@ Test_LR_strategy_SlopeLevel(
 					+ ";best_slope_long=;" + best_slope_long + ";best_slope_short=;" + best_slope_short 
 					+ ";best_slope_long_level=;" + best_slope_long_level + ";best_slope_short_level=;" + best_slope_short_level 
 					+ ";best_channel_width=;" + best_channel_width
+					+ ";train_window=;" + my_train_window + ";train_window_support=;" + my_train_window_support 
+					+ ";slope_long=;" + my_slope_long + ";slope_short=;" + my_slope_short 
+					+ ";slope_long_level=;" + my_slope_long_level + ";slope_short_level=;" + my_slope_short_level 
+					+ ";my_channel_width=;" + my_channel_width
 					);
 	
 					reset_history();
