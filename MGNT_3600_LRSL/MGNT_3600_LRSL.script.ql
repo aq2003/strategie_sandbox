@@ -78,7 +78,7 @@ train_window_resistance = 777c;
 channel_width = /*950*/0p;
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib (5).aql");
+import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\_LibsSandbox\LR_lib (5).aql");
 
 LR_strategy_SlopeLevel(
 			lots, expiration_time,
