@@ -676,22 +676,36 @@ LR_strategy_long_condition() :=
 	result = 0n;
 	offset = LR_strategy_condition_start_time();
 	result = (
-		time < expiration_time & account == 0l
-		& close[offset] #^ (LR = ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset])
-		& (
-			close[offset] < (LR_sup = ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[offset])
+		// time & account
+		(cond0 = (time < expiration_time & account == 0l))
+		// Main condition - close crossed LR_high
+		& (cond1 = (close[offset] #^ (LR_hh = ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset])))
+		// close < resistance_line | support_slope > 0
+		& (cond2 = (
+			close[offset] < (LR_lh = ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[offset])
 		|
-			ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[offset] > 0n
-		)
-		& ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] > slope_long_level		
-		& (
-			close[-1c] > close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] > ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
-			|
-			close[-1c] < close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] < ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
-		)
-		& (ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
-			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width
-	)
+			(LR_sl = (ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[offset])) > 0n
+		))
+		// line_slope > slope_long_level
+		& (cond3 = ((LR_sh = (ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c])) > slope_long_level))		
+		& (cond4 = (
+			//close[-1c] > close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] > (LR_sh_o = (ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]))
+			//|
+			close[-1c] < close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] < (LR_sh_o = (ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]))
+		))
+		// resistance_line - support_line > channel_width
+		& (cond5 = ((LR_chan = (ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
+			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support))) > channel_width))
+	);
+	
+	/*log("LR_strategy_long_condition;result=;" + result + ";offset=;" + offset 
+		+ ";cond0=;" + cond0 
+		+ ";cond1=;" + cond1 + ";close[offset]=;" + close[offset] + ";LR_hh=;" + LR_hh
+		+ ";cond2=;" + cond2 + ";LR_lh=;" + LR_lh + ";LR_sl=;" + LR_sl
+		+ ";cond3=;" + cond3 + ";LR_sh=;" + LR_sh
+		+ ";cond4=;" + cond4 + ";close[-1c]=;" + close[-1c] + ";close[-train_window]=;" + close[-train_window] + ";LR_sh=;" + LR_sh + ";LR_sh_o=;" + LR_sh_o
+		+ ";cond5=;" + cond5 + ";close[-1c]=;" + close[-1c] + ";LR_chan=;" + LR_chan + ";channel_width=;" + channel_width
+		)*/
 };
 
 // A service method of LR_strategy_short family.
