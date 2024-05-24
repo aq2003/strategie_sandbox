@@ -74,7 +74,10 @@
 // Created 18.09.2020 9:56:34
 
 // +++ parameters -----------------------------------------------------------------------------------------
-lots = 100000p;
+safety_stock = 5%;	// Safety stock in percents to the equity
+risk_L = 17%;		// Risk rate in percents for long positions
+risk_S = 17%;		// Risk rate in percents for short positions
+
 expiration_time = 15:00_15.12.24;
 day_start_time = 10:00;
 base_log_level = "Error";
@@ -87,18 +90,18 @@ train_window_stop = 300c;
 train_window_step = 10%;
 
 slope_long_start = 0n;
-slope_long_stop = -2n;
-slope_long_step = -2n;
+slope_long_stop = 0n;
+slope_long_step = 0n;
 slope_short_start = 0n;
-slope_short_stop = 2n;
-slope_short_step = 2n;
+slope_short_stop = 0n;
+slope_short_step = 0n;
 
-slope_long_level_start = -5n;
+slope_long_level_start = -0.8n;
 slope_long_level_stop = 0n;
-slope_long_level_step = 0.5n;
+slope_long_level_step = 0.08n;
 slope_short_level_start = 0n;
-slope_short_level_stop = 5n;
-slope_short_level_step = 0.5n;
+slope_short_level_stop = 0.8n;
+slope_short_level_step = 0.08n;
 
 predict_window_support = "week";
 predict_window_resistance = "week";
@@ -113,13 +116,13 @@ channel_width_start = 0p;
 channel_width_stop = 300p;
 channel_width_step = 50p;
 
-// target_type := ("best_equity", "equity_closest_to_max_equity")
-target_type = "equity_closest_to_max_equity";
+// target_type := ("best_equity" || "equity_closest_to_max_equity")
+target_type = "best_equity";
 // --- parameters -----------------------------------------------------------------------------------------
 		
-Test_LR_strategy_SlopeLevel = "%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\Test_LR_strategy_SlopeLevel.aql";
+Test_LR_strategy_SlopeLevel_path = "%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\Test_LR_strategy_SlopeLevel_AdaptiveLots.aql";
 
-import(Test_LR_strategy_SlopeLevel);
+import(Test_LR_strategy_SlopeLevel_path);
 
 best_equity = 0p;
 best_max_equity = 0p;
@@ -132,8 +135,10 @@ best_slope_short_level = 0n;
 best_channel_width = 0p;
 
 log("1st_turn");
-Test_LR_strategy_SlopeLevel(
-	lots, // = 1l;
+Test_LR_strategy_SlopeLevel_AdaptiveLots(
+	safety_stock,	// Safety stock in percents to the equity
+	risk_L,		// Risk rate in percents for long positions
+	risk_S,		// Risk rate in percents for short positions
 	expiration_time, // = 15:00_15.12.23;
 	
 	predict_window, // = "candle"; 
@@ -179,8 +184,10 @@ Test_LR_strategy_SlopeLevel(
 
 log("2nd_turn");
 
-Test_LR_strategy_SlopeLevel(
-	lots, // = 1l;
+Test_LR_strategy_SlopeLevel_AdaptiveLots(
+	safety_stock,	// Safety stock in percents to the equity
+	risk_L,		// Risk rate in percents for long positions
+	risk_S,		// Risk rate in percents for short positions
 	expiration_time, // = 15:00_15.12.23;
 	
 	predict_window, // = "candle"; 
@@ -221,3 +228,4 @@ Test_LR_strategy_SlopeLevel(
 	
 	day_start_time
 )
+

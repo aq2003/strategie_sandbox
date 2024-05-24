@@ -63,7 +63,7 @@
 
 // +++ parameters -----------------------------------------------------------------------------------------
 lots = 100000p;
-expiration_time = 15:00_15.12.22;
+expiration_time = 15:00_15.12.24;
 	
 predict_window = "candle"; 
 train_window = 35c;

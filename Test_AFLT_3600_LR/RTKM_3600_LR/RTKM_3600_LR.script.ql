@@ -1,14 +1,20 @@
-// 11.02.2024 17:13:07 Test_VKH4_900_LR ql script
-// Created 11.02.2024 17:13:07
+// 22.05.2024 18:47:14 RTKM_3600_LR ql script
+// Created 22.05.2024 18:47:14
 
-// 27.01.2024 10:50:24 Test_SRH4_900_LR ql script
-// Created 27.01.2024 10:50:24
+// 16.03.2024 12:11:04 Test_AFLT_3600_LR ql script
+// Created 16.03.2024 12:11:04
 
-// 07.10.2023 13:38:39 Test_SRZ3_900_LR ql script
-// Created 07.10.2023 13:38:39
+// 24.12.2023 20:18:35 Test_MGNT_3600_LR ql script
+// Created 24.12.2023 20:18:35
 
-// 14.08.2023 10:40:38 Test_SRU3_900_LR ql script
-// Created 14.08.2023 10:40:38
+// 10.12.2023 11:09:39 Test_MNZ3_3600_LR3 ql script
+// Created 10.12.2023 11:09:39
+
+// 25.11.2023 10:50:28 Test_MNZ3_900_LR ql script
+// Created 25.11.2023 10:50:28
+
+// 07.10.2023 19:33:19 Test_GZZ3_900_LR ql script
+// Created 07.10.2023 19:33:19
 
 // 13.01.2023 8:16:03 Test_GZH3_900_LR ql script
 // Created 13.01.2023 8:16:03
@@ -74,9 +80,12 @@
 // Created 18.09.2020 9:56:34
 
 // +++ parameters -----------------------------------------------------------------------------------------
-lots = 1l;
+safety_stock = 5%;	// Safety stock in percents to the equity
+risk_L = 25%;		// Risk rate in percents for long positions
+risk_S = 25%;		// Risk rate in percents for short positions
+
 expiration_time = 15:00_15.12.24;
-day_start_time = 09:00;
+day_start_time = 10:00;
 base_log_level = "Error";
 	
 predict_window = "candle"; 
@@ -87,24 +96,24 @@ train_window_stop = 300c;
 train_window_step = 10%;
 
 slope_long_start = 0n;
-slope_long_stop = -2n;
-slope_long_step = -2n;
+slope_long_stop = 0n;
+slope_long_step = 0n;
 slope_short_start = 0n;
-slope_short_stop = 2n;
-slope_short_step = 2n;
+slope_short_stop = 0n;
+slope_short_step = 0n;
 
-slope_long_level_start = -5n;
+slope_long_level_start = -0.18n;
 slope_long_level_stop = 0n;
-slope_long_level_step = 0.5n;
+slope_long_level_step = 0.018n;
 slope_short_level_start = 0n;
-slope_short_level_stop = 5n;
-slope_short_level_step = 0.5n;
+slope_short_level_stop = 0.18n;
+slope_short_level_step = 0.018n;
 
 predict_window_support = "week";
 predict_window_resistance = "week";
 train_window_support_start = 300c;
 train_window_support_stop = 2000c;
-train_window_support_step = 20%;
+train_window_support_step = 10%;
 train_window_resistance_start = 300c;
 train_window_resistance_stop = 2000c;
 train_window_resistance_step = 10%;
@@ -117,9 +126,9 @@ channel_width_step = 50p;
 target_type = "best_equity";
 // --- parameters -----------------------------------------------------------------------------------------
 		
-Test_LR_strategy_SlopeLevel = "%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\Test_LR_strategy_SlopeLevel.aql";
+Test_LR_strategy_SlopeLevel_path = "%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\Test_LR_strategy_SlopeLevel_AdaptiveLots.aql";
 
-import(Test_LR_strategy_SlopeLevel);
+import(Test_LR_strategy_SlopeLevel_path);
 
 best_equity = 0p;
 best_max_equity = 0p;
@@ -132,8 +141,10 @@ best_slope_short_level = 0n;
 best_channel_width = 0p;
 
 log("1st_turn");
-Test_LR_strategy_SlopeLevel(
-	lots, // = 1l;
+Test_LR_strategy_SlopeLevel_AdaptiveLots(
+	safety_stock,	// Safety stock in percents to the equity
+	risk_L,		// Risk rate in percents for long positions
+	risk_S,		// Risk rate in percents for short positions
 	expiration_time, // = 15:00_15.12.23;
 	
 	predict_window, // = "candle"; 
@@ -179,8 +190,10 @@ Test_LR_strategy_SlopeLevel(
 
 log("2nd_turn");
 
-Test_LR_strategy_SlopeLevel(
-	lots, // = 1l;
+Test_LR_strategy_SlopeLevel_AdaptiveLots(
+	safety_stock,	// Safety stock in percents to the equity
+	risk_L,		// Risk rate in percents for long positions
+	risk_S,		// Risk rate in percents for short positions
 	expiration_time, // = 15:00_15.12.23;
 	
 	predict_window, // = "candle"; 
@@ -219,7 +232,6 @@ Test_LR_strategy_SlopeLevel(
 	
 	"equity_closest_to_max_equity", // target_type := ("best_equity", "equity_closest_to_max_equity")
 	
-	day_start_time,
-	
-	base_log_level
+	day_start_time
 )
+

@@ -74,6 +74,7 @@
 lots = 1l;
 expiration_time = 15:00_15.12.24;
 day_start_time = 09:00;
+base_log_level = "Error";
 	
 predict_window = "candle"; 
 high_offset = "none";
@@ -169,7 +170,9 @@ Test_LR_strategy_SlopeLevel(
 	
 	"best_equity", // target_type := ("best_equity", "equity_closest_to_max_equity")
 	
-	day_start_time
+	day_start_time,
+	
+	base_log_level
 );
 
 log("2nd_turn");
@@ -214,5 +217,7 @@ Test_LR_strategy_SlopeLevel(
 	
 	"equity_closest_to_max_equity", // target_type := ("best_equity", "equity_closest_to_max_equity")
 	
-	day_start_time
+	day_start_time,
+	
+	base_log_level
 )

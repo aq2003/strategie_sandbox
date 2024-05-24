@@ -1,3 +1,6 @@
+// 05.04.2024 17:47:55 SBER_3600_LR ql script
+// Created 05.04.2024 17:47:55
+
 // 17.02.2024 20:03:16 MGNT_3600_LRSL ql script
 // Created 17.02.2024 20:03:16
 
@@ -56,18 +59,25 @@
 // Created 18.09.2020 9:56:34
 
 // +++ parameters -----------------------------------------------------------------------------------------
-lots = 1000000p;
+imitator.commission = 0.056%;
+imitator.credit = 16.35%;
+
+lots = 200000p;
+safety_stock = 5%;	// Safety stock in percents to the equity
+risk_L = 17%;		// Risk rate in percents for long positions
+risk_S = 17%;		// Risk rate in percents for short positions
+
 expiration_time = 15:00_21.12.24;
 day_start_time = 10:00;
 
 predict_window = "candle"; 
-train_window = 191c;
+train_window = 91c;
 high_offset = "none";
 low_offset = "none";
 
 slope_long_start = 0n;
 slope_short_start = 0n;
-slope_long_level = 0n;
+slope_long_level = -5n;
 slope_short_level = 5n;
 
 predict_window_support = "week";
@@ -80,17 +90,22 @@ channel_width = /*950*/0p;
 		
 import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\LR_lib (5).aql");
 
-LR_strategy_SlopeLevel(
-			lots, expiration_time,
-			predict_window, train_window,
-			high_offset, low_offset,
-			slope_long_start, slope_short_start,
-			slope_long_level, slope_short_level,
-			predict_window_support, train_window_support,
-			predict_window_resistance, train_window_resistance,
-			channel_width,
-			day_start_time
-		);
+log("imitator.commission=;" + imitator.commission + ";imitator.credit=;" + imitator.credit);
+
+LR_strategy_SlopeLevel_AdaptiveLots(
+	safety_stock,	// Safety stock in percents to the equity
+	risk_L,		// Risk rate in percents for long positions
+	risk_S,		// Risk rate in percents for short positions
+	expiration_time,
+	predict_window, train_window,
+	high_offset, low_offset,
+	slope_long_start, slope_short_start,
+	slope_long_level, slope_short_level,
+	predict_window_support, train_window_support,
+	predict_window_resistance, train_window_resistance,
+	channel_width,
+	day_start_time
+	);
 
 log("expiration_stop");
 
