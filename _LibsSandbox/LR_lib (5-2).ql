@@ -676,22 +676,36 @@ LR_strategy_long_condition() :=
 	result = 0n;
 	offset = LR_strategy_condition_start_time();
 	result = (
-		time < expiration_time & account == 0l
-		& close[offset] #^ (LR = ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset])
-		& (
-			close[offset] < (LR_sup = ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[offset])
+		// time & account
+		(cond0 = (time < expiration_time & account == 0l))
+		// Main condition - close crossed LR_high
+		& (cond1 = (close[offset] #^ (LR_hh = ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset])))
+		// close < resistance_line | support_slope > 0
+		& (cond2 = (
+			close[offset] < (LR_lh = ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[offset])
 		|
-			ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[offset] > 0n
-		)
-		& ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] > slope_long_level		
-		& (
-			close[-1c] > close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] > ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
-			|
-			close[-1c] < close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] < ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
-		)
-		& (ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
-			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width
-	)
+			(LR_sl = (ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[offset])) > 0n
+		))
+		// line_slope > slope_long_level
+		& (cond3 = ((LR_sh = (ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c])) > slope_long_level))		
+		& (cond4 = (
+			//close[-1c] > close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] > (LR_sh_o = (ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]))
+			//|
+			close[-1c] < close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] < (LR_sh_o = (ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]))
+		))
+		// resistance_line - support_line > channel_width
+		& (cond5 = ((LR_chan = (ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
+			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support))) > channel_width))
+	);
+	
+	/*log("LR_strategy_long_condition;result=;" + result + ";offset=;" + offset 
+		+ ";cond0=;" + cond0 
+		+ ";cond1=;" + cond1 + ";close[offset]=;" + close[offset] + ";LR_hh=;" + LR_hh
+		+ ";cond2=;" + cond2 + ";LR_lh=;" + LR_lh + ";LR_sl=;" + LR_sl
+		+ ";cond3=;" + cond3 + ";LR_sh=;" + LR_sh
+		+ ";cond4=;" + cond4 + ";close[-1c]=;" + close[-1c] + ";close[-train_window]=;" + close[-train_window] + ";LR_sh=;" + LR_sh + ";LR_sh_o=;" + LR_sh_o
+		+ ";cond5=;" + cond5 + ";close[-1c]=;" + close[-1c] + ";LR_chan=;" + LR_chan + ";channel_width=;" + channel_width
+		)*/
 };
 
 // A service method of LR_strategy_short family.
@@ -819,27 +833,30 @@ LR_strategy_SlopeLevel(
 
 	channel_width,	// Width of signal channel to disable trading
 	
-	day_start_time	// Start time of the day trading session
+	day_start_time,	// Start time of the day trading session
+	
+	no_activity_periods
 ) :=
 {
 	log("LR_strategy_SlopeLevel_has_started_and_running...");
 	log("LR_strategy_SlopeLevel_params=("); 
-	log("lots=;" + lots + ","); 
-	log("expiration_time=;" + expiration_time + ",");
-	log("day_start_time=;" + day_start_time + ",");
-	log("predict_window=;" + predict_window + ","); 
-	log("train_window=;" + train_window + ","); 
-	log("high_offset=;" + high_offset + ","); 
-	log("low_offset=;" + low_offset + ",");
-	log("slope_long_start=;" + slope_long_start + ","); 
-	log("slope_short_start=;" + slope_short_start + ","); 
-	log("slope_long_level=;" + slope_long_level + ","); 
-	log("slope_short_level=;" + slope_short_level + ",");
-	log("predict_window_support=;" + predict_window_support + ","); 
-	log("train_window_support=;" + train_window_support + ","); 
-	log("predict_window_resistance=;" + predict_window_resistance + ","); 
-	log("train_window_resistance=;" + train_window_resistance + ",");
-	log("channel_width=;" + channel_width);
+	log("    lots=;" + lots + ","); 
+	log("    expiration_time=;" + expiration_time + ",");
+	log("    day_start_time=;" + day_start_time + ",");
+	log("    predict_window=;" + predict_window + ","); 
+	log("    train_window=;" + train_window + ","); 
+	log("    high_offset=;" + high_offset + ","); 
+	log("    low_offset=;" + low_offset + ",");
+	log("    slope_long_start=;" + slope_long_start + ","); 
+	log("    slope_short_start=;" + slope_short_start + ","); 
+	log("    slope_long_level=;" + slope_long_level + ","); 
+	log("    slope_short_level=;" + slope_short_level + ",");
+	log("    predict_window_support=;" + predict_window_support + ","); 
+	log("    train_window_support=;" + train_window_support + ","); 
+	log("    predict_window_resistance=;" + predict_window_resistance + ","); 
+	log("    train_window_resistance=;" + train_window_resistance + ",");
+	log("    channel_width=;" + channel_width);
+	log("    no_activity_periods=;" + no_activity_periods);
 	log(")");
 	
 	nextSLlong = low;
@@ -969,11 +986,19 @@ LR_strategy_SlopeLevel(
 								//	- ind("LinearRegression", "low", "low", predict_window, "none", train_window)[-1c] >= 2p
 							;
 							log("long_lr_TS;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
-						/*||
-							stop() << time > 10:00 & account > 0l
-							& close[-1c] < absoluteSL
-							;
-							log("long_lr_absoluteSL;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";absoluteSL_=;" + absoluteSL) << account == 0l*/
+						||
+							no_activity = no_activity_periods << account > 0l;
+							log("long_lr_NAS;started_watching;no_activity_periods=;" + no_activity);
+							
+							..[no_activity > 0c]
+							{
+								no_activity -= 1c << close[-1c] < (LRHH = (ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[-1c]));
+								log("long_lr_NAS;no_activity=;" + no_activity + ";close=;" + close + ";LRHH=;" + LRHH);
+								~
+							};
+							
+							stop();
+							log("long_lr_NAS;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age) << account == 0l
 						}
 					}
 				||
@@ -997,11 +1022,19 @@ LR_strategy_SlopeLevel(
 							//	- ind("LinearRegression", "low", "low", predict_window, "none", train_window)[-1c] >= 2p
 						;
 						log("short_lr_TS;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";LRSL_=;" + LRSL) << account == 0l
-					/*||
-						stop() << time > 10:00 & account > 0l
-							& close[-1c] > absoluteSL
-						;
-						log("short_lr_absoluteSL;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age + ";absoluteSL_=;" + absoluteSL) << account == 0l*/
+					||
+						no_activity = no_activity_periods << account < 0l;
+						log("short_lr_NAS;started_watching;no_activity_periods=;" + no_activity);
+							
+						..[no_activity > 0c]
+						{
+							no_activity -= 1c << close[-1c] > (LRLL = (ind("LinearRegression", "low", "low", predict_window, high_offset, train_window)[-1c]));
+							log("short_lr_NAS;no_activity=;" + no_activity + ";close=;" + close + ";LRLL=;" + LRLL);
+							~
+						};
+							
+						stop();
+						log("short_lr_NAS;pos.abs_profit_=;" + pos.abs_profit + ";pos.age_=;" + pos.age) << account == 0l
 					}
 				}
 			}

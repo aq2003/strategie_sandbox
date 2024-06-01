@@ -64,13 +64,13 @@ expiration_time = 15:00_21.12.24;
 day_start_time = 10:00;
 
 predict_window = "candle"; 
-train_window = 191c;
+train_window = 91c;
 high_offset = "none";
 low_offset = "none";
 
 slope_long_start = 0n;
 slope_short_start = 0n;
-slope_long_level = 0n;
+slope_long_level = -5n;
 slope_short_level = 5n;
 
 predict_window_support = "week";
@@ -79,9 +79,11 @@ predict_window_resistance = "week";
 train_window_resistance = 777c;
 
 channel_width = /*950*/0p;
+
+no_activity_periods = 10c;
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\_LibsSandbox\LR_lib (5).aql");
+import("%QTrader_Libs%\LR_lib (5-1).aql");
 
 LR_strategy_SlopeLevel(
 			lots, expiration_time,
@@ -92,7 +94,8 @@ LR_strategy_SlopeLevel(
 			predict_window_support, train_window_support,
 			predict_window_resistance, train_window_resistance,
 			channel_width,
-			day_start_time
+			day_start_time,
+			no_activity_periods
 		);
 
 log("expiration_stop");

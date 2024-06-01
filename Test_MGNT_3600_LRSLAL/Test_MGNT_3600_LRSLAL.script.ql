@@ -1,5 +1,8 @@
-// 17.03.2024 20:36:50 Test_ROSN_3600_LR ql script
-// Created 17.03.2024 20:36:50
+// 26.05.2024 11:11:38 Test_MGNT_3600_LRSLAL ql script
+// Created 26.05.2024 11:11:38
+
+// 16.03.2024 12:11:04 Test_AFLT_3600_LR ql script
+// Created 16.03.2024 12:11:04
 
 // 24.12.2023 20:18:35 Test_MGNT_3600_LR ql script
 // Created 24.12.2023 20:18:35
@@ -99,12 +102,12 @@ slope_short_start = 0n;
 slope_short_stop = 0n;
 slope_short_step = 0n;
 
-slope_long_level_start = -0.5n;
+slope_long_level_start = -6n;
 slope_long_level_stop = 0n;
-slope_long_level_step = 0.05n;
+slope_long_level_step = (slope_long_level_start / -10n);
 slope_short_level_start = 0n;
-slope_short_level_stop = 0.5n;
-slope_short_level_step = 0.05n;
+slope_short_level_stop = 6n;
+slope_short_level_step = (slope_short_level_stop / 10n);
 
 predict_window_support = "week";
 predict_window_resistance = "week";
@@ -123,7 +126,7 @@ channel_width_step = 50p;
 target_type = "best_equity";
 // --- parameters -----------------------------------------------------------------------------------------
 		
-Test_LR_strategy_SlopeLevel_path = "%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\Test_LR_strategy_SlopeLevel_AdaptiveLots.aql";
+Test_LR_strategy_SlopeLevel_path = "%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\_LibsSandbox\Test_LR_strategy_SlopeLevel_AdaptiveLots.aql";
 
 import(Test_LR_strategy_SlopeLevel_path);
 

@@ -1,3 +1,4 @@
+// +++ 1.06.2024 +++ QTrader_stdlib - QTrader standard QL library ++++++++++++++++++++++++++++++++++++++++++++++++++
 // 10.01.2022 8:39:23 SRH2_900_LR ql script
 // Created 10.01.2022 8:39:23
 
@@ -80,6 +81,28 @@ find_max_price(period) :=
 	result = max;
 };
 
+find_max_price_index(period) :=
+{
+	index = 0c;
+	index = -period;
+	res = index;
+	max = high[index];
+	
+	..[index < 0c]
+	{
+		{
+			max = high[index] << high[index] > max;
+			res = index;
+		||
+			max = max << high[index] <= max;
+		};
+		
+		index += 1c;
+	};
+	
+	result = res;
+};
+
 find_min_price(period) :=
 {
 	index = 0c;
@@ -100,9 +123,37 @@ find_min_price(period) :=
 	result = min;
 };
 
+find_min_price_index(period) :=
+{
+	index = 0c;
+	index = -period;
+	res = index;
+	min = low[index];
+	
+	..[index < 0c]
+	{
+		{
+			min = low[index] << low[index] < min;
+			res = index;
+		||
+			min = min << low[index] >= min
+		};
+		
+		index += 1c;
+	};
+	
+	result = res;
+};
+
 // +++ MovingTimeBounds --- 16.04.2023 -----------------------------------------------------------------------------------------------------
 // Moves time bounds which define when the script trading starts and is over
-MovingTimeBounds() :=
+// !!!Under construction!!!
+MovingTimeBounds(
+	my_day_start_time,	// Start time of the day trading session
+	my_day_end_time,	// End time of the day trading session
+	my_night_start_time,	// Start time of the night trading session
+	my_night_end_time	// End time of the night trading session
+) :=
 {
 	result = 0n;
 	
@@ -115,3 +166,6 @@ MovingTimeBounds() :=
 	}
 };
 // --- MovingTimeBounds --------------------------------------------------------------------------------------------------------------------
+
+
+// --- 1.06.2024 --- QTrader_stdlib - QTrader standard QL library --------------------------------------------------
