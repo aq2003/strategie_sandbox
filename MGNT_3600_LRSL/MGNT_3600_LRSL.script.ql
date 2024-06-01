@@ -61,13 +61,13 @@ expiration_time = 15:00_21.12.24;
 day_start_time = 10:00;
 
 predict_window = "candle"; 
-train_window = 191c;
+train_window = 91c;
 high_offset = "none";
 low_offset = "none";
 
 slope_long_start = 0n;
 slope_short_start = 0n;
-slope_long_level = 0n;
+slope_long_level = -5n;
 slope_short_level = 5n;
 
 predict_window_support = "week";

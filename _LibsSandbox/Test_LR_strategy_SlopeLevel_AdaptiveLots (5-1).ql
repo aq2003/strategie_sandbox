@@ -110,6 +110,10 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 	channel_width_start, // = 0p;
 	channel_width_stop, // = 300p;
 	channel_width_step, // = 50p;
+
+	no_activity_start, // = 0c;
+	no_activity_stop, // = 20c;
+	no_activity_step, // = 1c;
 	
 	target_type, // target_type := ("best_equity", "equity_closest_to_max_equity")
 	
@@ -120,52 +124,71 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 {
 	log("Test_LR_strategy_SlopeLevel_AdaptiveLots_started");
 	
-	LR_strategy_SlopeLevel_library = "%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\_LibsSandbox\LR_lib (5).aql";
+	LR_strategy_SlopeLevel_library = "%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\_LibsSandbox\LR_lib (5-1).aql";
 
 	import(LR_strategy_SlopeLevel_library);
 
 	
 	// +++ parameters -----------------------------------------------------------------------------------------
-	log("safety_stock=;" + safety_stock + ","); 
-	log("risk_L=;" + risk_L + ","); 
-	log("risk_S=;" + risk_S + ","); 
-	log("expiration_time=;" + expiration_time);
-	log("day_start_time=;" + day_start_time);
-	log("predict_window=;" + predict_window);
-	log("high_offset=;" + high_offset);
-	log("train_window_start=;" + train_window_start);
-	log("train_window_stop=;" + train_window_stop);
-	log("train_window_step=;" + train_window_step);
+	log("    safety_stock=;" + safety_stock + ","); 
+	log("    risk_L=;" + risk_L + ","); 
+	log("    risk_S=;" + risk_S + ","); 
+	log("    expiration_time=;" + expiration_time);
+	log("    day_start_time=;" + day_start_time);
+	log("    predict_window=;" + predict_window);
+	log("    high_offset=;" + high_offset);
+	log("    train_window_start=;" + train_window_start);
+	log("    train_window_stop=;" + train_window_stop);
+	log("    train_window_step=;" + train_window_step);
 
-	log("slope_long_start=;" + slope_long_start);
-	log("slope_long_stop=;" + slope_long_stop);
-	log("slope_long_step=;" + slope_long_step);
-	log("slope_short_start=;" + slope_short_start);
-	log("slope_short_stop=;" + slope_short_stop);
-	log("slope_short_step=;" + slope_short_step);
+	log("    slope_long_start=;" + slope_long_start);
+	log("    slope_long_stop=;" + slope_long_stop);
+	log("    slope_long_step=;" + slope_long_step);
+	log("    slope_short_start=;" + slope_short_start);
+	log("    slope_short_stop=;" + slope_short_stop);
+	log("    slope_short_step=;" + slope_short_step);
 
-	log("slope_long_level_start=;" + slope_long_level_start);
-	log("slope_long_level_stop=;" + slope_long_level_stop);
-	log("slope_long_level_step=;" + slope_long_level_step);
-	log("slope_short_level_start=;" + slope_short_level_start);
-	log("slope_short_level_stop=;" + slope_short_level_stop);
-	log("slope_short_level_step=;" + slope_short_level_step);
+	log("    slope_long_level_start=;" + slope_long_level_start);
+	log("    slope_long_level_stop=;" + slope_long_level_stop);
+	log("    slope_long_level_step=;" + slope_long_level_step);
+	log("    slope_short_level_start=;" + slope_short_level_start);
+	log("    slope_short_level_stop=;" + slope_short_level_stop);
+	log("    slope_short_level_step=;" + slope_short_level_step);
 
-	log("predict_window_support=;" + predict_window_support);
-	log("predict_window_resistance=;" + predict_window_resistance);
-	log("train_window_support_start=;" + train_window_support_start);
-	log("train_window_support_stop=;" + train_window_support_stop);
-	log("train_window_support_step=;" + train_window_support_step);
-	log("train_window_resistance_start=;" + train_window_resistance_start);
-	log("train_window_resistance_stop=;" + train_window_resistance_stop);
-	log("train_window_resistance_step=;" + train_window_resistance_step);
-	log("channel_width_start=;" + channel_width_start);
-	log("channel_width_stop=;" + channel_width_stop);
-	log("channel_width_step=;" + channel_width_step);
+	log("    predict_window_support=;" + predict_window_support);
+	log("    predict_window_resistance=;" + predict_window_resistance);
+	log("    train_window_support_start=;" + train_window_support_start);
+	log("    train_window_support_stop=;" + train_window_support_stop);
+	log("    train_window_support_step=;" + train_window_support_step);
+	log("    train_window_resistance_start=;" + train_window_resistance_start);
+	log("    train_window_resistance_stop=;" + train_window_resistance_stop);
+	log("    train_window_resistance_step=;" + train_window_resistance_step);
+	log("    channel_width_start=;" + channel_width_start);
+	log("    channel_width_stop=;" + channel_width_stop);
+	log("    channel_width_step=;" + channel_width_step);
+	log("    no_activity_start=;" + no_activity_start);
+	log("    no_activity_stop=;" + no_activity_stop);
+	log("    no_activity_step=;" + no_activity_step);
 	
-	log("target_type=;" + target_type);
+	log("    target_type=;" + target_type);
 	
 	// +++ Checking parameter steps and calculating count of turns	
+	// +++ Checking parameter steps and calculating count of turns - count4
+	count4 = 0i;
+	{
+		no_activity_stop / no_activity_step << no_activity_step == 0c;
+		log("parameter_step_<no_activity_step>_cannot_be_zero");
+	||
+		no_activity_step = no_activity_step << no_activity_step != 0c
+	};
+	my_no_activity = no_activity_start;
+	..[my_no_activity <= no_activity_stop] 
+	{
+		my_no_activity += no_activity_step;
+		count4 += 1i
+	};
+	// --- Checking parameter steps and calculating count of turns - count3
+	
 	// +++ Checking parameter steps and calculating count of turns - count3
 	count3 = 0i;
 	{
@@ -229,8 +252,8 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 		count += 1i
 	};
 	// --- Checking parameter steps and calculating count of turns - count
-	total_count = (count * (count3 / 1i) * (count2 / 1i) * (count1 / 1i));
-	log("there_are_" + count3 + "_*_" + count2 + "_*_" + count1 + "_*_" + count + "_=_" + total_count + "_turns_ongoing");
+	total_count = (count * (count4 / 1i) * (count3 / 1i) * (count2 / 1i) * (count1 / 1i));
+	log("there_are_" + count4 + "_*_" + count3 + "_*_" + count2 + "_*_" + count1 + "_*_" + count + "_=_" + total_count + "_turns_ongoing");
 	// --- Checking parameter steps and calculating count of turns		
 	// --- parameters -----------------------------------------------------------------------------------------
 		
@@ -242,7 +265,6 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 	};
 	best_target = target;
 
-	
 	best_equity = 0p;
 	best_max_equity = 0p;
 	best_min_equity = 0p;
@@ -253,17 +275,23 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 	best_slope_long_level = 0n;
 	best_slope_short_level = 0n;
 	best_channel_width = 0p;
+	best_no_activity = -1c;
 
 	// +++ slope_long_level loop
 	my_slope_long = slope_long_start;
 	my_slope_short = slope_short_start;
 	my_channel_width = channel_width_start;
 	
-	my_slope_long_level = slope_long_level_start;
+	my_no_activity = no_activity_start;
 
+	count4 = 0i;
+	..[my_no_activity <= no_activity_stop]
+	{ // count4
+	my_slope_long_level = slope_long_level_start;
+	
 	count3 = 0i;
 	..[my_slope_long_level <= slope_long_level_stop]
-	{
+	{ // count3
 		// +++ slope_short_level loop
 		my_slope_short_level = slope_short_level_start;
 
@@ -289,7 +317,9 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 					+ ";train_window=;" + my_train_window + ";train_window_support=;" + my_train_window_support 
 					+ ";slope_long=;" + my_slope_long + ";slope_short=;" + my_slope_short 
 					+ ";slope_long_level=;" + my_slope_long_level + ";slope_short_level=;" + my_slope_short_level 
-					+ ";my_channel_width=;" + my_channel_width);
+					+ ";my_channel_width=;" + my_channel_width
+					+ ";my_no_activity=;" + my_no_activity
+					);
 		
 					real_log_level = log.level;
 					//log.level = "Error";
@@ -309,7 +339,8 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 							predict_window_support, my_train_window_support,
 							predict_window_resistance, my_train_window_resistance,
 							my_channel_width,
-							day_start_time
+							day_start_time,
+							my_no_activity
 						);
 						// --- History loop
 					};
@@ -336,13 +367,14 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 						best_slope_long_level = my_slope_long_level;
 						best_slope_short_level = my_slope_short_level;
 						best_channel_width = my_channel_width;
+						best_no_activity = my_no_activity;
 						log("best_target_moved" + ";target_type=;" + target_type + ";target=;" + target + ";best_target=;" + best_target)
 					||
 						best_target = best_target << target <= best_target
 					};
 		
 					log.level = real_log_level;
-					log("test_history_completed;count=;" + count3 + "." + count2 + "." + count1 + "." + count 
+					log("test_history_completed;count=;" + count4 + "." + count3 + "." + count2 + "." + count1 + "." + count 
 					+ ";equity=;" + equity + ";account=;" + account 
 					+ ";best_equity=;" + best_equity 
 					+ ";best_max_equity=;" + best_max_equity
@@ -350,10 +382,7 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 					+ ";best_train_window=;" + best_train_window + ";best_train_window_support=;" + best_train_window_support
 					+ ";best_slope_long=;" + best_slope_long + ";best_slope_short=;" + best_slope_short 
 					+ ";best_slope_long_level=;" + best_slope_long_level + ";best_slope_short_level=;" + best_slope_short_level 
-					+ ";best_channel_width=;" + best_channel_width
-					+ ";best_train_window=;" + best_train_window + ";best_train_window_support=;" + best_train_window_support 
-					+ ";best_slope_long=;" + best_slope_long + ";best_slope_short=;" + best_slope_short 
-					+ ";best_slope_long_level=;" + best_slope_long_level + ";best_slope_short_level=;" + best_slope_short_level 
+					+ ";best_no_activity=;" + best_no_activity
 					+ ";best_channel_width=;" + best_channel_width
 					);
 	
@@ -379,8 +408,12 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 	
 		my_slope_long_level += slope_long_level_step;
 		count3 += 1i;
-	};
+	}; // count3
 	// --- slope_long_level loop
+	
+	my_no_activity += no_activity_step;
+	count4 += 1i;
+	}; // count4
 
 	log("Test_LR_strategy_SlopeLevel_AdaptiveLots_stopped");
 	
@@ -392,10 +425,7 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 			+ ";best_train_window=;" + best_train_window + ";best_train_window_support=;" + best_train_window_support
 			+ ";best_slope_long=;" + best_slope_long + ";best_slope_short=;" + best_slope_short 
 			+ ";best_slope_long_level=;" + best_slope_long_level + ";best_slope_short_level=;" + best_slope_short_level 
-			+ ";best_channel_width=;" + best_channel_width
-			+ ";best_train_window=;" + best_train_window + ";best_train_window_support=;" + best_train_window_support 
-			+ ";best_slope_long=;" + best_slope_long + ";best_slope_short=;" + best_slope_short 
-			+ ";best_slope_long_level=;" + best_slope_long_level + ";best_slope_short_level=;" + best_slope_short_level 
+			+ ";best_no_activity=;" + best_no_activity
 			+ ";best_channel_width=;" + best_channel_width
 			)
 };

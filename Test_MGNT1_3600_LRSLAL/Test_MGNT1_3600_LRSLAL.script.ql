@@ -1,5 +1,8 @@
-// 23.05.2024 20:29:06 Test_CHMF_3600_LR ql script
-// Created 23.05.2024 20:29:06
+// 26.05.2024 14:41:29 Test_MGNT1_3600_LRSLAL ql script
+// Created 26.05.2024 14:41:29
+
+// 26.05.2024 11:11:38 Test_MGNT_3600_LRSLAL ql script
+// Created 26.05.2024 11:11:38
 
 // 16.03.2024 12:11:04 Test_AFLT_3600_LR ql script
 // Created 16.03.2024 12:11:04
@@ -93,7 +96,7 @@ high_offset = "none";
 low_offset = "none";
 train_window_start = 50c;
 train_window_stop = 300c;
-train_window_step = 10%;
+train_window_step = 20%;
 
 slope_long_start = 0n;
 slope_long_stop = 0n;
@@ -102,31 +105,35 @@ slope_short_start = 0n;
 slope_short_stop = 0n;
 slope_short_step = 0n;
 
-slope_long_level_start = -2n;
+slope_long_level_start = -6n;
 slope_long_level_stop = 0n;
-slope_long_level_step = 0.2n;
+slope_long_level_step = (slope_long_level_start / -10n);
 slope_short_level_start = 0n;
-slope_short_level_stop = 2n;
-slope_short_level_step = 0.2n;
+slope_short_level_stop = 6n;
+slope_short_level_step = (slope_short_level_stop / 10n);
 
 predict_window_support = "week";
 predict_window_resistance = "week";
 train_window_support_start = 300c;
 train_window_support_stop = 2000c;
-train_window_support_step = 10%;
+train_window_support_step = 20%;
 train_window_resistance_start = 300c;
 train_window_resistance_stop = 2000c;
-train_window_resistance_step = 10%;
+train_window_resistance_step = 20%;
 
 channel_width_start = 0p;
 channel_width_stop = 300p;
 channel_width_step = 50p;
 
+no_activity_start = 1c;
+no_activity_stop = 15c;
+no_activity_step = 1c;
+
 // target_type := ("best_equity" || "equity_closest_to_max_equity")
 target_type = "best_equity";
 // --- parameters -----------------------------------------------------------------------------------------
 		
-Test_LR_strategy_SlopeLevel_path = "%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\strategie_sandbox\LibsSandbox\Test_LR_strategy_SlopeLevel_AdaptiveLots.aql";
+Test_LR_strategy_SlopeLevel_path = "%OneDrive%\Documents\My Stocks\Stock\HP-HP\QM_Imit\Strategy Sandbox\_LibsSandbox\Test_LR_strategy_SlopeLevel_AdaptiveLots (5-1).aql";
 
 import(Test_LR_strategy_SlopeLevel_path);
 
@@ -139,6 +146,7 @@ best_slope_short = 0n;
 best_slope_long_level = 0n;
 best_slope_short_level = 0n;
 best_channel_width = 0p;
+best_no_activity = 0c;
 
 log("1st_turn");
 Test_LR_strategy_SlopeLevel_AdaptiveLots(
@@ -180,6 +188,10 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 	channel_width_start, // = 0p;
 	channel_width_start, // = 300p;
 	channel_width_step, // = 50p;
+
+	no_activity_start, // = 0c;
+	no_activity_stop, // = 20c;
+	no_activity_step, // = 1c;
 	
 	"best_equity", // target_type := ("best_equity", "equity_closest_to_max_equity")
 	
@@ -189,6 +201,61 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 );
 
 log("2nd_turn");
+
+no_activity_start = 1c;
+no_activity_stop = 20c;
+no_activity_step = 1c;
+
+Test_LR_strategy_SlopeLevel_AdaptiveLots(
+	safety_stock,	// Safety stock in percents to the equity
+	risk_L,		// Risk rate in percents for long positions
+	risk_S,		// Risk rate in percents for short positions
+	expiration_time, // = 15:00_15.12.23;
+	
+	predict_window, // = "candle"; 
+	high_offset, // = "none";
+	low_offset, // = "none";
+	best_train_window, // = 25c;
+	best_train_window, // = 300c;
+	train_window_step, // = 20%;
+
+	slope_long_start, // = 0n;
+	slope_long_stop, // = 20n;
+	slope_long_step, // = 2n;
+	slope_short_start, // = 0n;
+	slope_short_stop, // = 20n;
+	slope_short_step, // = 2n;
+
+	slope_long_level_start, // = -10n;
+	slope_long_level_start, // = 0n;
+	slope_long_level_step, // = 1n;
+	slope_short_level_stop, // = 10n;
+	slope_short_level_stop, // = 0n;
+	slope_short_level_step, // = -1n;
+
+	predict_window_support, // = "week";
+	predict_window_resistance, // = "week";
+	best_train_window_support, // = 300c;
+	best_train_window_support, // = 2000c;
+	train_window_support_step, // = 20%;
+	best_train_window_support, // = 300c;
+	best_train_window_support, // = 2000c;
+	train_window_resistance_step, // = 20%;
+
+	channel_width_start, // = 0p;
+	channel_width_stop, // = 300p;
+	channel_width_step, // = 50p;
+
+	no_activity_start, // = 1c;
+	no_activity_stop, // = 20c;
+	no_activity_step, // = 1c;
+	
+	"best_equity", // target_type := ("best_equity", "equity_closest_to_max_equity")
+	
+	day_start_time
+);
+
+log("3rd_turn");
 
 Test_LR_strategy_SlopeLevel_AdaptiveLots(
 	safety_stock,	// Safety stock in percents to the equity
@@ -229,9 +296,12 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 	channel_width_start, // = 0p;
 	channel_width_stop, // = 300p;
 	channel_width_step, // = 50p;
+
+	best_no_activity, // = 1c;
+	best_no_activity, // = 20c;
+	no_activity_step, // = 1c;
 	
 	"equity_closest_to_max_equity", // target_type := ("best_equity", "equity_closest_to_max_equity")
 	
 	day_start_time
 )
-
