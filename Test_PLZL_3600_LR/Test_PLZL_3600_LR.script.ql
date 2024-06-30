@@ -1,11 +1,8 @@
-// 26.05.2024 14:41:29 Test_MGNT1_3600_LRSLAL ql script
-// Created 26.05.2024 14:41:29
+// 24.06.2024 7:11:49 Test_PLZL_3600_LR ql script
+// Created 24.06.2024 7:11:49
 
-// 26.05.2024 11:11:38 Test_MGNT_3600_LRSLAL ql script
-// Created 26.05.2024 11:11:38
-
-// 16.03.2024 12:11:04 Test_AFLT_3600_LR ql script
-// Created 16.03.2024 12:11:04
+// 15.04.2024 7:22:10 Test_PLZL_3600_LR ql script
+// Created 15.04.2024 7:22:10
 
 // 24.12.2023 20:18:35 Test_MGNT_3600_LR ql script
 // Created 24.12.2023 20:18:35
@@ -89,12 +86,12 @@ risk_S = 17%;		// Risk rate in percents for short positions
 
 expiration_time = 15:00_15.12.24;
 base_log_level = "Error";
-
+	
 day_start_time = 10:00;	// Start time of the day trading session
 day_end_time = 19:00;	// End time of the day trading session
 night_start_time = 19:10;	// Start time of the night trading session
 night_end_time = 23:49;	// End time of the night trading session
-	
+
 predict_window = "candle"; 
 high_offset = "none";
 low_offset = "none";
@@ -102,19 +99,19 @@ train_window_start = 50c;
 train_window_stop = 300c;
 train_window_step = 10%;
 
-slope_long_start = 1.2n;
-slope_long_stop = 1.2n;
-slope_long_step = 2n;
-slope_short_start = -1.2n;
-slope_short_stop = -1.2n;
-slope_short_step = 2n;
-
-slope_long_level_start = -6n;
+slope_long_level_start = -14n;
 slope_long_level_stop = 0n;
 slope_long_level_step = (slope_long_level_start / -10n);
 slope_short_level_start = 0n;
-slope_short_level_stop = 6n;
+slope_short_level_stop = 14n;
 slope_short_level_step = (slope_short_level_stop / 10n);
+
+slope_long_start = (slope_long_level_start / -5n);
+slope_long_stop = slope_long_start;
+slope_long_step = 2n;
+slope_short_start = (-slope_short_level_stop / -5n);
+slope_short_stop = slope_short_start;
+slope_short_step = 2n;
 
 predict_window_support = "week";
 predict_window_resistance = "week";
@@ -129,8 +126,8 @@ channel_width_start = 0p;
 channel_width_stop = 300p;
 channel_width_step = 50p;
 
-no_activity_start = -1c;
-no_activity_stop = -1c;
+no_activity_start = 1c;
+no_activity_stop = 20c;
 no_activity_step = 1c;
 
 // target_type := ("best_equity" || "equity_closest_to_max_equity")
@@ -166,11 +163,11 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 	train_window_stop, // = 300c;
 	train_window_step, // = 20%;
 
-	slope_long_stop, // = 0n;
-	slope_long_stop, // = 20n;
+	slope_long_start, // = 0n;
+	slope_long_start, // = 20n;
 	slope_long_step, // = 2n;
-	slope_short_stop, // = 0n;
-	slope_short_stop, // = 20n;
+	slope_short_start, // = 0n;
+	slope_short_start, // = 20n;
 	slope_short_step, // = 2n;
 
 	slope_long_level_start, // = -10n;
@@ -192,8 +189,8 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 	channel_width_start, // = 0p;
 	channel_width_start, // = 300p;
 	channel_width_step, // = 50p;
-
-	no_activity_start, // = 0c;
+	
+	no_activity_stop, // = 0c;
 	no_activity_stop, // = 20c;
 	no_activity_step, // = 1c;
 	
@@ -209,10 +206,6 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 
 log("2nd_turn");
 
-no_activity_start = 1c;
-no_activity_stop = 20c;
-no_activity_step = 1c;
-
 Test_LR_strategy_SlopeLevel_AdaptiveLots(
 	safety_stock,	// Safety stock in percents to the equity
 	risk_L,		// Risk rate in percents for long positions
@@ -227,10 +220,10 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 	train_window_step, // = 20%;
 
 	slope_long_start, // = 0n;
-	slope_long_stop, // = 20n;
+	slope_long_start, // = 20n;
 	slope_long_step, // = 2n;
 	slope_short_start, // = 0n;
-	slope_short_stop, // = 20n;
+	slope_short_start, // = 20n;
 	slope_short_step, // = 2n;
 
 	slope_long_level_start, // = -10n;
@@ -250,7 +243,7 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 	train_window_resistance_step, // = 20%;
 
 	channel_width_start, // = 0p;
-	channel_width_stop, // = 300p;
+	channel_width_start, // = 300p;
 	channel_width_step, // = 50p;
 
 	no_activity_start, // = 1c;
@@ -283,10 +276,10 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 	train_window_step, // = 20%;
 
 	slope_long_start, // = 0n;
-	slope_long_stop, // = 20n;
+	slope_long_start, // = 20n;
 	slope_long_step, // = 2n;
 	slope_short_start, // = 0n;
-	slope_short_stop, // = 20n;
+	slope_short_start, // = 20n;
 	slope_short_step, // = 2n;
 
 	slope_long_level_start, // = -10n;
@@ -306,7 +299,7 @@ Test_LR_strategy_SlopeLevel_AdaptiveLots(
 	train_window_resistance_step, // = 20%;
 
 	channel_width_start, // = 0p;
-	channel_width_stop, // = 300p;
+	channel_width_start, // = 300p;
 	channel_width_step, // = 50p;
 
 	best_no_activity, // = 1c;

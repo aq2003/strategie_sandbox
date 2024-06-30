@@ -1,3 +1,6 @@
+// 29.06.2024 20:35:33 AFLT2-1_3600_LR ql script
+// Created 29.06.2024 20:35:33
+
 // 20.05.2024 8:15:02 AFLT_3600_LR ql script
 // Created 20.05.2024 8:15:02
 
@@ -84,13 +87,13 @@ channel_width = /*950*/0p;
 
 no_activity_periods = 9c;
 
-day_start_time = 09:00;	// Start time of the day trading session
+day_start_time = 10:00;	// Start time of the day trading session
 day_end_time = 19:00;	// End time of the day trading session
 night_start_time = 19:10;	// Start time of the night trading session
 night_end_time = 23:49;	// End time of the night trading session
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (2).aql");
+import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (2-1).aql");
 
 LR_strategy_SlopeLevel_AdaptiveLots(
 	safety_stock,	// Safety stock in percents to the equity

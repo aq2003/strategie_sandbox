@@ -1,3 +1,6 @@
+// 28.06.2024 21:31:55 Test_MGNT2-1_3600_LRSAL ql script
+// Created 28.06.2024 21:31:55
+
 // 26.05.2024 14:41:29 Test_MGNT1_3600_LRSLAL ql script
 // Created 26.05.2024 14:41:29
 

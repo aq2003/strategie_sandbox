@@ -84,7 +84,7 @@ channel_width = /*950*/0p;
 
 no_activity_periods = 9c;
 
-day_start_time = 09:00;	// Start time of the day trading session
+day_start_time = 10:00;	// Start time of the day trading session
 day_end_time = 19:00;	// End time of the day trading session
 night_start_time = 19:10;	// Start time of the night trading session
 night_end_time = 23:49;	// End time of the night trading session

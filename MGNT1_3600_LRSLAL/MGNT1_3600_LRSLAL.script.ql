@@ -83,8 +83,8 @@ train_window = 81c;
 high_offset = "none";
 low_offset = "none";
 
-slope_long_start = 0n;
-slope_short_start = 0n;
+slope_long_start = 2n;
+slope_short_start = -2n;
 slope_long_level = -6n;
 slope_short_level = 6n;
 
@@ -103,7 +103,7 @@ night_start_time = 19:10;	// Start time of the night trading session
 night_end_time = 23:49;	// End time of the night trading session
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots.aql");
+import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (2).aql");
 
 log("imitator.commission=;" + imitator.commission + ";imitator.credit=;" + imitator.credit);
 
@@ -112,6 +112,12 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 	risk_L,		// Risk rate in percents for long positions
 	risk_S,		// Risk rate in percents for short positions
 	expiration_time,
+	
+	day_start_time,	// Start time of the day trading session
+	day_end_time,	// End time of the day trading session
+	night_start_time,	// Start time of the night trading session
+	night_end_time,	// End time of the night trading session
+	
 	predict_window, train_window,
 	high_offset, low_offset,
 	slope_long_start, slope_short_start,
@@ -121,12 +127,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 	
 	channel_width,	// Width of signal channel to disable trading
 	
-	no_activity_periods,
-	
-	day_start_time,	// Start time of the day trading session
-	day_end_time,	// End time of the day trading session
-	night_start_time,	// Start time of the night trading session
-	night_end_time	// End time of the night trading session
+	no_activity_periods
 	);
 
 log("expiration_stop");

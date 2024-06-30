@@ -100,7 +100,7 @@ night_start_time = 19:10;	// Start time of the night trading session
 night_end_time = 23:49;	// End time of the night trading session
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%QTrader_Libs%\LR_lib (5-1).aql");
+import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots.aql");
 
 log("imitator.commission=;" + imitator.commission + ";imitator.credit=;" + imitator.credit);
 
