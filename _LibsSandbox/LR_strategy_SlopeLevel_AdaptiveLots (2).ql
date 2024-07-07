@@ -76,6 +76,32 @@ CalculateLotsToShort(
 	result = ((equity - equity * safety_stock / risk_S) / risk_S);
 };
 
+// Calculates SL percentage for a long 
+//	safety_stock - 	Safety stock in percents to the equity
+//	risk_L -		Risk rate in percents for short positions
+CalculateSLLong(
+	safety_stock,	// Safety stock in percents to the equity
+	risk_L		// Risk rate in percents for short positions
+) :=
+{
+	result = 0n;
+	
+	result = (safety_stock * risk_L);
+};
+
+// Calculates SL percentage for a short 
+//	safety_stock - 	Safety stock in percents to the equity
+//	risk_S -		Risk rate in percents for short positions
+CalculateSLShort(
+	safety_stock,	// Safety stock in percents to the equity
+	risk_S		// Risk rate in percents for short positions
+) :=
+{
+	result = 0n;
+	
+	result = (safety_stock * risk_S);
+};
+
 // Looking for day start candle to pass 2 canles in the past
 // Is actual only for periods and papers which have an empty candle at the day start
 LR_strategy_condition_start_time() :=
@@ -315,9 +341,13 @@ LR_strategy_long_SlopeLevel_AdaptiveLots(
 	
 	//nextSLlong = (low[nextSLlong_index] + 1p * (slope_long = slope_long_start) * (-nextSLlong_index / 1c));
 	
+	absSLlong = (pos.price - CalculateSLLong(p_safety_stock, p_risk_L));
+	
 	log("long_lr_break_open_following;pos.price=;" + pos.price + ";account=;" + account + ";lots=;" + lots 
 		+ ";start_time=;" + candle.time[nextSLlong_index-1c] + ";start_low=;" + low[nextSLlong_index-1c] 
-		+ ";nextSLlong_time=;" + candle.time[-1c] + ";nextSLlong=;" + nextSLlong + ";slope_long=;" + slope_long) << account > my_account;
+		+ ";nextSLlong_time=;" + candle.time[-1c] + ";nextSLlong=;" + nextSLlong + ";slope_long=;" + slope_long
+		+ ";absSLlong=;" + absSLlong
+	) << account > my_account;
 	~
 };
 
@@ -408,9 +438,13 @@ LR_strategy_short_SlopeLevel_AdaptiveLots(
 	
 	//nextSLshort = (high[nextSLshort_index] + 1p * (slope_short = slope_short_start) * (-nextSLshort_index / 1c));
 	
+	absSLshort = (pos.price + CalculateSLShort(p_safety_stock, p_risk_S));
+	
 	log("short_lr_break_open_following;pos.price=;" + ";account=;" + account + ";lots=;" + lots 
 		+ ";start_time=;" + candle.time[nextSLshort_index-1c] + ";start_high=;" + high[nextSLshort_index-1c] 
-		+ ";nextSLshort_time=;" + candle.time[-1c] + ";nextSLshort=;" + nextSLshort + ";slope_short=;" + slope_short) << account < my_account;
+		+ ";nextSLshort_time=;" + candle.time[-1c] + ";nextSLshort=;" + nextSLshort + ";slope_short=;" + slope_short
+		+ ";absSLshort=;" + absSLshort
+	) << account < my_account;
 	~
 };
 
@@ -482,6 +516,9 @@ import("%QTrader_Libs%\QTrader_LR_stdlib.aql");
 	nextSLshort = high;
 	slope_long = slope_long_start;
 	slope_short = slope_short_start;
+	
+	absSLlong = nextSLlong;
+	absSLshort = nextSLshort;
 
 	{
 		predict_window_type = "candle";
@@ -713,9 +750,18 @@ import("%QTrader_Libs%\QTrader_LR_stdlib.aql");
 							};
 							
 							stop() << (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time);
-;
+
 							log("long_lr_NAS;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";no_activity=;" + no_activity) 
 								<< account == 0l
+						||
+							stop() << account > 0l 
+								& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
+								& low < absSLlong
+							;
+							log(
+								"long_lr_SL;pos.abs_profit=;" + pos.abs_profit + ";pos.profit=;" + pos.profit
+									+ ";pos.age=;" + pos.age + ";absSLlong=;" + absSLlong + ";no_activity=;" + abs(no_activity)
+							) << account == 0l
 						}
 					}
 				||
@@ -766,9 +812,18 @@ import("%QTrader_Libs%\QTrader_LR_stdlib.aql");
 						};
 							
 						stop() << (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time);
-;
+
 						log("short_lr_NAS;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";no_activity=;" + no_activity) 
 							<< account == 0l
+						||
+							stop() << account < 0l 
+								& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
+								& high > absSLshort
+							;
+							log(
+								"short_lr_SL;pos.abs_profit=;" + pos.abs_profit + ";pos.profit=;" + pos.profit
+									+ ";pos.age=;" + pos.age + ";absSLshort=;" + absSLshort + ";no_activity=;" + abs(no_activity)
+							) << account == 0l
 					}
 				}
 			}
