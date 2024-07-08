@@ -86,8 +86,8 @@ train_window = 81c;
 high_offset = "none";
 low_offset = "none";
 
-slope_long_start = 2n;
-slope_short_start = -2n;
+slope_long_start = 1.2n;
+slope_short_start = -1.2n;
 slope_long_level = -6n;
 slope_short_level = 6n;
 
@@ -106,7 +106,7 @@ night_start_time = 19:10;	// Start time of the night trading session
 night_end_time = 23:49;	// End time of the night trading session
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (2-1).aql");
+import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (2).aql");
 
 log("imitator.commission=;" + imitator.commission + ";imitator.credit=;" + imitator.credit);
 
