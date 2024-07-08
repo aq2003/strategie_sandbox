@@ -324,30 +324,38 @@ LR_strategy_long_SlopeLevel_AdaptiveLots(
 	log("long_lr_break_open_following;trying_to_open_long;lots=;" + lots);
 	result = long(lots);
 			
-	nextSLlong_index = (find_min_price_index(p_train_window) - 1c);
+	nextSLlong_index = find_min_price_index(p_train_window);
 	nextSLlong = low[nextSLlong_index];
 	
-	slope_long = ind("LinearRegression", "slope", "low", "once", "low", candle.time[nextSLlong_index-1c], candle.time[-1c]);
+	log("long_lr_break_open_following;dates" + ";nextSLlong_index=;" + nextSLlong_index
+		+ ";start_time=;" + candle.time[nextSLlong_index] + ";start_low=;" + low[nextSLlong_index] 
+		+ ";nextSLlong_time=;" + candle.time[-1c] + ";nextSLlong=;" + nextSLlong + ";slope_long=;" + slope_long);
+		
+	slope_long = ind("LinearRegression", "slope", "low", "once", "low", candle.time[nextSLlong_index - 2c], candle.time[-1c]);
 	
 	{
-		slope_long = slope_long_start << slope_long < slope_long_start;
+		slope_long = slope_long_start << slope_long < slope_long_start /*| nextSLlong_index == -1c*/;
 		nextSLlong += (abs(nextSLlong_index) / 1c * slope_long * 1p);
-		log("long_lr_break_open_following;start_slope" + ";nextSLlong=;" + nextSLlong + ";slope_long=;" + slope_long);
+		log("long_lr_break_open_following;start_slope" 
+			+ ";start_time=;" + candle.time[nextSLlong_index] + ";start_low=;" + low[nextSLlong_index] 
+			+ ";nextSLlong_time=;" + candle.time[-1c] + ";nextSLlong=;" + nextSLlong 
+			+ ";slope_long=;" + slope_long + ";nextSLlong_index=;" + nextSLlong_index
+		);
 	||
-		slope_long = slope_long << slope_long >= slope_long_start;
-		nextSLlong = ind("LinearRegression", "line", "low", "once", "low", candle.time[nextSLlong_index-1c], candle.time[-1c]);
-		log("long_lr_break_open_following;calculated_slope" + ";nextSLlong=;" + nextSLlong + ";slope_long=;" + slope_long);
+		slope_long = slope_long << slope_long >= slope_long_start /*& nextSLlong_index < -1c*/;
+		nextSLlong = ind("LinearRegression", "line", "low", "once", "low", candle.time[nextSLlong_index-2c], candle.time[-1c]);
+		log("long_lr_break_open_following;calculated_slope" 
+			+ ";start_time=;" + candle.time[nextSLlong_index] + ";start_low=;" + low[nextSLlong_index] 
+			+ ";nextSLlong_time=;" + candle.time[-1c] + ";nextSLlong=;" + nextSLlong 
+			+ ";slope_long=;" + slope_long + ";nextSLlong_index=;" + nextSLlong_index
+		);
 	};
 	
 	//nextSLlong = (low[nextSLlong_index] + 1p * (slope_long = slope_long_start) * (-nextSLlong_index / 1c));
 	
-	absSLlong = (pos.price - CalculateSLLong(p_safety_stock, p_risk_L));
-	
 	log("long_lr_break_open_following;pos.price=;" + pos.price + ";account=;" + account + ";lots=;" + lots 
-		+ ";start_time=;" + candle.time[nextSLlong_index-1c] + ";start_low=;" + low[nextSLlong_index-1c] 
-		+ ";nextSLlong_time=;" + candle.time[-1c] + ";nextSLlong=;" + nextSLlong + ";slope_long=;" + slope_long
-		+ ";absSLlong=;" + absSLlong
-	) << account > my_account;
+		+ ";start_time=;" + candle.time[nextSLlong_index] + ";start_low=;" + low[nextSLlong_index] 
+		+ ";nextSLlong_time=;" + candle.time[-1c] + ";nextSLlong=;" + nextSLlong + ";slope_long=;" + slope_long) << account > my_account;
 	~
 };
 
@@ -421,30 +429,38 @@ LR_strategy_short_SlopeLevel_AdaptiveLots(
 	log("short_lr_break_open_following;trying_to_open_short;lots=;" + lots);
 	result = short(lots);
 			
-	nextSLshort_index = (find_max_price_index(p_train_window) - 1c);
+	nextSLshort_index = find_max_price_index(p_train_window);
 	nextSLshort = high[nextSLshort_index];
 	
-	slope_short = ind("LinearRegression", "slope", "high", "once", "high", candle.time[nextSLshort_index-1c], candle.time[-1c]);
+	log("short_lr_break_open_following;dates" + ";nextSLshort_index=;" + nextSLshort_index
+		+ ";start_time=;" + candle.time[nextSLshort_index] + ";start_high=;" + high[nextSLshort_index] 
+		+ ";nextSLshort_time=;" + candle.time[-1c] + ";nextSLshort=;" + nextSLshort + ";slope_short=;" + slope_short);
+		
+	slope_short = ind("LinearRegression", "slope", "high", "once", "high", candle.time[nextSLshort_index - 2c], candle.time[-1c]);
 	
 	{
-		slope_short = slope_short_start << slope_short > slope_short_start;
+		slope_short = slope_short_start << slope_short > slope_short_start /*| nextSLshort_index == -1c*/;
 		nextSLshort += (abs(nextSLshort_index) / 1c * slope_short * 1p);
-		log("short_lr_break_open_following;start_slope" + ";nextSLshort=;" + nextSLshort + ";slope_short=;" + slope_short);
+		log("short_lr_break_open_following;start_slope" 
+			+ ";start_time=;" + candle.time[nextSLshort_index] + ";start_high=;" + high[nextSLshort_index] 
+			+ ";nextSLshort_time=;" + candle.time[-1c] + ";nextSLshort=;" + nextSLshort 
+			+ ";slope_short=;" + slope_short + ";nextSLshort_index=;" + nextSLshort_index
+		);
 	||
-		slope_short = slope_short << slope_short <= slope_short_start;
-		nextSLshort = ind("LinearRegression", "line", "high", "once", "high", candle.time[nextSLshort_index-1c], candle.time[-1c]);
-		log("short_lr_break_open_following;calculated_slope" + ";nextSLshort=;" + nextSLshort + ";slope_short=;" + slope_short);
+		slope_short = slope_short << slope_short <= slope_short_start /*& nextSLshort_index < -1c*/;
+		nextSLshort = ind("LinearRegression", "line", "high", "once", "high", candle.time[nextSLshort_index-2c], candle.time[-1c]);
+		log("short_lr_break_open_following;calculated_slope"
+			+ ";start_time=;" + candle.time[nextSLshort_index] + ";start_high=;" + high[nextSLshort_index] 
+			+ ";nextSLshort_time=;" + candle.time[-1c] + ";nextSLshort=;" + nextSLshort 
+			+ ";slope_short=;" + slope_short + ";nextSLshort_index=;" + nextSLshort_index
+		);
 	};
 	
 	//nextSLshort = (high[nextSLshort_index] + 1p * (slope_short = slope_short_start) * (-nextSLshort_index / 1c));
 	
-	absSLshort = (pos.price + CalculateSLShort(p_safety_stock, p_risk_S));
-	
-	log("short_lr_break_open_following;pos.price=;" + ";account=;" + account + ";lots=;" + lots 
-		+ ";start_time=;" + candle.time[nextSLshort_index-1c] + ";start_high=;" + high[nextSLshort_index-1c] 
-		+ ";nextSLshort_time=;" + candle.time[-1c] + ";nextSLshort=;" + nextSLshort + ";slope_short=;" + slope_short
-		+ ";absSLshort=;" + absSLshort
-	) << account < my_account;
+	log("short_lr_break_open_following;pos.price=;" + pos.price + ";account=;" + account + ";lots=;" + lots 
+		+ ";start_time=;" + candle.time[nextSLshort_index] + ";start_high=;" + high[nextSLshort_index] 
+		+ ";nextSLshort_time=;" + candle.time[-1c] + ";nextSLshort=;" + nextSLshort + ";slope_short=;" + slope_short) << account < my_account;
 	~
 };
 
