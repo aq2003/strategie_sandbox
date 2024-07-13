@@ -593,24 +593,30 @@ import("%QTrader_Libs%\QTrader_LR_stdlib.aql");
 			// Debug
 			old_nextTSlong = nextTSlong;
 			old_slope_long = slope_long;
+			debug_str_l = "debug_moving_nextTSlong";
 			
 			{
-				nextTSlong = my_nextTSlong << my_nextTSlong > nextTSlong;
+				nextTSlong = my_nextTSlong << my_nextTSlong > nextTSlong & my_slope_long >= slope_long;
+				slope_long = my_slope_long;
 				// Debug
-				log("debug_moving_nextTSlong;my_nextTSlong>nextTSlong" + ";my_nextTSlong=;" + my_nextTSlong + ";nextTSlong=;" + old_nextTSlong);
+				debug_str_l += ";my_nextTSlong>nextTSlong";
 			||
 				{
 					slope_long = my_slope_long << my_nextTSlong <= nextTSlong & my_slope_long >= slope_long;
-				// Debug
-				log("debug_moving_nextTSlong;my_slope_long>slope_long" + ";my_slope_long=;" + my_slope_long + ";slope_long=;" + old_slope_long);
+					// Debug
+					debug_str_l += ";my_slope_long>slope_long";
 				||
 					slope_long = slope_long << my_nextTSlong <= nextTSlong & my_slope_long < slope_long;
-				// Debug
-				log("debug_moving_nextTSlong;my_slope_long<slope_long" + ";my_slope_long=;" + my_slope_long + ";slope_long=;" + old_slope_long);
+					// Debug
+					debug_str_l += ";my_slope_long<slope_long";
 				};
 				nextTSlong += (1p * slope_long);
 			};
 					
+			// Debug
+			log(debug_str_l + ";my_nextTSlong=;" + my_nextTSlong + ";old_nextTSlong=;" + old_nextTSlong + ";nextTSlong=;" + nextTSlong
+				+ ";my_slope_long=;" + my_slope_long + ";old_slope_long=;" + old_slope_long + ";slope_long=;" + slope_long
+			);
 			~
 		&&
 			my_nextTSshort = (ind("LinearRegression", "low", "high", predict_window, high_offset, train_window)[-1c]);
@@ -619,24 +625,30 @@ import("%QTrader_Libs%\QTrader_LR_stdlib.aql");
 			// Debug
 			old_nextTSshort = nextTSshort;
 			old_slope_short = slope_short;
+			debug_str_s = "debug_moving_nextTSshort";
 			
 			{
-				nextTSshort = my_nextTSshort << my_nextTSshort < nextTSshort;
+				nextTSshort = my_nextTSshort << my_nextTSshort < nextTSshort & my_slope_short <= slope_short;
+				slope_short = my_slope_short;
 				// Debug
-				log("debug_moving_nextTSshort;my_nextTSshort<nextTSshort" + ";my_nextTSshort=;" + my_nextTSshort + ";nextTSshort=;" + old_nextTSshort);
+				debug_str_s += ";my_nextTSshort<nextTSshort";
 			||
 				{
 					slope_short = my_slope_short << my_nextTSshort >= nextTSshort & my_slope_short <= slope_short;
-				// Debug
-				log("debug_moving_nextTSshort;my_slope_short<slope_short" + ";my_slope_short=;" + my_slope_short + ";slope_short=;" + old_slope_short);
+					// Debug
+					debug_str_s += ";my_slope_short<slope_short";
 				||
 					slope_short = slope_short << my_nextTSshort >= nextTSshort & my_slope_short > slope_short;
-				// Debug
-				log("debug_moving_nextTSshort;my_slope_short>slope_short" + ";my_slope_short=;" + my_slope_short + ";slope_short=;" + old_slope_short);
+					// Debug
+					debug_str_s += ";my_slope_short>slope_short";
 				};
 				nextTSshort += (1p * slope_short);
 			};
 					
+			// Debug
+			log(debug_str_s + ";my_nextTSshort=;" + my_nextTSshort + ";old_nextTSshort=;" + old_nextTSshort + ";nextTSshort=;" + nextTSshort
+				+ ";my_slope_short=;" + my_slope_short + ";old_slope_short=;" + old_slope_short + ";slope_short=;" + slope_short
+			);
 			~
 		}
 	||
