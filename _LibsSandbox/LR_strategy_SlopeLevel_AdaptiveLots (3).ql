@@ -587,7 +587,7 @@ import("%QTrader_Libs%\QTrader_LR_stdlib.aql");
 		
 	||
 		..{
-			my_nextTSlong = (ind("LinearRegression", "low", "high", predict_window, low_offset, train_window)[-1c]);
+			my_nextTSlong = (ind("LinearRegression", "high", "low", predict_window, low_offset, train_window)[-1c]);
 			my_slope_long = (ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c]);
 			
 			// Debug
@@ -613,7 +613,7 @@ import("%QTrader_Libs%\QTrader_LR_stdlib.aql");
 					
 			~
 		&&
-			my_nextTSshort = (ind("LinearRegression", "high", "low", predict_window, high_offset, train_window)[-1c]);
+			my_nextTSshort = (ind("LinearRegression", "low", "high", predict_window, high_offset, train_window)[-1c]);
 			my_slope_short = (ind("LinearRegression", "slope", "high", predict_window, low_offset, train_window)[-1c]);
 			
 			// Debug
