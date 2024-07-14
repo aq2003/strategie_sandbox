@@ -587,75 +587,97 @@ import("%QTrader_Libs%\QTrader_LR_stdlib.aql");
 		
 	||
 		..{
-			my_nextTSlong = (ind("LinearRegression", "high", "low", predict_window, low_offset, train_window)[-1c]);
-			my_slope_long = (ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c]);
-			
 			// Debug
-			old_nextTSlong = nextTSlong;
 			old_slope_long = slope_long;
 			debug_str_l = "debug_moving_nextTSlong";
 			
-			{// >> <> << ><
-				nextTSlong = my_nextTSlong << my_nextTSlong > nextTSlong & my_slope_long >= slope_long; // >>
-				slope_long = my_slope_long;
+			//log(debug_str_l + ";started...");
+			
+			my_slope_long = ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)[-1c];
+			my_nextTSlong = ind("LinearRegression", "high", "low", predict_window, low_offset, train_window)[-1c];
+			div_slope_long = ((my_nextTSlong - ind("LinearRegression", "high", "low", predict_window, low_offset, train_window)[-2c]) / 1p);
+			{
+				slope_long = my_slope_long << my_slope_long > slope_long & my_slope_long > div_slope_long;
 				// Debug
-				debug_str_l += ";my_nextTSlong_>_nextTSlong_&_my_slope_long_>=_slope_long";
+				debug_str_l += ";my_slope_long_the_best"
 			||
-				{
-					slope_long = slope_long << my_nextTSlong > nextTSlong & my_slope_long < slope_long; // ><
-					// Debug
-					debug_str_l += ";my_nextTSlong_>_nextTSlong_&_my_slope_long_<_slope_long";
-				||
-					slope_long = my_slope_long << my_nextTSlong <= nextTSlong & my_slope_long >= slope_long; // <>
-					// Debug
-					debug_str_l += ";my_nextTSlong_<=_nextTSlong_&_my_slope_long_>=_slope_long";
-				||
-					slope_long = slope_long << my_nextTSlong <= nextTSlong & my_slope_long < slope_long; // <<
-					// Debug
-					debug_str_l += ";my_nextTSlong_<=_nextTSlong_&_my_slope_long_<_slope_long";
-				};
-				nextTSlong += (1p * slope_long);
+				slope_long = div_slope_long << div_slope_long > slope_long & div_slope_long > my_slope_long;
+				// Debug
+				debug_str_l += ";div_slope_long_the_best"
+			||
+				slope_long = slope_long << slope_long >= div_slope_long  & slope_long >= my_slope_long;
+				// Debug
+				debug_str_l += ";slope_short_the_best"
+			};
+			
+			// Debug
+			//log(debug_str_l + ";selected...");
+			old_nextTSlong = nextTSlong;
+			
+			calc_nextTSlong = (nextTSlong + 1p * slope_long);
+			
+			{
+				nextTSlong = my_nextTSlong << my_nextTSlong >= calc_nextTSlong;
+				// Debug
+				debug_str_l += ";my_nextTSlong_the_best";
+			||
+				nextTSlong = calc_nextTSlong << calc_nextTSlong > my_nextTSlong;
+				// Debug
+				debug_str_l += ";calc_nextTSlong_the_best";
 			};
 					
 			// Debug
 			log(debug_str_l + ";my_nextTSlong=;" + my_nextTSlong + ";old_nextTSlong=;" + old_nextTSlong + ";nextTSlong=;" + nextTSlong
+				+ ";c_nextTSlong=;" + calc_nextTSlong
 				+ ";my_slope_long=;" + my_slope_long + ";old_slope_long=;" + old_slope_long + ";slope_long=;" + slope_long
+				+ ";div_slope_long=;" + div_slope_long
 			);
 			~
 		&&
-			my_nextTSshort = (ind("LinearRegression", "low", "high", predict_window, high_offset, train_window)[-1c]);
-			my_slope_short = (ind("LinearRegression", "slope", "high", predict_window, low_offset, train_window)[-1c]);
-			
 			// Debug
-			old_nextTSshort = nextTSshort;
 			old_slope_short = slope_short;
 			debug_str_s = "debug_moving_nextTSshort";
 			
-			{// << >> <> ><
-				nextTSshort = my_nextTSshort << my_nextTSshort < nextTSshort & my_slope_short <= slope_short; // <<
-				slope_short = my_slope_short;
+			//log(debug_str_s + ";started...");
+			
+			my_slope_short = ind("LinearRegression", "slope", "high", predict_window, low_offset, train_window)[-1c];
+			my_nextTSshort = (ind("LinearRegression", "low", "high", predict_window, high_offset, train_window)[-1c]);
+			div_slope_short = ((my_nextTSshort - ind("LinearRegression", "low", "high", predict_window, low_offset, train_window)[-2c]) / 1p);
+			{
+				slope_short = my_slope_short << my_slope_short < slope_short & my_slope_short < div_slope_short;
 				// Debug
-				debug_str_s += ";my_nextTSshort_<_nextTSshort_&_my_slope_short_<=_slope_short";
+				debug_str_s += ";my_slope_short_the_best"
 			||
-				{
-					slope_short = slope_short << my_nextTSshort < nextTSshort & my_slope_short > slope_short; // <>
-					// Debug
-					debug_str_s += ";my_nextTSshort_<_nextTSshort_&_my_slope_short_>_slope_short";
-				||
-					slope_short = my_slope_short << my_nextTSshort >= nextTSshort & my_slope_short <= slope_short; // ><
-					// Debug
-					debug_str_s += ";my_nextTSshort_>=_nextTSshort_&_my_slope_short_<=_slope_short";
-				||
-					slope_short = slope_short << my_nextTSshort >= nextTSshort & my_slope_short > slope_short; // >>
-					// Debug
-					debug_str_s += ";my_nextTSshort_>=_nextTSshort_&_my_slope_short_>_slope_short";
-				};
-				nextTSshort += (1p * slope_short);
+				slope_short = div_slope_short << div_slope_short < slope_short & div_slope_short < my_slope_short;
+				// Debug
+				debug_str_s += ";div_slope_short_the_best"
+			||
+				slope_short = slope_short << slope_short <= div_slope_short  & slope_short <= my_slope_short;
+				// Debug
+				debug_str_s += ";slope_short_the_best"
+			};
+			
+			// Debug
+			//log(debug_str_s + ";selected...");
+			old_nextTSshort = nextTSshort;
+			
+			calc_nextTSshort = (nextTSshort + 1p * slope_short);
+			
+			{
+				nextTSshort = my_nextTSshort << my_nextTSshort <= calc_nextTSshort;
+				// Debug
+				debug_str_s += ";my_nextTSshort_the_best";
+			||
+				nextTSshort = calc_nextTSshort << calc_nextTSshort < my_nextTSshort;
+				// Debug
+				debug_str_s += ";calc_nextTSshort_the_best";
 			};
 					
 			// Debug
 			log(debug_str_s + ";my_nextTSshort=;" + my_nextTSshort + ";old_nextTSshort=;" + old_nextTSshort + ";nextTSshort=;" + nextTSshort
+				+ ";c_nextTSshort=;" + calc_nextTSshort
 				+ ";my_slope_short=;" + my_slope_short + ";old_slope_short=;" + old_slope_short + ";slope_short=;" + slope_short
+				+ ";div_slope_short=;" + div_slope_short
 			);
 			~
 		}
