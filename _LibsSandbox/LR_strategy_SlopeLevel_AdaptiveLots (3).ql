@@ -777,35 +777,40 @@ import("%QTrader_Libs%\QTrader_LR_stdlib.aql");
 				
 			||
 				// Debug
-				log("account_<_0l_already_started...");
+				//log("account_<_0l_already_started...");
 				
 				nextTSshort = find_max_price(train_window) << my_account < 0l;
 				slope_short = slope_short_start;
 				log("account_<_0l_already;pos.price_=;" + pos.price + ";account_=;" + account + ";nextTSlong=;" + nextTSlong + ";slope_long=;" + slope_long);
 				
 				// Debug
-				log("account_<_0l_already_finished");
+				//log("account_<_0l_already_finished");
 				
 			};
 		
 			{
 				no_activity = -1c;
+				lock = 0n;
 				
 				{
 					log("looking_for_closing_long") << account > 0l;
 					{
-						stop() << account > 0l
+						lock = 1n
+						 << account > 0l & lock == 0n
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
 							& high[-1c] > (LRSL = ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
 							& close[-1c] < (LRSL = ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
 							& !(ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[-1c] > 0n)
 						;
+						stop();
 						log("long_lr_TP;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";LRSL=;" + LRSL + ";no_activity=;" + abs(no_activity)) << account == 0l
 					||
-						stop() << account > 0l
+						lock = 1n
+						 << account > 0l & lock == 0n
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
 							& close[-1c] < (LRSL = nextTSlong)
 						;
+						stop();
 						log("long_lr_TS;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";LRSL=;" + LRSL + ";no_activity=;" + abs(no_activity)) << account == 0l
 					||
 						no_activity = no_activity_periods << account > 0l;
@@ -822,15 +827,19 @@ import("%QTrader_Libs%\QTrader_LR_stdlib.aql");
 							~
 						};
 							
-						stop() << (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time);
-
+						lock = 1n
+						 << (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time) 
+								& lock == 0n;
+						stop();
 						log("long_lr_NAS;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";no_activity=;" + no_activity) 
-							<< account == 0l
+						 << account == 0l
 					||
-						stop() << account > 0l 
+						lock = 1n
+						 << account > 0l & lock == 0n
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
 							& low < absSLlong
 						;
+						stop();
 						log("long_lr_SL;pos.abs_profit=;" + pos.abs_profit + ";pos.profit=;" + pos.profit
 							+ ";pos.age=;" + pos.age + ";absSLlong=;" + absSLlong + ";no_activity=;" + abs(no_activity)
 						) << account == 0l
@@ -838,18 +847,22 @@ import("%QTrader_Libs%\QTrader_LR_stdlib.aql");
 				||
 					log("looking_for_closing_short") << account < 0l;
 					{
-						stop() << account < 0l
+						lock = 1n
+						 << account < 0l & lock == 0n
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
 							& low[-1c] < (LRSL = ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[-1c])
 							& close[-1c] > (LRSL = ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[-1c])
 							& !(ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[-1c] < 0n)
 						;
+						stop();
 						log("short_lr_TP;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";LRSL=;" + LRSL + ";no_activity=;" + abs(no_activity)) << account == 0l
 					||
-						stop() << account < 0l
+						lock = 1n
+						 << account < 0l & lock == 0n
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
 							& close[-1c] > (LRSL = nextTSshort)
 						;
+						stop();
 						log("short_lr_TS;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";LRSL=;" + LRSL + ";no_activity=;" + abs(no_activity)) << account == 0l
 					||
 						no_activity = no_activity_periods << account < 0l;
@@ -866,15 +879,19 @@ import("%QTrader_Libs%\QTrader_LR_stdlib.aql");
 							~
 						};
 							
-						stop() << (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time);
-
+						lock = 1n
+						 << (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time) 
+								& lock == 0n;
+						stop();
 						log("short_lr_NAS;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";no_activity=;" + no_activity) 
 							<< account == 0l
 					||
-						stop() << account < 0l 
+						lock = 1n
+						 << account < 0l & lock == 0n
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
 							& high > absSLshort
 						;
+						stop();
 						log("short_lr_SL;pos.abs_profit=;" + pos.abs_profit + ";pos.profit=;" + pos.profit
 							+ ";pos.age=;" + pos.age + ";absSLshort=;" + absSLshort + ";no_activity=;" + abs(no_activity)
 						) << account == 0l
