@@ -58,7 +58,7 @@ Test(
 	
 	{
 		// First run
-		import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (2).aql") << start_parameter_index == current_parameter_index;
+		import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (3).aql") << start_parameter_index == current_parameter_index;
 	||
 		result = 0n << start_parameter_index != current_parameter_index;
 	};
@@ -144,17 +144,18 @@ Test(
 		
 		log("test_starting_history...;" + msg_counts + ";equity=;" + equity + ";account=;" + account + msg_param_values);
 					
-		//my_log_level = log.level;
-		//log.level = base_log_level;
+		my_log_level = log.level;
+		log.level = base_log_level;
 		
 		param_values = CloneDict2List(parameters, "current", parameters_count);
 		
+		turn_result = 0n;
 		..[candles.is_calculated != 1n]
 		{
-			res = TestAdapter_LR_strategy_SlopeLevel_AdaptiveLots(param_values)
+			turn_result = TestAdapter_LR_strategy_SlopeLevel_AdaptiveLots(param_values)
 		};
 		
-		//log.level = my_log_level;
+		log.level = my_log_level;
 		
 		{
 			log("Test_checking_criteria;criteria=;" + criteria) << criteria == "best_equity";
@@ -171,42 +172,42 @@ Test(
 				best_parameters = CloneList2List(param_values, parameters_count)
 			||
 				//res = res << res["equity"] <= best_values["equity"]
-				res = res << equity <= best_values["equity"]
+				turn_result = turn_result << equity <= best_values["equity"]
 			}
 		||
 			log("Test_checking_criteria;criteria=;" + criteria) << criteria == "best_max_equity";
 			criteria = criteria << criteria == "best_max_equity";
 			{
-				best_values["equity"] = res["equity"] << res["max_equity"] > best_values["max_equity"];
-				best_values["max_equity"] = res["max_equity"];
-				best_values["min_equity"] = res["min_equity"];
+				best_values["equity"] = turn_result["equity"] << turn_result["max_equity"] > best_values["max_equity"];
+				best_values["max_equity"] = turn_result["max_equity"];
+				best_values["min_equity"] = turn_result["min_equity"];
 				best_parameters = CloneList2List(param_values, parameters_count)
 			||
-				res = res << res["max_equity"] <= best_values["max_equity"]
+				turn_result = turn_result << turn_result["max_equity"] <= best_values["max_equity"]
 			}
 		||
 			log("Test_checking_criteria;criteria=;" + criteria) << criteria == "best_min_equity";
 			criteria = criteria << criteria == "best_min_equity";
 			{
-				best_values["equity"] = res["equity"] << res["min_equity"] > best_values["min_equity"];
-				best_values["max_equity"] = res["max_equity"];
-				best_values["min_equity"] = res["min_equity"];
+				best_values["equity"] = turn_result["equity"] << turn_result["min_equity"] > best_values["min_equity"];
+				best_values["max_equity"] = turn_result["max_equity"];
+				best_values["min_equity"] = turn_result["min_equity"];
 				best_parameters = CloneList2List(param_values, parameters_count)
 			||
-				res = res << res["min_equity"] <= best_values["min_equity"]
+				turn_result = turn_result << turn_result["min_equity"] <= best_values["min_equity"]
 			}
 		||
-			my_equity = res["equity"] << criteria == "equity_closest_to_max_equity";
-			my_max_equity = res["max_equity"];
+			my_equity = turn_result["equity"] << criteria == "equity_closest_to_max_equity";
+			my_max_equity = turn_result["max_equity"];
 			target = ((my_max_equity + my_equity) / (my_max_equity - my_equity + 1p) * 1p);
 			
 			{
-				best_values["equity"] = res["equity"] << target > best_values["target"];
-				best_values["max_equity"] = res["max_equity"];
-				best_values["min_equity"] = res["min_equity"];
+				best_values["equity"] = turn_result["equity"] << target > best_values["target"];
+				best_values["max_equity"] = turn_result["max_equity"];
+				best_values["min_equity"] = turn_result["min_equity"];
 				best_parameters = CloneList2List(param_values, parameters_count)
 			||
-				res = res << target <= best_values["target"]
+				turn_result = turn_result << target <= best_values["target"]
 			}
 		};
 		
