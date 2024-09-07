@@ -179,7 +179,7 @@ LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
 			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width)
 			
 		// Last close is higher than predicted high support
-		& /*con6 =*/ close[offset] > ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)
+		//& /*con6 =*/ close[offset] > ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)
 		)
 		|
 		
@@ -266,7 +266,7 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width)
 			
 		// Last close is lower than predicted low resistance
-		& /*con6 =*/ close[offset] < ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)
+		//& /*con6 =*/ close[offset] < ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)
 		)
 		|
 		
