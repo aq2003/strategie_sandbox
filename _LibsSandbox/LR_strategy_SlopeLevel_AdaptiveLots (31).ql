@@ -148,18 +148,17 @@ LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
 		& account == 0l
 		
 		// Last close crossed up high predicted high line
-		& /*con1 =*/ (close[offset] #^ (LR = ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset]))
+		& /*con1 =*/ (close[offset] #^ ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset])
 		
 		// Last close is not higher than low predicted resistance 
 		// OR last slope of low predicted support is positive 
 		// OR ???last close is not lower than high predicted resistance???
 		& /*con2 =*/ ((
-			close[offset] < (LR_sup = ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[offset])
-		|
 			ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[offset] > 0n
 		|
-			// ???
-			close[offset] > (LR_sup = ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[offset])
+			close[offset] < ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[offset]
+		|
+			close[offset] > ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[offset]
 		))
 		
 		// Last slope of predicted high is more than slope_long_level parameter
@@ -236,17 +235,17 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 		& account == 0l
 		
 		// Last close crossed down low predicted low line
-		& /*con1 =*/ (close[offset] #_ (LR = ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[offset]))
+		& /*con1 =*/ (close[offset] #_ ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[offset])
 		
 		// Last slope of predicted high resistance is negative 
 		// OR last close is not lower than predicted high support 
 		// OR ???last close is not higher than predicted low resistance???
 		& /*con2 =*/ ((
-			close[offset] > (LR_sup = ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[offset])
-		|
 			ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[offset] < 0n
 		|
-			(close[offset] < (LR = ind("LinearRegression", "low", "low", predict_window_resistance, "low", train_window_resistance)[offset]))
+			close[offset] > ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[offset]
+		|
+			close[offset] < ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[offset]
 		))
 		
 		// Last slope of predicted low is less than slope_short_level parameter
