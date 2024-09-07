@@ -188,6 +188,13 @@ LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
 			/*con7 =*/ (close[offset] #^ ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[offset]
 			& close[offset] > ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset])
 		)
+		|
+		
+		// Last close crossed up high predicted resistance line
+		(
+			/*con8 =*/ (close[offset] #^ ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[offset]
+			& close[offset] > ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset])
+		)
 	);
 	
 	/* Debug Section 2.06.2024
@@ -273,7 +280,14 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 		
 		// Last close crossed down predicted low resistance line
 		(
-			/*con7 =*/ (close[offset] #_ ind("LinearRegression", "low", "low", predict_window_resistance, "low", train_window_resistance)[offset]
+			/*con7 =*/ (close[offset] #_ ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[offset]
+			& close[offset] < ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[offset])
+		)
+		|
+		
+		// Last close crossed down predicted low resistance line
+		(
+			/*con8 =*/ (close[offset] #_ ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[offset]
 			& close[offset] < ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[offset])
 		)
 	);
