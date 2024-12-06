@@ -1,3 +1,9 @@
+// 28.09.2024 17:00:07 AFKS30_3600_LRSLAL ql script
+// Created 28.09.2024 17:00:07
+
+// 13.07.2024 12:41:32 MGNT3_3600_LRSLAL ql script
+// Created 13.07.2024 12:41:32
+
 // 28.06.2024 20:48:45 MGNT2-1_3600_LRSLAL ql script
 // Created 28.06.2024 20:48:45
 
@@ -79,26 +85,25 @@ risk_L = 17%;		// Risk rate in percents for long positions
 risk_S = 17%;		// Risk rate in percents for short positions
 
 expiration_time = 15:00_21.12.24;
-day_start_time = 10:00;
 
 predict_window = "candle"; 
-train_window = 81c;
+train_window = 89c;
 high_offset = "none";
 low_offset = "none";
 
-slope_long_start = 1.2n;
-slope_short_start = -1.2n;
-slope_long_level = -6n;
-slope_short_level = 6n;
+slope_long_start = 0.008n;
+slope_short_start = -0.008n;
+slope_long_level = -0.04n;
+slope_short_level = 0.04n;
 
 predict_window_support = "week";
-train_window_support = 1138c;
+train_window_support = 1252c;
 predict_window_resistance = "week";
-train_window_resistance = 1138c;
+train_window_resistance = 1252c;
 
 channel_width = /*950*/0p;
 
-no_activity_periods = -1c;
+no_activity_periods = 2c;
 
 day_start_time = 10:00;	// Start time of the day trading session
 day_end_time = 19:00;	// End time of the day trading session

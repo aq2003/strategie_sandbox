@@ -1,3 +1,9 @@
+// 22.09.2024 11:44:37 MGNT40_3600_LRSLAL ql script
+// Created 22.09.2024 11:44:37
+
+// 13.07.2024 12:41:32 MGNT3_3600_LRSLAL ql script
+// Created 13.07.2024 12:41:32
+
 // 28.06.2024 20:48:45 MGNT2-1_3600_LRSLAL ql script
 // Created 28.06.2024 20:48:45
 
@@ -82,7 +88,7 @@ expiration_time = 15:00_21.12.24;
 day_start_time = 10:00;
 
 predict_window = "candle"; 
-train_window = 81c;
+train_window = 300c;
 high_offset = "none";
 low_offset = "none";
 
@@ -92,13 +98,13 @@ slope_long_level = -6n;
 slope_short_level = 6n;
 
 predict_window_support = "week";
-train_window_support = 1138c;
+train_window_support = 800c;
 predict_window_resistance = "week";
-train_window_resistance = 1138c;
+train_window_resistance = 800c;
 
-channel_width = /*950*/0p;
+channel_width = 0p;
 
-no_activity_periods = -1c;
+no_activity_periods = -2c;
 
 day_start_time = 10:00;	// Start time of the day trading session
 day_end_time = 19:00;	// End time of the day trading session
@@ -106,9 +112,7 @@ night_start_time = 19:10;	// Start time of the night trading session
 night_end_time = 23:49;	// End time of the night trading session
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (30).aql");
-
-log("imitator.commission=;" + imitator.commission + ";imitator.credit=;" + imitator.credit);
+import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (40).aql");
 
 LR_strategy_SlopeLevel_AdaptiveLots(
 	safety_stock,	// Safety stock in percents to the equity

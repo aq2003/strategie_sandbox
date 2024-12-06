@@ -830,7 +830,8 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 						lock = 1n
 						 << account > 0l & lock == 0n
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
-							& low < absSLlong
+							//& low < absSLlong
+							& close[-1c] < absSLlong & close[-1c] < ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[-1c]
 						;
 						stop();
 						log("long_lr_SL;pos.abs_profit=;" + pos.abs_profit + ";pos.profit=;" + pos.profit
@@ -882,7 +883,8 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 						lock = 1n
 						 << account < 0l & lock == 0n
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
-							& high > absSLshort
+							//& high > absSLshort
+							& close[-1c] > absSLshort & close[-1c] > ind("LinearRegression", "low", "low", predict_window, high_offset, train_window)[-1c]
 						;
 						stop();
 						log("short_lr_SL;pos.abs_profit=;" + pos.abs_profit + ";pos.profit=;" + pos.profit

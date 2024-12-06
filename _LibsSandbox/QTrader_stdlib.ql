@@ -50,6 +50,30 @@
 // 18.09.2020 9:56:34 SRZ0_300_7600yup ql script
 // Created 18.09.2020 9:56:34
 
+// +++ 18.09.2024 - iter -----------------------------------------------------------------------------------
+// Returns a list filled with valiues produced by iterations 
+// Parameters:
+// - pstart - start bound of iteration sequence
+// - pstop - stop bound of iteration sequence
+// - pstep - step of iteration sequence
+iter(pstart, pstop, pstep) :=
+{
+	result = 1n;
+	result = new("list");
+	target = abs(pstop);
+	
+	current = pstart;
+	..[abs(current) <= target]
+	{
+		// +++ Debug - 20.09.2024 ----------------------------------------------------------------
+		//log("iter(pstart=" + pstart + ", pstop=" + pstop + ", pstep=" + pstep + ")=" + current);
+		// --- Debug - 20.09.2024 ----------------------------------------------------------------
+		result += current;
+		current += pstep;
+	};
+};
+// --- 18.09.2024 - iter -----------------------------------------------------------------------------------
+
 my_stop() :=
 {
 	..[account != 0l]

@@ -143,29 +143,17 @@ LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
 	result = 
 	(
 		(
-		// The candle time is in working hours and no open position
 		/*con0 =*/ (time < expiration_time & (time >= _day_start_time & time < _day_end_time | time >= _night_start_time & time < _night_end_time)) 
 		& account == 0l
-		
-		// Last close crossed up high predicted high line
-		& /*con1 =*/ (close[offset] #^ ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset])
-		
-		// Last close is not higher than low predicted resistance 
-		// OR last slope of low predicted support is positive 
-		// OR ???last close is not lower than high predicted resistance???
+		& /*con1 =*/ (close[offset] #^ (LR = ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset]))
 		& /*con2 =*/ ((
+			close[offset] < (LR_sup = ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[offset])
+		|
 			ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[offset] > 0n
 		|
-			close[offset] < ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[offset]
-		|
-			close[offset] > ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[offset]
+			close[offset] > (LR_sup = ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[offset])
 		))
-		
-		// Last slope of predicted high is more than slope_long_level parameter
 		& /*con3 =*/ (ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] > slope_long_level)		
-		
-		// Last close is more than close train_window ago and last predicted high slope is more than high slope train_window ago
-		// OR last close is less than close train_window ago and last predicted high slope is less than high slope train_window ago
 		& /*con4 =*/ ((
 			close[-1c] > close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] 
 				> ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
@@ -173,20 +161,14 @@ LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
 			close[-1c] < close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] 
 				< ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
 		))
-		
-		// Difference between predicted high support and predicted low resistance is more than channel_width parameter
 		& /*con5 =*/ ((ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
 			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width)
-			
-		// Last close is higher than predicted high support
+		// To open long not lower then support high
 		& /*con6 =*/ close[offset] > ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)
 		)
 		|
-		
-		// Last close crossed up high predicted resistance line
 		(
-			/*con7 =*/ (close[offset] #^ ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[offset]
-			& close[offset] > ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset])
+			/*con7 =*/ (close[offset] #^ (LR = ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[offset]))
 		)
 	);
 	
@@ -195,6 +177,11 @@ LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
 		+ ";con0=;" + con0 + ";con1=;" + con1 + ";con2=;" + con2 + ";con3=;" + con3 + ";con4=;" + con4 + ";con5=;" + con5 + ";con6=;" + con6
 	);
 	*/
+	{
+		~ << result == false
+	||
+		skip() << result == true
+	}
 };
 
 // A service method of LR_strategy_short_SlopeLevel_AdaptiveLots family.
@@ -217,7 +204,13 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 	predict_window_resistance,	// Resistance line predict window type := ("week" || "day" || "candle")
 	train_window_resistance,	// Resistance line width of training window in candle number
 
-	channel_width
+	channel_width/*,	// Width of signal channel to disable trading
+	
+	_day_start_time,	// Start time of the day trading session
+	_day_end_time,	// End time of the day trading session
+	_night_start_time,	// Start time of the night trading session
+	_night_end_time	// End time of the night trading session
+	*/
 ) :=
 {
 	result = 0n;
@@ -225,29 +218,17 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 	result = 
 	(
 		(
-		// The candle time is in working hours and no open position
 		/*con0 =*/ (time < expiration_time & (time >= _day_start_time & time < _day_end_time | time >= _night_start_time & time < _night_end_time)) 
 		& account == 0l
-		
-		// Last close crossed down low predicted low line
-		& /*con1 =*/ (close[offset] #_ ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[offset])
-		
-		// Last slope of predicted high resistance is negative 
-		// OR last close is not lower than predicted high support 
-		// OR ???last close is not higher than predicted low resistance???
+		& /*con1 =*/ (close[offset] #_ (LR = ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[offset]))
 		& /*con2 =*/ ((
+			close[offset] > (LR_sup = ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[offset])
+		|
 			ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[offset] < 0n
 		|
-			close[offset] > ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[offset]
-		|
-			close[offset] < ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[offset]
+			(close[offset] < (LR = ind("LinearRegression", "low", "low", predict_window_resistance, "low", train_window_resistance)[offset]))
 		))
-		
-		// Last slope of predicted low is less than slope_short_level parameter
 		& /*con3 =*/ (ind("LinearRegression", "slope", "low", predict_window, high_offset, train_window)[-1c] < slope_short_level)
-		
-		// Last close is more than close train_window ago and last predicted high slope is more than high slope train_window ago
-		// OR last close is less than close train_window ago and last predicted high slope is less than high slope train_window ago
 		& /*con4 =*/ ((
 			close[-1c] > close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] 
 				> ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
@@ -255,20 +236,14 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 			close[-1c] < close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] 
 				< ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
 		))
-		
-		// Difference between predicted high support and predicted low resistance is more than channel_width parameter
 		& /*con5 =*/ ((ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
 			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width)
-			
-		// Last close is lower than predicted low resistance
-		& /*con6 =*/ close[offset] < ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)
+		// To open short not higher then resistanse low
+		& /*con6 =*/ close[offset] < ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support)
 		)
 		|
-		
-		// Last close crossed down predicted low resistance line
 		(
-			/*con7 =*/ (close[offset] #_ ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[offset]
-			& close[offset] < ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[offset])
+			/*con7 =*/ (close[offset] #_ (LR = ind("LinearRegression", "low", "low", predict_window_resistance, "low", train_window_resistance)[offset]))
 		)
 	);
 	
@@ -277,6 +252,11 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 		+ ";con0=;" + con0 + ";con1=;" + con1 + ";con2=;" + con2 + ";con3=;" + con3 + ";con4=;" + con4 + ";con5=;" + con5 + ";con6=;" + con6
 	);
 	*/
+	{
+		~ << result == false
+	||
+		skip() << result == true
+	}
 };
 // A service method of LR_strategy_SlopeLevel_AdaptiveLots family.
 // Opens a long position
@@ -301,7 +281,13 @@ LR_strategy_long_SlopeLevel_AdaptiveLots(
 	ppredict_window_resistance,	// Resistance line predict window type := ("week" || "day" || "candle")
 	ptrain_window_resistance,	// Resistance line width of training window in candle number
 
-	pchannel_width
+	pchannel_width/*,	// Width of signal channel to disable trading
+	
+	p_day_start_time,	// Start time of the day trading session
+	p_day_end_time,	// End time of the day trading session
+	p_night_start_time,	// Start time of the night trading session
+	p_night_end_time	// End time of the night trading session
+	*/
 ) :=
 {
 	/* +++ Debug Section 2.06.2024
@@ -329,7 +315,13 @@ LR_strategy_long_SlopeLevel_AdaptiveLots(
 		ppredict_window_resistance,	// Resistance line predict window type := ("week" || "day" || "candle")
 		ptrain_window_resistance,	// Resistance line width of training window in candle number
 
-		pchannel_width
+		pchannel_width/*,	// Width of signal channel to disable trading
+	
+		p_day_start_time,	// Start time of the day trading session
+		p_day_end_time,	// End time of the day trading session
+		p_night_start_time,	// Start time of the night trading session
+		p_night_end_time	// End time of the night trading session
+		*/
 	);
 	
 	lots = CalculateLotsToLong(p_safety_stock, p_risk_L);
@@ -500,11 +492,8 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 	no_activity_periods
 ) :=
 {
-	my_start_equity = equity;
-	my_start_time = time;
-	
-	import("%QTrader_Libs%\QTrader_stdlib.aql");
-	import("%QTrader_Libs%\QTrader_LR_stdlib.aql");
+import("%QTrader_Libs%\QTrader_stdlib.aql");
+import("%QTrader_Libs%\QTrader_LR_stdlib.aql");
 
 	log("LR_strategy_SlopeLevel_AdaptiveLots_has_started_and_running...");
 	log("LR_strategy_SlopeLevel_AdaptiveLots_params=("); 
@@ -565,7 +554,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 			+ ";channel_width_=;" + (hhigh - llow)
 			);
 			step += 1n; 
-				
+			
 			{
 				day_start_time = day_start_time << time >= night_end_time;
 				
@@ -578,11 +567,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 					log("debug_day_time_moved;" + ";day_start_time=;" + day_start_time + ";day_end_time=;" + day_end_time
 						+ ";night_start_time=;" + night_start_time + ";night_end_time=;" + night_end_time
 					)
-				};
-						
-				log("daily_report;start_equity=;" + my_start_equity + ";start_time=;" + my_start_time + ";equity=;" + equity + ";abs_equity_diff=;" 
-					+ (equity - my_start_equity) + ";p_equity_diff=;" + 100% * ((equity - my_start_equity) / my_start_equity))
-				
+				}
 			||
 				day_start_time = day_start_time << time < night_end_time
 			};
@@ -593,8 +578,8 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 	||
 		..{
 			// Debug
-			//old_slope_long = slope_long;
-			//debug_str_l = "debug_moving_nextTSlong";
+			old_slope_long = slope_long;
+			debug_str_l = "debug_moving_nextTSlong";
 			
 			//log(debug_str_l + ";started...");
 			
@@ -604,44 +589,44 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 			{
 				slope_long = my_slope_long << my_slope_long > slope_long & my_slope_long > div_slope_long;
 				// Debug
-				//debug_str_l += ";my_slope_long_the_best"
+				debug_str_l += ";my_slope_long_the_best"
 			||
 				slope_long = div_slope_long << div_slope_long > slope_long & div_slope_long > my_slope_long;
 				// Debug
-				//debug_str_l += ";div_slope_long_the_best"
+				debug_str_l += ";div_slope_long_the_best"
 			||
 				slope_long = slope_long << slope_long >= div_slope_long  & slope_long >= my_slope_long;
 				// Debug
-				//debug_str_l += ";slope_short_the_best"
+				debug_str_l += ";slope_short_the_best"
 			};
 			
 			// Debug
 			//log(debug_str_l + ";selected...");
-			//old_nextTSlong = nextTSlong;
+			old_nextTSlong = nextTSlong;
 			
 			calc_nextTSlong = (nextTSlong + 1p * slope_long);
 			
 			{
 				nextTSlong = my_nextTSlong << my_nextTSlong >= calc_nextTSlong;
 				// Debug
-				//debug_str_l += ";my_nextTSlong_the_best";
+				debug_str_l += ";my_nextTSlong_the_best";
 			||
 				nextTSlong = calc_nextTSlong << calc_nextTSlong > my_nextTSlong;
 				// Debug
-				//debug_str_l += ";calc_nextTSlong_the_best";
+				debug_str_l += ";calc_nextTSlong_the_best";
 			};
 					
 			// Debug
-			//log(debug_str_l + ";my_nextTSlong=;" + my_nextTSlong + ";old_nextTSlong=;" + old_nextTSlong + ";nextTSlong=;" + nextTSlong
-			//	+ ";c_nextTSlong=;" + calc_nextTSlong
-			//	+ ";my_slope_long=;" + my_slope_long + ";old_slope_long=;" + old_slope_long + ";slope_long=;" + slope_long
-			//	+ ";div_slope_long=;" + div_slope_long
-			//);
+			log(debug_str_l + ";my_nextTSlong=;" + my_nextTSlong + ";old_nextTSlong=;" + old_nextTSlong + ";nextTSlong=;" + nextTSlong
+				+ ";c_nextTSlong=;" + calc_nextTSlong
+				+ ";my_slope_long=;" + my_slope_long + ";old_slope_long=;" + old_slope_long + ";slope_long=;" + slope_long
+				+ ";div_slope_long=;" + div_slope_long
+			);
 			~
 		&&
 			// Debug
-			//old_slope_short = slope_short;
-			//debug_str_s = "debug_moving_nextTSshort";
+			old_slope_short = slope_short;
+			debug_str_s = "debug_moving_nextTSshort";
 			
 			//log(debug_str_s + ";started...");
 			
@@ -651,39 +636,39 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 			{
 				slope_short = my_slope_short << my_slope_short < slope_short & my_slope_short < div_slope_short;
 				// Debug
-				//debug_str_s += ";my_slope_short_the_best"
+				debug_str_s += ";my_slope_short_the_best"
 			||
 				slope_short = div_slope_short << div_slope_short < slope_short & div_slope_short < my_slope_short;
 				// Debug
-				//debug_str_s += ";div_slope_short_the_best"
+				debug_str_s += ";div_slope_short_the_best"
 			||
 				slope_short = slope_short << slope_short <= div_slope_short  & slope_short <= my_slope_short;
 				// Debug
-				//debug_str_s += ";slope_short_the_best"
+				debug_str_s += ";slope_short_the_best"
 			};
 			
 			// Debug
 			//log(debug_str_s + ";selected...");
-			//old_nextTSshort = nextTSshort;
+			old_nextTSshort = nextTSshort;
 			
 			calc_nextTSshort = (nextTSshort + 1p * slope_short);
 			
 			{
 				nextTSshort = my_nextTSshort << my_nextTSshort <= calc_nextTSshort;
 				// Debug
-				//debug_str_s += ";my_nextTSshort_the_best";
+				debug_str_s += ";my_nextTSshort_the_best";
 			||
 				nextTSshort = calc_nextTSshort << calc_nextTSshort < my_nextTSshort;
 				// Debug
-				//debug_str_s += ";calc_nextTSshort_the_best";
+				debug_str_s += ";calc_nextTSshort_the_best";
 			};
 					
 			// Debug
-			//log(debug_str_s + ";my_nextTSshort=;" + my_nextTSshort + ";old_nextTSshort=;" + old_nextTSshort + ";nextTSshort=;" + nextTSshort
-			//	+ ";c_nextTSshort=;" + calc_nextTSshort
-			//	+ ";my_slope_short=;" + my_slope_short + ";old_slope_short=;" + old_slope_short + ";slope_short=;" + slope_short
-			//	+ ";div_slope_short=;" + div_slope_short
-			//);
+			log(debug_str_s + ";my_nextTSshort=;" + my_nextTSshort + ";old_nextTSshort=;" + old_nextTSshort + ";nextTSshort=;" + nextTSshort
+				+ ";c_nextTSshort=;" + calc_nextTSshort
+				+ ";my_slope_short=;" + my_slope_short + ";old_slope_short=;" + old_slope_short + ";slope_short=;" + slope_short
+				+ ";div_slope_short=;" + div_slope_short
+			);
 			~
 		}
 	||
