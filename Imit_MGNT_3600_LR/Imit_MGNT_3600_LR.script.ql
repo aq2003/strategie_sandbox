@@ -69,7 +69,7 @@ risk_S = 20%;		// Risk rate in percents for short positions
 expiration_time = 15:00_21.12.24;
 
 predict_window = "candle"; 
-train_window = 131c;
+train_window = 55c;
 high_offset = "none";
 low_offset = "none";
 
@@ -79,13 +79,13 @@ slope_long_level = -6n;
 slope_short_level = 6n;
 
 predict_window_support = "week";
-train_window_support = 941c;
+train_window_support = 363c;
 predict_window_resistance = "week";
-train_window_resistance = 941c;
+train_window_resistance = 363c;
 
 channel_width = /*950*/0p;
 
-no_activity_periods = 2c;
+no_activity_periods = 3c;
 
 day_start_time = 10:00;	// Start time of the day trading session
 day_end_time = 19:00;	// End time of the day trading session
