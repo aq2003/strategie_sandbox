@@ -88,7 +88,7 @@ train_window_resistance = 300c;
 
 channel_width = /*950*/0p;
 
-no_activity_periods = 3c;
+no_activity_periods = 4c;
 
 day_start_time = 10:00;	// Start time of the day trading session
 day_end_time = 19:00;	// End time of the day trading session
