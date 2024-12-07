@@ -72,7 +72,7 @@ risk_S = 20%;		// Risk rate in percents for short positions
 expiration_time = 15:00_21.12.24;
 
 predict_window = "candle"; 
-train_window = 210c;
+train_window = 131c;
 high_offset = "none";
 low_offset = "none";
 
@@ -82,9 +82,9 @@ slope_long_level = -6n;
 slope_short_level = 6n;
 
 predict_window_support = "week";
-train_window_support = 855c;
+train_window_support = 941c;
 predict_window_resistance = "week";
-train_window_resistance = 855c;
+train_window_resistance = 941c;
 
 channel_width = /*950*/0p;
 
