@@ -82,13 +82,13 @@ slope_long_level = -0.05n;
 slope_short_level = 0.05n;
 
 predict_window_support = "week";
-train_window_support = 1035c;
+train_window_support = 855c;
 predict_window_resistance = "week";
-train_window_resistance = 1035c;
+train_window_resistance = 855c;
 
 channel_width = /*950*/0p;
 
-no_activity_periods = 2c;
+no_activity_periods = 1c;
 
 day_start_time = 09:00;	// Start time of the day trading session
 day_end_time = 19:00;	// End time of the day trading session
