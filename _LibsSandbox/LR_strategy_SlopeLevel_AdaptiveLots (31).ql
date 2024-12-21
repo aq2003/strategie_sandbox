@@ -1004,8 +1004,8 @@ TestAdapter(params) :=
 	// best_values := (equity, max_equity, min_equity, target)
 	res = new("dict");
 	res["equity"] = equity;
-	res["max_equity"] = max_equity;
-	res["min_equity"] = min_equity;
+	res["max_equity"] = dealer.max_equity;
+	res["min_equity"] = dealer.min_equity;
 	res["target"] = equity;
 	
 	log("TestAdapter_LR_strategy_SlopeLevel_AdaptiveLots_has_finished;");
