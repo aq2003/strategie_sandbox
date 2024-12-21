@@ -18,6 +18,8 @@ base_log_level = "Error";
 
 import("%QTrader_Libs%\QTrader_stdlib.aql");
 
+script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (33).aql";
+
 // target_type := ("best_equity" || "equity_closest_to_max_equity")
 target_type = "best_equity";
 // --- parameters -----------------------------------------------------------------------------------------
@@ -158,7 +160,7 @@ best_result = Test(
 	params, // parameters := (..parameter); parameter := (name, start, stop, step, current, index)
 	criteria, // Optimization criteria; criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
 	base_log_level,
-	"LR_strategy_SlopeLevel_AdaptiveLots (31).aql"
+	script_to_test
 );
 log("---_1st_turn ---------------------------------------------------------------------------------------------------------------------------------");
 // --- 1st turn ---------------------------------------------------------------------------------------------------------------------------------
@@ -185,7 +187,7 @@ best_result = Test(
 	params, // parameters := (..parameter); parameter := (name, start, stop, step, current, index)
 	criteria, // Optimization criteria; criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
 	base_log_level,
-	"LR_strategy_SlopeLevel_AdaptiveLots (31).aql"
+	script_to_test
 );
 log("---_2nd_turn ---------------------------------------------------------------------------------------------------------------------------------");
 // --- 2nd turn ---------------------------------------------------------------------------------------------------------------------------------
@@ -209,7 +211,7 @@ best_result = Test(
 	params, // parameters := (..parameter); parameter := (name, start, stop, step, current, index)
 	criteria, // Optimization criteria; criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
 	base_log_level,
-	"LR_strategy_SlopeLevel_AdaptiveLots (31).aql"
+	script_to_test
 );
 log("---_3rd_turn ---------------------------------------------------------------------------------------------------------------------------------");
 // --- 3rd turn ---------------------------------------------------------------------------------------------------------------------------------

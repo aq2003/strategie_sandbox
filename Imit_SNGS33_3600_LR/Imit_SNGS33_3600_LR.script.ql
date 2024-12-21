@@ -1,3 +1,6 @@
+// 08.12.2024 18:33:56 Imit_SNGS33_3600_LR ql script
+// Created 08.12.2024 18:33:56
+
 // 25.11.2024 9:11:59 Imit_SNGS_3600_LR ql script
 // Created 25.11.2024 9:11:59
 
@@ -82,13 +85,13 @@ slope_long_level = -0.05n;
 slope_short_level = 0.05n;
 
 predict_window_support = "week";
-train_window_support = 855c;
+train_window_support = 1667c;
 predict_window_resistance = "week";
-train_window_resistance = 855c;
+train_window_resistance = 1667c;
 
 channel_width = /*950*/0p;
 
-no_activity_periods = 1c;
+no_activity_periods = 5c;
 
 day_start_time = 09:00;	// Start time of the day trading session
 day_end_time = 19:00;	// End time of the day trading session
@@ -96,7 +99,7 @@ night_start_time = 19:10;	// Start time of the night trading session
 night_end_time = 23:49;	// End time of the night trading session
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (31).aql");
+import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (33).aql");
 
 LR_strategy_SlopeLevel_AdaptiveLots(
 	safety_stock,	// Safety stock in percents to the equity

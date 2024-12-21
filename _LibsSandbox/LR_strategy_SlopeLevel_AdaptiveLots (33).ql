@@ -166,13 +166,13 @@ LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
 		
 		// Last close is more than close train_window ago and last predicted high slope is more than high slope train_window ago
 		// OR last close is less than close train_window ago and last predicted high slope is less than high slope train_window ago
-		& /*con4 =*/ ((
-			close[-1c] > close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] 
-				> ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
-			|
-			close[-1c] < close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] 
-				< ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
-		))
+		//& /*con4 =*/ ((
+		//	close[-1c] > close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] 
+		//		> ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
+		//	|
+		//	close[-1c] < close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] 
+		//		< ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
+		//))
 		
 		// Difference between predicted high support and predicted low resistance is more than channel_width parameter
 		& /*con5 =*/ ((ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
@@ -248,13 +248,13 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 		
 		// Last close is more than close train_window ago and last predicted high slope is more than high slope train_window ago
 		// OR last close is less than close train_window ago and last predicted high slope is less than high slope train_window ago
-		& /*con4 =*/ ((
-			close[-1c] > close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] 
-				> ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
-			|
-			close[-1c] < close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] 
-				< ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
-		))
+		//& /*con4 =*/ ((
+		//	close[-1c] > close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] 
+		//		> ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
+		//	|
+		//	close[-1c] < close[-train_window] & ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] 
+		//		< ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-train_window]
+		//))
 		
 		// Difference between predicted high support and predicted low resistance is more than channel_width parameter
 		& /*con5 =*/ ((ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 

@@ -1,8 +1,8 @@
-// 01.12.2024 6:22:28 Test32_AFKS_3600_LRSLAL ql script
-// Created 01.12.2024 6:22:28
+// 07.12.2024 12:38:47 Test32_PLZL_3600_LRSLAL ql script
+// Created 07.12.2024 12:38:47
 
-// 07.10.2024 8:13:37 Test32_AFKS_3600_LRSLAL ql script
-// Created 07.10.2024 8:13:37
+// 06.10.2024 7:41:43 Test32_PLZL_3600_LRSLAL ql script
+// Created 06.10.2024 7:41:43
 
 // 05.10.2024 16:47:05 Test32_MGNT_3600_LRSLAL ql script
 // Created 05.10.2024 16:47:05
@@ -32,19 +32,19 @@ params = new("list");
 i_safety_stock = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "safety_stock";
-my_param["value"] = 10%;//iter(5%, 15%, 5%);
+my_param["value"] = 5%;//iter(5%, 15%, 5%);
 
 // 1 Risk rate in percents for long positions
 i_risk_L = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "risk_L";
-my_param["value"] = 20%;
+my_param["value"] = 17%;
 
 // 2 Risk rate in percents for short positions
 i_risk_S = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "risk_S";
-my_param["value"] = 20%;
+my_param["value"] = 17%;
 
 // 3
 i_expiration_time = count(params);
@@ -116,25 +116,25 @@ my_param["value"] = iter(50c, 300c, 10%);
 i_slope_long = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_long";
-my_param["value"] = 0.01n;//iter(1.2n, 1.2n, 2n);
+my_param["value"] = 2.8n;//iter(1.2n, 1.2n, 2n);
 
 // 17
 i_slope_short = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_short";
-my_param["value"] = -0.01n;//iter(-1.2n, -1.2n, -2n);
+my_param["value"] = -2.8n;//iter(-1.2n, -1.2n, -2n);
 
 // 18
 i_slope_long_level = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_long_level";
-my_param["value"] = -0.05n;//iter(-6n, -6n, 2n);
+my_param["value"] = -14n;//iter(-6n, -6n, 2n);
 
 // 19
 i_slope_short_level = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_short_level";
-my_param["value"] = 0.05n;//iter(6n, 6n, 2n);
+my_param["value"] = 14n;//iter(6n, 6n, 2n);
 
 // 20
 i_channel_width = count(params);
@@ -200,11 +200,11 @@ my_param["value"] = best_parameters[i_no_activity];
 
 // 18
 my_param = params[i_slope_long_level];
-my_param["value"] = iter(0n, -0.05n, -0.005n);
+my_param["value"] = iter(0n, -14n, -1.4n);
 
 // 19
 my_param = params[i_slope_short_level];
-my_param["value"] = iter(0n, 0.05n, 0.005n);
+my_param["value"] = iter(0n, 14n, 1.4n);
 
 criteria = "equity_closest_to_max_equity";
 best_result = Test(

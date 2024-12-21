@@ -1,11 +1,14 @@
-// 25.11.2024 9:11:59 Imit_SNGS_3600_LR ql script
-// Created 25.11.2024 9:11:59
+// 08.12.2024 11:36:02 Imit_AFKS33_3600_LR ql script
+// Created 08.12.2024 11:36:02
 
-// 13.10.2024 11:24:44 I_SNGS_3600_LR ql script
-// Created 13.10.2024 11:24:44
+// 08.12.2024 11:16:27 Imit_AFKS_3600_LR ql script
+// Created 08.12.2024 11:16:27
 
-// 24.04.2024 4:50:08 SNGS_3600_LR ql script
-// Created 24.04.2024 4:50:08
+// 23.11.2024 15:01:33 Imit_MGNT_3600_LR ql script
+// Created 23.11.2024 15:01:33
+
+// 13.10.2024 20:12:22 I_MGNT_3600_LR ql script
+// Created 13.10.2024 20:12:22
 
 // 11.02.2024 21:44:00 MGNT_3600_LR ql script
 // Created 11.02.2024 21:44:00
@@ -72,7 +75,7 @@ risk_S = 20%;		// Risk rate in percents for short positions
 expiration_time = 15:00_21.12.24;
 
 predict_window = "candle"; 
-train_window = 210c;
+train_window = 144c;
 high_offset = "none";
 low_offset = "none";
 
@@ -82,21 +85,21 @@ slope_long_level = -0.05n;
 slope_short_level = 0.05n;
 
 predict_window_support = "week";
-train_window_support = 855c;
+train_window_support = 300c;
 predict_window_resistance = "week";
-train_window_resistance = 855c;
+train_window_resistance = 300c;
 
 channel_width = /*950*/0p;
 
-no_activity_periods = 1c;
+no_activity_periods = 5c;
 
-day_start_time = 09:00;	// Start time of the day trading session
+day_start_time = 10:00;	// Start time of the day trading session
 day_end_time = 19:00;	// End time of the day trading session
 night_start_time = 19:10;	// Start time of the night trading session
 night_end_time = 23:49;	// End time of the night trading session
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (31).aql");
+import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (33).aql");
 
 LR_strategy_SlopeLevel_AdaptiveLots(
 	safety_stock,	// Safety stock in percents to the equity
@@ -126,5 +129,3 @@ log("expiration_stop");
 stop();
 
 log("script_stopped")
-
-
