@@ -243,12 +243,20 @@ _Test(
 		param_values = CloneDict2List(parameters, "current");
 		
 		turn_result = 0n;
-		..[candles.is_calculated != 1n]
+		test_finished_itself = false;
+		..[candles.is_calculated != 1n & test_finished_itself == false]
 		{
-			turn_result = /*TestAdapter_LR_strategy_SlopeLevel_AdaptiveLots(param_values)*/TestAdapter(param_values)
+			turn_result = TestAdapter(param_values);
+			test_finished_itself = true;
 		};
 		
 		log.level = my_log_level;
+		
+		{
+			log("there_is_something_unusual_in_the_test,_check_expiration_date") << test_finished_itself == true;
+		||
+			test_finished_itself = false << test_finished_itself == false;
+		};
 		
 		{
 			criteria = criteria << criteria == "best_equity";
