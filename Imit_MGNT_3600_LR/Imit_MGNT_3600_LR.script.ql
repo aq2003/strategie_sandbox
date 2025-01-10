@@ -66,7 +66,7 @@ safety_stock = 5%;	// Safety stock in percents to the equity
 risk_L = 20%;		// Risk rate in percents for long positions
 risk_S = 20%;		// Risk rate in percents for short positions
 
-expiration_time = 15:00_21.12.24;
+expiration_time = 15:00_21.12.25;
 
 predict_window = "candle"; 
 train_window = 131c;
