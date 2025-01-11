@@ -115,6 +115,80 @@ LR_strategy_condition_start_time() :=
 	};
 };
 
+// Finds a LR slope max value on a given time section for given period and price type
+//  slope_period - train_window value for the SL slope indicator
+//  price_type - type of the price for the SL slope indicator
+//  start_time - start point for time section
+//  end_time - finish time for time section
+// Returns slope max value
+LR_strategy_Slope_Max(
+	slope_period,
+	price_type,
+	start_time,
+	end_time
+) :=
+{
+	result = 0n;
+	
+	start_candleno = candle.number[start_time];
+	end_candleno = candle.number[end_time];
+	current_candleno = candle.number;
+	
+	offset = (start_candleno - current_candleno);
+	end_offset = (end_candleno - current_candleno);
+	//log("LR_strategy_Slope_Max" + ";start_candleno=" + start_candleno + ";end_candleno=" + end_candleno + ";offset=" + offset + ";end_offset=" + end_offset);
+	..[offset <= end_offset]
+	{
+		slope = ind("LinearRegression", "slope", price_type, "candle", "none", slope_period)[offset];
+		{
+			result = slope << slope > result
+		||
+			result = result << slope <= result
+		};
+		
+		offset += 1c
+	};
+		
+	//result = slope_max
+};
+
+// Finds a LR slope min value on a given time section for given period and price type
+//  slope_period - train_window value for the SL slope indicator
+//  price_type - type of the price for the SL slope indicator
+//  start_time - start point for time section
+//  end_time - finish time for time section
+// Returns slope min value
+LR_strategy_Slope_Min(
+	slope_period,
+	price_type,
+	start_time,
+	end_time
+) :=
+{
+	result = 0n;
+	
+	start_candleno = candle.number[start_time];
+	end_candleno = candle.number[end_time];
+	current_candleno = candle.number;
+	
+	offset = (start_candleno - current_candleno);
+	end_offset = (end_candleno - current_candleno);
+	//log("LR_strategy_Slope_Min" + ";start_candleno=" + start_candleno + ";end_candleno=" + end_candleno + ";offset=" + offset + ";end_offset=" + end_offset);
+	..[offset <= end_offset]
+	{
+		slope = ind("LinearRegression", "slope", price_type, "candle", "none", slope_period)[offset];
+		{
+			result = slope << slope < result
+		||
+			result = result << slope >= result
+		};
+		
+		offset += 1c
+	};
+	
+	//result = slope_min
+};
+
 // A service method of LR_strategy_long_SlopeLevel_AdaptiveLots family.
 // Tests a condition for a long position
 LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
