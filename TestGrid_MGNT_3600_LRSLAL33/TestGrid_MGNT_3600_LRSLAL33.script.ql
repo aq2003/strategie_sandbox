@@ -56,7 +56,7 @@ my_param["value"] = 20%;
 i_expiration_time = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "expiration_time";
-my_param["value"] = 15:00_15.12.24;
+my_param["value"] = 15:00_15.12.25;
 
 // 4 Start time of the day trading session
 i_day_start_time = count(params);
@@ -124,25 +124,25 @@ my_param["value"] = iter(10c, 300c, 1c);
 i_slope_long = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_long";
-my_param["value"] = 1.2n;//iter(1.2n, 1.2n, 2n);
+my_param["value"] = 0n;//iter(1.2n, 1.2n, 2n);
 
 // 17
 i_slope_short = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_short";
-my_param["value"] = -1.2n;//iter(-1.2n, -1.2n, -2n);
+my_param["value"] = 0n;//iter(-1.2n, -1.2n, -2n);
 
 // 18
 i_slope_long_level = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_long_level";
-my_param["value"] = -6n;//iter(-6n, -6n, 2n);
+my_param["value"] = -100n;//iter(-6n, -6n, 2n);
 
 // 19
 i_slope_short_level = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_short_level";
-my_param["value"] = 6n;//iter(6n, 6n, 2n);
+my_param["value"] = 100n;//iter(6n, 6n, 2n);
 
 // 20
 i_channel_width = count(params);
@@ -185,10 +185,6 @@ best_parameters = best_result["best_parameters"];
 // 15
 (params[i_train_window_period])["value"] = best_parameters[i_train_window_period];
 
-// 21
-//my_param = params[i_no_activity];
-//my_param["value"] = iter(1c, 20c, 1c);
-
 criteria = "best_equity";
 best_result = Test(
 	params, // parameters := (..parameter); parameter := (name, start, stop, step, current, index)
@@ -202,33 +198,23 @@ log("---_2nd_turn --------------------------------------------------------------
 // +++ 3rd turn ---------------------------------------------------------------------------------------------------------------------------------
 log("+++_3rd_turn ---------------------------------------------------------------------------------------------------------------------------------");
 best_parameters = best_result["best_parameters"];
-//my_param = params[i_no_activity];
-//my_param["value"] = best_parameters[i_no_activity];
 
 // 14
 (params[i_train_window_slow_period])["value"] = best_parameters[i_train_window_slow_period];
 
 // 16
-//i_slope_long = count(params);
-//params += (my_param = new("dict"));
-//my_param["name"] = "slope_long";
-//my_param["value"] = 0.01n;//iter(1.2n, 1.2n, 2n);
-(params[i_slope_long])["value"] = iter(0n, 2.4n, 0.24n);
+slope_long_max = LR_strategy_Slope_Max(best_parameters[i_train_window_period], "high", imitator.start_time, imitator.end_time);
+//slope_long_max = params[i_slope_long];
+//slope_long_max = slope_long_max["value"];
+//slope_long_max *= 2n;
+(params[i_slope_long])["value"] = iter(0n, slope_long_max, slope_long_max / 10n);
 
 // 17
-//i_slope_short = count(params);
-//params += (my_param = new("dict"));
-//my_param["name"] = "slope_short";
-//my_param["value"] = -0.01n;//iter(-1.2n, -1.2n, -2n);
-(params[i_slope_short])["value"] = iter(0n, -2.4n, -0.24n);
-
-// 18
-//my_param = params[i_slope_long_level];
-//my_param["value"] = iter(0n, -0.18n, -0.018n);
-
-// 19
-//my_param = params[i_slope_short_level];
-//my_param["value"] = iter(0n, 0.18n, 0.018n);
+slope_short_min = LR_strategy_Slope_Min(best_parameters[i_train_window_period], "low", imitator.start_time, imitator.end_time);
+//slope_short_min = params[i_slope_short];
+//slope_short_min = slope_short_min["value"];
+//slope_short_min *= 2n;
+(params[i_slope_short])["value"] = iter(0n, slope_short_min, slope_short_min / 10n);
 
 criteria = "best_equity";
 best_result = Test(
