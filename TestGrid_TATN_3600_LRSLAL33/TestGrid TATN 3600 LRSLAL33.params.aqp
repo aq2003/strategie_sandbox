@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--This is a comment-->
+<atf_data>
+  <userdata>
+    <scalar type="string" value="QM" name="script_className" />
+    <!--+++ imitator-->
+    <scalar type="string" value="10:00 19.04.25" name="imitator_EndDate" />
+    <scalar type="string" value="10:00 19.12.24" name="imitator_StartDate" />
+    <scalar type="string" value="%" name="imitator_coms_type" />
+    <scalar type="double" value="21.35" name="imitator_credit" />
+    <scalar type="double" value="0.056" name="imitator_coms" />
+    <scalar type="double" value="200000" name="imitator_equity" />
+    <!--*** imitator-->
+    <!--+++ dealer-->
+    <scalar type="double" value="200000" name="dealer_moneyIn" />
+    <scalar type="" value="" name="dealer_btGetFromStatus" />
+    <scalar type="double" value="0" name="dealer_posAgeIn" />
+    <scalar type="double" value="0" name="dealer_posPriceIn" />
+    <scalar type="string" value="0" name="dealer_tradeLimit" />
+    <scalar type="string" value="0" name="dealer_useCredit" />
+    <scalar type="double" value="0" name="dealer_amount" />
+    <scalar type="string" value="0" name="dealer_portfolioType" />
+    <scalar type="double" value="0" name="dealer_portfolio" />
+    <scalar type="string" value="l" name="dealer_saldoIn_type" />
+    <scalar type="" value="" name="dealer_lbl_amount" />
+    <scalar type="double" value="20" name="dealer_riskS" />
+    <scalar type="double" value="20" name="dealer_riskL" />
+    <scalar type="double" value="0" name="dealer_saldoIn" />
+    <scalar type="string" value="SPOT" name="dealer_market" />
+    <scalar type="string" value="" name="dealer_client" />
+    <scalar type="string" value="" name="dealer_modeS" />
+    <scalar type="string" value="" name="dealer_modeL" />
+    <scalar type="string" value="Imit" name="dealer_tradeMode" />
+    <!--*** dealer-->
+    <!--+++ log-->
+    <scalar type="int" value="0" name="log_logLevel" />
+    <scalar type="string" value="Yes" name="log_logAllowed" />
+    <!--*** log-->
+    <!--+++ general-->
+    <scalar type="string" value="TestGrid_TATN_3600_LRSLAL33" name="general_Description" />
+    <!--*** general-->
+  </userdata>
+</atf_data>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<atf_data>
+    <userdata>
+        <scalar type="string" value="QM" name="script_className" />
+        <scalar type="string" value="Yes" name="log_logAllowed" />
+        <scalar type="int" value="0" name="log_logLevel" />
+        <scalar type="string" value="Test_VKCO_3600_LR" name="general_Description" />
+        <scalar type="string" value="" name="dealer_client" />
+        <scalar type="string" value="" name="dealer_market" />
+        <scalar type="double" value="100" name="dealer_riskL" />
+        <scalar type="double" value="100" name="dealer_riskS" />
+        <scalar type="string" value="" name="dealer_modeL" />
+        <scalar type="string" value="" name="dealer_modeS" />
+        <scalar type="string" value="Real" name="dealer_tradeMode" />
+        <scalar type="double" value="100000" name="dealer_moneyIn" />
+        <scalar type="double" value="100000" name="imitator_equity" />
+        <scalar type="double" value="0.04" name="imitator_coms" />
+        <scalar type="string" value="%" name="imitator_coms_type" />
+        <scalar type="double" value="9" name="imitator_credit" />
+        <scalar type="string" value="18:21 10.02.23" name="imitator_StartDate" />
+        <scalar type="string" value="18:21 09.02.25" name="imitator_EndDate" />
+    </userdata>
+</atf_data>
