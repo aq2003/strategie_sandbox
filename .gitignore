@@ -1,7 +1,6 @@
-*status.xml
+*.status.xml
 *.aql
-*.aqp
-*script.csv
+*.script.csv
 *-QMIndicator.csv
 *-QMEquityIndicator.csv
 *.csv
