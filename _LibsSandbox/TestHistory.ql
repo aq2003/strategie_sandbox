@@ -326,6 +326,8 @@ _Test(
 			+ ";best_equity=;" + best_values["equity"] + ";best_max_equity=;" + best_values["max_equity"] + ";best_min_equity=;" + best_values["min_equity"]
 			+ msg_best_parameters 
 		);
+		
+		best_values["mean_equity"] += equity;
 					
 		reset_history();
 		
@@ -387,6 +389,7 @@ Test(
 	best_values["max_equity"] = 0p;
 	best_values["min_equity"] = 0p;
 	best_values["target"] = 0p;
+	best_values["mean_equity"] = 0p;
 		
 	// --- best values preparing ------------------------------------------------------------------------------
 		
@@ -415,16 +418,18 @@ Test(
 	result = new("dict");
 	result["best_values"] = best_values;
 	result["best_parameters"] = best_parameters;
+	
+	best_values["mean_equity"] /= total_count;
 		
 	log("Test_stopped;" 
 		+ ";equity=;" + equity + ";account=;" + account
-		+ ";best_equity=;" + best_values["equity"] + ";best_max_equity=;" + best_values["max_equity"] + ";best_min_equity=;" + best_values["min_equity"]
+		+ ";best_equity=;" + best_values["equity"] + ";best_max_equity=;" + best_values["max_equity"] + ";best_min_equity=;" + best_values["min_equity"] + ";mean_equity=;" + best_values["mean_equity"]
 		+ msg_best_parameters 
 	);
 		
 	system.log("Test_stopped;" 
 		+ ";equity=;" + equity + ";account=;" + account
-		+ ";best_equity=;" + best_values["equity"] + ";best_max_equity=;" + best_values["max_equity"] + ";best_min_equity=;" + best_values["min_equity"]
+		+ ";best_equity=;" + best_values["equity"] + ";best_max_equity=;" + best_values["max_equity"] + ";best_min_equity=;" + best_values["min_equity"] + ";mean_equity=;" + best_values["mean_equity"]
 		+ msg_best_parameters 
 	)
 };

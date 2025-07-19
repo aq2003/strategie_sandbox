@@ -419,10 +419,13 @@ LR_strategy_long_SlopeLevel_AdaptiveLots(
 		+ ";nextTSlong_time=;" + candle.time[-1c] + ";nextTSlong=;" + _nextTSlong + ";slope_long=;" + _slope_long);
 		
 	_slope_long = ind("LinearRegression", "slope", "low", "once", "low", candle.time[nextTSlong_index - 2c], candle.time[-1c]);
+	_absSLlong = (pos.price - (p_safety_stock * p_risk_L)) << account > my_account;
 	
 	{
 		_slope_long = pslope_long_start << _slope_long < pslope_long_start;
-		_nextTSlong += (abs(nextTSlong_index) / 1c * _slope_long * 1p);
+		//_nextTSlong += (abs(nextTSlong_index) / 1c * _slope_long * 1p);
+		_nextTSlong = _absSLlong;
+		
 		log("long_lr_break_open_following;start_slope" 
 			+ ";start_time=;" + candle.time[nextTSlong_index] + ";start_low=;" + low[nextTSlong_index] 
 			+ ";nextTSlong_time=;" + candle.time[-1c] + ";nextTSlong=;" + _nextTSlong 
@@ -438,7 +441,6 @@ LR_strategy_long_SlopeLevel_AdaptiveLots(
 		);
 	};
 	
-	_absSLlong = (pos.price - (p_safety_stock * p_risk_L)) << account > my_account;
 	log("long_lr_break_open_following;pos.price=;" + pos.price + ";account=;" + account + ";lots=;" + lots 
 		+ ";start_time=;" + candle.time[nextTSlong_index] + ";start_low=;" + low[nextTSlong_index] 
 		+ ";nextTSlong_time=;" + candle.time[-1c] + ";nextTSlong=;" + _nextTSlong + ";slope_long=;" + _slope_long
@@ -513,10 +515,13 @@ LR_strategy_short_SlopeLevel_AdaptiveLots(
 		+ ";nextTSshort_time=;" + candle.time[-1c] + ";nextTSshort=;" + _nextTSshort + ";slope_short=;" + _slope_short);
 		
 	_slope_short = ind("LinearRegression", "slope", "high", "once", "high", candle.time[nextTSshort_index - 2c], candle.time[-1c]);
+	_absSLshort = (pos.price + (p_safety_stock * p_risk_S)) << account < my_account;
 	
 	{
 		_slope_short = pslope_short_start << _slope_short > pslope_short_start;
-		_nextTSshort += (abs(nextTSshort_index) / 1c * _slope_short * 1p);
+		//_nextTSshort += (abs(nextTSshort_index) / 1c * _slope_short * 1p);
+		_nextTSshort = _absSLshort;
+		
 		log("short_lr_break_open_following;start_slope" 
 			+ ";start_time=;" + candle.time[nextTSshort_index] + ";start_high=;" + high[nextTSshort_index] 
 			+ ";nextTSshort_time=;" + candle.time[-1c] + ";nextTSshort=;" + _nextTSshort 
@@ -532,7 +537,6 @@ LR_strategy_short_SlopeLevel_AdaptiveLots(
 		);
 	};
 	
-	_absSLshort = (pos.price + (p_safety_stock * p_risk_S)) << account < my_account;
 	log("short_lr_break_open_following;pos.price=;" + pos.price + ";account=;" + account + ";lots=;" + lots 
 		+ ";start_time=;" + candle.time[nextTSshort_index] + ";start_high=;" + high[nextTSshort_index] 
 		+ ";nextTSshort_time=;" + candle.time[-1c] + ";nextTSshort=;" + _nextTSshort + ";slope_short=;" + _slope_short

@@ -214,29 +214,35 @@ LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
 {
 	result = 0n;
 	offset = LR_strategy_condition_start_time();
-	result = 
-	(
-		(
+	//result = 
+	//(
+	//	(
 		// The candle time is in working hours and no open position
-		/*con0 =*/ (time < expiration_time & (time >= _day_start_time & time < _day_end_time | time >= _night_start_time & time < _night_end_time)) 
-		& account == 0l
+		con0 = (
+				time < expiration_time 
+				& (time >= _day_start_time & time < _day_end_time | time >= _night_start_time & time < _night_end_time) 
+				& account == 0l
+			);
 		
 		// Last close crossed up high predicted high line
-		& /*con1 =*/ (close[offset] #^ ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset])
+		//& 
+		con1 = (close[offset] #^ ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset]);
 		
 		// Last close is not higher than low predicted resistance 
 		// OR last slope of low predicted support is positive 
 		// OR ???last close is not lower than high predicted resistance???
-		& /*con2 =*/ ((
+		//& 
+		con2 = (
 			ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[offset] > 0n
 		|
 			close[offset] < ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[offset]
 		|
 			close[offset] > ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[offset]
-		))
+		);
 		
 		// Last slope of predicted high is more than slope_long_level parameter
-		& /*con3 =*/ (ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] > slope_long_level)		
+		//& 
+		con3 = (ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] > slope_long_level);		
 		
 		// Last close is more than close train_window ago and last predicted high slope is more than high slope train_window ago
 		// OR last close is less than close train_window ago and last predicted high slope is less than high slope train_window ago
@@ -249,26 +255,37 @@ LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
 		//))
 		
 		// Difference between predicted high support and predicted low resistance is more than channel_width parameter
-		& /*con5 =*/ ((ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
-			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width)
+		//& 
+		con5 = ((ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
+			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width);
 			
 		// Last close is higher than predicted high support
-		& /*con6 =*/ close[offset] > ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)
-		)
+		//& 
+		con6 = (close[offset] > ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support));
+		//)
+		//|
 		
-		|
 		// Last close crossed up high predicted resistance line
-		(
-			/*con7 =*/ (close[offset] #^ ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[offset]
-			& close[offset] > ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset])
-		)
-	);
+		//(
+			con7 = (close[offset] #^ ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[offset]
+			& close[offset] > ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset]);
+		//)
+	//);
 	
-	/* Debug Section 2.06.2024
+	result = ((con0 & con1 & con2 & con3 & con5 & con6) | con7);
+	
+	/* Debug Section 2.06.2024*/
 	log("LR_strategy_long_condition_SlopeLevel_AdaptiveLots;offset=;" + offset + ";result=;" + result
-		+ ";con0=;" + con0 + ";con1=;" + con1 + ";con2=;" + con2 + ";con3=;" + con3 + ";con4=;" + con4 + ";con5=;" + con5 + ";con6=;" + con6
+		+ ";con0=;" + con0 + ";con1=;" + con1 + ";con2=;" + con2 + ";con3=;" + con3 
+		+ /*";con4=;" + con4 +*/ ";con5=;" + con5 + ";con6=;" + con6 + ";con7=;" + con7
 	);
-	*/
+	/**/
+	
+	{
+		~ << result == false
+	||
+		result = result << result == true
+	};
 };
 
 // A service method of LR_strategy_short_SlopeLevel_AdaptiveLots family.
@@ -296,29 +313,35 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 {
 	result = 0n;
 	offset = LR_strategy_condition_start_time();
-	result = 
-	(
-		(
+	//result = 
+	//(
+	//	(
 		// The candle time is in working hours and no open position
-		/*con0 =*/ (time < expiration_time & (time >= _day_start_time & time < _day_end_time | time >= _night_start_time & time < _night_end_time)) 
-		& account == 0l
+		con0 = (
+			time < expiration_time 
+			& (time >= _day_start_time & time < _day_end_time | time >= _night_start_time & time < _night_end_time) 
+			& account == 0l
+		);
 		
 		// Last close crossed down low predicted low line
-		& /*con1 =*/ (close[offset] #_ ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[offset])
+		//& 
+		con1 = (close[offset] #_ ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[offset]);
 		
 		// Last slope of predicted high resistance is negative 
 		// OR last close is not lower than predicted high support 
 		// OR ???last close is not higher than predicted low resistance???
-		& /*con2 =*/ ((
+		//& 
+		con2 = (
 			ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[offset] < 0n
 		|
 			close[offset] > ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[offset]
 		|
 			close[offset] < ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[offset]
-		))
+		);
 		
 		// Last slope of predicted low is less than slope_short_level parameter
-		& /*con3 =*/ (ind("LinearRegression", "slope", "low", predict_window, high_offset, train_window)[-1c] < slope_short_level)
+		//& 
+		con3 = (ind("LinearRegression", "slope", "low", predict_window, high_offset, train_window)[-1c] < slope_short_level);
 		
 		// Last close is more than close train_window ago and last predicted high slope is more than high slope train_window ago
 		// OR last close is less than close train_window ago and last predicted high slope is less than high slope train_window ago
@@ -331,26 +354,37 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 		//))
 		
 		// Difference between predicted high support and predicted low resistance is more than channel_width parameter
-		& /*con5 =*/ ((ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
-			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width)
+		//& 
+		con5 = ((ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
+			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width);
 			
 		// Last close is lower than predicted low resistance
-		& /*con6 =*/ close[offset] < ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)
-		)
-
-		|
+		//& 
+		con6 = (close[offset] < ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance));
+	//	)
+	//	|
+		
 		// Last close crossed down predicted low resistance line
-		(
-			/*con7 =*/ (close[offset] #_ ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[offset]
-			& close[offset] < ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[offset])
-		)
-	);
+	//	(
+			con7 = (close[offset] #_ ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[offset]
+			& close[offset] < ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[offset]);
+	//	)
+	//);
 	
-	/* Debug Section 2.06.2024
+	result = ((con0 & con1 & con2 & con3 & con5 & con6) | con7);
+	
+	/* Debug Section 2.06.2024*/
 	log("LR_strategy_short_condition_SlopeLevel_AdaptiveLots;offset=;" + offset + ";result=;" + result
-		+ ";con0=;" + con0 + ";con1=;" + con1 + ";con2=;" + con2 + ";con3=;" + con3 + ";con4=;" + con4 + ";con5=;" + con5 + ";con6=;" + con6
+		+ ";con0=;" + con0 + ";con1=;" + con1 + ";con2=;" + con2 
+		+ ";con3=;" + con3 + /*";con4=;" + con4 +*/ ";con5=;" + con5 + ";con6=;" + con6 + ";con7=;" + con7
 	);
-	*/
+	/**/
+	
+	{
+		~ << result == false
+	||
+		result = result << result == true
+	};
 };
 // A service method of LR_strategy_SlopeLevel_AdaptiveLots family.
 // Opens a long position
@@ -616,27 +650,32 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 	absSLshort = nextTSshort;
 
 	{
-		predict_window_type = "candle";
+		//predict_window_type = "candle";
 		step = 0n; 
 		..
 		{
 			log("step_=;" + step 
 			+ ";account_=;" + account 
 			+ ";equity_=;" + equity 
-			+ ";high_=;" + ind("LinearRegression", "line", "high", predict_window_type, high_offset, train_window) 
-			+ ";hhigh_=;" + hhigh = ind("LinearRegression", "high", "high", predict_window_type, high_offset, train_window) 
-			+ ";lhigh_=;" + ind("LinearRegression", "low", "high", predict_window_type, high_offset, train_window) 
-			+ ";high.slope_=;" + ind("LinearRegression", "slope", "high", predict_window_type, high_offset, train_window) 
-			+ ";high.mae_=;" + ind("LinearRegression", "mae", "high", predict_window_type, high_offset, train_window) 
-			+ ";low_=;" + ind("LinearRegression", "line", "low", predict_window_type, low_offset, train_window)
-			+ ";hlow_=;" + ind("LinearRegression", "high", "low", predict_window_type, low_offset, train_window)
-			+ ";llow_=;" + llow = ind("LinearRegression", "low", "low", predict_window_type, low_offset, train_window)
-			+ ";llow.slope_=;" + ind("LinearRegression", "slope", "low", predict_window_type, low_offset, train_window)
-			+ ";llow.mae_=;" + ind("LinearRegression", "mae", "low", predict_window_type, low_offset, train_window)
+			+ ";high_=;" + ind("LinearRegression", "line", "high", predict_window, high_offset, train_window) 
+			+ ";hhigh_=;" + ind("LinearRegression", "high", "high", predict_window, high_offset, train_window) 
+			+ ";lhigh_=;" + ind("LinearRegression", "low", "high", predict_window, high_offset, train_window) 
+			+ ";high.slope_=;" + ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window) 
+			+ ";high.mae_=;" + ind("LinearRegression", "mae", "high", predict_window, high_offset, train_window) 
+			+ ";low_=;" + ind("LinearRegression", "line", "low", predict_window, low_offset, train_window)
+			+ ";hlow_=;" + ind("LinearRegression", "high", "low", predict_window, low_offset, train_window)
+			+ ";llow_=;" + ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)
+			+ ";llow.slope_=;" + ind("LinearRegression", "slope", "low", predict_window, low_offset, train_window)
+			+ ";llow.mae_=;" + ind("LinearRegression", "mae", "low", predict_window, low_offset, train_window)
 			+ ";nextTSlong_=;" + nextTSlong + ";slope_long_=;" + slope_long
 			+ ";nextTSshort_=;" + nextTSshort + ";slope_short_=;" + slope_short
-			+ ";train_window_=;" + train_window
-			+ ";channel_width_=;" + (hhigh - llow)
+			+ ";resist_=;" + ind("LinearRegression", "line", "high", predict_window_resistance, "high", train_window_resistance) 
+			+ ";hresist_=;" + ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance) 
+			+ ";lresist_=;" + lresist = ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance) 
+			+ ";support_=;" + ind("LinearRegression", "line", "low", predict_window_support, "low", train_window_support) 
+			+ ";hsupport_=;" + hsupport = ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support) 
+			+ ";lsupport_=;" + ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support) 
+			+ ";channel_width_=;" + (lresist - hsupport)
 			);
 			step += 1n; 
 				

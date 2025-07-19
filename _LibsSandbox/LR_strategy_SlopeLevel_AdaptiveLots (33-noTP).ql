@@ -862,16 +862,16 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 				{
 					log("looking_for_closing_long") << account > 0l;
 					{
-						lock = 1n
-						 << account > 0l & lock == 0n
-							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
-							& high[-1c] > (LRSL = ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
-							& close[-1c] < (LRSL = ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
-							& !(ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[-1c] > 0n)
-						;
-						stop();
-						log("long_lr_TP;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";LRSL=;" + LRSL + ";no_activity=;" + abs(no_activity)) << account == 0l
-					||
+						//lock = 1n
+						// << account > 0l & lock == 0n
+						//	& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
+						//	& high[-1c] > (LRSL = ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
+						//	& close[-1c] < (LRSL = ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
+						//	& !(ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[-1c] > 0n)
+						//;
+						//stop();
+						//log("long_lr_TP;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";LRSL=;" + LRSL + ";no_activity=;" + abs(no_activity)) << account == 0l
+					//||
 						lock = 1n
 						 << account > 0l & lock == 0n
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
@@ -914,16 +914,16 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 				||
 					log("looking_for_closing_short") << account < 0l;
 					{
-						lock = 1n
-						 << account < 0l & lock == 0n
-							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
-							& low[-1c] < (LRSL = ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[-1c])
-							& close[-1c] > (LRSL = ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[-1c])
-							& !(ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[-1c] < 0n)
-						;
-						stop();
-						log("short_lr_TP;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";LRSL=;" + LRSL + ";no_activity=;" + abs(no_activity)) << account == 0l
-					||
+						//lock = 1n
+						// << account < 0l & lock == 0n
+						//	& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
+						//	& low[-1c] < (LRSL = ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[-1c])
+						//	& close[-1c] > (LRSL = ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[-1c])
+						//	& !(ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[-1c] < 0n)
+						//;
+						//stop();
+						//log("short_lr_TP;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";LRSL=;" + LRSL + ";no_activity=;" + abs(no_activity)) << account == 0l
+					//||
 						lock = 1n
 						 << account < 0l & lock == 0n
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
@@ -1067,6 +1067,25 @@ TestAdapter(params) :=
 
 		predict_window_support,	// Support line predict window type := ("week" || "day" || "candle")
 		train_window_support,		// Support line width of training window in candle number
+		predict_window_resistance,	// Resistance line predict window type := ("week" || "day" || "candle")
+		train_window_resistance,	// Resistance line width of training window in candle number
+
+		channel_width,	// Width of signal channel to disable trading
+	
+		no_activity_periods
+	);
+	
+	// best_values := (equity, max_equity, min_equity, target)
+	res = new("dict");
+	res["equity"] = equity;
+	res["max_equity"] = dealer.max_equity;
+	res["min_equity"] = dealer.min_equity;
+	res["target"] = equity;
+	
+	log("TestAdapter_LR_strategy_SlopeLevel_AdaptiveLots_has_finished;");
+	result = res;
+};
+rt line width of training window in candle number
 		predict_window_resistance,	// Resistance line predict window type := ("week" || "day" || "candle")
 		train_window_resistance,	// Resistance line width of training window in candle number
 

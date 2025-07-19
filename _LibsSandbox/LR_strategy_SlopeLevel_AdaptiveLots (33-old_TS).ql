@@ -695,6 +695,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 			
 			calc_nextTSlong = (nextTSlong + 1p * slope_long);
 			
+			/*Aq 13.07.2025
 			{
 				nextTSlong = my_nextTSlong << my_nextTSlong >= calc_nextTSlong;
 				// Debug
@@ -703,7 +704,9 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 				nextTSlong = calc_nextTSlong << calc_nextTSlong > my_nextTSlong;
 				// Debug
 				//debug_str_l += ";calc_nextTSlong_the_best";
-			};
+			};*/
+			//Aq 13.07.2025
+			nextTSlong = my_nextTSlong;
 					
 			// Debug
 			//log(debug_str_l + ";my_nextTSlong=;" + my_nextTSlong + ";old_nextTSlong=;" + old_nextTSlong + ";nextTSlong=;" + nextTSlong
@@ -742,6 +745,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 			
 			calc_nextTSshort = (nextTSshort + 1p * slope_short);
 			
+			/*Aq 13.07.2025
 			{
 				nextTSshort = my_nextTSshort << my_nextTSshort <= calc_nextTSshort;
 				// Debug
@@ -750,7 +754,9 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 				nextTSshort = calc_nextTSshort << calc_nextTSshort < my_nextTSshort;
 				// Debug
 				//debug_str_s += ";calc_nextTSshort_the_best";
-			};
+			};*/
+			//Aq 13.07.2025
+			nextTSshort = my_nextTSshort;
 					
 			// Debug
 			//log(debug_str_s + ";my_nextTSshort=;" + my_nextTSshort + ";old_nextTSshort=;" + old_nextTSshort + ";nextTSshort=;" + nextTSshort

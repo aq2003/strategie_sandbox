@@ -76,12 +76,26 @@ iter(pstart, pstop, pstep) :=
 
 my_stop() :=
 {
-	..[account != 0l]
+	my_account = account;
+	
 	{
-		log("my_stop_sending;" + "account=;" + account);
-		stop();
-		~
+		log("my_stop_sending;" + "account=;" + account) << account < 0l;
+		..[account != 0l]
+		{
+			stop();
+			~
+		}
+	||
+		log("my_stop_sending;" + "account=;" + account) << account > 0l;
+		..[account != 0l]
+		{
+			stop();
+			~
+		}
+	||
+		log("no_stop_sending;" + "account=;" + account) << account == 0l;
 	};
+	
 	log("my_stop_finished;" + "account=;" + account)
 };
 

@@ -869,7 +869,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 							& close[-1c] < (LRSL = ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[-1c])
 							& !(ind("LinearRegression", "slope", "low", predict_window_support, "low", train_window_support)[-1c] > 0n)
 						;
-						stop();
+						my_stop();
 						log("long_lr_TP;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";LRSL=;" + LRSL + ";no_activity=;" + abs(no_activity)) << account == 0l
 					||
 						lock = 1n
@@ -877,7 +877,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
 							& close[-1c] < (LRSL = nextTSlong)
 						;
-						stop();
+						my_stop();
 						log("long_lr_TS;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";LRSL=;" + LRSL + ";no_activity=;" + abs(no_activity)) << account == 0l
 					||
 						no_activity = no_activity_periods << account > 0l;
@@ -897,7 +897,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 						lock = 1n
 						 << (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time) 
 								& lock == 0n;
-						stop();
+						my_stop();
 						log("long_lr_NAS;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";no_activity=;" + no_activity) 
 						 << account == 0l
 					||
@@ -906,7 +906,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
 							& low < absSLlong
 						;
-						stop();
+						my_stop();
 						log("long_lr_SL;pos.abs_profit=;" + pos.abs_profit + ";pos.profit=;" + pos.profit
 							+ ";pos.age=;" + pos.age + ";absSLlong=;" + absSLlong + ";no_activity=;" + abs(no_activity)
 						) << account == 0l
@@ -921,7 +921,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 							& close[-1c] > (LRSL = ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[-1c])
 							& !(ind("LinearRegression", "slope", "high", predict_window_resistance, "high", train_window_resistance)[-1c] < 0n)
 						;
-						stop();
+						my_stop();
 						log("short_lr_TP;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";LRSL=;" + LRSL + ";no_activity=;" + abs(no_activity)) << account == 0l
 					||
 						lock = 1n
@@ -929,7 +929,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
 							& close[-1c] > (LRSL = nextTSshort)
 						;
-						stop();
+						my_stop();
 						log("short_lr_TS;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";LRSL=;" + LRSL + ";no_activity=;" + abs(no_activity)) << account == 0l
 					||
 						no_activity = no_activity_periods << account < 0l;
@@ -949,7 +949,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 						lock = 1n
 						 << (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time) 
 								& lock == 0n;
-						stop();
+						my_stop();
 						log("short_lr_NAS;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";no_activity=;" + no_activity) 
 							<< account == 0l
 					||
@@ -958,7 +958,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
 							& high > absSLshort
 						;
-						stop();
+						my_stop();
 						log("short_lr_SL;pos.abs_profit=;" + pos.abs_profit + ";pos.profit=;" + pos.profit
 							+ ";pos.age=;" + pos.age + ";absSLshort=;" + absSLshort + ";no_activity=;" + abs(no_activity)
 						) << account == 0l
@@ -970,7 +970,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 
 	log("LR_strategy_SlopeLevel_AdaptiveLots_has_expired;" + "expiration_stop");
 
-	stop();
+	my_stop();
 
 	log("LR_strategy_SlopeLevel_AdaptiveLots_has_finished;" + "script_stopped")
 };
