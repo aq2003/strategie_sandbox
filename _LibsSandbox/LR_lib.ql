@@ -54,13 +54,16 @@
 
 my_stop() :=
 {
-	..[account != 0l]
+	log("stop_started...");
+	stop();
+	my_time = time;
+	
 	{
-		log("my_stop_sending;" + "account=;" + account);
-		stop();
-		~
-	};
-	log("my_stop_finished;" + "account=;" + account)
+		log("stop_finished") << account == 0l
+	||
+		log("stop_timeout_expired") << time > my_time + 5M;
+		break(); break();
+	}
 };
 
 find_max_price(period) :=
