@@ -1,8 +1,32 @@
-// 23.11.2024 15:01:33 Imit_MGNT_3600_LR ql script
-// Created 23.11.2024 15:01:33
+// 28.04.2025 20:03:35 Imit_CRM5_3600_LR ql script
+// Created 28.04.2025 20:03:35
 
-// 13.10.2024 20:12:22 I_MGNT_3600_LR ql script
-// Created 13.10.2024 20:12:22
+// 19.04.2025 10:55:29 Imit_SiM5_3600_LR ql script
+// Created 19.04.2025 10:55:29
+
+// 25.03.2025 20:59:28 SiM5_3600_LRSLAL ql script
+// Created 25.03.2025 20:59:28
+
+// 14.01.2025 9:33:19 VBH5_3600_LRSLAL ql script
+// Created 14.01.2025 9:33:19
+
+// 23.12.2024 8:31:51 MNH5_3600_LRSLAL ql script
+// Created 23.12.2024 8:31:51
+
+// 22.09.2024 20:06:39 MNZ4_3600_LRSLAL ql script
+// Created 22.09.2024 20:06:39
+
+// 16.07.2024 14:53:37 MNU_3600_LRSLAL ql script
+// Created 16.07.2024 14:53:37
+
+// 16.07.2024 14:34:28 MNU_900_LRSLAL ql script
+// Created 16.07.2024 14:34:28
+
+// 16.07.2024 10:58:29 VKU4_900_LRSLAL ql script
+// Created 16.07.2024 10:58:29
+
+// 21.04.2024 20:03:03 PLZL_3600_LR ql script
+// Created 21.04.2024 20:03:03
 
 // 11.02.2024 21:44:00 MGNT_3600_LR ql script
 // Created 11.02.2024 21:44:00
@@ -59,41 +83,41 @@
 // Created 18.09.2020 9:56:34
 
 // +++ parameters -----------------------------------------------------------------------------------------
-imitator.commission = 0.056%;
-imitator.credit = 21.35%;
+//imitator.commission = 15p;
+//imitator.credit = 0%;
 
 safety_stock = 5%;	// Safety stock in percents to the equity
-risk_L = 20%;		// Risk rate in percents for long positions
-risk_S = 20%;		// Risk rate in percents for short positions
+risk_L = 100%;		// Risk rate in percents for long positions
+risk_S = 100%;		// Risk rate in percents for short positions
 
-expiration_time = 15:00_21.12.25;
+expiration_time = 15:00_20.06.25;
 
 predict_window = "candle"; 
-train_window = 131c;
+train_window = 150c;
 high_offset = "none";
 low_offset = "none";
 
-slope_long_start = 1.2n;
-slope_short_start = -1.2n;
-slope_long_level = -6n;
-slope_short_level = 6n;
+slope_long_start = 0.0026n;
+slope_short_start = -0.0026n;
+slope_long_level = -0.013n;
+slope_short_level = 0.013n;
 
 predict_window_support = "week";
-train_window_support = 941c;
+train_window_support = 800c;
 predict_window_resistance = "week";
-train_window_resistance = 941c;
+train_window_resistance = 800c;
 
 channel_width = /*950*/0p;
 
-no_activity_periods = 3c;
+no_activity_periods = -1c;
 
-day_start_time = 10:00;	// Start time of the day trading session
+day_start_time = 09:00;	// Start time of the day trading session
 day_end_time = 19:00;	// End time of the day trading session
 night_start_time = 19:10;	// Start time of the night trading session
 night_end_time = 23:49;	// End time of the night trading session
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (33-my_stop).aql");
+import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (33).aql");
 
 LR_strategy_SlopeLevel_AdaptiveLots(
 	safety_stock,	// Safety stock in percents to the equity

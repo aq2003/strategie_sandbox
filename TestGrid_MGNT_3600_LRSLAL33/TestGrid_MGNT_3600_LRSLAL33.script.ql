@@ -22,9 +22,18 @@
 // +++ parameters -----------------------------------------------------------------------------------------
 base_log_level = "Error";
 
+//imitator.end_time = 10:00_18.01.25;
+//imitator.start_time -= 122D;
+
 import("%QTrader_Libs%\QTrader_stdlib.aql");
 
 script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (33).aql";
+
+turn_1_abs = true;
+turn_2_abs = true;
+turn_3_abs = true;
+
+equity_treshold = (equity + 25%);
 
 // target_type := ("best_equity" || "equity_closest_to_max_equity")
 target_type = "best_equity";
@@ -62,7 +71,7 @@ my_param["value"] = 15:00_15.12.25;
 i_day_start_time = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "day_start_time";
-my_param["value"] = 10:00;
+my_param["value"] = 07:00;
 
 // 5 End time of the day trading session
 i_day_end_time = count(params);
@@ -124,13 +133,13 @@ my_param["value"] = iter(10c, 300c, 1c);
 i_slope_long = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_long";
-my_param["value"] = 0n;//iter(1.2n, 1.2n, 2n);
+my_param["value"] = 1.2n;//iter(1.2n, 1.2n, 2n);
 
 // 17
 i_slope_short = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_short";
-my_param["value"] = 0n;//iter(-1.2n, -1.2n, -2n);
+my_param["value"] = -1.2n;//iter(-1.2n, -1.2n, -2n);
 
 // 18
 i_slope_long_level = count(params);
@@ -159,69 +168,88 @@ my_param["value"] = -1c;
 // --- parameters preparing -------------------------------------------------------------------------------
 
 import("%QTrader_Libs%\TestHistory.aql");
-//import("Z:\Documents\My Stocks\Stock\SASHA-SERVER\QM_Imit\Strategy Sandbox\LibsSandbox\TestHistory.aql");
 
 // +++ 1st turn ---------------------------------------------------------------------------------------------------------------------------------
+best_result = 0n;
 // criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
-log("+++_1st_turn ---------------------------------------------------------------------------------------------------------------------------------");
-criteria = "best_equity";
-best_result = Test(
-	params, // parameters := (..parameter); parameter := (name, start, stop, step, current, index)
-	criteria, // Optimization criteria; criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
-	base_log_level,
-	script_to_test
-);
-log("---_1st_turn ---------------------------------------------------------------------------------------------------------------------------------");
+{
+	log("+++_1st_turn ---------------------------------------------------------------------------------------------------------------------------------")
+		<< turn_1_abs == true;
+	criteria = "best_equity";
+	_best_result = Test(
+		params, // parameters := (..parameter); parameter := (name, start, stop, step, current, index)
+		criteria, // Optimization criteria; criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
+		base_log_level,
+		script_to_test
+	);
+	log("---_1st_turn ---------------------------------------------------------------------------------------------------------------------------------");
+||
+	log("***_1st_turn is missed") << turn_1_abs != true;	
+	system.log("Test_stopped;***_1st_turn is missed")	
+};
+
+mean_equity = best_result["best_values"];
+mean_equity = mean_equity["mean_equity"];
+turn_2 = (turn_3 = (mean_equity > equity_treshold));
 // --- 1st turn ---------------------------------------------------------------------------------------------------------------------------------
 
 // +++ 2nd turn ---------------------------------------------------------------------------------------------------------------------------------
-log("+++_2nd_turn ---------------------------------------------------------------------------------------------------------------------------------");
-best_parameters = best_result["best_parameters"];
+{
+	log("+++_2nd_turn ---------------------------------------------------------------------------------------------------------------------------------")
+		<< turn_2 == true & turn_2_abs == true;
+	best_parameters = best_result["best_parameters"];
 
-// 14
-//(params[i_train_window_slow_period])["value"] = best_parameters[i_train_window_slow_period];
-(params[i_train_window_slow_period])["value"] = iter(300c, 2000c, 5c);
+	// 14
+	(params[i_train_window_slow_period])["value"] = iter(300c, 2000c, 5c);
 
-// 15
-(params[i_train_window_period])["value"] = best_parameters[i_train_window_period];
+	// 15
+	(params[i_train_window_period])["value"] = best_parameters[i_train_window_period];
 
-criteria = "best_equity";
-best_result = Test(
-	params, // parameters := (..parameter); parameter := (name, start, stop, step, current, index)
-	criteria, // Optimization criteria; criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
-	base_log_level,
-	script_to_test
-);
-log("---_2nd_turn ---------------------------------------------------------------------------------------------------------------------------------");
+	criteria = "best_equity";
+	_best_result = Test(
+		params, // parameters := (..parameter); parameter := (name, start, stop, step, current, index)
+		criteria, // Optimization criteria; criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
+		base_log_level,
+		script_to_test
+	);
+	log("---_2nd_turn ---------------------------------------------------------------------------------------------------------------------------------");
+||
+	log("***_2st_turn is missed") << !(turn_2 == true & turn_2_abs == true);	
+	system.log("Test_stopped;***_2st_turn is missed")	
+};
 // --- 2nd turn ---------------------------------------------------------------------------------------------------------------------------------
 
 // +++ 3rd turn ---------------------------------------------------------------------------------------------------------------------------------
-log("+++_3rd_turn ---------------------------------------------------------------------------------------------------------------------------------");
-best_parameters = best_result["best_parameters"];
+{
+	log("+++_3rd_turn ---------------------------------------------------------------------------------------------------------------------------------")
+		<< turn_3 == true & turn_3_abs == true;
+	best_parameters = best_result["best_parameters"];
 
-// 14
-(params[i_train_window_slow_period])["value"] = best_parameters[i_train_window_slow_period];
+	// 14
+	(params[i_train_window_slow_period])["value"] = best_parameters[i_train_window_slow_period];
 
-// 16
-slope_long_max = LR_strategy_Slope_Max(best_parameters[i_train_window_period], "high", imitator.start_time, imitator.end_time);
-//slope_long_max = params[i_slope_long];
-//slope_long_max = slope_long_max["value"];
-//slope_long_max *= 2n;
-(params[i_slope_long])["value"] = iter(0n, slope_long_max, slope_long_max / 10n);
+	// 16
+	slope_long_max = params[i_slope_long];
+	slope_long_max = slope_long_max["value"];
+	slope_long_max *= 2n;
+	(params[i_slope_long])["value"] = iter(0n, slope_long_max, slope_long_max / 10n);
 
-// 17
-slope_short_min = LR_strategy_Slope_Min(best_parameters[i_train_window_period], "low", imitator.start_time, imitator.end_time);
-//slope_short_min = params[i_slope_short];
-//slope_short_min = slope_short_min["value"];
-//slope_short_min *= 2n;
-(params[i_slope_short])["value"] = iter(0n, slope_short_min, slope_short_min / 10n);
+	// 17
+	slope_short_min = params[i_slope_short];
+	slope_short_min = slope_short_min["value"];
+	slope_short_min *= 2n;
+	(params[i_slope_short])["value"] = iter(0n, slope_short_min, slope_short_min / 10n);
 
-criteria = "best_equity";
-best_result = Test(
-	params, // parameters := (..parameter); parameter := (name, start, stop, step, current, index)
-	criteria, // Optimization criteria; criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
-	base_log_level,
-	script_to_test
-);
-log("---_3rd_turn ---------------------------------------------------------------------------------------------------------------------------------");
+	criteria = "best_equity";
+	_best_result = Test(
+		params, // parameters := (..parameter); parameter := (name, start, stop, step, current, index)
+		criteria, // Optimization criteria; criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
+		base_log_level,
+		script_to_test
+	);
+	log("---_3rd_turn ---------------------------------------------------------------------------------------------------------------------------------");
+||
+	log("***_3st_turn is missed") << !(turn_3 == true & turn_3_abs == true);	
+	system.log("Test_stopped;***_3st_turn is missed")	
+};
 // --- 3rd turn ---------------------------------------------------------------------------------------------------------------------------------

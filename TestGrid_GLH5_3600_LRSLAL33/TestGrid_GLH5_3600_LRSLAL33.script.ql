@@ -216,14 +216,20 @@ best_parameters = best_result["best_parameters"];
 //params += (my_param = new("dict"));
 //my_param["name"] = "slope_long";
 //my_param["value"] = 0.01n;//iter(1.2n, 1.2n, 2n);
-(params[i_slope_long])["value"] = iter(0n, 2.4n, 0.24n);
+slope_long_max = params[i_slope_long];
+slope_long_max = slope_long_max["value"];
+slope_long_max *= 2n;
+(params[i_slope_long])["value"] = iter(0n, slope_long_max, slope_long_max / 10n);
 
 // 17
 //i_slope_short = count(params);
 //params += (my_param = new("dict"));
 //my_param["name"] = "slope_short";
 //my_param["value"] = -0.01n;//iter(-1.2n, -1.2n, -2n);
-(params[i_slope_short])["value"] = iter(0n, -2.4n, -0.24n);
+slope_short_min = params[i_slope_short];
+slope_short_min = slope_short_min["value"];
+slope_short_min *= 2n;
+(params[i_slope_short])["value"] = iter(0n, slope_short_min, slope_short_min / 10n);
 
 // 18
 //my_param = params[i_slope_long_level];

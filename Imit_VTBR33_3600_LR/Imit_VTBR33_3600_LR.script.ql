@@ -1,8 +1,5 @@
-// 23.11.2024 15:01:33 Imit_MGNT_3600_LR ql script
-// Created 23.11.2024 15:01:33
-
-// 13.10.2024 20:12:22 I_MGNT_3600_LR ql script
-// Created 13.10.2024 20:12:22
+// 23.12.2024 10:37:21 VTBR_3600_LR ql script
+// Created 23.12.2024 10:37:21
 
 // 11.02.2024 21:44:00 MGNT_3600_LR ql script
 // Created 11.02.2024 21:44:00
@@ -66,34 +63,36 @@ safety_stock = 5%;	// Safety stock in percents to the equity
 risk_L = 20%;		// Risk rate in percents for long positions
 risk_S = 20%;		// Risk rate in percents for short positions
 
-expiration_time = 15:00_21.12.25;
+expiration_time = 15:00_31.12.25;
+
+// VTBR-01.02.25		170c		1870c		0,0104n		-0,052n		-0,13n		0,13n		-1c			503 453,70p		279386,6388
 
 predict_window = "candle"; 
-train_window = 131c;
+train_window = 170c;
 high_offset = "none";
 low_offset = "none";
 
-slope_long_start = 1.2n;
-slope_short_start = -1.2n;
-slope_long_level = -6n;
-slope_short_level = 6n;
+slope_long_start = 0.0104n;
+slope_short_start = -0.052n;
+slope_long_level = -0.13n;
+slope_short_level = 0.13n;
 
 predict_window_support = "week";
-train_window_support = 941c;
+train_window_support = 1870c;
 predict_window_resistance = "week";
-train_window_resistance = 941c;
+train_window_resistance = 1870c;
 
 channel_width = /*950*/0p;
 
-no_activity_periods = 3c;
+no_activity_periods = -1c;
 
-day_start_time = 10:00;	// Start time of the day trading session
+day_start_time = 07:00;	// Start time of the day trading session
 day_end_time = 19:00;	// End time of the day trading session
 night_start_time = 19:10;	// Start time of the night trading session
 night_end_time = 23:49;	// End time of the night trading session
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (33-my_stop).aql");
+import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (33).aql");
 
 LR_strategy_SlopeLevel_AdaptiveLots(
 	safety_stock,	// Safety stock in percents to the equity
