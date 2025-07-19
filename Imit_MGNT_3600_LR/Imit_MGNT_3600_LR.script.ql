@@ -73,8 +73,8 @@ train_window = 131c;
 high_offset = "none";
 low_offset = "none";
 
-slope_long_start = 0n;
-slope_short_start = 0n;
+slope_long_start = 1.2n;
+slope_short_start = -1.2n;
 slope_long_level = -6n;
 slope_short_level = 6n;
 
