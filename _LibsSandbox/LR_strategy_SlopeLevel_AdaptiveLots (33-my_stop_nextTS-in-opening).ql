@@ -250,6 +250,8 @@ LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
 	// Difference between predicted high support and predicted low resistance is more than channel_width parameter
 	result = (result & /*con5 =*/ ((ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
 			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width));
+			
+	result = (result & /*con8 =*/ close[offset] > _nextTSlong);
 		
 	//result = 
 	//(
@@ -368,6 +370,8 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 	// Difference between predicted high support and predicted low resistance is more than channel_width parameter
 	result = (result & /*con5 =*/ ((ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
 			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width));
+			
+	result = (result & /*con8 =*/ close[offset] < _nextTSshort);
 				
 	//result = 
 	//(
