@@ -251,7 +251,13 @@ LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
 	result = (result & /*con5 =*/ ((ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
 			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width));
 			
-	result = (result & /*con8 =*/ close[offset] > _nextTSlong);
+	{
+		nextTSlong_index = find_min_price_index(train_window) << result == true;
+		_nextTSlong = low[nextTSlong_index] + abs(nextTSlong_index) / 1c * _slope_long * 1p;
+		result = (result & /*con8 =*/ close[offset] > _nextTSlong);
+	||
+		result = result << result == false
+	};
 		
 	//result = 
 	//(
@@ -371,7 +377,13 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 	result = (result & /*con5 =*/ ((ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
 			- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) > channel_width));
 			
-	result = (result & /*con8 =*/ close[offset] < _nextTSshort);
+	{
+		nextTSshort_index = find_max_price_index(train_window) << result == true;
+		_nextTSshort = low[nextTSshort_index] + abs(nextTSshort_index) / 1c * _slope_short * 1p;
+		result = (result & /*con8 =*/ close[offset] < _nextTSshort);
+	||
+		result = result << result == false
+	};
 				
 	//result = 
 	//(
