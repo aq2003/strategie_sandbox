@@ -217,7 +217,7 @@ LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
 	con0 = (con1 = (con2 = (con3 = (con5 = (con6 = (con7 = (con8 = false)))))));
 	con0 = ((time < expiration_time & (time >= _day_start_time & time < _day_end_time | time >= _night_start_time & time < _night_end_time) & account == 0l);
 	{
-		con1 = (close[offset] #^ ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset]) << con0;
+		con1 = (close[offset] #^ ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset]) << con0 == true;
 		con7 = (close[offset] #^ ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[offset]
 				& close[offset] > ind("LinearRegression", "high", "high", predict_window, high_offset, train_window)[offset]);
 		{
@@ -227,41 +227,41 @@ LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
 					close[offset] < ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[offset]
 					|
 					close[offset] > ind("LinearRegression", "high", "high", predict_window_resistance, "high", train_window_resistance)[offset]
-				) << con1;
+				) << con1 == true;
 			{
-				con3 = (ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] > slope_long_level) << con2;
+				con3 = (ind("LinearRegression", "slope", "high", predict_window, high_offset, train_window)[-1c] > slope_long_level) << con2 == true;
 				{
 					con5 = (ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
 							- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support) > channel_width) 
-						<< con3;
+						<< con3 == true;
 					{
-						con6 = (close[offset] > ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) << con5;
+						con6 = (close[offset] > ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) << con5 == true;
 						{
-							nextTSlong_index = find_min_price_index(train_window) << con6;
+							nextTSlong_index = find_min_price_index(train_window) << con6 == true;
 							_nextTSlong = low[nextTSlong_index] + abs(nextTSlong_index) / 1c * _slope_long * 1p;
 							con8 = (close[offset] > _nextTSlong);
 							{
-								result = true << con8
+								result = true << con8 == true
 							||
-								result = false << !con8
+								result = false << con8 != true
 							}
 						||
-							result = false << !con6
+							result = false << con6 != true
 						}
 					||
-						result = false << !con5
+						result = false << con5 != true
 					}
 				||
-					result = false << !con3
+					result = false << con3 != true
 				}
 			||
-				result = false << !con2
+				result = false << con2 != true
 			}
 		||
-			result = (con1 | con7) << !con1
+			result = (con1 | con7) << con1 != true
 		}
 	||
-		result = false << !con0
+		result = false << con0 != true
 	};
 	
 	
@@ -395,7 +395,7 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 	con0 = (con1 = (con2 = (con3 = (con5 = (con6 = (con7 = (con8 = false)))))));
 	con0 = ((time < expiration_time & (time >= _day_start_time & time < _day_end_time | time >= _night_start_time & time < _night_end_time) & account == 0l);
 	{
-		con1 = (close[offset] #_ ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[offset]) << con0;
+		con1 = (close[offset] #_ ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[offset]) << con0 == true;
 		con7 = (close[offset] #_ ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[offset]
 				& close[offset] < ind("LinearRegression", "low", "low", predict_window, low_offset, train_window)[offset]);
 		{
@@ -405,41 +405,41 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 					close[offset] > ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[offset]
 					|
 					close[offset] < ind("LinearRegression", "low", "low", predict_window_support, "low", train_window_support)[offset]
-				) << con1;
+				) << con1 == true;
 			{
-				con3 = (ind("LinearRegression", "slope", "low", predict_window, high_offset, train_window)[-1c] < slope_short_level) << con2;
+				con3 = (ind("LinearRegression", "slope", "low", predict_window, high_offset, train_window)[-1c] < slope_short_level) << con2 == true;
 				{
 					con5 = (ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support) 
 							- ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support) > channel_width) 
-						<< con3;
+						<< con3 == true;
 					{
-						con6 = (close[offset] < ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)) << con5;
+						con6 = (close[offset] < ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)) << con5 == true;
 						{
-							nextTSshort_index = find_max_price_index(train_window) << con6;
+							nextTSshort_index = find_max_price_index(train_window) << con6 == true;
 							_nextTSshort = low[nextTSshort_index] + abs(nextTSshort_index) / 1c * _slope_short * 1p;
 							con8 = (close[offset] < _nextTSshort);
 							{
-								result = true << con8
+								result = true << con8 == true
 							||
-								result = false << !con8
+								result = false << con8 != true
 							}
 						||
-							result = false << !con6
+							result = false << con6 != true
 						}
 					||
-						result = false << !con5
+						result = false << con5 != true
 					}
 				||
-					result = false << !con3
+					result = false << con3 != true
 				}
 			||
-				result = false << !con2
+				result = false << con2 != true
 			}
 		||
-			result = (con1 | con7) << !con1
+			result = (con1 | con7) << con1 != true
 		}
 	||
-		result = false << !con0
+		result = false << con0 != true
 	};
 	
 	//// The candle time is in working hours and no open position
