@@ -4,8 +4,8 @@
   <userdata>
     <scalar type="string" value="QM" name="script_className" />
     <!--+++ imitator-->
-    <scalar type="string" value="10:00 12.07.25" name="imitator_EndDate" />
-    <scalar type="string" value="10:00 12.03.25" name="imitator_StartDate" />
+    <scalar type="string" value="10:00 19.07.25" name="imitator_EndDate" />
+    <scalar type="string" value="10:00 19.03.25" name="imitator_StartDate" />
     <scalar type="string" value="p" name="imitator_coms_type" />
     <scalar type="double" value="0" name="imitator_credit" />
     <scalar type="double" value="5" name="imitator_coms" />
