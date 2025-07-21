@@ -60,7 +60,7 @@ base_log_level = "Error";
 
 import("%QTrader_Libs%\QTrader_stdlib.aql");
 
-script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (33).aql";
+script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (33-my_stop_nextTS-in-opening1).aql";
 
 turn_1_abs = true;
 turn_2_abs = true;
@@ -216,9 +216,10 @@ best_result = 0n;
 		script_to_test
 	);
 	log("---_1st_turn ---------------------------------------------------------------------------------------------------------------------------------");
+	system.log("Test_stopped;***_1st_turn is completed")
 ||
 	log("***_1st_turn is missed") << turn_1_abs != true;	
-	system.log("Test_stopped;***_1st_turn is missed")	
+	system.log("Test_stopped;1st_turn_is_completed")	
 };
 
 mean_equity = best_result["best_values"];
@@ -233,7 +234,7 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 	best_parameters = best_result["best_parameters"];
 
 	// 14
-	(params[i_train_window_slow_period])["value"] = iter(300c, 2000c, 5c);
+	(params[i_train_window_slow_period])["value"] = iter(300c, 1500c, 5c);//iter(300c, 2000c, 5c);
 
 	// 15
 	(params[i_train_window_period])["value"] = best_parameters[i_train_window_period];
@@ -252,9 +253,10 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 		script_to_test
 	);
 	log("---_2nd_turn ---------------------------------------------------------------------------------------------------------------------------------");
+	system.log("Test_stopped;2nd_turn_is_completed")	
 ||
 	log("***_2st_turn is missed") << !(turn_2 == true & turn_2_abs == true);	
-	system.log("Test_stopped;***_2st_turn is missed")	
+	system.log("Test_stopped;***_2nd_turn is missed")	
 };
 // --- 2nd turn ---------------------------------------------------------------------------------------------------------------------------------
 
@@ -287,6 +289,7 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 		script_to_test
 	);
 	log("---_3rd_turn ---------------------------------------------------------------------------------------------------------------------------------");
+	system.log("Test_stopped;3rd_turn_is_completed")	
 ||
 	log("***_3st_turn is missed") << !(turn_3 == true & turn_3_abs == true);	
 	system.log("Test_stopped;***_3st_turn is missed")	
