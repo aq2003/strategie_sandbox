@@ -235,7 +235,6 @@ _Test(
 		// +++ Debug 22.09.2024
 		//log(level_str + "test_starting_history...;" + msg_counts + ";equity=;" + equity + ";account=;" + account + msg_param_values);
 		// --- Debug 22.09.2024
-		first_time = system.time;
 		log("test_starting_history...;" + msg_counts + ";equity=;" + equity + ";account=;" + account + msg_param_values);
 					
 		my_log_level = log.level;
@@ -322,12 +321,10 @@ _Test(
 			+ msg_best_parameters 
 		);*/
 		// --- Debug 22.09.2024
-		second_time = system.time;
-		delta_time = (second_time - first_time);
 		log("test_history_completed;" + msg_counts
 			+ ";equity=;" + equity + ";account=;" + account
 			+ ";best_equity=;" + best_values["equity"] + ";best_max_equity=;" + best_values["max_equity"] + ";best_min_equity=;" + best_values["min_equity"]
-			+ msg_best_parameters + ";seconds_spent=;" + seconds(delta_time)
+			+ msg_best_parameters 
 		);
 		
 		best_values["mean_equity"] += equity;
