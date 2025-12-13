@@ -45,7 +45,7 @@ base_log_level = "Error";
 
 import("%QTrader_Libs%\QTrader_stdlib.aql");
 
-script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (33).aql";
+script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (34).aql";
 
 turn_1_abs = true;
 turn_2_abs = true;

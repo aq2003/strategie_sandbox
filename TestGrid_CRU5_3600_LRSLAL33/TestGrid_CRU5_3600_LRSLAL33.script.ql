@@ -54,7 +54,7 @@ base_log_level = "Error";
 
 import("%QTrader_Libs%\QTrader_stdlib.aql");
 
-script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (33-my_stop_nextTS-in-opening1).aql";
+script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (35).aql";
 
 turn_1_abs = true;
 turn_2_abs = true;
@@ -80,19 +80,19 @@ my_param["value"] = 5%;//iter(5%, 15%, 5%);
 i_risk_L = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "risk_L";
-my_param["value"] = 20%;
+my_param["value"] = 100%;
 
 // 2 Risk rate in percents for short positions
 i_risk_S = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "risk_S";
-my_param["value"] = 20%;
+my_param["value"] = 100%;
 
 // 3
 i_expiration_time = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "expiration_time";
-my_param["value"] = 15:00_20.09.25;
+my_param["value"] = 15:00_20.12.25;
 
 // 4 Start time of the day trading session
 i_day_start_time = count(params);
@@ -154,19 +154,19 @@ i_train_window_period = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "train_window_period";
 //my_param["value"] = iter(10c, 300c, 1c);
-my_param["value"] = iter(10c, 300c, 5c);
+my_param["value"] = iter(10c, 300c, 1c);
 
 // 16
 i_slope_long = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_long";
-my_param["value"] = /*0.0026n;*/iter(0n, 0.0052n, 0.0013n);
+my_param["value"] = 0.0026n;//iter(0n, 0.0052n, 0.0013n);
 
 // 17
 i_slope_short = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_short";
-my_param["value"] = /*-0.0026n;*/iter(0n, -0.0052n, -0.0013n);
+my_param["value"] = -0.0026n;//iter(0n, -0.0052n, -0.0013n);
 
 // 18
 i_slope_long_level = count(params);

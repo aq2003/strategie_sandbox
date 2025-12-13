@@ -45,13 +45,13 @@ base_log_level = "Error";
 
 import("%QTrader_Libs%\QTrader_stdlib.aql");
 
-script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (33).aql";
+script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (35-1).aql";
 
 turn_1_abs = true;
 turn_2_abs = true;
 turn_3_abs = true;
 
-equity_treshold = 250000p;
+equity_treshold = (equity + 25%);
 
 // target_type := ("best_equity" || "equity_closest_to_max_equity")
 target_type = "best_equity";
@@ -89,7 +89,7 @@ my_param["value"] = 15:00_31.12.25;
 i_day_start_time = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "day_start_time";
-my_param["value"] = 10:00;
+my_param["value"] = 07:00;
 
 // 5 End time of the day trading session
 i_day_end_time = count(params);

@@ -21,7 +21,7 @@ base_log_level = "Error";
 
 import("%QTrader_Libs%\QTrader_stdlib.aql");
 
-script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (33-my_stop_nextTS-in-opening1).aql";
+script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (35).aql";
 
 turn_1_abs = true;
 turn_2_abs = true;
@@ -89,7 +89,7 @@ my_param["value"] = 23:49;
 i_predict_window_type = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "predict_window_type";
-my_param["value"] = "candle";
+my_param["value"] = "day";
 
 // 9
 i_high_offset_type = count(params);
