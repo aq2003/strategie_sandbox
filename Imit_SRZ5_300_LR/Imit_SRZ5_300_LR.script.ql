@@ -115,7 +115,7 @@ night_end_time = 23:49;	// End time of the night trading session
 // --- parameters -----------------------------------------------------------------------------------------
 		
 //import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (33-my_stop_nextTS-in-opening).aql");
-import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (35).aql");
+import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (36).aql");
 
 LR_strategy_SlopeLevel_AdaptiveLots(
 	safety_stock,	// Safety stock in percents to the equity
