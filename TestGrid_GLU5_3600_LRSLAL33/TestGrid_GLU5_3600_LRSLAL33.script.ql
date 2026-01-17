@@ -54,13 +54,13 @@ base_log_level = "Error";
 
 import("%QTrader_Libs%\QTrader_stdlib.aql");
 
-script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (35).aql";
+script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (35-1).aql";
 
 turn_1_abs = true;
 turn_2_abs = true;
 turn_3_abs = true;
 
-equity_treshold = (equity + 50%);
+equity_treshold = (equity + 25%);
 
 // target_type := ("best_equity" || "equity_closest_to_max_equity")
 target_type = "best_equity";

@@ -63,7 +63,7 @@ turn_1_abs = true;
 turn_2_abs = true;
 turn_3_abs = true;
 
-equity_treshold = (equity + 25%);
+equity_treshold = (equity + 0%);
 
 // target_type := ("best_equity" || "equity_closest_to_max_equity")
 target_type = "best_equity";
