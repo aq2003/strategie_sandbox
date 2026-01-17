@@ -1,35 +1,8 @@
-// 14.07.2025 20:51:39 TestGrid_GAZPF_3600_LRSLAL33 ql script
-// Created 14.07.2025 20:51:39
+// 17.12.2025 20:53:05 TestGrid_IMOEXF_300_LRSLAL33 ql script
+// Created 17.12.2025 20:53:05
 
-// 21.06.2025 13:56:12 TestGrid_GZU5_3600_LRSLAL33 ql script
-// Created 21.06.2025 13:56:12
-
-// 07.06.2025 14:19:14 TestGrid_GZM5_3600_LRSLAL33 ql script
-// Created 07.06.2025 14:19:14
-
-// 22.03.2025 18:16:25 TestGrid_SiM5_3600_LRSLAL33 ql script
-// Created 22.03.2025 18:16:25
-
-// 21.03.2025 13:30:24 TestGrid_VBM5_3600_LRSLAL33 ql script
-// Created 21.03.2025 13:30:24
-
-// 21.12.2024 22:04:04 TestGrid_VTBR_3600_LRSLAL33 ql script
-// Created 21.12.2024 22:04:04
-
-// 21.12.2024 21:53:12 TestGrid_VTBR_3600_LRSLAL31 ql script
-// Created 21.12.2024 21:53:12
-
-// 21.12.2024 11:36:24 TestGrid_SBER_3600_LRSLAL31 ql script
-// Created 21.12.2024 11:36:24
-
-// 13.12.2024 18:36:40 TestGrid_RTKM_3600_LRSLAL31 ql script
-// Created 13.12.2024 18:36:40
-
-// 12.12.2024 16:34:45 TestGrid_SNGS_3600_LRSLAL31 ql script
-// Created 12.12.2024 16:34:45
-
-// 10.12.2024 13:55:10 TestGrid_AFKS_3600_LRSLAL31 ql script
-// Created 10.12.2024 13:55:10
+// 21.07.2025 20:52:20 TestGrid_IMOEXF_3600_LRSLAL33 ql script
+// Created 21.07.2025 20:52:20
 
 // 09.12.2024 20:28:38 TestGrid_MGNT_3600_LRSLAL33 ql script
 // Created 09.12.2024 20:28:38
@@ -86,19 +59,19 @@ my_param["value"] = 5%;//iter(5%, 15%, 5%);
 i_risk_L = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "risk_L";
-my_param["value"] = 100%;
+my_param["value"] = security.riskL;
 
 // 2 Risk rate in percents for short positions
 i_risk_S = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "risk_S";
-my_param["value"] = 100%;
+my_param["value"] = security.riskS;
 
 // 3
 i_expiration_time = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "expiration_time";
-my_param["value"] = 15:00_20.12.25;
+my_param["value"] = 15:00_31.12.26;
 
 // 4 Start time of the day trading session
 i_day_start_time = count(params);
@@ -159,32 +132,32 @@ my_param["value"] = 800c;
 i_train_window_period = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "train_window_period";
-//my_param["value"] = iter(10c, 300c, 1c);
+//my_param["value"] = iter(50c, 300c, 10%);
 my_param["value"] = iter(10c, 300c, 1c);
 
 // 16
 i_slope_long = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_long";
-my_param["value"] = 13n;//iter(0n, 40n, 10n);
+my_param["value"] = 0.05n;//iter(1.2n, 1.2n, 2n);
 
 // 17
 i_slope_short = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_short";
-my_param["value"] = -10n;//iter(0n, -40n, -10n);
+my_param["value"] = -0.05n;//iter(-1.2n, -1.2n, -2n);
 
 // 18
 i_slope_long_level = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_long_level";
-my_param["value"] = -65n;//iter(-6n, -6n, 2n);
+my_param["value"] = -100n;//iter(-6n, -6n, 2n);
 
 // 19
 i_slope_short_level = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_short_level";
-my_param["value"] = 50n;//iter(6n, 6n, 2n);
+my_param["value"] = 100n;//iter(6n, 6n, 2n);
 
 // 20
 i_channel_width = count(params);
@@ -216,7 +189,7 @@ best_result = 0n;
 		script_to_test
 	);
 	log("---_1st_turn ---------------------------------------------------------------------------------------------------------------------------------");
-	system.log("Test_stopped;***_1st_turn is completed")	
+	system.log("Test_stopped;***_1st_turn is completed")
 ||
 	log("***_1st_turn is missed") << turn_1_abs != true;	
 	system.log("Test_stopped;***_1st_turn is missed")	
@@ -234,7 +207,7 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 	best_parameters = best_result["best_parameters"];
 
 	// 14
-	(params[i_train_window_slow_period])["value"] = iter(300c, 1500c, 5c);//iter(300c, 2000c, 5c);
+	(params[i_train_window_slow_period])["value"] = iter(300c, 1500c, 5c);
 
 	// 15
 	(params[i_train_window_period])["value"] = best_parameters[i_train_window_period];
@@ -253,7 +226,7 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 		script_to_test
 	);
 	log("---_2nd_turn ---------------------------------------------------------------------------------------------------------------------------------");
-	system.log("Test_stopped;***_2nd_turn is completed")	
+	system.log("Test_stopped;***_2nd_turn is completed")
 ||
 	log("***_2st_turn is missed") << !(turn_2 == true & turn_2_abs == true);	
 	system.log("Test_stopped;***_2st_turn is missed")	
@@ -289,7 +262,7 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 		script_to_test
 	);
 	log("---_3rd_turn ---------------------------------------------------------------------------------------------------------------------------------");
-	system.log("Test_stopped;***_3rd_turn is completed")	
+	system.log("Test_stopped;***_3rd_turn is completed")
 ||
 	log("***_3st_turn is missed") << !(turn_3 == true & turn_3_abs == true);	
 	system.log("Test_stopped;***_3st_turn is missed")	
