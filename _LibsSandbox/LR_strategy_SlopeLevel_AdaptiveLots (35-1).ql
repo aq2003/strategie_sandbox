@@ -60,7 +60,11 @@ CalculateLotsToLong(
 {
 	result = 0p;
 	
-	result = ((equity - equity * safety_stock / risk_L) / risk_L);
+	{
+		result = ((equity - safety_stock/* / risk_L*/) / risk_L) << security.board == "TQBR"
+	||
+		result = (equity - safety_stock) << security.board == "FUT"
+	}
 };
 
 // Calculates amount of money to spend for a short position as a safe part of equity 
@@ -73,7 +77,11 @@ CalculateLotsToShort(
 {
 	result = 0p;
 	
-	result = ((equity - equity * safety_stock / risk_S) / risk_S);
+	{
+		result = ((equity - safety_stock/* / risk_S*/) / risk_S) << security.board == "TQBR"
+	||
+		result = (equity - safety_stock) << security.board == "FUT"
+	}
 };
 
 // Calculates SL percentage for a long 
@@ -84,9 +92,13 @@ CalculateSLLong(
 	risk_L		// Risk rate in percents for short positions
 ) :=
 {
-	result = 0n;
+	result = 0%;
 	
-	result = (safety_stock * risk_L);
+	{
+		result = (safety_stock * risk_L) << security.board == "TQBR"
+	||
+		result = (safety_stock * (security.buy_deposit / security.lotprice)) << security.board == "FUT"
+	}
 };
 
 // Calculates SL percentage for a short 
@@ -99,7 +111,11 @@ CalculateSLShort(
 {
 	result = 0n;
 	
-	result = (safety_stock * risk_S);
+	{
+		result = (safety_stock * risk_S) << security.board == "TQBR"
+	||
+		result = (safety_stock * (security.sell_deposit / security.lotprice)) << security.board == "FUT"
+	}
 };
 
 // Looking for day start candle to pass 2 canles in the past
@@ -650,7 +666,7 @@ LR_strategy_long_SlopeLevel_AdaptiveLots(
 		);
 	};
 	
-	_absSLlong = (pos.price - (p_safety_stock * p_risk_L)) << account > my_account;
+	_absSLlong = (pos.price - CalculateSLLong(p_safety_stock, p_risk_L)) << account > my_account;
 	log("long_lr_break_open_following;pos.price=;" + pos.price + ";account=;" + account + ";lots=;" + lots 
 		+ ";start_time=;" + candle.time[nextTSlong_index] + ";start_low=;" + low[nextTSlong_index] 
 		+ ";nextTSlong_time=;" + candle.time[-1c] + ";nextTSlong=;" + _nextTSlong + ";slope_long=;" + _slope_long
@@ -744,7 +760,7 @@ LR_strategy_short_SlopeLevel_AdaptiveLots(
 		);
 	};
 	
-	_absSLshort = (pos.price + (p_safety_stock * p_risk_S)) << account < my_account;
+	_absSLshort = (pos.price + CalculateSLShort(p_safety_stock, p_risk_S)) << account < my_account;
 	log("short_lr_break_open_following;pos.price=;" + pos.price + ";account=;" + account + ";lots=;" + lots 
 		+ ";start_time=;" + candle.time[nextTSshort_index] + ";start_high=;" + high[nextTSshort_index] 
 		+ ";nextTSshort_time=;" + candle.time[-1c] + ";nextTSshort=;" + _nextTSshort + ";slope_short=;" + _slope_short
