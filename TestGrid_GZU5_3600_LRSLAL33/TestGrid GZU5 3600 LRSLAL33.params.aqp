@@ -8,7 +8,7 @@
     <scalar type="string" value="10:00 13.08.25" name="imitator_StartDate" />
     <scalar type="string" value="p" name="imitator_coms_type" />
     <scalar type="double" value="0" name="imitator_credit" />
-    <scalar type="double" value="3" name="imitator_coms" />
+    <scalar type="double" value="1.5" name="imitator_coms" />
     <scalar type="double" value="100000" name="imitator_equity" />
     <!--*** imitator-->
     <!--+++ dealer-->
