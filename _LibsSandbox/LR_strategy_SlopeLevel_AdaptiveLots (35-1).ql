@@ -905,43 +905,58 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 				//step += 1n; 
 			
 				// +++ Debug 08.08.2025 --------------------------------------------------------------------------
-				log("LR_strategy_long_condition_SlopeLevel_AdaptiveLots" + ";step=;" + step + ";result=;" + long_result 
-					+ ";con1=;" + long_con1 
-					+ ";con2=;" + long_con2 
-					+ ";con3=;" + long_con3 
-					+ ";con5=;" + long_con5 
-					+ ";con6=;" + long_con6 
-					+ ";con7=;" + long_con7 
-					+ ";con8=;" + long_con8 
-					+ ";supportLH=;" + ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support)
-					+ ";supportHL=;" + ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)
-				);
-				log("LR_strategy_short_condition_SlopeLevel_AdaptiveLots" + ";step=;" + step + ";result=;" + short_result 
-					+ ";con1=;" + short_con1 
-					+ ";con2=;" + short_con2 
-					+ ";con3=;" + short_con3 
-					+ ";con5=;" + short_con5 
-					+ ";con6=;" + short_con6 
-					+ ";con7=;" + short_con7 
-					+ ";con8=;" + short_con8 
-					+ ";resistanceLH=;" + ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)
-					+ ";resistanceHL=;" + ind("LinearRegression", "high", "low", predict_window_resistance, "low", train_window_resistance)
-				);
+				{
+					log("long_conditions" + ";step=;" + step + ";result=;" + long_result 
+						+ ";con1=;" + long_con1 
+						+ ";con2=;" + long_con2 
+						+ ";con3=;" + long_con3 
+						+ ";con5=;" + long_con5 
+						+ ";con6=;" + long_con6 
+						+ ";con7=;" + long_con7 
+						+ ";con8=;" + long_con8 
+						+ ";supportLH=;" + ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support)
+						+ ";supportHL=;" + ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)
+					) << long_con1 | long_con7
+				||
+					long_con1 = long_con1 << !(long_con1 | long_con7)
+				}; 
+				
+				{
+					log("short_conditions" + ";step=;" + step + ";result=;" + short_result 
+						+ ";con1=;" + short_con1 
+						+ ";con2=;" + short_con2 
+						+ ";con3=;" + short_con3 
+						+ ";con5=;" + short_con5 
+						+ ";con6=;" + short_con6 
+						+ ";con7=;" + short_con7 
+						+ ";con8=;" + short_con8 
+						+ ";resistanceLH=;" + ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)
+						+ ";resistanceHL=;" + ind("LinearRegression", "high", "low", predict_window_resistance, "low", train_window_resistance)
+					) << long_con1 | long_con7
+				||
+					short_con1 = short_con1 << !(short_con1 | short_con7)
+				};
 				// --- Debug 08.08.2025 --------------------------------------------------------------------------
 				
 				{
-					day_start_time = day_start_time << time >= this_night_end_time;
+					day_start_time = day_start_time << time >= night_end_time;
 				
-					log("debug_day_time_moved;" + ";day_start_time=;" + day_start_time + ";day_end_time=;" + day_end_time
-						+ ";night_start_time=;" + night_start_time + ";night_end_time=;" + night_end_time
-					)
-					<< time >= this_night_end_time;
+					..[time >= night_end_time]
+					{
+						day_start_time += 1D << time >= night_end_time;
+						day_end_time += 1D;
+						night_start_time += 1D;
+						night_end_time += 1D;
+						log("debug_day_time_moved;" + ";day_start_time=;" + day_start_time + ";day_end_time=;" + day_end_time
+							+ ";night_start_time=;" + night_start_time + ";night_end_time=;" + night_end_time
+						)
+					};
 						
 					log("daily_report;start_equity=;" + my_start_equity + ";start_time=;" + my_start_time + ";equity=;" + equity + ";abs_equity_diff=;" 
-						+ (equity - my_start_equity) + ";p_equity_diff=;" + 100% * ((equity - my_start_equity) / my_start_equity)
-					)
+						+ (equity - my_start_equity) + ";p_equity_diff=;" + 100% * ((equity - my_start_equity) / my_start_equity))
+				
 				||
-					day_start_time = day_start_time << time < this_night_end_time
+					day_start_time = day_start_time << time < night_end_time
 				};
 
 			||
@@ -1268,14 +1283,16 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 					}
 				}
 			}
-		}
+		};
+		
+		log("LR_strategy_SlopeLevel_AdaptiveLots_has_expired;" + "expiration_stop");
+
+		my_stop();
+
+		log("LR_strategy_SlopeLevel_AdaptiveLots_has_finished;" + "script_stopped")
+
 	};
 
-	log("LR_strategy_SlopeLevel_AdaptiveLots_has_expired;" + "expiration_stop");
-
-	my_stop();
-
-	log("LR_strategy_SlopeLevel_AdaptiveLots_has_finished;" + "script_stopped")
 };
 // --- LR_strategy_SlopeLevel_AdaptiveLots --- 7.04.2024 -------------------------------------------------------------------------------------------------------------------
 
