@@ -178,13 +178,13 @@ my_param["value"] = 0n;//iter(-1.2n, -1.2n, -2n);
 i_slope_long_level = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_long_level";
-my_param["value"] = -14n;//iter(-6n, -6n, 2n);
+my_param["value"] = -140000n;//iter(-6n, -6n, 2n);
 
 // 19
 i_slope_short_level = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_short_level";
-my_param["value"] = 14n;//iter(6n, 6n, 2n);
+my_param["value"] = 140000n;//iter(6n, 6n, 2n);
 
 // 20
 i_channel_width = count(params);
