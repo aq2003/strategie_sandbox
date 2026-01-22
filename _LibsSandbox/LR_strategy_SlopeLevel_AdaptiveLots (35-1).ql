@@ -916,7 +916,8 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 						+ ";con8=;" + long_con8 
 						+ ";supportLH=;" + ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support)
 						+ ";supportHL=;" + ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)
-					) << long_con1 | long_con7
+					) << long_con1 | long_con7;
+					long_con1 = (long_con7 = false);
 				||
 					long_con1 = long_con1 << !(long_con1 | long_con7)
 				}; 
@@ -932,7 +933,8 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 						+ ";con8=;" + short_con8 
 						+ ";resistanceLH=;" + ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)
 						+ ";resistanceHL=;" + ind("LinearRegression", "high", "low", predict_window_resistance, "low", train_window_resistance)
-					) << long_con1 | long_con7
+					) << short_con1 | short_con7;
+					short_con1 = (short_con7 = false);
 				||
 					short_con1 = short_con1 << !(short_con1 | short_con7)
 				};
