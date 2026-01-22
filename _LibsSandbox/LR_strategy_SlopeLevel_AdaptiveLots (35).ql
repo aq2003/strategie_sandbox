@@ -866,70 +866,85 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 		//step = 0n; 
 		..
 		{
-			log("step_=;" + step 
-			+ ";account_=;" + account 
-			+ ";equity_=;" + equity 
-			+ ";high_=;" + ind("LinearRegression", "line", "high", predict_window_type, high_offset, train_window) 
-			+ ";hhigh_=;" + hhigh = ind("LinearRegression", "high", "high", predict_window_type, high_offset, train_window) 
-			+ ";lhigh_=;" + ind("LinearRegression", "low", "high", predict_window_type, high_offset, train_window) 
-			+ ";high.slope_=;" + ind("LinearRegression", "slope", "high", predict_window_type, high_offset, train_window) 
-			+ ";high.mae_=;" + ind("LinearRegression", "mae", "high", predict_window_type, high_offset, train_window) 
-			+ ";low_=;" + ind("LinearRegression", "line", "low", predict_window_type, low_offset, train_window)
-			+ ";hlow_=;" + ind("LinearRegression", "high", "low", predict_window_type, low_offset, train_window)
-			+ ";llow_=;" + llow = ind("LinearRegression", "low", "low", predict_window_type, low_offset, train_window)
-			+ ";llow.slope_=;" + ind("LinearRegression", "slope", "low", predict_window_type, low_offset, train_window)
-			+ ";llow.mae_=;" + ind("LinearRegression", "mae", "low", predict_window_type, low_offset, train_window)
-			+ ";nextTSlong_=;" + nextTSlong + ";slope_long_=;" + slope_long
-			+ ";nextTSshort_=;" + nextTSshort + ";slope_short_=;" + slope_short
-			+ ";train_window_=;" + train_window
-			+ ";channel_width_=;" + (hhigh - llow)
-			);
-			//step += 1n; 
-			
-			// +++ Debug 08.08.2025 --------------------------------------------------------------------------
-			log("LR_strategy_long_condition_SlopeLevel_AdaptiveLots" + ";step=;" + step + ";result=;" + long_result 
-				+ ";con1=;" + long_con1 
-				+ ";con2=;" + long_con2 
-				+ ";con3=;" + long_con3 
-				+ ";con5=;" + long_con5 
-				+ ";con6=;" + long_con6 
-				+ ";con7=;" + long_con7 
-				+ ";con8=;" + long_con8 
-				+ ";supportLH=;" + ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support)
-				+ ";supportHL=;" + ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)
-			);
-			log("LR_strategy_short_condition_SlopeLevel_AdaptiveLots" + ";step=;" + step + ";result=;" + short_result 
-				+ ";con1=;" + short_con1 
-				+ ";con2=;" + short_con2 
-				+ ";con3=;" + short_con3 
-				+ ";con5=;" + short_con5 
-				+ ";con6=;" + short_con6 
-				+ ";con7=;" + short_con7 
-				+ ";con8=;" + short_con8 
-				+ ";resistanceLH=;" + ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)
-				+ ";resistanceHL=;" + ind("LinearRegression", "high", "low", predict_window_resistance, "low", train_window_resistance)
-			);
-			// --- Debug 08.08.2025 --------------------------------------------------------------------------
-				
 			{
-				day_start_time = day_start_time << time >= night_end_time;
-				
-				..[time >= night_end_time]
+				log("step_=;" + step 
+				+ ";account_=;" + account 
+				+ ";equity_=;" + equity 
+				+ ";high_=;" + ind("LinearRegression", "line", "high", predict_window_type, high_offset, train_window) 
+				+ ";hhigh_=;" + hhigh = ind("LinearRegression", "high", "high", predict_window_type, high_offset, train_window) 
+				+ ";lhigh_=;" + ind("LinearRegression", "low", "high", predict_window_type, high_offset, train_window) 
+				+ ";high.slope_=;" + ind("LinearRegression", "slope", "high", predict_window_type, high_offset, train_window) 
+				+ ";high.mae_=;" + ind("LinearRegression", "mae", "high", predict_window_type, high_offset, train_window) 
+				+ ";low_=;" + ind("LinearRegression", "line", "low", predict_window_type, low_offset, train_window)
+				+ ";hlow_=;" + ind("LinearRegression", "high", "low", predict_window_type, low_offset, train_window)
+				+ ";llow_=;" + llow = ind("LinearRegression", "low", "low", predict_window_type, low_offset, train_window)
+				+ ";llow.slope_=;" + ind("LinearRegression", "slope", "low", predict_window_type, low_offset, train_window)
+				+ ";llow.mae_=;" + ind("LinearRegression", "mae", "low", predict_window_type, low_offset, train_window)
+				+ ";nextTSlong_=;" + nextTSlong + ";slope_long_=;" + slope_long
+				+ ";nextTSshort_=;" + nextTSshort + ";slope_short_=;" + slope_short
+				+ ";train_window_=;" + train_window
+				+ ";channel_width_=;" + (hhigh - llow)
+				) 
+				<< log.level != "Error";
+				//step += 1n; 
+			
+				// +++ Debug 08.08.2025 --------------------------------------------------------------------------
 				{
-					day_start_time += 1D << time >= night_end_time;
-					day_end_time += 1D;
-					night_start_time += 1D;
-					night_end_time += 1D;
-					log("debug_day_time_moved;" + ";day_start_time=;" + day_start_time + ";day_end_time=;" + day_end_time
-						+ ";night_start_time=;" + night_start_time + ";night_end_time=;" + night_end_time
-					)
+					log("long_conditions" + ";step=;" + step + ";result=;" + long_result 
+						+ ";con1=;" + long_con1 
+						+ ";con2=;" + long_con2 
+						+ ";con3=;" + long_con3 
+						+ ";con5=;" + long_con5 
+						+ ";con6=;" + long_con6 
+						+ ";con7=;" + long_con7 
+						+ ";con8=;" + long_con8 
+						+ ";supportLH=;" + ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support)
+						+ ";supportHL=;" + ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)
+					) << long_con1 | long_con7
+				||
+					long_con1 = long_con1 << !(long_con1 | long_con7)
 				};
-						
-				log("daily_report;start_equity=;" + my_start_equity + ";start_time=;" + my_start_time + ";equity=;" + equity + ";abs_equity_diff=;" 
-					+ (equity - my_start_equity) + ";p_equity_diff=;" + 100% * ((equity - my_start_equity) / my_start_equity))
+			
+				{
+					log("short_conditions" + ";step=;" + step + ";result=;" + short_result 
+						+ ";con1=;" + short_con1 
+						+ ";con2=;" + short_con2 
+						+ ";con3=;" + short_con3 
+						+ ";con5=;" + short_con5 
+						+ ";con6=;" + short_con6 
+						+ ";con7=;" + short_con7 
+						+ ";con8=;" + short_con8 
+						+ ";resistanceLH=;" + ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)
+						+ ";resistanceHL=;" + ind("LinearRegression", "high", "low", predict_window_resistance, "low", train_window_resistance)
+					) << short_con1 | short_con7
+				||
+					short_con1 = short_con1 << !(short_con1 | short_con7)
+				};
+				// --- Debug 08.08.2025 --------------------------------------------------------------------------
 				
+				{
+					day_start_time = day_start_time << time >= night_end_time;
+				
+					..[time >= night_end_time]
+					{
+						day_start_time += 1D << time >= night_end_time;
+						day_end_time += 1D;
+						night_start_time += 1D;
+						night_end_time += 1D;
+						log("debug_day_time_moved;" + ";day_start_time=;" + day_start_time + ";day_end_time=;" + day_end_time
+							+ ";night_start_time=;" + night_start_time + ";night_end_time=;" + night_end_time
+						)
+					};
+						
+					log("daily_report;start_equity=;" + my_start_equity + ";start_time=;" + my_start_time + ";equity=;" + equity + ";abs_equity_diff=;" 
+						+ (equity - my_start_equity) + ";p_equity_diff=;" + 100% * ((equity - my_start_equity) / my_start_equity))
+				
+				||
+					day_start_time = day_start_time << time < night_end_time
+				};
+
 			||
-				day_start_time = day_start_time << time < night_end_time
+				step = step << log.level == "Error";
 			};
 			
 			~
