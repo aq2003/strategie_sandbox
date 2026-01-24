@@ -229,7 +229,11 @@ LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
 ) :=
 {
 	result = 0n;
+	nextTSlong_index = 0c;
+	nextTSlong = 0p;
+	
 	offset = LR_strategy_condition_start_time();
+	
 	_long_con0 = (_long_con1 = (_long_con2 = (_long_con3 = (_long_con5 = (_long_con6 = (_long_con7 = (_long_con8 = false)))))));
 	_long_con0 = ((time < expiration_time & (time >= _day_start_time & time < _day_end_time | time >= _night_start_time & time < _night_end_time) & account == 0l);
 	{
@@ -254,8 +258,8 @@ LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
 						_long_con6 = (close[offset] > ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) << _long_con5 == true;
 						{
 							nextTSlong_index = find_min_price_index(train_window) << _long_con6 == true;
-							_nextTSlong = low[nextTSlong_index] + abs(nextTSlong_index) / 1c * _slope_long * 1p;
-							_long_con8 = (close[offset] > _nextTSlong);
+							nextTSlong = low[nextTSlong_index] + abs(nextTSlong_index) / 1c * _slope_long * 1p;
+							_long_con8 = (close[offset] > nextTSlong);
 							result = _long_con8
 						||
 							result = false << _long_con6 != true
@@ -276,20 +280,18 @@ LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
 		result = false << _long_con0 != true
 	};
 	
-	_long_result = result
+	_long_result = result;
 	
 	// +++ Debug 08.08.2025 --------------------------------------------------------------------------
-	//log("LR_strategy_long_condition_SlopeLevel_AdaptiveLots" + ";step=;" + step + ";result=;" + result 
-	//	+ ";con1=;" + con1 
-	//	+ ";con2=;" + con2 
-	//	+ ";con3=;" + con3 
-	//	+ ";con5=;" + con5 
-	//	+ ";con6=;" + con6 
-	//	+ ";con7=;" + con7 
-	//	+ ";con8=;" + con8 
-	//	+ ";supportLH=;" + ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support)
-	//	+ ";supportHL=;" + ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)
-	//);
+	/*
+	log("LR_strategy_long_condition_SlopeLevel_AdaptiveLots" + ";step=;" + step + ";result=;" + result 
+		+ ";con0=;" + _long_con0 + ";con1=;" + _long_con1 + ";con2=;" + _long_con2 + ";con3=;" + _long_con3 
+		+ ";con5=;" + _long_con5 + ";con6=;" + _long_con6 + ";con7=;" + _long_con7 + ";con8=;" + _long_con8 
+		+ ";nextTSlong_index=;" + nextTSlong_index + ";nextTSlong=;" + nextTSlong + ";close[offset]=;" + close[offset]
+		//+ ";supportLH=;" + ind("LinearRegression", "low", "high", predict_window_support, "high", train_window_support)
+		//+ ";supportHL=;" + ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)
+	);
+	*/
 	// --- Debug 08.08.2025 --------------------------------------------------------------------------
 
 	//// The candle time is in working hours and no open position
@@ -417,6 +419,9 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 ) :=
 {
 	result = 0n;
+	nextTSshort_index = 0c;
+	nextTSshort = 0p;
+	
 	offset = LR_strategy_condition_start_time();
 	
 	_short_con0 = (_short_con1 = (_short_con2 = (_short_con3 = (_short_con5 = (_short_con6 = (_short_con7 = (_short_con8 = false)))))));
@@ -443,8 +448,8 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 						_short_con6 = (close[offset] < ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)) << _short_con5 == true;
 						{
 							nextTSshort_index = find_max_price_index(train_window) << _short_con6 == true;
-							_nextTSshort = low[nextTSshort_index] + abs(nextTSshort_index) / 1c * _slope_short * 1p;
-							_short_con8 = (close[offset] < _nextTSshort);
+							nextTSshort = low[nextTSshort_index] + abs(nextTSshort_index) / 1c * _slope_short * 1p;
+							_short_con8 = (close[offset] < nextTSshort);
 							result = _short_con8
 						||
 							result = false << _short_con6 != true
@@ -465,20 +470,18 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 		result = false << _short_con0 != true
 	};
 	
-	_short_result = result
+	_short_result = result;
 	
 	// +++ Debug 08.08.2025 --------------------------------------------------------------------------
-	//log("LR_strategy_short_condition_SlopeLevel_AdaptiveLots" + ";step=;" + step + ";result=;" + result 
-	//	+ ";con1=;" + con1 
-	//	+ ";con2=;" + con2 
-	//	+ ";con3=;" + con3 
-	//	+ ";con5=;" + con5 
-	//	+ ";con6=;" + con6 
-	//	+ ";con7=;" + con7 
-	//	+ ";con8=;" + con8 
-	//	+ ";resistanceLH=;" + ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)
-	//	+ ";resistanceHL=;" + ind("LinearRegression", "high", "low", predict_window_resistance, "low", train_window_resistance)
-	//);
+	/*
+	log("LR_strategy_short_condition_SlopeLevel_AdaptiveLots" + ";step=;" + step + ";result=;" + result 
+		+ ";con0=;" + _short_con0 + ";con1=;" + _short_con1 + ";con2=;" + _short_con2 + ";con3=;" + _short_con3 
+		+ ";con5=;" + _short_con5 + ";con6=;" + _short_con6 + ";con7=;" + _short_con7 + ";con8=;" + _short_con8 
+		+ ";nextTSshort_index=;" + nextTSshort_index + ";nextTSshort=;" + nextTSshort + ";close[offset]=;" + close[offset]
+		//+ ";resistanceLH=;" + ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)
+		//+ ";resistanceHL=;" + ind("LinearRegression", "high", "low", predict_window_resistance, "low", train_window_resistance)
+	);
+	*/
 	// --- Debug 08.08.2025 --------------------------------------------------------------------------
 	
 	//// The candle time is in working hours and no open position
@@ -844,6 +847,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 	absSLshort = nextTSshort;
 
 	long_result = false;
+	long_con0 = false;
 	long_con1 = false;
 	long_con2 = false; 
 	long_con3 = false; 
@@ -853,6 +857,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 	long_con8 = false; 
 	
 	short_result = false;
+	short_con0 = false;
 	short_con1 = false;
 	short_con2 = false; 
 	short_con3 = false; 
@@ -907,6 +912,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 				// +++ Debug 08.08.2025 --------------------------------------------------------------------------
 				{
 					log("long_conditions" + ";step=;" + step + ";result=;" + long_result 
+						+ ";con0=;" + long_con0 
 						+ ";con1=;" + long_con1 
 						+ ";con2=;" + long_con2 
 						+ ";con3=;" + long_con3 
@@ -924,6 +930,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 				
 				{
 					log("short_conditions" + ";step=;" + step + ";result=;" + short_result 
+						+ ";con1=;" + short_con0 
 						+ ";con1=;" + short_con1 
 						+ ";con2=;" + short_con2 
 						+ ";con3=;" + short_con3 
