@@ -655,6 +655,12 @@ LR_strategy_long_SlopeLevel_AdaptiveLots(
 	_slope_long = ind("LinearRegression", "slope", "high", ppredict_window, phigh_offset, ptrain_window)[offset];
 	
 	{
+		_nextTSlong = _absSLlong << close[offset - 1c] < _absSLlong
+	||
+		_nextTSlong = (close[offset - 1c]) << close[offset - 1c] >= _absSLlong
+	};
+	
+	{
 		_slope_long = pslope_long_start << _slope_long < pslope_long_start;
 		//_nextTSlong = (low[nextTSlong_index] + abs(nextTSlong_index) / 1c * _slope_long * 1p);
 		_nextTSlong = _absSLlong;
@@ -752,6 +758,12 @@ LR_strategy_short_SlopeLevel_AdaptiveLots(
 	//_slope_short = ind("LinearRegression", "slope", "high", "once", "high", candle.time[nextTSshort_index - 2c], candle.time[-1c]);
 	_slope_short = ind("LinearRegression", "slope", "low", ppredict_window, plow_offset, ptrain_window)[offset];
 	
+	{
+		_nextTSshort = _absSLshort << close[offset - 1c] > _absSLshort
+	||
+		_nextTSshort = (close[offset - 1c]) << close[offset - 1c] <= _absSLshort
+	};
+		
 	{
 		_slope_short = pslope_short_start << _slope_short > pslope_short_start;
 		//_nextTSshort = (high[nextTSshort_index] + abs(nextTSshort_index) / 1c * _slope_short * 1p);
