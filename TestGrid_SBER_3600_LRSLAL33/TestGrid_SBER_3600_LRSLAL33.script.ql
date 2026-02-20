@@ -39,7 +39,7 @@ base_log_level = "Error";
 
 import("%QTrader_Libs%\QTrader_stdlib.aql");
 
-script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (36).aql";
+script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (35-1).aql";
 
 turn_1_abs = true;
 turn_2_abs = true;
@@ -65,19 +65,19 @@ my_param["value"] = 5%;//iter(5%, 15%, 5%);
 i_risk_L = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "risk_L";
-my_param["value"] = 17%;
+my_param["value"] = security.riskL;
 
 // 2 Risk rate in percents for short positions
 i_risk_S = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "risk_S";
-my_param["value"] = 17%;
+my_param["value"] = security.riskS;
 
 // 3
 i_expiration_time = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "expiration_time";
-my_param["value"] = 15:00_31.12.25;
+my_param["value"] = 15:00_31.12.26;
 
 // 4 Start time of the day trading session
 i_day_start_time = count(params);
@@ -113,13 +113,13 @@ my_param["value"] = "candle";
 i_high_offset_type = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "high_offset_type";
-my_param["value"] = "none";
+my_param["value"] = "high";
 
 // 10
 i_low_offset_type = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "low_offset_type";
-my_param["value"] = "none";
+my_param["value"] = "low";
 
 // 12
 i_predict_window_slow_type = count(params);
