@@ -448,7 +448,7 @@ LR_strategy_short_condition_SlopeLevel_AdaptiveLots(
 						_short_con6 = (close[offset] < ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)) << _short_con5 == true;
 						{
 							nextTSshort_index = find_max_price_index(train_window) << _short_con6 == true;
-							nextTSshort = high[nextTSshort_index] + abs(nextTSshort_index) / 1c * _slope_short * 1p;
+							nextTSshort = low[nextTSshort_index] + abs(nextTSshort_index) / 1c * _slope_short * 1p;
 							_short_con8 = (close[offset] < nextTSshort);
 							result = _short_con8
 						||
@@ -650,22 +650,24 @@ LR_strategy_long_SlopeLevel_AdaptiveLots(
 		+ ";nextTSlong_time=;" + candle.time[-1c] + ";nextTSlong=;" + _nextTSlong + ";slope_long=;" + _slope_long + ";step=;" + step);
 		
 	_slope_long = ind("LinearRegression", "slope", "low", "once", "low", candle.time[nextTSlong_index - 2c], candle.time[-1c]);
-	
+	real_slope_start = (_nextTSlong * pslope_long_start / 1p);
 	{
-		_slope_long = pslope_long_start << _slope_long < pslope_long_start;
+		_slope_long = real_slope_start/*pslope_long_start*/ << _slope_long < real_slope_start/*pslope_long_start*/;
 		_nextTSlong += (abs(nextTSlong_index) / 1c * _slope_long * 1p);
 		log("long_lr_break_open_following;start_slope" 
 			+ ";start_time=;" + candle.time[nextTSlong_index] + ";start_low=;" + low[nextTSlong_index] 
 			+ ";nextTSlong_time=;" + candle.time[-1c] + ";nextTSlong=;" + _nextTSlong 
 			+ ";slope_long=;" + _slope_long + ";nextTSlong_index=;" + nextTSlong_index + ";step=;" + step
+			+ ";real_slope_start=;" + real_slope_start + ";pslope_long_start=;" + pslope_long_start
 		);
 	||
-		_slope_long = _slope_long << _slope_long >= pslope_long_start;
+		_slope_long = _slope_long << _slope_long >= real_slope_start/*pslope_long_start*/;
 		_nextTSlong = ind("LinearRegression", "line", "low", "once", "low", candle.time[nextTSlong_index-2c], candle.time[-1c]);
 		log("long_lr_break_open_following;calculated_slope" 
 			+ ";start_time=;" + candle.time[nextTSlong_index] + ";start_low=;" + low[nextTSlong_index] 
 			+ ";nextTSlong_time=;" + candle.time[-1c] + ";nextTSlong=;" + _nextTSlong 
 			+ ";slope_long=;" + _slope_long + ";nextTSlong_index=;" + nextTSlong_index + ";step=;" + step
+			+ ";real_slope_start=;" + real_slope_start + ";pslope_long_start=;" + pslope_long_start
 		);
 	};
 	
@@ -743,10 +745,18 @@ LR_strategy_short_SlopeLevel_AdaptiveLots(
 		+ ";start_time=;" + candle.time[nextTSshort_index] + ";start_high=;" + high[nextTSshort_index] 
 		+ ";nextTSshort_time=;" + candle.time[-1c] + ";nextTSshort=;" + _nextTSshort + ";slope_short=;" + _slope_short + ";step=;" + step);
 		
-	_slope_short = ind("LinearRegression", "slope", "high", "once", "none", candle.time[nextTSshort_index - 2c], candle.time[-1c]);
+	_slope_short = ind("LinearRegression", "slope", "high", "once", "high", candle.time[nextTSshort_index - 2c], candle.time[-1c]);
 	real_slope_start = (_nextTSshort * pslope_short_start / 1p);
-	//log("short_lr_break_open_following;start_slope-calculation0" + ";_slope_short=;" + _slope_short + ";real_slope_start=;" + real_slope_start 
-	//	+ ";pslope_short_start=;" + pslope_short_start + ";_nextTSshort=;" + _nextTSshort);
+	/*log("short_lr_break_open_following;start_slope-calculation0" 
+		+ ";_slope_short=;" + _slope_short + ";real_slope_start=;" + real_slope_start 
+		+ ";pslope_short_start=;" + pslope_short_start + ";_nextTSshort=;" + _nextTSshort
+		+ ";start_time=;" + candle.time[nextTSshort_index] + ";start_candleno=;" + candle.number[nextTSshort_index]
+		+ ";start_high=;" + high[nextTSshort_index] + ";start_low=;" + low[nextTSshort_index]
+		+ ";start_open=;" + open[nextTSshort_index] + ";start_close=;" + close[nextTSshort_index]
+		+ ";this_time=;" + candle.time[-1c] + ";start_candleno=;" + candle.number[-1c]
+		+ ";this_high=;" + high[-1c] + ";this_low=;" + low[-1c]
+		+ ";this_open=;" + open[-1c] + ";this_close=;" + close[-1c]
+	);*/
 	{
 		_slope_short = real_slope_start/*pslope_short_start*/ << _slope_short > real_slope_start/*pslope_short_start*/;
 		_nextTSshort += (abs(nextTSshort_index) / 1c * _slope_short * 1p);
@@ -758,7 +768,7 @@ LR_strategy_short_SlopeLevel_AdaptiveLots(
 		);
 	||
 		_slope_short = _slope_short << _slope_short <= real_slope_start/*pslope_short_start*/;
-		_nextTSshort = ind("LinearRegression", "line", "high", "once", "none", candle.time[nextTSshort_index-2c], candle.time[-1c]);
+		_nextTSshort = ind("LinearRegression", "line", "high", "once", "high", candle.time[nextTSshort_index-2c], candle.time[-1c]);
 		log("short_lr_break_open_following;calculated_slope"
 			+ ";start_time=;" + candle.time[nextTSshort_index] + ";start_high=;" + high[nextTSshort_index] 
 			+ ";nextTSshort_time=;" + candle.time[-1c] + ";nextTSshort=;" + _nextTSshort 
