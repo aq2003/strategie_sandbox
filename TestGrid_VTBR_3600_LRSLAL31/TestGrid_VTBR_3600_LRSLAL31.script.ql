@@ -42,7 +42,7 @@ base_log_level = "Error";
 
 import("%QTrader_Libs%\QTrader_stdlib.aql");
 
-script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (35-1).aql";
+script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (35-5).aql";
 
 turn_1_abs = true;
 turn_2_abs = true;
@@ -80,7 +80,7 @@ my_param["value"] = 25%;
 i_expiration_time = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "expiration_time";
-my_param["value"] = 15:00_31.12.25;
+my_param["value"] = 18:00_30.12.26;
 
 // 4 Start time of the day trading session
 i_day_start_time = count(params);
@@ -128,7 +128,7 @@ my_param["value"] = "none";
 i_predict_window_slow_type = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "predict_window_slow_type";
-my_param["value"] = "week";
+my_param["value"] = "candle";
 
 // 14
 i_train_window_slow_period = count(params);
@@ -142,31 +142,31 @@ i_train_window_period = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "train_window_period";
 //my_param["value"] = iter(50c, 300c, 10%);
-my_param["value"] = iter(10c, 300c, 1c);
+my_param["value"] = iter(300c, 600c, 1c);
 
 // 16
 i_slope_long = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_long";
-my_param["value"] = 0.026n;//iter(1.2n, 1.2n, 2n);
+my_param["value"] = (close * 0.00372% / 1p);//0.026n;//iter(1.2n, 1.2n, 2n);
 
 // 17
 i_slope_short = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_short";
-my_param["value"] = -0.026n;//iter(-1.2n, -1.2n, -2n);
+my_param["value"] = -(close * 0.00372% / 1p);//-0.026n;//iter(-1.2n, -1.2n, -2n);
 
 // 18
 i_slope_long_level = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_long_level";
-my_param["value"] = -0.13n;//iter(-6n, -6n, 2n);
+my_param["value"] = -13n;//iter(-6n, -6n, 2n);
 
 // 19
 i_slope_short_level = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_short_level";
-my_param["value"] = 0.13n;//iter(6n, 6n, 2n);
+my_param["value"] = 13n;//iter(6n, 6n, 2n);
 
 // 20
 i_channel_width = count(params);
@@ -244,15 +244,15 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 	(params[i_train_window_slow_period])["value"] = best_parameters[i_train_window_slow_period];
 
 	// 16
-	slope_long_max = params[i_slope_long];
-	slope_long_max = slope_long_max["value"];
-	slope_long_max *= 2n;
+	slope_long_max = (close * 0.00372% * 10n / 1p);//params[i_slope_long];
+	//slope_long_max = slope_long_max["value"];
+	//slope_long_max *= 2n;
 	(params[i_slope_long])["value"] = iter(0n, slope_long_max, slope_long_max / 10n);
 
 	// 17
-	slope_short_min = params[i_slope_short];
-	slope_short_min = slope_short_min["value"];
-	slope_short_min *= 2n;
+	slope_short_min = -(close * 0.00372% * 10n / 1p);//params[i_slope_short];
+	//slope_short_min = slope_short_min["value"];
+	//slope_short_min *= 2n;
 	(params[i_slope_short])["value"] = iter(0n, slope_short_min, slope_short_min / 10n);
 
 	criteria = "best_equity";
