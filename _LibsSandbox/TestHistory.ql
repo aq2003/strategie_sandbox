@@ -1,3 +1,5 @@
+// TestGrid on history
+// 
 CloneList2List(source) :=
 {
 	my_index = 0i;
@@ -65,20 +67,58 @@ CopyValuesList2Dict(source, target, param_name) :=
 	result = target;
 };
 
+// Tests the variable type whether is it scalar ro not
+// Parameters:
+// - variable - a variable to test type of
+// Returns:
+// - true if the type is scalar, false if not
 IsScalarType(variable) :=
 {
 	result = false;
 	result = (type(variable) == "n" | type(variable) == "p" | type(variable) == "%" | type(variable) == "c" | type(variable) == "l" | type(variable) == "pp" | type(variable) == "i")
 };
 
+// +++ 09.03.2026 --- FindParameter ---------------------------
+// Runs through a given parameter list to find out a parameter with given name
+// Parameters:
+// - param_list - a list of parameters to run through
+// - params_count - count of parameters in the list
+// - param_name - name of a parameter to find out
+// Returns:
+// - parameter found or null
+FindParameter(param_list, params_count, param_name) :=
+{
+	result = 0n;
+	
+	i = 0i;
+	..[i < params_count]
+	{
+		my_param = param_list[i];
+		p_name = my_param["name"];
+		
+		// +++ Debug
+		//log("FindParameter" + ";i=;" + i + ";my_param=;" + my_param + ";p_name=;" + p_name + ";param_name=;" + param_name);
+		// --- Debug
+		
+		{
+			result = my_param << p_name == param_name;
+			i = params_count;
+		||
+			result = result << p_name != param_name
+		};
+		i += 1i
+	}
+};
+// --- 09.03.2026 --- FindParameter ---------------------------
+
 _Test(
-	parameters, // parameters := (..parameter); parameter := (name, start, stop, step, current, index)
-	parameters_count, // Total number of parameters in the list; parameters.count
-	start_parameter_index,// Parameter number at the first entry
-	current_parameter_index, // Number of a parameter to search with
-	best_parameters, // List of best parameter values according to the given criteria; best_parameters := (..value); best_parameters.count == parameters.count
-	best_values, // A set of best values; best_values := (equity, max_equity, min_equity, target)
-	criteria, // Optimization criteria; criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
+	parameters, 			// parameters := (..parameter); parameter := (name, start, stop, step, current, index)
+	parameters_count, 		// Total number of parameters in the list; parameters.count
+	start_parameter_index,	// Parameter number at the first entry
+	current_parameter_index, 	// Number of a parameter to search with
+	best_parameters, 		// List of best parameter values according to the given criteria; best_parameters := (..value); best_parameters.count == parameters.count
+	best_values, 			// A set of best values; best_values := (equity, max_equity, min_equity, target)
+	criteria, 				// Optimization criteria; criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
 	base_log_level
 ) :=
 {
@@ -104,7 +144,7 @@ _Test(
 		my_parameter = parameters[my_index] << my_index < parameters_count;
 
 		{
-			// *** 12.06.2024 To step into a cycle when the value is of scalar type
+			// *** 12.06.2024 To step into a cycle when the value is a list
 			my_parameter["index"] = 0i << type(my_parameter["value"]) == "list";
 				
 			// +++ Debug 14.09.2024
@@ -155,14 +195,38 @@ _Test(
 			}
 			
 		||
-			// *** 14.09.2024 To take one turn when the value is of not scalar type
+			// *** 14.09.2024 To take one turn when the value is not a list
 			my_parameter["index"] = 0i << type(my_parameter["value"]) != "list";
 				
 			// +++ Debug 14.09.2024
 			//log("_Test_entered_not_scalar_section;my_parameter['name']=;" + my_parameter["name"] + ";type(my_parameter['start'])=;" + type(my_parameter["start"]));
 			// --- Debug 14.09.2024
+			
+			// +++ 09.03.2026 Here to substitute a named parameter
+			my_parameter_value = 0n;
+			{
+				param_found = FindParameter(parameters, current_parameter_index, my_parameter["value"]) << type(my_parameter["value"]) == "s";
+				{
+					my_parameter_value = param_found["current"]
+					// +++ Debug
+					//log(level_str + "FindParameter_finished_success;param_found=;" + param_found + ";my_parameter;" + my_parameter) 
+					//my_parameter_value = param_found["current"]
+					// --- Debug
+					<< type(param_found) != "n";
+				||
+					my_parameter_value = my_parameter["value"] 
+					// +++ Debug
+					//log(level_str + "FindParameter_finished_unsuccess;my_parameter=;" + my_parameter + ";param_found;" + param_found) 
+					//my_parameter_value = my_parameter["value"]
+					// --- Debug
+					<< type(param_found) == "n";
+				}
+			||
+				my_parameter_value = my_parameter["value"] << type(my_parameter["value"]) != "s"
+			};
+			// --- 09.03.2026 Here to substitute a named parameter
 				
-			my_parameter_value = my_parameter["value"];
+			//my_parameter_value = my_parameter["value"];
 			
 			my_parameter["current"] = my_parameter_value;
 			// +++ Debug 12.06.2024
@@ -341,6 +405,18 @@ _Test(
 	// --- Debug 14.09.2024
 };
 
+// Makes a grid test on given a set of parameters and a module to test
+// Parameters:
+// - 	parameters - a set of parameters; parameters := (..parameter); parameter := (name, value, current, index, count); value := (list || scalar)
+// -	criteria - optimization criteria; criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
+// -	base_log_level - log level to set when test has started running; prevents flooding in the log
+// -	tested_module - a module to test; it has to have a TestAdapter function
+// Returns:
+// - best_values - a set of values produced on the best turn
+// - best_parameters - set of tested module parameter values corresponding best_values
+//
+// If a parameter has type "s" then its value might be name of another parameter. In this case parameter's value for each turn repeats the value of that another parameter
+//
 Test(
 	parameters, // parameters := (..parameter); parameter := (name, start, stop, step, current, index)
 	criteria, // Optimization criteria; criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
@@ -351,7 +427,6 @@ Test(
 	result = 0n;
 	
 	// First run
-	//import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (30).aql");
 	import("%QTrader_Libs%\" + tested_module);
 		
 	parameters_count = count(parameters);
