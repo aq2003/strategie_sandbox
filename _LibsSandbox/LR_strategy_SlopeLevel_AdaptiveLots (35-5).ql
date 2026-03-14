@@ -205,6 +205,145 @@ LR_strategy_Slope_Min(
 	//result = slope_min
 };
 
+// A service method of LR_strategy_SlopeLevel family.
+// Calculates nextTSlong and slope_long values depending on account value.
+// Expects external _nextTSlong and _slope_long variables
+LRSLAL_long_CalcNextTSSlope() :=
+{
+	result = 0n;
+	
+	{
+		// +++ Debug
+		//old_slope_long = _slope_long << account > 0l;
+		//debug_str_l = "debug_moving_nextTSlong";	
+		//log(debug_str_l + ";started...");
+		// ---
+			
+		my_slope_long = ind("LinearRegression", "slope", "low", _predict_window, _low_offset, _train_window)[-1c] << account > 0l;
+		my_nextTSlong = ind("LinearRegression", "low", "low", _predict_window, _low_offset, _train_window)[-1c];
+		//div_slope_long = ((my_nextTSlong - ind("LinearRegression", "high", "low", predict_window, low_offset, train_window)[-2c]) / 1p);
+		{
+			_slope_long = my_slope_long << my_slope_long > _slope_long /*& my_slope_long > div_slope_long*/;
+			// +++ Debug
+			//debug_str_l += ";my_slope_long_the_best"
+			// ---
+		/*||
+			slope_long = div_slope_long << div_slope_long > slope_long & div_slope_long > my_slope_long;*/
+			// +++ Debug
+			//debug_str_l += ";div_slope_long_the_best"
+			// ---
+		||
+			_slope_long = _slope_long << /*slope_long >= div_slope_long  &*/ _slope_long >= my_slope_long;
+			// +++ Debug
+			//debug_str_l += ";slope_long_the_best"
+			// ---
+		};
+			
+		// +++ Debug
+		//log(debug_str_l + ";selected...");
+		//old_nextTSlong = _nextTSlong;
+		// ---
+			
+		calc_nextTSlong = (_nextTSlong + 1p * _slope_long);
+			
+		{
+			_nextTSlong = my_nextTSlong << my_nextTSlong >= calc_nextTSlong;
+			// +++ Debug
+			//debug_str_l += ";my_nextTSlong_the_best";
+			// ---
+		||
+			_nextTSlong = calc_nextTSlong << calc_nextTSlong > my_nextTSlong;
+			// +++ Debug
+			//debug_str_l += ";calc_nextTSlong_the_best";
+			// ---
+		};
+					
+		// +++ Debug
+		//log(debug_str_l + ";my_nextTSlong=;" + my_nextTSlong + ";old_nextTSlong=;" + old_nextTSlong + ";nextTSlong=;" + _nextTSlong
+		//	+ ";c_nextTSlong=;" + calc_nextTSlong
+		//	+ ";my_slope_long=;" + my_slope_long + ";old_slope_long=;" + old_slope_long + ";slope_long=;" + _slope_long
+		//	//+ ";div_slope_long=;" + div_slope_long
+		//);
+		// ---
+			
+	||
+		_slope_long = _slope_long << account <= 0l;
+				
+		// +++ Debug
+		//log("debug_moving_nextTSlong;skip");
+		// ---
+	}
+};
+
+// A service method of LR_strategy_SlopeLevel family.
+// Calculates nextTSshort and slope_short values depending on account value.
+// Expects external _nextTSshort and _slope_short variables
+LRSLAL_short_CalcNextTSSlope() :=
+{
+	result = 0n;
+	
+	{
+		// +++ Debug
+		//old_slope_short = _slope_short << account < 0l;
+		//debug_str_s = "debug_moving_nextTSshort";	
+		//log(debug_str_s + ";started...");
+		// ---
+			
+		my_slope_short = ind("LinearRegression", "slope", "high", _predict_window, _low_offset, _train_window)[-1c] << account < 0l;
+		my_nextTSshort = (ind("LinearRegression", "high", "high", _predict_window, _high_offset, _train_window)[-1c]);
+		//div_slope_short = ((my_nextTSshort - ind("LinearRegression", "low", "high", predict_window, low_offset, train_window)[-2c]) / 1p);
+		{
+			_slope_short = my_slope_short << my_slope_short < _slope_short /*& my_slope_short < div_slope_short*/;
+			// +++ Debug
+			//debug_str_s += ";my_slope_short_the_best"
+			// ---
+		/*||
+			slope_short = div_slope_short << div_slope_short < slope_short & div_slope_short < my_slope_short;*/
+			// +++ Debug
+			//debug_str_s += ";div_slope_short_the_best"
+			// ---
+		||
+			_slope_short = _slope_short << /*slope_short <= div_slope_short  &*/ _slope_short <= my_slope_short;
+			// +++ Debug
+			//debug_str_s += ";slope_short_the_best"
+			// ---
+		};
+			
+		// +++ Debug
+		//log(debug_str_s + ";selected...");
+		//old_nextTSshort = _nextTSshort;
+		// ---
+			
+		calc_nextTSshort = (_nextTSshort + 1p * _slope_short);
+			
+		{
+			_nextTSshort = my_nextTSshort << my_nextTSshort <= calc_nextTSshort;
+			// +++ Debug
+			//debug_str_s += ";my_nextTSshort_the_best";
+			// ---
+		||
+			_nextTSshort = calc_nextTSshort << calc_nextTSshort < my_nextTSshort;
+			// +++ Debug
+			//debug_str_s += ";calc_nextTSshort_the_best";
+			// ---
+		};
+					
+		// +++ Debug
+		//log(debug_str_s + ";my_nextTSshort=;" + my_nextTSshort + ";old_nextTSshort=;" + old_nextTSshort + ";nextTSshort=;" + _nextTSshort
+		//	+ ";calc_nextTSshort=;" + calc_nextTSshort
+		//	+ ";my_slope_short=;" + my_slope_short + ";old_slope_short=;" + old_slope_short + ";slope_short=;" + _slope_short
+		//	//+ ";div_slope_short=;" + div_slope_short
+		//);
+		// ---
+	||
+		_slope_short = _slope_short << account >= 0l;
+				
+		// +++ Debug
+		//log("debug_moving_nextTSshort;skip");
+		// ---
+	}
+};
+
 // A service method of LR_strategy_long_SlopeLevel_AdaptiveLots family.
 // Tests a condition for a long position
 LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
@@ -670,6 +809,10 @@ LR_strategy_long_SlopeLevel_AdaptiveLots(
 	};*/
 	
 	_absSLlong = (pos.price - CalculateSLLong(p_safety_stock, p_risk_L)) << account > my_account;
+	_slope_long = pslope_long_start;
+	_nextTSlong = _absSLlong;
+	LRSLAL_long_CalcNextTSSlope();
+	
 	log("long_lr_break_open_following;pos.price=;" + pos.price + ";account=;" + account + ";lots=;" + lots 
 		+ ";start_time=;" + candle.time[nextTSlong_index] + ";start_low=;" + low[nextTSlong_index] 
 		+ ";nextTSlong_time=;" + candle.time[-1c] + ";nextTSlong=;" + _nextTSlong + ";slope_long=;" + _slope_long
@@ -764,150 +907,15 @@ LR_strategy_short_SlopeLevel_AdaptiveLots(
 	};*/
 	
 	_absSLshort = (pos.price + CalculateSLShort(p_safety_stock, p_risk_S)) << account < my_account;
+	_slope_short = pslope_short_start;
+	_nextTSshort = _absSLshort;
+	LRSLAL_short_CalcNextTSSlope();
+	
 	log("short_lr_break_open_following;pos.price=;" + pos.price + ";account=;" + account + ";lots=;" + lots 
 		+ ";start_time=;" + candle.time[nextTSshort_index] + ";start_high=;" + high[nextTSshort_index] 
 		+ ";nextTSshort_time=;" + candle.time[-1c] + ";nextTSshort=;" + _nextTSshort + ";slope_short=;" + _slope_short
 		+ ";absSLshort=;" + _absSLshort + ";step=;" + step);
 	~
-};
-
-// A service method of LR_strategy_SlopeLevel family.
-// Calculates nextTSlong and slope_long values depending on account value.
-// Expects external _nextTSlong and _slope_long variables
-LRSLAL_long_CalcNextTSSlope() :=
-{
-	result = 0n;
-	
-	{
-		// +++ Debug
-		//old_slope_long = _slope_long << account > 0l;
-		//debug_str_l = "debug_moving_nextTSlong";	
-		//log(debug_str_l + ";started...");
-		// ---
-			
-		my_slope_long = ind("LinearRegression", "slope", "low", _predict_window, _low_offset, _train_window)[-1c] << account > 0l;
-		my_nextTSlong = ind("LinearRegression", "high", "low", _predict_window, _low_offset, _train_window)[-1c];
-		//div_slope_long = ((my_nextTSlong - ind("LinearRegression", "high", "low", predict_window, low_offset, train_window)[-2c]) / 1p);
-		{
-			_slope_long = my_slope_long << my_slope_long > _slope_long /*& my_slope_long > div_slope_long*/;
-			// +++ Debug
-			//debug_str_l += ";my_slope_long_the_best"
-			// ---
-		/*||
-			slope_long = div_slope_long << div_slope_long > slope_long & div_slope_long > my_slope_long;*/
-			// +++ Debug
-			//debug_str_l += ";div_slope_long_the_best"
-			// ---
-		||
-			_slope_long = _slope_long << /*slope_long >= div_slope_long  &*/ _slope_long >= my_slope_long;
-			// +++ Debug
-			//debug_str_l += ";slope_long_the_best"
-			// ---
-		};
-			
-		// +++ Debug
-		//log(debug_str_l + ";selected...");
-		//old_nextTSlong = _nextTSlong;
-		// ---
-			
-		calc_nextTSlong = (_nextTSlong + 1p * _slope_long);
-			
-		{
-			_nextTSlong = my_nextTSlong << my_nextTSlong >= calc_nextTSlong;
-			// +++ Debug
-			//debug_str_l += ";my_nextTSlong_the_best";
-			// ---
-		||
-			_nextTSlong = calc_nextTSlong << calc_nextTSlong > my_nextTSlong;
-			// +++ Debug
-			//debug_str_l += ";calc_nextTSlong_the_best";
-			// ---
-		};
-					
-		// +++ Debug
-		//log(debug_str_l + ";my_nextTSlong=;" + my_nextTSlong + ";old_nextTSlong=;" + old_nextTSlong + ";nextTSlong=;" + _nextTSlong
-		//	+ ";c_nextTSlong=;" + calc_nextTSlong
-		//	+ ";my_slope_long=;" + my_slope_long + ";old_slope_long=;" + old_slope_long + ";slope_long=;" + _slope_long
-		//	//+ ";div_slope_long=;" + div_slope_long
-		//);
-		// ---
-			
-	||
-		_slope_long = _slope_long << account <= 0l;
-				
-		// +++ Debug
-		//log("debug_moving_nextTSlong;skip");
-		// ---
-	}
-};
-
-// A service method of LR_strategy_SlopeLevel family.
-// Calculates nextTSshort and slope_short values depending on account value.
-// Expects external _nextTSshort and _slope_short variables
-LRSLAL_short_CalcNextTSSlope() :=
-{
-	result = 0n;
-	
-	{
-		// +++ Debug
-		//old_slope_short = _slope_short << account < 0l;
-		//debug_str_s = "debug_moving_nextTSshort";	
-		//log(debug_str_s + ";started...");
-		// ---
-			
-		my_slope_short = ind("LinearRegression", "slope", "high", _predict_window, _low_offset, _train_window)[-1c] << account < 0l;
-		my_nextTSshort = (ind("LinearRegression", "low", "high", _predict_window, _high_offset, _train_window)[-1c]);
-		//div_slope_short = ((my_nextTSshort - ind("LinearRegression", "low", "high", predict_window, low_offset, train_window)[-2c]) / 1p);
-		{
-			_slope_short = my_slope_short << my_slope_short < _slope_short /*& my_slope_short < div_slope_short*/;
-			// +++ Debug
-			//debug_str_s += ";my_slope_short_the_best"
-			// ---
-		/*||
-			slope_short = div_slope_short << div_slope_short < slope_short & div_slope_short < my_slope_short;*/
-			// +++ Debug
-			//debug_str_s += ";div_slope_short_the_best"
-			// ---
-		||
-			_slope_short = _slope_short << /*slope_short <= div_slope_short  &*/ _slope_short <= my_slope_short;
-			// +++ Debug
-			//debug_str_s += ";slope_short_the_best"
-			// ---
-		};
-			
-		// +++ Debug
-		//log(debug_str_s + ";selected...");
-		//old_nextTSshort = _nextTSshort;
-		// ---
-			
-		calc_nextTSshort = (_nextTSshort + 1p * _slope_short);
-			
-		{
-			_nextTSshort = my_nextTSshort << my_nextTSshort <= calc_nextTSshort;
-			// +++ Debug
-			//debug_str_s += ";my_nextTSshort_the_best";
-			// ---
-		||
-			_nextTSshort = calc_nextTSshort << calc_nextTSshort < my_nextTSshort;
-			// +++ Debug
-			//debug_str_s += ";calc_nextTSshort_the_best";
-			// ---
-		};
-					
-		// +++ Debug
-		//log(debug_str_s + ";my_nextTSshort=;" + my_nextTSshort + ";old_nextTSshort=;" + old_nextTSshort + ";nextTSshort=;" + _nextTSshort
-		//	+ ";calc_nextTSshort=;" + calc_nextTSshort
-		//	+ ";my_slope_short=;" + my_slope_short + ";old_slope_short=;" + old_slope_short + ";slope_short=;" + _slope_short
-		//	//+ ";div_slope_short=;" + div_slope_short
-		//);
-		// ---
-	||
-		_slope_short = _slope_short << account >= 0l;
-				
-		// +++ Debug
-		//log("debug_moving_nextTSshort;skip");
-		// ---
-	}
 };
 
 
@@ -1365,7 +1373,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 				{
 					log("looking_for_closing_long" + ";step=;" + step) << account > 0l;
 					{
-						/*lock = 1n
+						lock = 1n
 						 << account > 0l & lock == 0n
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
 							& high[-1c] > ind("LinearRegression", "low", "high", predict_window_resistance, "high", train_window_resistance)[-1c]
@@ -1374,7 +1382,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 						;
 						my_stop();
 						log("long_lr_TP;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";no_activity=;" + abs(no_activity)) << account == 0l
-					||*/
+					||
 						lock = 1n
 						 << account > 0l & lock == 0n
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
@@ -1386,10 +1394,10 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 						lock = 1n
 						 << account > 0l & lock == 0n
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
-							& close[-1c] < (LRSL = nextTSlong)
+							& close[-1c] < nextTSlong
 						;
 						my_stop();
-						log("long_lr_TS;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";LRSL=;" + LRSL + ";no_activity=;" + abs(no_activity)) << account == 0l
+						log("long_lr_TS;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";nextTSlong=;" + nextTSlong + ";no_activity=;" + abs(no_activity)) << account == 0l
 					||
 						no_activity = no_activity_periods << account > 0l;
 							
@@ -1425,7 +1433,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 				||
 					log("looking_for_closing_short" + ";step=;" + step) << account < 0l;
 					{
-						/*lock = 1n
+						lock = 1n
 						 << account < 0l & lock == 0n
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
 							& low[-1c] < (LRSL = ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)[-1c])
@@ -1434,7 +1442,7 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 						;
 						my_stop();
 						log("short_lr_TP;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";LRSL=;" + LRSL + ";no_activity=;" + abs(no_activity)) << account == 0l
-					||*/
+					||
 						lock = 1n
 						 << account > 0l & lock == 0n
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
@@ -1446,10 +1454,10 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 						lock = 1n
 						 << account < 0l & lock == 0n
 							& (time >= day_start_time & time < day_end_time | time >= night_start_time & time < night_end_time)
-							& close[-1c] > (LRSL = nextTSshort)
+							& close[-1c] > nextTSshort
 						;
 						my_stop();
-						log("short_lr_TS;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";LRSL=;" + LRSL + ";no_activity=;" + abs(no_activity)) << account == 0l
+						log("short_lr_TS;pos.abs_profit=;" + pos.abs_profit + ";pos.age=;" + pos.age + ";nextTSshort=;" + nextTSshort + ";no_activity=;" + abs(no_activity)) << account == 0l
 					||
 						no_activity = no_activity_periods << account < 0l;
 						
