@@ -258,7 +258,7 @@ LR_strategy_long_condition_SlopeLevel_AdaptiveLots(
 						_long_con6 = (close[offset] > ind("LinearRegression", "high", "low", predict_window_support, "low", train_window_support)) << _long_con5 == true;
 						{
 							nextTSlong_index = find_min_price_index(train_window) << _long_con6 == true;
-							nextTSlong = low[nextTSlong_index] + abs(nextTSlong_index) / 1c * _slope_long * 1p;
+							nextTSlong = high[nextTSlong_index] + abs(nextTSlong_index) / 1c * _slope_long * 1p;
 							_long_con8 = (close[offset] > nextTSlong);
 							result = _long_con8
 						||
@@ -845,6 +845,11 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 	
 	absSLlong = nextTSlong;
 	absSLshort = nextTSshort;
+	
+	session_abs_profit_long = 0p;
+	session_abs_profit_short = 0p;
+	session_abs_loss_long = -1p;
+	session_abs_loss_short = -1p;
 
 	long_result = false;
 	long_con0 = false;
@@ -1229,7 +1234,14 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 						log("long_lr_SL;pos.abs_profit=;" + pos.abs_profit + ";pos.profit=;" + pos.profit
 							+ ";pos.age=;" + pos.age + ";absSLlong=;" + absSLlong + ";no_activity=;" + abs(no_activity)
 						) << account == 0l
+					};
+					
+					{
+						session_abs_profit_long += pos.abs_profit << pos.abs_profit >= 0p
+					||
+						session_abs_loss_long += pos.abs_profit << pos.abs_profit < 0p
 					}
+
 				||
 					log("looking_for_closing_short" + ";step=;" + step) << account < 0l;
 					{
@@ -1289,8 +1301,24 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 						log("short_lr_SL;pos.abs_profit=;" + pos.abs_profit + ";pos.profit=;" + pos.profit
 							+ ";pos.age=;" + pos.age + ";absSLshort=;" + absSLshort + ";no_activity=;" + abs(no_activity)
 						) << account == 0l
+					};
+					
+					{
+						session_abs_profit_short += pos.abs_profit << pos.abs_profit >= 0p
+					||
+						session_abs_loss_short += pos.abs_profit << pos.abs_profit < 0p
 					}
-				}
+
+				};
+			
+				session_abs_profit = (session_abs_profit_long + session_abs_profit_short);
+				session_abs_loss = (session_abs_loss_long + session_abs_loss_short);
+				log("session_profit_&_loss" 
+					+ ";session_abs_profit_long=;" + session_abs_profit_long + ";session_abs_loss_long=;" + session_abs_loss_long
+					+ ";session_abs_profit_short=;" + session_abs_profit_short + ";session_abs_loss_short=;" + session_abs_loss_short
+					+ ";session_abs_profit=;" + session_abs_profit + ";session_abs_loss=;" + session_abs_loss
+					+ ";session_profit_loss_rate=;" + (session_abs_profit / -session_abs_loss)
+				);
 			}
 		};
 		
