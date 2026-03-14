@@ -166,13 +166,13 @@ my_param["value"] = iter(10c, 300c, 1c);
 i_slope_long = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_long";
-my_param["value"] = (close * 0.01% / 1p);//0.0026n;//iter(0n, 0.0052n, 0.0013n);
+my_param["value"] = (close * 0.0036% / 1p);//0.0026n;//iter(0n, 0.0052n, 0.0013n);
 
 // 17
 i_slope_short = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_short";
-my_param["value"] = (-close * 0.01% / 1p);//-0.0026n;//iter(0n, -0.0052n, -0.0013n);
+my_param["value"] = -(close * 0.0036% / 1p);//-0.0026n;//iter(0n, -0.0052n, -0.0013n);
 
 // 18
 i_slope_long_level = count(params);
@@ -270,17 +270,17 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 	(params[i_train_window_slow_period])["value"] = best_parameters[i_train_window_slow_period];
 
 	// 16
-	//slope_long_max = params[i_slope_long];
-	//slope_long_max = slope_long_max["value"];
-	//slope_long_max *= 2n;
-	slope_long_max = (close * 0.1% / 1p);
+	slope_long_max = params[i_slope_long];
+	slope_long_max = slope_long_max["value"];
+	slope_long_max *= 4n;
+	//slope_long_max = (close * 0.1% / 1p);
 	(params[i_slope_long])["value"] = iter(0n, slope_long_max, slope_long_max / 10n);
 
 	// 17
-	//slope_short_min = params[i_slope_short];
-	//slope_short_min = slope_short_min["value"];
-	//slope_short_min *= 2n;
-	slope_short_min = (-close * 0.1% / 1p);
+	slope_short_min = params[i_slope_short];
+	slope_short_min = slope_short_min["value"];
+	slope_short_min *= 4n;
+	//slope_short_min = (-close * 0.1% / 1p);
 	(params[i_slope_short])["value"] = iter(0n, slope_short_min, slope_short_min / 10n);
 
 	criteria = "best_equity";

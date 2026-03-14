@@ -39,13 +39,14 @@ base_log_level = "Error";
 
 import("%QTrader_Libs%\QTrader_stdlib.aql");
 
-script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (35-1).aql";
+script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (35-01).aql";
 
 turn_1_abs = true;
 turn_2_abs = true;
 turn_3_abs = true;
 
-equity_treshold = (equity + 25%);
+equity_treshold = (equity + 0%);
+init_slope_start = (close * 0.01% / 1p);
 
 // target_type := ("best_equity" || "equity_closest_to_max_equity")
 target_type = "best_equity";
@@ -113,13 +114,13 @@ my_param["value"] = "candle";
 i_high_offset_type = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "high_offset_type";
-my_param["value"] = "high";
+my_param["value"] = "none";
 
 // 10
 i_low_offset_type = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "low_offset_type";
-my_param["value"] = "low";
+my_param["value"] = "none";
 
 // 12
 i_predict_window_slow_type = count(params);
@@ -145,25 +146,25 @@ my_param["value"] = iter(10c, 300c, 1c);
 i_slope_long = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_long";
-my_param["value"] = 0.006n;//iter(1.2n, 1.2n, 2n);
+my_param["value"] = init_slope_start;//0.006n;//iter(1.2n, 1.2n, 2n);
 
 // 17
 i_slope_short = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_short";
-my_param["value"] = -0.006n;//iter(-1.2n, -1.2n, -2n);
+my_param["value"] = -init_slope_start;//-0.006n;//iter(-1.2n, -1.2n, -2n);
 
 // 18
 i_slope_long_level = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_long_level";
-my_param["value"] = -0.03n;//iter(-6n, -6n, 2n);
+my_param["value"] = -(init_slope_start * 20n);//-3n;//iter(-6n, -6n, 2n);
 
 // 19
 i_slope_short_level = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_short_level";
-my_param["value"] = 0.03n;//iter(6n, 6n, 2n);
+my_param["value"] = (init_slope_start * 20n);//3n;//iter(6n, 6n, 2n);
 
 // 20
 i_channel_width = count(params);
@@ -243,13 +244,13 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 	// 16
 	slope_long_max = params[i_slope_long];
 	slope_long_max = slope_long_max["value"];
-	slope_long_max *= 2n;
+	slope_long_max *= 4n;
 	(params[i_slope_long])["value"] = iter(0n, slope_long_max, slope_long_max / 10n);
 
 	// 17
 	slope_short_min = params[i_slope_short];
 	slope_short_min = slope_short_min["value"];
-	slope_short_min *= 2n;
+	slope_short_min *= 4n;
 	(params[i_slope_short])["value"] = iter(0n, slope_short_min, slope_short_min / 10n);
 
 	criteria = "best_equity";

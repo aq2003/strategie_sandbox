@@ -83,15 +83,16 @@ low_offset = "none";
 
 slope_long_start = 0n;
 slope_short_start = -0n;
-slope_long_level = -100n;
-slope_short_level = 100n;
+OBV_long_level = 10%;
+OBV_short_level = -10%;
 
 predict_window_support = "week";
-train_window_support = 800c;
+train_window_support = 300c;
 predict_window_resistance = "week";
-train_window_resistance = 800c;
+train_window_resistance = 300c;
 
-channel_width = /*950*/0p;
+OBV_period = 20c;
+//channel_width = /*950*/0p;
 
 no_activity_periods = -1c;
 
@@ -101,9 +102,9 @@ night_start_time = 19:10;	// Start time of the night trading session
 night_end_time = 23:49;	// End time of the night trading session
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (35).aql");
+import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (36).aql");
 
-LR_strategy_SlopeLevel_AdaptiveLots(
+LR_strategy_SlopeLevel_AdaptiveLots_36(
 	safety_stock,	// Safety stock in percents to the equity
 	security.riskL,		// Risk rate in percents for long positions
 	security.riskS,		// Risk rate in percents for short positions
@@ -117,11 +118,11 @@ LR_strategy_SlopeLevel_AdaptiveLots(
 	predict_window, train_window,
 	high_offset, low_offset,
 	slope_long_start, slope_short_start,
-	slope_long_level, slope_short_level,
+	OBV_long_level, OBV_short_level,
 	predict_window_support, train_window_support,
 	predict_window_resistance, train_window_resistance,
 	
-	channel_width,	// Width of signal channel to disable trading
+	OBV_period,	// Width of signal channel to disable trading
 	
 	no_activity_periods
 );

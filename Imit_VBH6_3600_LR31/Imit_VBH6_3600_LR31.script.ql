@@ -75,10 +75,10 @@ train_window = 150c;
 high_offset = "none";
 low_offset = "none";
 
-slope_long_start = 0.02916n;
-slope_short_start = -0.02916n;
-slope_long_level = -20n;
-slope_short_level = 20n;
+slope_long_start = (close * 0.0036% / 1p);//0.02916n;
+slope_short_start = -(close * 0.0036% / 1p);//0.02916n;
+slope_long_level = slope_long_start;//-20n;
+slope_short_level = slope_short_start;//20n;
 
 predict_window_support = "week";
 train_window_support = 800c;
@@ -95,7 +95,7 @@ night_start_time = 19:10;	// Start time of the night trading session
 night_end_time = 23:49;	// End time of the night trading session
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (35-1).aql");
+import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (37).aql");
 
 LR_strategy_SlopeLevel_AdaptiveLots(
 	safety_stock,	// Safety stock in percents to the equity

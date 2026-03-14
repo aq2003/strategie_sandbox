@@ -57,7 +57,7 @@ base_log_level = "Error";
 
 import("%QTrader_Libs%\QTrader_stdlib.aql");
 
-script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (35-111).aql";
+script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (35-01).aql";
 
 turn_1_abs = true;
 turn_2_abs = true;
@@ -169,7 +169,7 @@ my_param["value"] = (close * 0.01% / 1p);//0.01%;//iter(1.2n, 1.2n, 2n);
 i_slope_short = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = "slope_short";
-my_param["value"] = (-close * 0.01% / 1p);//-0.01%;//iter(-1.2n, -1.2n, -2n);
+my_param["value"] = -(close * 0.01% / 1p);//-0.01%;//iter(-1.2n, -1.2n, -2n);
 
 // 18
 i_slope_long_level = count(params);
@@ -259,17 +259,17 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 	(params[i_train_window_slow_period])["value"] = best_parameters[i_train_window_slow_period];
 
 	// 16
-	//slope_long_max = params[i_slope_long];
-	//slope_long_max = slope_long_max["value"];
-	//slope_long_max *= 2n;
-	slope_long_max = (close * 0.1% / 1p);//0.1%;//
+	slope_long_max = params[i_slope_long];
+	slope_long_max = slope_long_max["value"];
+	slope_long_max *= 4n;
+	//slope_long_max = (close * 0.1% / 1p);//0.1%;//
 	(params[i_slope_long])["value"] = iter(0n, slope_long_max, slope_long_max / 10n);
 
 	// 17
-	//slope_short_min = params[i_slope_short];
-	//slope_short_min = slope_short_min["value"];
-	//slope_short_min *= 2n;
-	slope_short_min = (-close * 0.1% / 1p);//-0.1%;//
+	slope_short_min = params[i_slope_short];
+	slope_short_min = slope_short_min["value"];
+	slope_short_min *= 4n;
+	//slope_short_min = (-close * 0.1% / 1p);//-0.1%;//
 	(params[i_slope_short])["value"] = iter(0n, slope_short_min, slope_short_min / 10n);
 
 	criteria = "best_equity";

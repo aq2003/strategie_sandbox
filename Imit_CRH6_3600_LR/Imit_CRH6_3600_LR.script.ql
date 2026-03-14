@@ -65,8 +65,8 @@
 // Created 18.09.2020 9:56:34
 
 // +++ parameters -----------------------------------------------------------------------------------------
-imitator.commission = 0.5p;
-imitator.credit = 0%;
+//imitator.commission = 0.5p;
+//imitator.credit = 0%;
 
 safety_stock = 5%;	// Safety stock in percents to the equity
 risk_L = 100%;		// Risk rate in percents for long positions
@@ -74,15 +74,13 @@ risk_S = 100%;		// Risk rate in percents for short positions
 
 expiration_time = 15:00_31.12.26;
 
-// 	18.07.2025 23:00	TestGrid_IMOEXF_3600_LRSLAL33.226	Warning	#test_history_completed, count=1i*1i*1i*1i*1i*1i*1i*1i*1i*1i*1i*1i*1i*38i*1i*1i*1i*1i*1i*1i*=38i_of_291i, equity=-1 179 895,00p, account=0l, best_equity=968 699,00p, best_max_equity=968 869,00p, best_min_equity=98 064,00p, safety_stock, =5%, risk_L, =20%, risk_S, =20%, expiration_time, =15:00_15.12.25, day_start_time, =07:00_19.03.25, day_end_time, =19:00_19.03.25, night_start_time, =19:10_19.03.25, night_end_time, =23:49_19.03.25, predict_window_type, =candle, high_offset_type, =none, low_offset_type, =none, predict_window_slow_type, =week, train_window_slow_period, =800c, train_window_period, =14c, slope_long, =0n, slope_short, =0n, slope_long_level, =-100n, slope_short_level, =100n, channel_width, =0,00p, no_activity, =-1c
-
 predict_window = "candle"; 
 train_window = 144c;
 high_offset = "none";
 low_offset = "none";
 
-slope_long_start = 0.01%;
-slope_short_start = -0.01%;
+slope_long_start = ((close * 0.01%) / 1p);
+slope_short_start = -((close * 0.01%) / 1p);
 slope_long_level = -0.05n;
 slope_short_level = 0.05n;
 
@@ -101,7 +99,7 @@ night_start_time = 19:10;	// Start time of the night trading session
 night_end_time = 23:49;	// End time of the night trading session
 // --- parameters -----------------------------------------------------------------------------------------
 		
-import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (35-4).aql");
+import("%QTrader_Libs%\LR_strategy_SlopeLevel_AdaptiveLots (35-01).aql");
 
 LR_strategy_SlopeLevel_AdaptiveLots(
 	safety_stock,	// Safety stock in percents to the equity
