@@ -49,6 +49,8 @@
 // 18.09.2020 9:56:34 SRZ0_300_7600yup ql script
 // Created 18.09.2020 9:56:34
 
+// slope_start in percents
+
 // +++ LR_strategy_SlopeLevel_AdaptiveLots --- 7.04.2024 -------------------------------------------------------------------------------------------------------------------
 // Calculates amount of money to spend for a long position as a safe part of equity 
 //	safety_stock - 	Safety stock in percents to the equity
