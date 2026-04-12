@@ -88,7 +88,8 @@ night_start_time = 19:10;
 night_end_time = 23:49;
 
 // 8
-A_train_window_period = iter(100c, 300c, 10%);//iter(10c, 300c, 1c);
+A_train_window_period = iter(100c, 300c, 10%);
+//A_train_window_period = iter(10c, 300c, 1c);
 
 // 9
 A_predict_window_type = "candle";
@@ -149,13 +150,16 @@ short_open_OBV_period = 10c;
 short_open_OBV_level = 0%;
 
 // 28
-longTS_line = "low";//"high";
+longTS_line = "low";
+//longTS_line = "high";
 
 // 29
-longTS_price_type = name(A_low_price_type);
+longTS_price_type = name(A_high_price_type);
+//longTS_price_type = name(A_low_price_type);
 
 // 30
-longTS_offset_type = name(A_low_offset_type);
+longTS_offset_type = name(A_high_offset_type);
+//longTS_offset_type = name(A_low_offset_type);
 
 // 31
 longTS_train_window_period = name(A_train_window_period);
@@ -164,7 +168,7 @@ longTS_train_window_period = name(A_train_window_period);
 longTS_predict_window_type = name(A_predict_window_type);
 
 // 33
-longTS_slope_start = init_slope_start; //0n;
+longTS_slope_start = init_slope_start;
 
 // 34
 longTP_line = "low";
@@ -185,13 +189,16 @@ longTP_predict_window_type = name(B_predict_window_type);
 longTP_level = 15%;
 
 // 40
-shortTS_line = "high";//"low";"low";
+shortTS_line = "high";
+//shortTS_line = "low";
 
 // 41
 shortTS_price_type = name(A_low_price_type);
+//shortTS_price_type = name(A_high_price_type);
 
 // 42
 shortTS_offset_type = name(A_low_offset_type);
+//shortTS_offset_type = name(A_high_offset_type);
 
 // 43
 shortTS_train_window_period = name(A_train_window_period);
@@ -318,7 +325,6 @@ iB_train_window_period = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = name(B_train_window_period);
 my_param["value"] = B_train_window_period;
-//my_param["value"] = 800c;
 
 // 15
 iB_predict_window_type = count(params);
@@ -633,12 +639,12 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 	};
 	
 	// 52
-	(params[ilongTS_slope_start])["value"] = iter(0n, slope_long_max, slope_long_max / 10n);
 	slope_long_max = init_slope_start_max;
+	(params[ilongTS_slope_start])["value"] = iter(0n, slope_long_max, slope_long_max / 10n);
 
 	// 53
-	(params[ishortTS_slope_start])["value"] = iter(0n, slope_short_min, slope_short_min / 10n);
 	slope_short_min = -init_slope_start_max;
+	(params[ishortTS_slope_start])["value"] = iter(0n, slope_short_min, slope_short_min / 10n);
 
 	criteria = "best_equity";
 	_best_result = Test(
