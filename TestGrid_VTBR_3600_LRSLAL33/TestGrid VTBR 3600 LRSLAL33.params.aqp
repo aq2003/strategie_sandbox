@@ -4,8 +4,8 @@
   <userdata>
     <scalar type="string" value="QM" name="script_className" />
     <!--+++ imitator-->
-    <scalar type="string" value="10:00 28.02.26" name="imitator_EndDate" />
-    <scalar type="string" value="10:00 29.10.25" name="imitator_StartDate" />
+    <scalar type="string" value="10:00 14.03.26" name="imitator_EndDate" />
+    <scalar type="string" value="10:00 12.11.25" name="imitator_StartDate" />
     <scalar type="string" value="%" name="imitator_coms_type" />
     <scalar type="double" value="21.35" name="imitator_credit" />
     <scalar type="double" value="0.056" name="imitator_coms" />
@@ -23,8 +23,8 @@
     <scalar type="double" value="0" name="dealer_portfolio" />
     <scalar type="string" value="l" name="dealer_saldoIn_type" />
     <scalar type="" value="" name="dealer_lbl_amount" />
-    <scalar type="double" value="25" name="dealer_riskS" />
-    <scalar type="double" value="25" name="dealer_riskL" />
+    <scalar type="double" value="20" name="dealer_riskS" />
+    <scalar type="double" value="20" name="dealer_riskL" />
     <scalar type="double" value="0" name="dealer_saldoIn" />
     <scalar type="string" value="SPOT" name="dealer_market" />
     <scalar type="string" value="" name="dealer_client" />
