@@ -60,14 +60,15 @@ base_log_level = "Error";
 
 import("%QTrader_Libs%\QTrader_stdlib.aql");
 init_slope_start = (close * 0.01% / 1p);
+init_slope_start_max = (close * 1% / 1p);
 
-script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (35-021).aql";
+script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (35-023).aql";
 
 turn_1_abs = true;
 turn_2_abs = true;
 turn_3_abs = true;
 
-equity_treshold = (equity + 0%);
+equity_treshold = 0p;//(equity - 50%);
 
 // target_type := ("best_equity" || "equity_closest_to_max_equity")
 target_type = "best_equity";
@@ -99,7 +100,8 @@ night_start_time = 19:10;
 night_end_time = 23:49;
 
 // 8
-A_train_window_period = iter(100c, 300c, 10%);//iter(10c, 300c, 1c);
+A_train_window_period = iter(100c, 300c, 10%);
+//A_train_window_period = iter(10c, 300c, 1c);
 
 // 9
 A_predict_window_type = "candle";
@@ -121,7 +123,7 @@ B_train_window_period = iter(300c, 1800c, 10%);
 //B_train_window_period = 800c;
 
 // 15
-B_predict_window_type = "week";
+B_predict_window_type = "day";
 
 // 16
 B_high_price_type = "high";
@@ -130,10 +132,10 @@ B_high_price_type = "high";
 B_low_price_type = "low";
 
 // 18
-B_high_offset_type = "high";
+B_high_offset_type = "none";
 
 // 19
-B_low_offset_type = "low";
+B_low_offset_type = "none";
 
 // 20
 long_open_A_line = "high";
@@ -142,7 +144,7 @@ long_open_A_line = "high";
 long_open_B_line = "high";
 
 // 22
-long_open_OBV_period = 20c;
+long_open_OBV_period = 10c;
 
 // 23
 long_open_OBV_level = 0%;
@@ -154,82 +156,94 @@ short_open_A_line = "low";
 short_open_B_line = "low";
 
 // 26
-short_open_OBV_period = 20c;
+short_open_OBV_period = 10c;
 
 // 27
 short_open_OBV_level = 0%;
 
 // 28
-longTS_line = "line";//"low";//"high";
+longTS_line = "low";
+//longTS_line = "high";
 
 // 29
-longTS_price_type = "high";//"A_low_price_type";
+longTS_price_type = name(A_high_price_type);
+//longTS_price_type = name(A_low_price_type);
 
 // 30
-longTS_offset_type = "none";//"A_low_offset_type";
+longTS_offset_type = name(A_high_offset_type);
+//longTS_offset_type = name(A_low_offset_type);
 
 // 31
-longTS_train_window_period = "A_train_window_period";
+longTS_train_window_period = name(A_train_window_period);
 
 // 32
-longTS_predict_window_type = "A_predict_window_type";
+longTS_predict_window_type = name(A_predict_window_type);
 
 // 33
-longTS_slope_start = 0n;
+longTS_slope_start = init_slope_start;
 
 // 34
 longTP_line = "low";
 
 // 35
-longTP_price_type = "B_high_price_type";
+longTP_price_type = name(B_high_price_type);
 
 // 36
-longTP_offset_type = "B_high_offset_type";
+longTP_offset_type = name(B_high_offset_type);
 
 // 37
-longTP_train_window_period = "B_train_window_period";
+longTP_train_window_period = name(B_train_window_period);
 
 // 38
-longTP_predict_window_type = "B_predict_window_type";
+longTP_predict_window_type = name(B_predict_window_type);
 
 // 39
-longTP_level = 50%;
+longTP_level = 15%;
 
 // 40
-shortTS_line = "line";//"high";//"low";"low";
+shortTS_line = "high";
+//shortTS_line = "low";
 
 // 41
-shortTS_price_type = "low";//"A_low_price_type";
+shortTS_price_type = name(A_low_price_type);
+//shortTS_price_type = name(A_high_price_type);
 
 // 42
-shortTS_offset_type = "none";//"A_low_offset_type";
+shortTS_offset_type = name(A_low_offset_type);
+//shortTS_offset_type = name(A_high_offset_type);
 
 // 43
-shortTS_train_window_period = "A_train_window_period";
+shortTS_train_window_period = name(A_train_window_period);
 
 // 44
-shortTS_predict_window_type = "A_predict_window_type";
+shortTS_predict_window_type = name(A_predict_window_type);
 
 // 45
-shortTS_slope_start = 0n;
+shortTS_slope_start = -init_slope_start; //0n;
 
 // 46
 shortTP_line = "high";
 
 // 47
-shortTP_price_type = "B_high_price_type";
+shortTP_price_type = name(B_high_price_type);
 
 // 48
-shortTP_offset_type = "B_high_offset_type";
+shortTP_offset_type = name(B_high_offset_type);
 
 // 49
-shortTP_train_window_period = "B_train_window_period";
+shortTP_train_window_period = name(B_train_window_period);
 
 // 50
-shortTP_predict_window_type = "B_predict_window_type";
+shortTP_predict_window_type = name(B_predict_window_type);
 
 // 51
-shortTP_level = 50%;
+shortTP_level = 15%;
+
+// 52
+longTS_slope_start_max = init_slope_start; //0n;
+
+// 53
+shortTS_slope_start_max = init_slope_start; //0n;
 
 // parameters := (..parameter); parameter := (name, start, stop, step, current, index)
 params = new("list");
@@ -323,7 +337,6 @@ iB_train_window_period = count(params);
 params += (my_param = new("dict"));
 my_param["name"] = name(B_train_window_period);
 my_param["value"] = B_train_window_period;
-//my_param["value"] = 800c;
 
 // 15
 iB_predict_window_type = count(params);
@@ -547,6 +560,18 @@ params += (my_param = new("dict"));
 my_param["name"] = name(shortTP_level);
 my_param["value"] = shortTP_level;
 
+// 52
+ilongTS_slope_start_max = count(params);
+params += (my_param = new("dict"));
+my_param["name"] = name(longTS_slope_start_max);
+my_param["value"] = longTS_slope_start_max;
+
+// 53
+ishortTS_slope_start_max = count(params);
+params += (my_param = new("dict"));
+my_param["name"] = name(shortTS_slope_start_max);
+my_param["value"] = shortTS_slope_start_max;
+
 // --- parameters preparing -------------------------------------------------------------------------------
 
 import("%QTrader_Libs%\TestHistory.aql");
@@ -589,15 +614,9 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 		i += 1i;
 	};
 
-	// 14
-	//(params[iB_train_window_period])["value"] = best_parameters[iB_train_window_period];//iter(300c, 2000c, 300c);//iter(300c, 2000c, 5c);
-
-	// 8
-	//(params[iA_train_window_period])["value"] = best_parameters[iA_train_window_period];
-
 	// 23
 	//(params[ilong_open_OBV_level])["value"] = iter(0%, 300%, 100%);
-	(params[ilong_open_OBV_period])["value"] = iter(5c, 50c, 5c);
+	(params[ilong_open_OBV_period])["value"] = iter(2c, 20c, 1c);
 
 	// 27
 	//(params[ishort_open_OBV_level])["value"] = iter(0%, -300%, -100%);
@@ -631,24 +650,15 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 		i += 1i;
 	};
 	
-	// 14
-	//(params[iB_train_window_period])["value"] = best_parameters[iB_train_window_period];
-	
-	// 23
-	//(params[ilong_open_OBV_level])["value"] = best_parameters[ilong_open_OBV_level];//iter(0%, 300%, 25%);
+	// 52
+	slope_long_max = init_slope_start_max;
+	(params[ilongTS_slope_start])["value"] = iter(0n, slope_long_max, slope_long_max / 10n);
 
-	// 27
-	//(params[ishort_open_OBV_level])["value"] = best_parameters[ishort_open_OBV_level];//iter(0%, -300%, -25%);
+	// 53
+	slope_short_min = -init_slope_start_max;
+	(params[ishortTS_slope_start])["value"] = iter(0n, slope_short_min, slope_short_min / 10n);
 
-	// 33
-	slope_long_max = (init_slope_start * 4n);
-	(params[ilongTS_slope_start])["value"] = iter(0n, slope_long_max, slope_long_max / 4n);
-
-	// 45
-	slope_short_min = -(init_slope_start * 4n);
-	(params[ishortTS_slope_start])["value"] = iter(0n, slope_short_min, slope_short_min / 4n);
-
-	criteria = "best_PL_rate";
+	criteria = "best_equity";
 	_best_result = Test(
 		params, // parameters := (..parameter); parameter := (name, start, stop, step, current, index)
 		criteria, // Optimization criteria; criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
