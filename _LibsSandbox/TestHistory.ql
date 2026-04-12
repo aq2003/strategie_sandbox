@@ -109,6 +109,38 @@ FindParameter(param_list, params_count, param_name) :=
 		i += 1i
 	}
 };
+
+// +++ 14.03.2026 --- CopyBestValues ---------------------------
+// Copies 'best_values' set of parameters from a source into a target
+// Parameters:
+// - source - 'best_values' set of parameters to copy from
+// - target - 'best_values' set of parameters to copy into
+// Returns:
+// - target set
+CopyBestValues(source, target) :=
+{
+	result = 0n;
+	
+	//log("CopyBestValues;" + "source=;" + source);
+	//log("CopyBestValues;" + "target=;" + target);
+	
+	target["equity"] = source["equity"];
+	target["max_equity"] = source["max_equity"];
+	target["min_equity"] = source["min_equity"];
+	target["target"] = source["target"];
+	target["session_PL_rate"] = source["session_PL_rate"];
+	target["session_PL_rate_long"] = source["session_PL_rate_long"];
+	target["session_PL_rate_short"] = source["session_PL_rate_short"];
+	target["session_abs_profit_long"] = source["session_abs_profit_long"];
+	target["session_abs_loss_long"] = source["session_abs_loss_long"];
+	target["session_abs_profit_short"] = source["session_abs_profit_short"]; 
+	target["session_abs_loss_short"] = source["session_abs_loss_short"];
+	target["session_abs_profit"] = source["session_abs_profit"]; 
+	target["session_abs_loss"] = source["session_abs_loss"];
+
+	result = target;				
+};
+
 // --- 09.03.2026 --- FindParameter ---------------------------
 
 _Test(
@@ -309,7 +341,7 @@ _Test(
 		
 		turn_result = 0n;
 		test_finished_itself = false;
-		..[candles.is_calculated != 1n & test_finished_itself == false]
+		..[/*candles.is_calculated != 1n &*/ test_finished_itself == false]
 		{
 			turn_result = TestAdapter(param_values);
 			test_finished_itself = true;
@@ -326,33 +358,39 @@ _Test(
 		{
 			criteria = criteria << criteria == "best_equity";
 			{
-				best_values["equity"] = equity << equity > best_values["equity"];
-				best_values["max_equity"] = dealer.max_equity;
-				best_values["min_equity"] = dealer.min_equity;
+				/*best_values = turn_result*/CopyBestValues(turn_result, best_values) << turn_result["equity"] > best_values["equity"];
+				//best_values["equity"] = equity << equity > best_values["equity"];
+				//best_values["max_equity"] = dealer.max_equity;
+				//best_values["min_equity"] = dealer.min_equity;
+				//CopyBestValues(turn_result, best_values);
 				CopyList2List(param_values, best_parameters);
 			||
 				//log(level_str + "test_equity_not_best;best_parameters=;" + best_parameters);
-				turn_result = turn_result << equity <= best_values["equity"]
+				turn_result = turn_result << turn_result["equity"] <= best_values["equity"]
 			}
 		||
 			criteria = criteria << criteria == "best_max_equity";
 			{
-				best_values["equity"] = equity << dealer.max_equity > best_values["max_equity"];
-				best_values["max_equity"] = dealer.max_equity;
-				best_values["min_equity"] = dealer.min_equity;
+				/*best_values = turn_result*/CopyBestValues(turn_result, best_values) << turn_result["max_equity"] > best_values["max_equity"];
+				//best_values["equity"] = equity << dealer.max_equity > best_values["max_equity"];
+				//best_values["max_equity"] = dealer.max_equity;
+				//best_values["min_equity"] = dealer.min_equity;
+				//CopyBestValues(turn_result, best_values);
 				CopyList2List(param_values, best_parameters);
 			||
-				turn_result = turn_result << dealer.max_equity <= best_values["max_equity"]
+				turn_result = turn_result << turn_result["max_equity"] <= best_values["max_equity"]
 			}
 		||
 			criteria = criteria << criteria == "best_min_equity";
 			{
-				best_values["equity"] = equity << dealer.min_equity > best_values["min_equity"];
-				best_values["max_equity"] = dealer.max_equity;
-				best_values["min_equity"] = dealer.min_equity;
+				/*best_values = turn_result*/CopyBestValues(turn_result, best_values) << turn_result["min_equity"] > best_values["min_equity"];
+				//best_values["equity"] = equity << dealer.min_equity > best_values["min_equity"];
+				//best_values["max_equity"] = dealer.max_equity;
+				//best_values["min_equity"] = dealer.min_equity;
+				//CopyBestValues(turn_result, best_values);
 				CopyList2List(param_values, best_parameters);
 			||
-				turn_result = turn_result << dealer.min_equity <= best_values["min_equity"]
+				turn_result = turn_result << turn_result["min_equity"] <= best_values["min_equity"]
 			}
 		||
 			my_equity = equity << criteria == "equity_closest_to_max_equity";
@@ -360,14 +398,30 @@ _Test(
 			target = ((my_max_equity + my_equity) / (my_max_equity - my_equity + 1p) * 1p);
 			
 			{
-				best_values["equity"] = equity << target > best_values["target"];
-				best_values["max_equity"] = dealer.max_equity;
-				best_values["min_equity"] = dealer.min_equity;
+				//best_values["equity"] = equity << target > best_values["target"];
+				//best_values["max_equity"] = dealer.max_equity;
+				//best_values["min_equity"] = dealer.min_equity;
+				CopyBestValues(turn_result, best_values);
 				CopyList2List(param_values, best_parameters);
 			||
 				turn_result = turn_result << target <= best_values["target"]
 			}
+		||
+			criteria = criteria << criteria == "best_PL_rate";
+			{
+				/*best_values = turn_result*/CopyBestValues(turn_result, best_values) << turn_result["session_PL_rate"] > best_values["session_PL_rate"];
+				//best_values["equity"] = equity << dealer.min_equity > best_values["min_equity"];
+				//best_values["max_equity"] = dealer.max_equity;
+				//best_values["min_equity"] = dealer.min_equity;
+				//CopyBestValues(turn_result, best_values);
+				CopyList2List(param_values, best_parameters);
+			||
+				turn_result = turn_result << turn_result["session_PL_rate"] <= best_values["session_PL_rate"]
+			}
 		};
+		// +++ Debug
+		log("Criteria_finished;" + "criteria=;" + criteria);
+		// --- Debug
 		
 		best_parameter_index = start_parameter_index;
 		msg_best_parameters = "";
@@ -468,6 +522,15 @@ Test(
 	best_values["min_equity"] = 0p;
 	best_values["target"] = 0p;
 	best_values["mean_equity"] = 0p;
+	best_values["session_PL_rate"] = 0n;
+	best_values["session_PL_rate_long"] = 0n;
+	best_values["session_PL_rate_short"] = 0n;
+	best_values["session_abs_profit_long"] = 0p;
+	best_values["session_abs_loss_long"] = 0p;
+	best_values["session_abs_profit_short"] = 0p; 
+	best_values["session_abs_loss_short"] = 0p;
+	best_values["session_abs_profit"] = 0p; 
+	best_values["session_abs_loss"] = 0p;
 		
 	// --- best values preparing ------------------------------------------------------------------------------
 		
@@ -504,10 +567,28 @@ Test(
 		+ ";best_equity=;" + best_values["equity"] + ";best_max_equity=;" + best_values["max_equity"] + ";best_min_equity=;" + best_values["min_equity"] + ";mean_equity=;" + best_values["mean_equity"]
 		+ msg_best_parameters 
 	);
+	
+	log("session_profit_&_loss" 
+		+ ";session_PL_rate=;" + best_values["session_PL_rate"]
+		+ ";session_PL_rate_long=;" + best_values["session_PL_rate_long"]
+		+ ";session_PL_rate_short=;" + best_values["session_PL_rate_short"]
+		+ ";session_abs_profit_long=;" + best_values["session_abs_profit_long"] + ";session_abs_loss_long=;" + best_values["session_abs_loss_long"]
+		+ ";session_abs_profit_short=;" + best_values["session_abs_profit_short"] + ";session_abs_loss_short=;" + best_values["session_abs_loss_short"]
+		+ ";session_abs_profit=;" + best_values["session_abs_profit"] + ";session_abs_loss=;" + best_values["session_abs_loss"]
+	);
 		
 	system.log("Test_stopped;" 
 		+ ";equity=;" + equity + ";account=;" + account
 		+ ";best_equity=;" + best_values["equity"] + ";best_max_equity=;" + best_values["max_equity"] + ";best_min_equity=;" + best_values["min_equity"] + ";mean_equity=;" + best_values["mean_equity"]
 		+ msg_best_parameters 
+	);
+	
+	system.log("session_profit_&_loss" 
+		+ ";session_PL_rate=;" + best_values["session_PL_rate"]
+		+ ";session_PL_rate_long=;" + best_values["session_PL_rate_long"]
+		+ ";session_PL_rate_short=;" + best_values["session_PL_rate_short"]
+		+ ";session_abs_profit_long=;" + best_values["session_abs_profit_long"] + ";session_abs_loss_long=;" + best_values["session_abs_loss_long"]
+		+ ";session_abs_profit_short=;" + best_values["session_abs_profit_short"] + ";session_abs_loss_short=;" + best_values["session_abs_loss_short"]
+		+ ";session_abs_profit=;" + best_values["session_abs_profit"] + ";session_abs_loss=;" + best_values["session_abs_loss"]
 	)
 };
