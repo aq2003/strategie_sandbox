@@ -913,14 +913,15 @@ LR_strategy_long_SlopeLevel_AdaptiveLots_3502(
 		longTS_slope_start,	// Initial slope value
 		_nextTSlong,	// An initial nextTSlong value
 		_slope_long	// An initial slope_long value
-	);
+	) 
+	<< account > my_account;
 
 	_nextTSlong = (res["nextTSlong"]);
 	_slope_long = (res["slope_long"]);
 	nextTSlong_index = (res["nextTSlong_index"]);
 	slope_type = (res["slope_type"]);
 	_nextTPlong = (pos.price + longTP_level);
-	_absSLlong = (pos.price - CalculateSLLong(p_safety_stock, p_risk_L)) << account > my_account;
+	_absSLlong = (pos.price - CalculateSLLong(p_safety_stock, p_risk_L));
 	
 	log("long_lr_break_open_following;" + slope_type + ";pos.price=;" + pos.price + ";account=;" + account + ";lots=;" + lots 
 		+ ";start_time=;" + candle.time[nextTSlong_index] + ";start_low=;" + low[nextTSlong_index] 
@@ -964,14 +965,15 @@ LR_strategy_short_SlopeLevel_AdaptiveLots_3502(
 		shortTS_slope_start, // Starting slope of linear regression for a short position
 		_nextTSshort,	// An initial nextTSshort value
 		_slope_short	// An initial slope_short value
-	);
+	) 
+	<< account < my_account;
 
 	_nextTSshort = (res["nextTSshort"]);
 	_slope_short = (res["slope_short"]);
 	nextTSshort_index = (res["nextTSshort_index"]);
 	slope_type = (res["slope_type"]);
 	_nextTPshort = (pos.price - shortTP_level);
-	_absSLshort = (pos.price + CalculateSLShort(p_safety_stock, p_risk_S)) << account < my_account;
+	_absSLshort = (pos.price + CalculateSLShort(p_safety_stock, p_risk_S));
 	
 	log("short_lr_break_open_following;" + slope_type + ";pos.price=;" + pos.price + ";account=;" + account + ";lots=;" + lots 
 		+ ";start_time=;" + candle.time[nextTSshort_index] + ";start_high=;" + high[nextTSshort_index] 
@@ -1097,8 +1099,8 @@ LR_strategy_SlopeLevel_AdaptiveLots_3502(
 	import("%QTrader_Libs%\QTrader_stdlib.aql");
 	import("%QTrader_Libs%\QTrader_LR_stdlib.aql");
 
-	log("LR_strategy_SlopeLevel_AdaptiveLots_has_started_and_running...");
-	log("LR_strategy_SlopeLevel_AdaptiveLots_params=("); 
+	log("LR_strategy_SlopeLevel_AdaptiveLots_3502_has_started_and_running...");
+	log("LR_strategy_SlopeLevel_AdaptiveLots_3502_params=("); 
 	log("    safety_stock=;" + safety_stock + ","); 
 	log("    risk_L=;" + risk_L + ","); 
 	log("    risk_S=;" + risk_S + ","); 
@@ -1172,6 +1174,12 @@ LR_strategy_SlopeLevel_AdaptiveLots_3502(
 	session_abs_profit_short = 0p;
 	session_abs_loss_long = -1p;
 	session_abs_loss_short = -1p;
+	
+	session_abs_profit = 0p;
+	session_abs_loss = 0p;
+	session_PL_rate = 0n;
+	session_PL_rate_long = 0n;
+	session_PL_rate_short = 0n;
 
 	long_result = false;
 	long_con0 = false;
@@ -1365,7 +1373,7 @@ LR_strategy_SlopeLevel_AdaptiveLots_3502(
 	||
 		thread = "";
 	
-		..[time < expiration_time]
+		..[time < expiration_time & candles.is_calculated != 1n]
 		{
 			my_account = account;
 			{
@@ -1609,9 +1617,9 @@ LR_strategy_SlopeLevel_AdaptiveLots_3502(
 					};
 					
 					// +++ Debug
-					log("session_profit_&_loss_long_started..." 
-						+ ";session_abs_profit_long=;" + session_abs_profit_long + ";session_abs_loss_long=;" + session_abs_loss_long
-					);
+					//log("session_profit_&_loss_long_started..." 
+					//	+ ";session_abs_profit_long=;" + session_abs_profit_long + ";session_abs_loss_long=;" + session_abs_loss_long
+					//);
 					// --- Debug
 					
 					{
@@ -1621,9 +1629,9 @@ LR_strategy_SlopeLevel_AdaptiveLots_3502(
 					};
 					
 					// +++ Debug
-					log("session_profit_&_loss_long_finished" 
-						+ ";session_abs_profit_long=;" + session_abs_profit_long + ";session_abs_loss_long=;" + session_abs_loss_long
-					);
+					//log("session_profit_&_loss_long_finished" 
+					//	+ ";session_abs_profit_long=;" + session_abs_profit_long + ";session_abs_loss_long=;" + session_abs_loss_long
+					//);
 					// --- Debug
 
 					
@@ -1690,9 +1698,9 @@ LR_strategy_SlopeLevel_AdaptiveLots_3502(
 					};
 					
 					// +++ Debug
-					log("session_profit_&_loss_short_started..." 
-						+ ";session_abs_profit_short=;" + session_abs_profit_short + ";session_abs_loss_short=;" + session_abs_loss_short
-					);
+					//log("session_profit_&_loss_short_started..." 
+					//	+ ";session_abs_profit_short=;" + session_abs_profit_short + ";session_abs_loss_short=;" + session_abs_loss_short
+					//);
 					// --- Debug
 					
 					{
@@ -1702,22 +1710,22 @@ LR_strategy_SlopeLevel_AdaptiveLots_3502(
 					};
 					
 					// +++ Debug
-					log("session_profit_&_loss_short_finished" 
-						+ ";session_abs_profit_short=;" + session_abs_profit_short + ";session_abs_loss_short=;" + session_abs_loss_short
-					);
+					//log("session_profit_&_loss_short_finished" 
+					//	+ ";session_abs_profit_short=;" + session_abs_profit_short + ";session_abs_loss_short=;" + session_abs_loss_short
+					//);
 					// --- Debug
 
 				};
 			
 				session_abs_profit = (session_abs_profit_long + session_abs_profit_short);
 				session_abs_loss = (session_abs_loss_long + session_abs_loss_short);
-				session_profit_loss_rate = (session_abs_profit / -session_abs_loss);
-				session_profit_loss_rate_long = (session_abs_profit_long / -session_abs_loss_long);
-				session_profit_loss_rate_short = (session_abs_profit_short / -session_abs_loss_short);
+				session_PL_rate = (session_abs_profit / -session_abs_loss);
+				session_PL_rate_long = (session_abs_profit_long / -session_abs_loss_long);
+				session_PL_rate_short = (session_abs_profit_short / -session_abs_loss_short);
 				log("session_profit_&_loss" 
-					+ ";session_profit_loss_rate=;" + session_profit_loss_rate
-					+ ";session_profit_loss_rate_long=;" + session_profit_loss_rate_long
-					+ ";session_profit_loss_rate_short=;" + session_profit_loss_rate_short
+					+ ";session_PL_rate=;" + session_PL_rate
+					+ ";session_PL_rate_long=;" + session_PL_rate_long
+					+ ";session_PL_rate_short=;" + session_PL_rate_short
 					+ ";session_abs_profit_long=;" + session_abs_profit_long + ";session_abs_loss_long=;" + session_abs_loss_long
 					+ ";session_abs_profit_short=;" + session_abs_profit_short + ";session_abs_loss_short=;" + session_abs_loss_short
 					+ ";session_abs_profit=;" + session_abs_profit + ";session_abs_loss=;" + session_abs_loss
@@ -1726,19 +1734,24 @@ LR_strategy_SlopeLevel_AdaptiveLots_3502(
 
 		};
 		
-		log("LR_strategy_SlopeLevel_AdaptiveLots_has_expired;" + "expiration_stop");
+		{
+			log("LR_strategy_SlopeLevel_AdaptiveLots_3502_has_expired;" + "expiration_stop") << time >= expiration_time
+		||
+			log("LR_strategy_SlopeLevel_AdaptiveLots_3502_history_calculated;" + "history_calculated") << candles.is_calculated == 1n
+		};
+		
 
 		my_stop();
 
-		log("LR_strategy_SlopeLevel_AdaptiveLots_has_finished;" + "script_stopped")
+		log("LR_strategy_SlopeLevel_AdaptiveLots_3502_has_finished;" + "script_stopped")
 
 	};
 	
 	result = new("dict");
-	result["session_profit_loss_rate"] = session_profit_loss_rate;
-	result["session_profit_loss_rate_long"] = session_profit_loss_rate_long;
-	result["session_profit_loss_rate_short"] = session_profit_loss_rate_short;
-	result["session_abs_profit_long="] = session_abs_profit_long; 
+	result["session_PL_rate"] = session_PL_rate;
+	result["session_PL_rate_long"] = session_PL_rate_long;
+	result["session_PL_rate_short"] = session_PL_rate_short;
+	result["session_abs_profit_long"] = session_abs_profit_long; 
 	result["session_abs_loss_long"] = session_abs_loss_long;
 	result["session_abs_profit_short"] = session_abs_profit_short; 
 	result["session_abs_loss_short"] = session_abs_loss_short;
