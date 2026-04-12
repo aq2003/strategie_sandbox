@@ -48,7 +48,7 @@ base_log_level = "Error";
 
 import("%QTrader_Libs%\QTrader_stdlib.aql");
 init_slope_start = (close * 0.01% / 1p);
-init_slope_start_max = (close * 0.5% / 1p);
+init_slope_start_max = (close * 1% / 1p);
 
 script_to_test = "LR_strategy_SlopeLevel_AdaptiveLots (35-023).aql";
 
@@ -56,7 +56,7 @@ turn_1_abs = true;
 turn_2_abs = true;
 turn_3_abs = true;
 
-equity_treshold = (equity - 50%);
+equity_treshold = 0p;//(equity - 50%);
 
 // target_type := ("best_equity" || "equity_closest_to_max_equity")
 target_type = "best_equity";
@@ -633,12 +633,12 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 	};
 	
 	// 52
-	slope_long_max = (init_slope_start_max * 2n);
 	(params[ilongTS_slope_start])["value"] = iter(0n, slope_long_max, slope_long_max / 10n);
+	slope_long_max = init_slope_start_max;
 
 	// 53
-	slope_short_min = -(init_slope_start_max * 2n);
 	(params[ishortTS_slope_start])["value"] = iter(0n, slope_short_min, slope_short_min / 10n);
+	slope_short_min = -init_slope_start_max;
 
 	criteria = "best_equity";
 	_best_result = Test(
