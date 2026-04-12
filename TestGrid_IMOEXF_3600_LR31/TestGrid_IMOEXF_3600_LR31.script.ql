@@ -29,7 +29,7 @@
 // Created 09.06.2024 16:44:23
 
 // +++ parameters -----------------------------------------------------------------------------------------
-base_log_level = "Error";
+base_log_level = "Warning";
 
 import("%QTrader_Libs%\QTrader_stdlib.aql");
 
