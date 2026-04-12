@@ -100,7 +100,7 @@ A_low_offset_type = "none";
 
 // 14
 B_train_window_period = iter(300c, 2000c, 10%);
-//my_param["value"] = 800c;
+//B_train_window_period = 800c;
 
 // 15
 B_predict_window_type = "week";
@@ -502,14 +502,14 @@ import("%QTrader_Libs%\TestHistory.aql");
 
 // +++ 1st turn ---------------------------------------------------------------------------------------------------------------------------------
 best_result = 0n;
-// criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
+// criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity" || "best_PL_rate")
 {
 	log("+++_1st_turn ---------------------------------------------------------------------------------------------------------------------------------")
 		<< turn_1_abs == true;
 	criteria = "best_equity";
 	_best_result = Test(
 		params, // parameters := (..parameter); parameter := (name, start, stop, step, current, index)
-		criteria, // Optimization criteria; criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
+		criteria, // criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity" || "best_PL_rate")
 		base_log_level,
 		script_to_test
 	);
@@ -545,10 +545,10 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 	//(params[iA_train_window_period])["value"] = best_parameters[iA_train_window_period];
 
 	// 23
-	(params[ilong_open_OBV_level])["value"] = iter(0%, 300%, 25%);
+	(params[ilong_open_OBV_level])["value"] = iter(0%, 300%, 100%);
 
 	// 27
-	(params[ishort_open_OBV_level])["value"] = iter(0%, -300%, -25%);
+	(params[ishort_open_OBV_level])["value"] = iter(0%, -300%, -100%);
 
 	criteria = "best_equity";
 	_best_result = Test(
@@ -589,13 +589,13 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 
 	// 33
 	slope_long_max = (init_slope_start * 4n);
-	(params[ilongTS_slope_start])["value"] = iter(0n, slope_long_max, slope_long_max / 8n);
+	(params[ilongTS_slope_start])["value"] = iter(0n, slope_long_max, slope_long_max / 4n);
 
 	// 45
 	slope_short_min = -(init_slope_start * 4n);
-	(params[ishortTS_slope_start])["value"] = iter(0n, slope_short_min, slope_short_min / 8n);
+	(params[ishortTS_slope_start])["value"] = iter(0n, slope_short_min, slope_short_min / 4n);
 
-	criteria = "best_equity";
+	criteria = "best_PL_rate";
 	_best_result = Test(
 		params, // parameters := (..parameter); parameter := (name, start, stop, step, current, index)
 		criteria, // Optimization criteria; criteria := ("best_equity" || "best_max_equity" || "best_min_equity" || "equity_closest_to_max_equity")
