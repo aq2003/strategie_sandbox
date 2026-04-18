@@ -88,6 +88,7 @@ night_start_time = 19:10;
 night_end_time = 23:49;
 
 // 8
+//A_train_window_period = 100c;
 A_train_window_period = iter(100c, 300c, 10%);
 //A_train_window_period = iter(10c, 300c, 1c);
 
@@ -120,10 +121,16 @@ B_high_price_type = "high";
 B_low_price_type = "low";
 
 // 18
-B_high_offset_type = "none";
+//B_high_offset_type = "none";
+B_high_offset_type = new("list");
+B_high_offset_type += "none";
+B_high_offset_type += "high";
 
 // 19
-B_low_offset_type = "none";
+//B_low_offset_type = "none";
+B_low_offset_type = new("list");
+B_low_offset_type += "none";
+B_low_offset_type += "low";
 
 // 20
 long_open_A_line = "high";
@@ -228,10 +235,10 @@ shortTP_predict_window_type = name(B_predict_window_type);
 shortTP_level = 15%;
 
 // 52
-longTS_slope_start_max = init_slope_start; //0n;
+longTS_slope_start_max = init_slope_start; 
 
 // 53
-shortTS_slope_start_max = init_slope_start; //0n;
+shortTS_slope_start_max = -init_slope_start; 
 
 // parameters := (..parameter); parameter := (name, start, stop, step, current, index)
 params = new("list");
@@ -604,7 +611,8 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 
 	// 23
 	//(params[ilong_open_OBV_level])["value"] = iter(0%, 300%, 100%);
-	(params[ilong_open_OBV_period])["value"] = iter(2c, 20c, 1c);
+	//(params[ilong_open_OBV_period])["value"] = iter(2c, 20c, 1c);
+	(params[ilong_open_OBV_period])["value"] = iter(2c, 4c, 1c);
 
 	// 27
 	//(params[ishort_open_OBV_level])["value"] = iter(0%, -300%, -100%);
@@ -640,11 +648,11 @@ turn_2 = (turn_3 = (mean_equity > equity_treshold));
 	
 	// 52
 	slope_long_max = init_slope_start_max;
-	(params[ilongTS_slope_start])["value"] = iter(0n, slope_long_max, slope_long_max / 10n);
+	(params[ilongTS_slope_start_max])["value"] = iter(0n, slope_long_max, slope_long_max / 10n);
 
 	// 53
 	slope_short_min = -init_slope_start_max;
-	(params[ishortTS_slope_start])["value"] = iter(0n, slope_short_min, slope_short_min / 10n);
+	(params[ishortTS_slope_start_max])["value"] = iter(0n, slope_short_min, slope_short_min / 10n);
 
 	criteria = "best_equity";
 	_best_result = Test(
